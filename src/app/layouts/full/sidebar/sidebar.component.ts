@@ -9,7 +9,9 @@ import { NavService } from '../../../services/nav.service';
 export class SidebarComponent implements OnInit {
   navItems = navItems;
 
-  constructor(public navService: NavService) {}
+  constructor(public navService: NavService) {
+
+  }
 
   ngOnInit(): void {}
 }

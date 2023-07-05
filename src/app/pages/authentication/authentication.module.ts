@@ -15,7 +15,10 @@ import * as TablerIcons from 'angular-tabler-icons/icons';
 import { AuthenticationRoutes } from './authentication.routing';
 
 import { AppSideLoginComponent } from './login/login.component';
-import { AppSideRegisterComponent } from './register/register.component';
+import { AppSideAdminRegisterComponent } from './register/admin-register/admin-register.component';
+import { VerifyComponent } from './verify/verify.component';
+import { ResetPasswordComponent } from './reset-password/reset-password.component';
+import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 
 @NgModule({
   imports: [
@@ -32,7 +35,10 @@ import { AppSideRegisterComponent } from './register/register.component';
   ],
   declarations: [
     AppSideLoginComponent,
-    AppSideRegisterComponent,
+    AppSideAdminRegisterComponent,
+    VerifyComponent,
+    ResetPasswordComponent,
+    ForgotPasswordComponent,
   ],
 })
 export class AuthenticationModule {}

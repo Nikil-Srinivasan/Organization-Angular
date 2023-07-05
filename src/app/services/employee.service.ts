@@ -9,9 +9,9 @@ import { Observable } from 'rxjs';
 
 export class EmployeeService {
     constructor(private http: HttpClient) { }
-    protected url = 'https://jsonplaceholder.typicode.com/todos/';
+    // protected url = 'https://jsonplaceholder.typicode.com/todos/';
 
-    getEmployees(): Observable<any> {
-        return this.http.get(this.url).pipe(map(res => res));
-    }
+    // getEmployees(): Observable<any> {
+    //     return this.http.get(this.url).pipe(map(res => res));
+    // }
 }
