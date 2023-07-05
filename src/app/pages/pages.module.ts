@@ -11,7 +11,9 @@ import * as TablerIcons from 'angular-tabler-icons/icons';
 import { AppDashboardComponent } from './dashboard/dashboard.component';
 
 @NgModule({
-  declarations: [AppDashboardComponent],
+  declarations: [
+    AppDashboardComponent
+  ],
   imports: [
     CommonModule,
     MaterialModule,

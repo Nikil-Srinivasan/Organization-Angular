@@ -15,7 +15,7 @@ export const navItems: NavItem[] = [
   {
     displayName: 'Employee',
     iconName: 'rosette',
-    route: '/ui-components/badge',
+    route: '/dashboard/employee',
   },
   // {
   //   displayName: 'Chips',

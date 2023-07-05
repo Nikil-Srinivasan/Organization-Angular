@@ -15,10 +15,9 @@ const routes: Routes = [
       },
       {
         path: 'authentication',
-        loadChildren: () =>
-          import('./pages/authentication/authentication.module').then(
-            (m) => m.AuthenticationModule
-          ),
+        loadChildren: () => import('./pages/authentication/authentication.module').then(
+          (m) => m.AuthenticationModule
+        ),
       },
     ],
   },
@@ -37,13 +36,11 @@ const routes: Routes = [
         loadChildren: () =>
           import('./pages/pages.module').then((m) => m.PagesModule),
       },
-      // {
-      //   path: 'ui-components',
-      //   loadChildren: () =>
-      //     import('./pages/ui-components/ui-components.module').then(
-      //       (m) => m.UicomponentsModule
-      //     ),
-      // },
+      {
+        path: 'employee',
+        loadChildren: () =>
+          import('./pages/employee/employee.component').then((m) => m.EmployeeComponent),
+      },
     ],
   },
 
