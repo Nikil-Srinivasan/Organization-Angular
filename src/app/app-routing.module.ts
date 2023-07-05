@@ -44,6 +44,11 @@ const routes: Routes = [
       //       (m) => m.UicomponentsModule
       //     ),
       // },
+      {
+        path: 'employee',
+        loadChildren: () =>
+          import('./pages/employee/employee.component').then((m) => m.EmployeeComponent),
+      },
     ],
   },
 
