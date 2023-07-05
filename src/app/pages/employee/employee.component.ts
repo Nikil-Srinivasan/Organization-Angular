@@ -1,6 +1,10 @@
-import { Component } from '@angular/core';
+import { Component , ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { AddComponent } from './dialog/add/add.component';
+import { Observable } from 'rxjs';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatTableDataSource } from '@angular/material/table';
+import { Employee, EmployeeService } from 'src/app/services/EmployeeService/employee.service';
 
 export interface productsData {
   id: number;
@@ -44,6 +48,22 @@ const ELEMENT_DATA: productsData[] = [
     budget: 2.4,
     priority: 'critical',
   },
+  {
+    id: 5,
+    uname: 'Nirav Joshi',
+    position: 'Frontend Engineer',
+    productName: 'Hosting Press HTML',
+    budget: 2.4,
+    priority: 'critical',
+  },
+  {
+    id: 6,
+    uname: 'Nirav Joshi',
+    position: 'Frontend Engineer',
+    productName: 'Hosting Press HTML',
+    budget: 2.4,
+    priority: 'critical',
+  },
 ];
 
 @Component({
@@ -52,24 +72,40 @@ const ELEMENT_DATA: productsData[] = [
   styleUrls: ['./employee.component.css']
 })
 export class EmployeeComponent {
-  displayedColumns: string[] = ['assigned', 'name', 'priority', 'budget', 'actions'];
-  dataSource = ELEMENT_DATA;
+  @ViewChild(MatPaginator) paginator: MatPaginator;
 
-  constructor(private _dialog: MatDialog) {
+  employeelist : any;
+  dataSource: MatTableDataSource<any>;
+  dataObs$: Observable<any>;
+  displayedColumns: string[] = ['name', 'age', 'salary', 'department', 'product','edit','delete'];
 
+  constructor(private _dialog: MatDialog, private employeeService: EmployeeService) {
+    this.employeeService.GetEmployee().subscribe(response => {
+      this.employeelist = response.data;
+      this.dataSource = new MatTableDataSource<any>(this.employeelist);
+      this.dataSource.paginator = this.paginator;
+      this.dataObs$= this.dataSource.connect();
+      console.log(response.data);
+    });
   }
+ 
+  
+  
+  
+  
 
-  addEmployee() {
-    this._dialog.open(AddComponent);
+
+  /* this._dialog.open(AddComponent);
   }
 
   editEmployee() {
     // Logic to edit the selected item
-  }
+  } addEmployee() {
+  
 
   deleteEmployee() {
     // Logic to delete the selected item
-  }
+  }*/
 
 }
 

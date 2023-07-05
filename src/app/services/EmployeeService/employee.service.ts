@@ -3,15 +3,24 @@ import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs';
 import { Observable } from 'rxjs';
 
+
+export interface Employee{
+    name : string
+    age : number
+    salaray : number
+    department : string
+    product : string
+}
+
 @Injectable({
     providedIn: 'root'
 })
 
 export class EmployeeService {
     constructor(private http: HttpClient) { }
-    // protected url = 'https://jsonplaceholder.typicode.com/todos/';
-
-    // getEmployees(): Observable<any> {
-    //     return this.http.get(this.url).pipe(map(res => res));
-    // }
+    
+    GetEmployee() : Observable<any>
+    {
+        return this.http.get<any>("http://localhost:5005/api/Employee/GetAllEmployees");
+    }
 }
