@@ -10,7 +10,7 @@
 
   <mat-sidenav
     #leftsidenav
-    [mode]="isOver ? 'over' : 'side'"
+    [mode]="isOver ? 'over' : 'side'" 
     [opened]="!isOver"
     (openedChange)="onSidenavOpenedChange($event)"
     (closedStart)="onSidenavClosedStart()"
@@ -21,6 +21,10 @@
   <!-- ============================================================== -->
   <!-- Main Content -->
   <!-- ============================================================== -->
+  <!-- 
+    The mat-sidenav-content component represents the main content area. 
+    It contains the following elements:
+   -->
   <mat-sidenav-content class="contentWrapper">
     <!-- ============================================================== -->
     <!-- VerticalHeader -->

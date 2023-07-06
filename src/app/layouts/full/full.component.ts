@@ -27,8 +27,11 @@ export class FullComponent implements OnInit {
   get isOver(): boolean {
     return this.isMobileScreen;
   }
-
+  // BreakpointObserver is injected as a dependency.
+  //  The BreakpointObserver is a service provided by Angular CDK (Component Dev Kit) 
+  // that allows you to observe changes in the viewport breakpoints.
   constructor(private breakpointObserver: BreakpointObserver) {
+    // get the html 
     this.htmlElement = document.querySelector('html')!;
     this.layoutChangesSubscription = this.breakpointObserver
       .observe([MOBILE_VIEW, TABLET_VIEW, MONITOR_VIEW])

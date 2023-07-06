@@ -15,8 +15,7 @@ const routes: Routes = [
       },
       {
         path: 'authentication',
-        loadChildren: () =>
-          import('./pages/authentication/authentication.module').then(
+        loadChildren: () => import('./pages/authentication/authentication.module').then(
             (m) => m.AuthenticationModule
           ),
       },
@@ -37,13 +36,6 @@ const routes: Routes = [
         loadChildren: () =>
           import('./pages/pages.module').then((m) => m.PagesModule),
       },
-      // {
-      //   path: 'ui-components',
-      //   loadChildren: () =>
-      //     import('./pages/ui-components/ui-components.module').then(
-      //       (m) => m.UicomponentsModule
-      //     ),
-      // },
     ],
   },
 
