@@ -1,4 +1,4 @@
-import { Component, ViewEncapsulation, ViewChild } from '@angular/core';
+import { Component, ViewEncapsulation, ViewChild ,OnInit} from '@angular/core';
 import {
   ApexChart,
   ChartComponent,
@@ -15,6 +15,10 @@ import {
   ApexMarkers,
   ApexResponsive,
 } from 'ng-apexcharts';
+import { ProductServiceService } from 'src/app/services/ProductService/product-service.service';
+import { Observable } from 'rxjs';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatTableDataSource } from '@angular/material/table';
 
 interface month {
   value: string;
@@ -36,36 +40,8 @@ export interface salesOverviewChart {
   marker: ApexMarkers;
 }
 
-export interface yearlyChart {
-  series: ApexAxisChartSeries;
-  chart: ApexChart;
-  dataLabels: ApexDataLabels;
-  plotOptions: ApexPlotOptions;
-  tooltip: ApexTooltip;
-  stroke: ApexStroke;
-  legend: ApexLegend;
-  responsive: ApexResponsive;
-}
 
-export interface monthlyChart {
-  series: ApexAxisChartSeries;
-  chart: ApexChart;
-  dataLabels: ApexDataLabels;
-  plotOptions: ApexPlotOptions;
-  tooltip: ApexTooltip;
-  stroke: ApexStroke;
-  legend: ApexLegend;
-  responsive: ApexResponsive;
-}
 
-interface stats {
-  id: number;
-  time: string;
-  color: string;
-  title?: string;
-  subtext?: string;
-  link?: string;
-}
 
 export interface productsData {
   id: number;
@@ -77,328 +53,220 @@ export interface productsData {
   priority: string;
 }
 
-// ecommerce card
-interface productcards {
-  id: number;
-  imgSrc: string;
-  title: string;
-  price: string;
-  rprice: string;
-}
 
-const ELEMENT_DATA: productsData[] = [
-  {
-    id: 1,
-    imagePath: 'assets/images/profile/user-1.jpg',
-    uname: 'Sunil Joshi',
-    position: 'Web Designer',
-    productName: 'Elite Admin',
-    budget: 3.9,
-    priority: 'low',
-  },
-  {
-    id: 2,
-    imagePath: 'assets/images/profile/user-2.jpg',
-    uname: 'Andrew McDownland',
-    position: 'Project Manager',
-    productName: 'Real Homes Theme',
-    budget: 24.5,
-    priority: 'medium',
-  },
-  {
-    id: 3,
-    imagePath: 'assets/images/profile/user-3.jpg',
-    uname: 'Christopher Jamil',
-    position: 'Project Manager',
-    productName: 'MedicalPro Theme',
-    budget: 12.8,
-    priority: 'high',
-  },
-  {
-    id: 4,
-    imagePath: 'assets/images/profile/user-4.jpg',
-    uname: 'Nirav Joshi',
-    position: 'Frontend Engineer',
-    productName: 'Hosting Press HTML',
-    budget: 2.4,
-    priority: 'critical',
-  },
-];
 
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
   encapsulation: ViewEncapsulation.None,
 })
-export class AppDashboardComponent {
+export class AppDashboardComponent implements OnInit{
+
   @ViewChild('chart') chart: ChartComponent = Object.create(null);
+  @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
 
   public salesOverviewChart!: Partial<salesOverviewChart> | any;
-  public yearlyChart!: Partial<yearlyChart> | any;
-  public monthlyChart!: Partial<monthlyChart> | any;
+  
+  TotalProducts : any;
+  TotalEmployees : any;
+  TotalCustomers : any;
+  TotalDepartments : any;
 
   displayedColumns: string[] = ['assigned', 'name', 'priority', 'budget'];
-  dataSource = ELEMENT_DATA;
+  dataSource: MatTableDataSource<any>;
+  dataObs$: Observable<any>;
 
-  months: month[] = [
-    { value: 'mar', viewValue: 'March 2023' },
-    { value: 'apr', viewValue: 'April 2023' },
-    { value: 'june', viewValue: 'June 2023' },
-  ];
-
-  // recent transaction
-  stats: stats[] = [
+  tableData = [
     {
       id: 1,
-      time: '09.30 am',
-      color: 'primary',
-      subtext: 'Payment received from John Doe of $385.90',
+      imagePath: 'assets/images/profile/user-1.jpg',
+      uname: 'Sunil Joshi',
+      position: 'Web Designer',
+      productName: 'Elite Admin',
+      budget: 3.9,
+      priority: 'low',
     },
     {
       id: 2,
-      time: '10.30 am',
-      color: 'accent',
-      title: 'New sale recorded',
-      link: '#ML-3467',
+      imagePath: 'assets/images/profile/user-2.jpg',
+      uname: 'Andrew McDownland',
+      position: 'Project Manager',
+      productName: 'Real Homes Theme',
+      budget: 24.5,
+      priority: 'medium',
     },
     {
       id: 3,
-      time: '12.30 pm',
-      color: 'success',
-      subtext: 'Payment was made of $64.95 to Michael',
+      imagePath: 'assets/images/profile/user-3.jpg',
+      uname: 'Christopher Jamil',
+      position: 'Project Manager',
+      productName: 'MedicalPro Theme',
+      budget: 12.8,
+      priority: 'high',
     },
     {
       id: 4,
-      time: '12.30 pm',
-      color: 'warning',
-      title: 'New sale recorded',
-      link: '#ML-3467',
+      imagePath: 'assets/images/profile/user-4.jpg',
+      uname: 'Nirav Joshi',
+      position: 'Frontend Engineer',
+      productName: 'Hosting Press HTML',
+      budget: 2.4,
+      priority: 'critical',
     },
     {
       id: 5,
-      time: '12.30 pm',
-      color: 'error',
-      title: 'New arrival recorded',
-      link: '#ML-3467',
+      imagePath: 'assets/images/profile/user-4.jpg',
+      uname: 'Nirav Joshi',
+      position: 'Frontend Engineer',
+      productName: 'Hosting Press HTML',
+      budget: 2.4,
+      priority: 'critical',
     },
     {
       id: 6,
-      time: '12.30 pm',
-      color: 'success',
-      subtext: 'Payment Done',
+      imagePath: 'assets/images/profile/user-4.jpg',
+      uname: 'Nirav Joshi',
+      position: 'Frontend Engineer',
+      productName: 'Hosting Press HTML',
+      budget: 2.4,
+      priority: 'critical',
     },
   ];
 
-  // ecommerce card
-  productcards: productcards[] = [
-    {
-      id: 1,
-      imgSrc: '/assets/images/products/s4.jpg',
-      title: 'Boat Headphone',
-      price: '285',
-      rprice: '375',
-    },
-    {
-      id: 2,
-      imgSrc: '/assets/images/products/s5.jpg',
-      title: 'MacBook Air Pro',
-      price: '285',
-      rprice: '375',
-    },
-    {
-      id: 3,
-      imgSrc: '/assets/images/products/s7.jpg',
-      title: 'Red Valvet Dress',
-      price: '285',
-      rprice: '375',
-    },
-    {
-      id: 4,
-      imgSrc: '/assets/images/products/s11.jpg',
-      title: 'Cute Soft Teddybear',
-      price: '285',
-      rprice: '375',
-    },
-  ];
+  constructor(private productService : ProductServiceService) { }
 
-  constructor() {
-    // sales overview chart
-    this.salesOverviewChart = {
-      series: [
-        {
-          name: 'Eanings this month',
-          data: [355, 390, 300, 350, 390, 180, 355, 390],
-          color: '#5D87FF',
-        },
-        {
-          name: 'Expense this month',
-          data: [280, 250, 325, 215, 250, 310, 280, 250],
-          color: '#49BEFF',
-        },
-      ],
+  ngOnInit() 
+  {
+    this.setPagination(this.tableData);
+    this.TotalCount();
+    this.loadData();
+  } 
 
-      grid: {
-        borderColor: 'rgba(0,0,0,0.1)',
-        strokeDashArray: 3,
-        xaxis: {
-          lines: {
-            show: false,
-          },
-        },
-      },
-      plotOptions: {
-        bar: { horizontal: false, columnWidth: '35%', borderRadius: [4] },
-      },
-      chart: {
-        type: 'bar',
-        height: 390,
-        offsetX: -15,
-        toolbar: { show: true },
-        foreColor: '#adb0bb',
-        fontFamily: 'inherit',
-        sparkline: { enabled: false },
-      },
-      dataLabels: { enabled: false },
-      markers: { size: 0 },
-      legend: { show: false },
-      xaxis: {
-        type: 'category',
-        categories: [
-          '16/08',
-          '17/08',
-          '18/08',
-          '19/08',
-          '20/08',
-          '21/08',
-          '22/08',
-          '23/08',
-        ],
-        labels: {
-          style: { cssClass: 'grey--text lighten-2--text fill-color' },
-        },
-      },
-      yaxis: {
-        show: true,
-        min: 0,
-        max: 400,
-        tickAmount: 4,
-        labels: {
-          style: {
-            cssClass: 'grey--text lighten-2--text fill-color',
-          },
-        },
-      },
-      stroke: {
-        show: true,
-        width: 3,
-        lineCap: 'butt',
-        colors: ['transparent'],
-      },
-      tooltip: { theme: 'light' },
+  setPagination(tableData : any) 
+  {
+    this.dataSource = new MatTableDataSource<any>(tableData);
+    this.dataSource.paginator = this.paginator;
+    this.dataObs$ = this.dataSource.connect();
+  }
 
-      responsive: [
-        {
-          breakpoint: 600,
-          options: {
-            plotOptions: {
-              bar: {
-                borderRadius: 3,
+  TotalCount() 
+  {
+    this.productService.getProductCount().subscribe(
+      {
+        next: (response : any) => {
+          const responseData = response.data;
+          this.TotalProducts = responseData.Products;
+          this.TotalEmployees = responseData.Employees;
+          this.TotalCustomers = responseData.Customers;
+          this.TotalDepartments = responseData.Departments;
+        },
+        error: (error : any) => {
+          console.error(error);
+        }
+      }
+    );
+  }
+  
+ 
+  loadData()
+   {
+    this.productService.getAllProductsWithCounts().subscribe(
+      {
+      next : (response: any) => {
+        const data = response.data;
+        const productNames = data.map((product: any) => product.productName);
+        const employeeCounts = data.map((product: any) => product.employeeCount);
+        const customerCounts = data.map((product: any) => product.customerCount);
+        const productRevenue = data.map((product: any) => product.productRevenue);
+
+        this.salesOverviewChart = {
+          series: [
+            {
+              name: 'Employees',
+              data: employeeCounts,
+              color: '#5D87FF',
+            },
+            {
+              name: 'Customers',
+              data: customerCounts,
+              color: '#49BEFF',
+            },
+            {
+              name: 'ProductRevenue',
+              data: productRevenue,
+              color: '#49BEFF',
+            },
+          ],
+    
+          grid: {
+            borderColor: 'rgba(0,0,0,0.1)',
+            strokeDashArray: 3,
+            xaxis: {
+              lines: {
+                show: false,
               },
             },
           },
-        },
-      ],
-    };
-
-    // yearly breakup chart
-    this.yearlyChart = {
-      series: [38, 40, 25],
-
-      chart: {
-        type: 'donut',
-        fontFamily: "'Plus Jakarta Sans', sans-serif;",
-        foreColor: '#adb0bb',
-        toolbar: {
-          show: false,
-        },
-        height: 130,
-      },
-      colors: ['#5D87FF', '#ECF2FF', '#F9F9FD'],
-      plotOptions: {
-        pie: {
-          startAngle: 0,
-          endAngle: 360,
-          donut: {
-            size: '75%',
-            background: 'transparent',
+          plotOptions: {
+            bar: { horizontal: false, columnWidth: '35%', borderRadius: [4] },
           },
-        },
-      },
-      stroke: {
-        show: false,
-      },
-      dataLabels: {
-        enabled: false,
-      },
-      legend: {
-        show: false,
-      },
-      responsive: [
-        {
-          breakpoint: 991,
-          options: {
-            chart: {
-              width: 120,
+          chart: {
+            type: 'bar',
+            height: 390,
+            offsetX: -15,
+            toolbar: { show: true },
+            foreColor: '#adb0bb',
+            fontFamily: 'inherit',
+            sparkline: { enabled: false },
+          },
+          dataLabels: { enabled: false },
+          markers: { size: 0 },
+          legend: { show: false },
+          xaxis: {
+            type: 'category',
+            categories: productNames,
+            labels: {
+              style: { cssClass: 'grey--text lighten-2--text fill-color' },
             },
           },
-        },
-      ],
-      tooltip: {
-        enabled: false,
+          yaxis: {
+            show: true,
+            min: 0,
+            tickAmount: 4,
+            labels: {
+              style: {
+                cssClass: 'grey--text lighten-2--text fill-color',
+              },
+            },
+          },
+          stroke: {
+            show: true,
+            width: 3,
+            lineCap: 'butt',
+            colors: ['transparent'],
+          },
+          tooltip: { theme: 'light' },
+    
+          responsive: [
+            {
+              breakpoint: 600,
+              options: {
+                plotOptions: {
+                  bar: {
+                    borderRadius: 3,
+                  },
+                },
+              },
+            },
+          ],
+        };
       },
-    };
-
-    // mohtly earnings chart
-    this.monthlyChart = {
-      series: [
-        {
-          name: '',
-          color: '#49BEFF',
-          data: [25, 66, 20, 40, 12, 58, 20],
-        },
-      ],
-
-      chart: {
-        type: 'area',
-        fontFamily: "'Plus Jakarta Sans', sans-serif;",
-        foreColor: '#adb0bb',
-        toolbar: {
-          show: false,
-        },
-        height: 60,
-        sparkline: {
-          enabled: true,
-        },
-        group: 'sparklines',
-      },
-      stroke: {
-        curve: 'smooth',
-        width: 2,
-      },
-      fill: {
-        colors: ['#E8F7FF'],
-        type: 'solid',
-        opacity: 0.05,
-      },
-      markers: {
-        size: 0,
-      },
-      tooltip: {
-        theme: 'dark',
-        x: {
-          show: false,
-        },
-      },
-    };
+      error: (error : any) => {
+        console.error(error);
+      }
+    }
+  );
   }
+  
+  
 }
