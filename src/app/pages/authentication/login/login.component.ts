@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { AuthenticationService, Credentials, LoginContext } from 'src/app/services/auth';
 
 @Component({
@@ -8,7 +9,7 @@ import { AuthenticationService, Credentials, LoginContext } from 'src/app/servic
 })
 export class AppSideLoginComponent {
 
-  constructor(private authService: AuthenticationService) {
+  constructor(private authService: AuthenticationService, private router : Router) {
   }
   
   loginForm = new FormGroup({
@@ -34,6 +35,8 @@ export class AppSideLoginComponent {
         next: (credentials: Credentials) => {
           // Handle the successful login
           console.log('Logged in successfully:', credentials);
+          this.router.navigate(['/dashboard']);
+
         },
         error: (error) => {
           // Handle the error during login
