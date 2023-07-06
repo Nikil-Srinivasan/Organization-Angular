@@ -65,7 +65,18 @@ export class AppDashboardComponent implements OnInit{
   @ViewChild('chart') chart: ChartComponent = Object.create(null);
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
 
-  public salesOverviewChart!: Partial<salesOverviewChart> | any;
+  public salesOverviewChart: any = {
+    series: [],
+    dataLabels: {},
+    chart: {},
+    legend: {},
+    xaxis: {},
+    yaxis: {},
+    grid: {},
+    stroke: {},
+    tooltip: {},
+    plotOptions: {}
+  };
   
   TotalProducts : any;
   TotalEmployees : any;
@@ -133,13 +144,15 @@ export class AppDashboardComponent implements OnInit{
     },
   ];
 
-  constructor(private productService : ProductServiceService) { }
+  constructor(private productService : ProductServiceService) {
+   
+   }
 
   ngOnInit() 
   {
-    this.setPagination(this.tableData);
-    this.TotalCount();
     this.loadData();
+    this.setPagination(this.tableData);
+    this.TotalCount(); 
   } 
 
   setPagination(tableData : any) 
