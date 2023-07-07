@@ -19,6 +19,7 @@ import { AppSideAdminRegisterComponent } from './register/admin-register/admin-r
 import { VerifyComponent } from './verify/verify.component';
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 
 @NgModule({
   imports: [
@@ -32,6 +33,7 @@ import { ForgotPasswordComponent } from './forgot-password/forgot-password.compo
     FormsModule,
     ReactiveFormsModule,
     TablerIconsModule.pick(TablerIcons),
+    MatProgressSpinnerModule
   ],
   declarations: [
     AppSideLoginComponent,

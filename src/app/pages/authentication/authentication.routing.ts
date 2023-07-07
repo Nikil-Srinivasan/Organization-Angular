@@ -4,6 +4,7 @@ import { AppSideAdminRegisterComponent } from './register/admin-register/admin-r
 import { VerifyComponent } from './verify/verify.component';
 import { VerifyGuard, canActivateTeam } from 'src/app/guards/authguard/verify.guard';
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
+import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 
 export const AuthenticationRoutes: Routes = [
   {
@@ -21,6 +22,10 @@ export const AuthenticationRoutes: Routes = [
         path: 'verify',
         component: VerifyComponent,
         canActivate: [canActivateTeam],
+      },
+      {
+        path: 'forgot-password',
+        component: ForgotPasswordComponent,
       },
       {
         path: 'reset-password',

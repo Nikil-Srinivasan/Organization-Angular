@@ -25,6 +25,11 @@ export interface forgotPasswordContext{
   email : string
 }
 
+export interface ResetPasswordContext{
+  email : string,
+  newPassowrd : string
+}
+
 
 @Injectable({
   providedIn: 'root'
@@ -99,7 +104,7 @@ export class AuthenticationService {
   }
   
 
-  forgotPassword(context : forgotPasswordContext){
+  forgotPassword(context : forgotPasswordContext) : Observable<any>{
     const params = new HttpParams()
     .set('email', context.email)
     const options = {
@@ -112,6 +117,17 @@ export class AuthenticationService {
 
   }
 
+  ResetPassword(context : ResetPasswordContext) : Observable<any>{
+    return this.http.post<{ data: string }>(`${environment.apiUrl}/api/Auth/reset-password`, {
+      email: context.email,
+      newPassword: context.newPassowrd
+    }).pipe(
+      map(response => {
+        const responseData = response.data;
+        return responseData;
+      })
+    );
+  }
 
   /**
    * Logs out the user and clear credentials.
