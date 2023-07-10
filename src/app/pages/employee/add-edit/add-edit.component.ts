@@ -20,6 +20,8 @@ export class AddEditComponent {
 
   departments: any[] = [];
 
+  products: any[] = [];
+
   selectedDepartmentId: number | undefined;
 
   roles: string[] = [
@@ -37,16 +39,24 @@ export class AddEditComponent {
     @Inject(MAT_DIALOG_DATA) public data: any,
   ) {
     this.employeeForm = this._formbuiler.group({
-      name: '',
-      age: '',
-      salary: '',
-      department: '',
-      product: '',
+      email:'',
+      userName: '',
+      password:'',
+      employeeAge: '',
+      employeeSalary: '',
+      employeeName:'',
+      departmentID: '',
+      productID: '',
+      role:2,
+      managerName:'',
+      managerSalary:0,
+      managerAge:0
     })
   }
   ngOnInit(): void {
     this.employeeForm.patchValue(this.data);
     this.fetchDepartments();
+    this.fetchProducts();
   }
 
   fetchDepartments() {
@@ -56,31 +66,27 @@ export class AddEditComponent {
     });
   }
 
+  fetchProducts(){
+    this._http.get<any>('http://localhost:5005/api/Product/GetAllProducts').subscribe(products => {
+      this.products = products.data;
+      console.log(products.data);
+    })
+  }
   //onSubmit Method is invoked when the Submit Button is clicked
   onSubmit() {
-    // if (this.employeeForm.valid) {
-
-    //   //Checks whether the data is present on the table
-    //   if (this.data) {
-    //     this._employeeService.UpdateEmployee(this.data.id, this.employeeForm.value).subscribe({
-    //       next: (val: any) => {
-    //         // this._coreService.openSnackBar('Employee details updated!');
-    //         this._dialogRef.close(true);
-    //       }
-    //     })
-    //   }
-    //   // If data is not present then employee gets created
-    //   else {
-    //     this._employeeService.AddEmployee(this.employeeForm.value).subscribe({
-    //       next: (val: any) => {
-    //         // this._coreService.openSnackBar('Employee added successfully!');
-    //         this._dialogRef.close(true);
-    //       }
-    //     })
-    //   }
-
-    // }
-    console.log(this.departments)
+    this._employeeService.AddEmployee(this.employeeForm.value)
+      .subscribe(
+        (response: any) => {
+          console.log("Data sent successfully");
+          this._dialogRef.close(true);
+        },
+        (error: any) => {
+          console.log(this.employeeForm.value);
+          console.error("Error sending data:", error);
+          // Handle error if needed
+        }
+      );
   }
-}
+}  
+
 

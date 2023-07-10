@@ -6,6 +6,8 @@ import { Observable } from 'rxjs';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { IEmployee, EmployeeService } from 'src/app/services/EmployeeService/employee.service';
+import {MatSort, Sort, MatSortModule} from '@angular/material/sort';
+import { LiveAnnouncer } from '@angular/cdk/a11y';
 
 @Component({
   selector: 'app-employee',
@@ -14,6 +16,7 @@ import { IEmployee, EmployeeService } from 'src/app/services/EmployeeService/emp
 })
 export class EmployeeComponent implements OnInit{
   @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatSort) sort: MatSort;
 
   employeelist: any;
   dataSource: MatTableDataSource<any>;
@@ -22,7 +25,8 @@ export class EmployeeComponent implements OnInit{
 
   constructor(
     private _dialog: MatDialog,
-    private _employeeService: EmployeeService
+    private _employeeService: EmployeeService,
+    private _liveAnnouncer: LiveAnnouncer
   ) { }
   ngOnInit(): void {
     this.GetEmployees();
@@ -31,7 +35,7 @@ export class EmployeeComponent implements OnInit{
   GetEmployees() {
     this._employeeService.GetEmployees().subscribe(response => {
       this.employeelist = response.data;
-      this.dataSource = new MatTableDataSource<any>(this.employeelist);
+      this.dataSource = new MatTableDataSource(this.employeelist);
       this.dataSource.paginator = this.paginator;
       this.dataObs$ = this.dataSource.connect();
       // console.log(response.data);
@@ -71,5 +75,9 @@ export class EmployeeComponent implements OnInit{
       error: console.log,
     })
   }
+
+ 
+
 }
+
 
