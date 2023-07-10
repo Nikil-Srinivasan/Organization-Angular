@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { Employee, EmployeeService } from 'src/app/services/EmployeeService/employee.service';
+import { MatSort } from '@angular/material/sort';
 
 export interface productsData {
   id: number;
@@ -72,29 +73,23 @@ const ELEMENT_DATA: productsData[] = [
   styleUrls: ['./employee.component.css']
 })
 export class EmployeeComponent {
-  @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatPaginator) paginator !: MatPaginator;
+  @ViewChild(MatSort) sort !: MatSort;
 
-  employeelist : any;
-  dataSource: MatTableDataSource<any>;
-  dataObs$: Observable<any>;
+  employeelist !: Employee[];
+  dataSource: MatTableDataSource<Employee>;
   displayedColumns: string[] = ['name', 'age', 'salary', 'department', 'product','edit','delete'];
 
   constructor(private _dialog: MatDialog, private employeeService: EmployeeService) {
-    this.employeeService.GetEmployee().subscribe(response => {
+
+      this.employeeService.GetEmployee().subscribe(response => {
       this.employeelist = response.data;
-      this.dataSource = new MatTableDataSource<any>(this.employeelist);
+      this.dataSource = new MatTableDataSource(this.employeelist);
       this.dataSource.paginator = this.paginator;
-      this.dataObs$= this.dataSource.connect();
-      console.log(response.data);
-    });
-  }
- 
+      this.dataSource.sort = this.sort;
+      }); 
+    }
   
-  
-  
-  
-
-
   /* this._dialog.open(AddComponent);
   }
 
