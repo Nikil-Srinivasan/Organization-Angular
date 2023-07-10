@@ -24,7 +24,7 @@ import { HeaderComponent } from './layouts/full/header/header.component';
 import { BrandingComponent } from './layouts/full/sidebar/branding.component';
 import { AppNavItemComponent } from './layouts/full/sidebar/nav-item/nav-item.component';
 import { EmployeeComponent } from './pages/employee/employee.component';
-import { AddComponent } from './pages/employee/dialog/add/add.component';
+import { AddEditComponent } from './pages/employee/add-edit/add-edit.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +36,7 @@ import { AddComponent } from './pages/employee/dialog/add/add.component';
     BrandingComponent,
     AppNavItemComponent,
     EmployeeComponent,
-    AddComponent,
+    AddEditComponent,
   ],
   imports: [
     BrowserModule,
