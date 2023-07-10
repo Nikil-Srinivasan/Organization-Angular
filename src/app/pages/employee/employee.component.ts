@@ -6,6 +6,7 @@ import { Observable } from 'rxjs';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { IEmployee, EmployeeService } from 'src/app/services/EmployeeService/employee.service';
+import { EmployeeEditComponent } from './dialog/employee-edit/employee-edit.component';
 
 @Component({
   selector: 'app-employee',
@@ -34,7 +35,6 @@ export class EmployeeComponent implements OnInit{
       this.dataSource = new MatTableDataSource<any>(this.employeelist);
       this.dataSource.paginator = this.paginator;
       this.dataObs$ = this.dataSource.connect();
-      // console.log(response.data);
     });
   }
 
@@ -50,7 +50,8 @@ export class EmployeeComponent implements OnInit{
   }
 
   OpenEditEmployee(data: any) {
-    const dialogRef = this._dialog.open(AddEditComponent, {
+    // console.log(data)
+    const dialogRef = this._dialog.open(EmployeeEditComponent, {
       data,
     });
     dialogRef.afterClosed().subscribe({

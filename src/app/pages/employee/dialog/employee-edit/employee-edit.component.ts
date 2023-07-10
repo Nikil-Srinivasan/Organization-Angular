@@ -1,4 +1,4 @@
-import { Component, Inject } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { EmployeeService } from 'src/app/services/EmployeeService/employee.service';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
@@ -10,11 +10,11 @@ interface IDepartment {
 }
 
 @Component({
-  selector: 'app-add-edit',
-  templateUrl: './add-edit.component.html',
-  styleUrls: ['./add-edit.component.scss']
+  selector: 'app-employee-edit',
+  templateUrl: './employee-edit.component.html',
+  styleUrls: ['./employee-edit.component.scss']
 })
-export class AddEditComponent {
+export class EmployeeEditComponent implements OnInit {
 
   employeeForm: FormGroup;
 
@@ -30,18 +30,11 @@ export class AddEditComponent {
 
   selectedProductId: number | undefined;
 
-  roles: string[] = [
-    'Developer',
-    'HR',
-    'Sales',
-    'Marketing'
-  ]
-
   constructor(
     private _formbuiler: FormBuilder,
     private _employeeService: EmployeeService,
     private _http: HttpClient,
-    private _dialogRef: MatDialogRef<AddEditComponent>,
+    private _dialogRef: MatDialogRef<EmployeeEditComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
   ) {
     this.employeeForm = this._formbuiler.group({
@@ -51,15 +44,15 @@ export class AddEditComponent {
       departmentID: '',
       productID: '',
     })
+    console.log(data)
   }
-
   ngOnInit(): void {
     this.employeeForm.patchValue({
-      name: this.data.employeeName,
-      age: this.data.employeeAge,
-      salary: this.data.employeeSalary,
-      department: this.data.departmentID,
-      product: this.data.productID
+      employeeName: this.data.employeeName,
+      employeeAge: this.data.employeeAge,
+      employeeSalary: this.data.employeeSalary,
+      departmentID: this.data.departmentID,
+      productID: this.data.productID
     });    
 
     this.fetchDepartments();
@@ -98,9 +91,6 @@ export class AddEditComponent {
   //onSubmit Method is invoked when the Submit Button is clicked
   onSubmit() {
     if (this.employeeForm.valid) {
-
-      //Checks whether the data is present on the table
-      if (this.data) {
         this._employeeService.UpdateEmployee(this.data.employeeID, this.employeeForm.value).subscribe({
           next: (val: any) => {
             console.log(this.data.employeeID);
@@ -113,22 +103,7 @@ export class AddEditComponent {
             // Handle the error and show an error message to the user
           }
         });
-        
-      }
-      // If data is not present then employee gets created
-      else {
-        this._employeeService.AddEmployee(this.employeeForm.value).subscribe({
-          next: (val: any) => {
-            // this._coreService.openSnackBar('Employee added successfully!');
-            this._dialogRef.close(true);
-          },
-          error: (error: any) => {
-            console.error('Error updating employee details:', error);
-            // Handle the error and show an error message to the user
-          }
-        })
-      }
     }
   }
-}
 
+}

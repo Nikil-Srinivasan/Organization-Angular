@@ -21,19 +21,27 @@ export class EmployeeService {
     constructor(private _http: HttpClient) { }
 
     GetEmployees(): Observable<any> {
-        return this._http.get<any>(`${environment.apiUrl}/api/Employee/GetAllEmployees`);
+        return this._http.get<any>(`${environment.baseUrl}/api/Employee/GetAllEmployees`);
     }
 
     AddEmployee(data: any): Observable<any> {
-        return this._http.post(`${environment.apiUrl}/api/Employee/CreateEmployee`, data);
+        return this._http.post(`${environment.baseUrl}/api/Employee/CreateEmployee`, data);
     }
 
     UpdateEmployee(id: number, data: any): Observable<any> {
-        return this._http.put(`${environment.apiUrl}/api/Employee/UpdateEmployee${id}`, data);
+        console.log(id,data)
+        return this._http.put(`${environment.baseUrl}/api/Employee/UpdateEmployee?id=${id}`, data);
     }
 
-    DeleteEmployee(id: number): Observable<any> {
-        return this._http.delete(`${environment.apiUrl}/api/Employee/DeleteEmployee?id=${id}`);
+    DeleteEmployee(id: number): Observable<any> {   
+        return this._http.delete(`${environment.baseUrl}/api/Employee/DeleteEmployee?id=${id}`);
     }
 
+    FetchDepartments(): Observable<any> {
+        return this._http.get<any>(`${environment.baseUrl}/api/Department/GetAllDepartment`);
+    }
+
+    FetchProducts(): Observable<any> {
+        return this._http.get<any>(`${environment.baseUrl}/api/Product/GetAllProducts`)
+    }
 }
