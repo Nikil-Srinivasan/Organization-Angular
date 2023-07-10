@@ -58,7 +58,7 @@ export class AuthenticationService {
  
   login(context: LoginContext): Observable<any> {
     // Make the POST request to the authentication endpoint
-    return this.http.post<{ data: string }>(`${environment.apiUrl}/api/Auth/login`, {
+    return this.http.post<{ data: string }>(`${environment.baseUrl}/api/Auth/login`, {
       userName: context.username,
       password: context.password
     }).pipe(map(response => {
@@ -75,7 +75,7 @@ export class AuthenticationService {
   }
 
   AdminRegister(context: RegisterContext): Observable<any> {
-    return this.http.post<{ data: string }>(`${environment.apiUrl}/api/Auth/AdminRegister`, {
+    return this.http.post<{ data: string }>(`${environment.baseUrl}/api/Auth/AdminRegister`, {
       userName: context.username,
       email: context.email,
       password: context.password
@@ -100,7 +100,7 @@ export class AuthenticationService {
       params: params
     };
   
-    return this.http.post<{ data: string }>(`${environment.apiUrl}/api/Auth/verify`, null, options);
+    return this.http.post<{ data: string }>(`${environment.baseUrl}/api/Auth/verify`, null, options);
   }
   
 
@@ -113,12 +113,12 @@ export class AuthenticationService {
       }),
       params: params
     };
-    return this.http.post<{ data: string }>(`${environment.apiUrl}/api/Auth/forgot-password`, null, options);
+    return this.http.post<{ data: string }>(`${environment.baseUrl}/api/Auth/forgot-password`, null, options);
 
   }
 
   ResetPassword(context : ResetPasswordContext) : Observable<any>{
-    return this.http.post<{ data: string }>(`${environment.apiUrl}/api/Auth/reset-password`, {
+    return this.http.post<{ data: string }>(`${environment.baseUrl}/api/Auth/reset-password`, {
       email: context.email,
       newPassword: context.newPassowrd
     }).pipe(

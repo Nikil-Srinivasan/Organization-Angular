@@ -4,18 +4,12 @@ import { EmployeeService } from 'src/app/services/EmployeeService/employee.servi
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { HttpClient } from '@angular/common/http';
 
-interface IDepartment {
-  id: number;
-  departmentName: string;
-}
-
 @Component({
-  selector: 'app-add-edit',
-  templateUrl: './add-edit.component.html',
-  styleUrls: ['./add-edit.component.scss']
+  selector: 'app-employee-add',
+  templateUrl: './employee-add.component.html',
+  styleUrls: ['./employee-add.component.scss']
 })
-export class AddEditComponent {
-
+export class EmployeeAddComponent {
   employeeForm: FormGroup;
 
   departments: any[] = [];
@@ -35,7 +29,7 @@ export class AddEditComponent {
     private _formbuiler: FormBuilder,
     private _employeeService: EmployeeService,
     private _http: HttpClient,
-    private _dialogRef: MatDialogRef<AddEditComponent>,
+    private _dialogRef: MatDialogRef<EmployeeAddComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
   ) {
     this.employeeForm = this._formbuiler.group({
@@ -87,6 +81,4 @@ export class AddEditComponent {
         }
       );
   }
-}  
-
-
+}

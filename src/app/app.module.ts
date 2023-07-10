@@ -23,8 +23,6 @@ import { SidebarComponent } from './layouts/full/sidebar/sidebar.component';
 import { HeaderComponent } from './layouts/full/header/header.component';
 import { BrandingComponent } from './layouts/full/sidebar/branding.component';
 import { AppNavItemComponent } from './layouts/full/sidebar/nav-item/nav-item.component';
-import { EmployeeComponent } from './pages/employee/employee.component';
-import { AddEditComponent } from './pages/employee/add-edit/add-edit.component';
 
 @NgModule({
   declarations: [
@@ -34,9 +32,7 @@ import { AddEditComponent } from './pages/employee/add-edit/add-edit.component';
     SidebarComponent,
     HeaderComponent,
     BrandingComponent,
-    AppNavItemComponent,
-    EmployeeComponent,
-    AddEditComponent,
+    AppNavItemComponent
   ],
   imports: [
     BrowserModule,

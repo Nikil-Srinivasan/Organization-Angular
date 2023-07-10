@@ -1,13 +1,12 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatCardModule } from '@angular/material/card';
-import { AddEditComponent } from './add-edit/add-edit.component';
+import { EmployeeAddComponent } from './dialog/employee-add/employee-add.component'; 
+import { EmployeeEditComponent } from './dialog/employee-edit/employee-edit.component';
 import { Observable } from 'rxjs';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { IEmployee, EmployeeService } from 'src/app/services/EmployeeService/employee.service';
-import {MatSort, Sort, MatSortModule} from '@angular/material/sort';
-import { LiveAnnouncer } from '@angular/cdk/a11y';
 
 @Component({
   selector: 'app-employee',
@@ -16,7 +15,6 @@ import { LiveAnnouncer } from '@angular/cdk/a11y';
 })
 export class EmployeeComponent implements OnInit{
   @ViewChild(MatPaginator) paginator: MatPaginator;
-  @ViewChild(MatSort) sort: MatSort;
 
   employeelist: any;
   dataSource: MatTableDataSource<any>;
@@ -25,8 +23,7 @@ export class EmployeeComponent implements OnInit{
 
   constructor(
     private _dialog: MatDialog,
-    private _employeeService: EmployeeService,
-    private _liveAnnouncer: LiveAnnouncer
+    private _employeeService: EmployeeService
   ) { }
   ngOnInit(): void {
     this.GetEmployees();
@@ -38,12 +35,11 @@ export class EmployeeComponent implements OnInit{
       this.dataSource = new MatTableDataSource(this.employeelist);
       this.dataSource.paginator = this.paginator;
       this.dataObs$ = this.dataSource.connect();
-      // console.log(response.data);
     });
   }
 
   OpenAddEditDialog(){
-    const dialogRef = this._dialog.open(AddEditComponent);
+    const dialogRef = this._dialog.open(EmployeeAddComponent);
     dialogRef.afterClosed().subscribe({
       next: (val) => {
         if(val){
@@ -54,7 +50,8 @@ export class EmployeeComponent implements OnInit{
   }
 
   OpenEditEmployee(data: any) {
-    const dialogRef = this._dialog.open(AddEditComponent, {
+    // console.log(data)
+    const dialogRef = this._dialog.open(EmployeeEditComponent, {
       data,
     });
     dialogRef.afterClosed().subscribe({

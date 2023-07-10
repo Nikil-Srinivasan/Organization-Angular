@@ -3,21 +3,27 @@ import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { PagesRoutes } from './pages.routing.module';
 import { MaterialModule } from '../material.module';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { NgApexchartsModule } from 'ng-apexcharts';
 // icons
 import { TablerIconsModule } from 'angular-tabler-icons';
 import * as TablerIcons from 'angular-tabler-icons/icons';
 import { AppDashboardComponent } from './dashboard/dashboard.component';
-
+import { EmployeeComponent } from './employee/employee.component';
+import { EmployeeAddComponent } from './employee/dialog/employee-add/employee-add.component';
+import { EmployeeEditComponent } from './employee/dialog/employee-edit/employee-edit.component';
 @NgModule({
   declarations: [
-    AppDashboardComponent
+    AppDashboardComponent,
+    EmployeeComponent,
+    EmployeeEditComponent,
+    EmployeeAddComponent
   ],
   imports: [
     CommonModule,
     MaterialModule,
     FormsModule,
+    ReactiveFormsModule,
     NgApexchartsModule,
     RouterModule.forChild(PagesRoutes),
     TablerIconsModule.pick(TablerIcons),
