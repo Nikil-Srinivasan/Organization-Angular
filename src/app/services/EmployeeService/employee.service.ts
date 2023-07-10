@@ -25,7 +25,9 @@ export class EmployeeService {
     }
 
     AddEmployee(data: any): Observable<any> {
-        return this._http.post(`${environment.baseUrl}/api/Employee/CreateEmployee`, data);
+        console.log(data)
+        return this._http.post(`${environment.baseUrl}/api/Auth/Register`, data);
+        
     }
 
     UpdateEmployee(id: number, data: any): Observable<any> {

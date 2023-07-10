@@ -1,12 +1,12 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatCardModule } from '@angular/material/card';
-import { AddEditComponent } from './add-edit/add-edit.component';
+import { EmployeeAddComponent } from './dialog/employee-add/employee-add.component'; 
+import { EmployeeEditComponent } from './dialog/employee-edit/employee-edit.component';
 import { Observable } from 'rxjs';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { IEmployee, EmployeeService } from 'src/app/services/EmployeeService/employee.service';
-import { EmployeeEditComponent } from './dialog/employee-edit/employee-edit.component';
 
 @Component({
   selector: 'app-employee',
@@ -32,14 +32,14 @@ export class EmployeeComponent implements OnInit{
   GetEmployees() {
     this._employeeService.GetEmployees().subscribe(response => {
       this.employeelist = response.data;
-      this.dataSource = new MatTableDataSource<any>(this.employeelist);
+      this.dataSource = new MatTableDataSource(this.employeelist);
       this.dataSource.paginator = this.paginator;
       this.dataObs$ = this.dataSource.connect();
     });
   }
 
   OpenAddEditDialog(){
-    const dialogRef = this._dialog.open(AddEditComponent);
+    const dialogRef = this._dialog.open(EmployeeAddComponent);
     dialogRef.afterClosed().subscribe({
       next: (val) => {
         if(val){
@@ -72,5 +72,9 @@ export class EmployeeComponent implements OnInit{
       error: console.log,
     })
   }
+
+ 
+
 }
+
 
