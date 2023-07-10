@@ -33,7 +33,6 @@ export interface salesOverviewChart {
   plotOptions: ApexPlotOptions;
   yaxis: ApexYAxis;
   xaxis: ApexXAxis;
-  fill: ApexFill;
   tooltip: ApexTooltip;
   stroke: ApexStroke;
   legend: ApexLegend;
@@ -61,13 +60,13 @@ export interface productsData {
   templateUrl: './dashboard.component.html',
   encapsulation: ViewEncapsulation.None,
 })
-export class AppDashboardComponent implements OnInit{
+export class AppDashboardComponent implements OnInit {
 
   @ViewChild('chart') chart: ChartComponent = Object.create(null);
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
-  public salesOverviewChart: any ;
+  public salesOverviewChart: salesOverviewChart ;
   
   TotalProducts : any;
   TotalEmployees : any;
@@ -136,6 +135,7 @@ export class AppDashboardComponent implements OnInit{
   ];
 
   constructor(private productService : ProductServiceService) {
+
     this.salesOverviewChart = {
       series: [
         {
@@ -165,7 +165,7 @@ export class AppDashboardComponent implements OnInit{
         },
       },
       plotOptions: {
-        bar: { horizontal: false, columnWidth: '35%', borderRadius: [4] },
+        bar: { horizontal: false, columnWidth: '35%', borderRadius: 4 },
       },
       chart: {
         type: 'bar',
@@ -177,7 +177,7 @@ export class AppDashboardComponent implements OnInit{
         sparkline: { enabled: false },
       },
       dataLabels: { enabled: false },
-      markers: { size: 0 },
+      marker: { size: 0 },
       legend: { show: false },
       xaxis: {
         type: 'category',
@@ -204,36 +204,15 @@ export class AppDashboardComponent implements OnInit{
       },
       tooltip: { theme: 'light' },
 
-      responsive: [
-        {
-          breakpoint: 600,
-          options: {
-            plotOptions: {
-              bar: {
-                borderRadius: 3,
-              },
-            },
-          },
-        },
-      ],
     };
    }
 
   ngOnInit() 
   {
-    
-    this.setPagination(this.tableData);
-    this.loadData();
     this.TotalCount(); 
+    this.loadData();
+    this.setPagination(this.tableData);
   } 
-
-  setPagination(tableData : any) 
-  {
-    this.dataSource = new MatTableDataSource<any>(tableData);
-    this.dataSource.paginator = this.paginator;
-    this.dataSource.sort = this.sort;
-    
-  }
 
   TotalCount() 
   {
@@ -259,24 +238,38 @@ export class AppDashboardComponent implements OnInit{
     this.productService.getAllProductsWithCounts().subscribe(
       {
       next : (response: any) => {
+        
         const data = response.data;
+        console.log(this.salesOverviewChart.xaxis.categories);
         const productNames = data.map((product: any) => product.productName);
         const employeeCounts = data.map((product: any) => product.employeeCount);
         const customerCounts = data.map((product: any) => product.customerCount);
         const productRevenue = data.map((product: any) => product.productRevenue);
+
+        // console.log(productNames);
+        // console.log(employeeCounts);
+        // console.log(customerCounts);
+        // console.log(productRevenue);
         
+        this.salesOverviewChart.xaxis.categories = productNames;
         this.salesOverviewChart.series[0].data = employeeCounts;
         this.salesOverviewChart.series[1].data = customerCounts;
         this.salesOverviewChart.series[2].data = productRevenue;
-        this.salesOverviewChart.xaxis.categories = productNames;
+        
+        console.log(this.salesOverviewChart.xaxis.categories);
 
       },
       error: (error : any) => {
         console.error(error);
       }
-    }
-  );
+    });
   }
-  
-  
+
+  setPagination(tableData : any) 
+  {
+    this.dataSource = new MatTableDataSource<any>(tableData);
+    this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
+    
+  }  
 }
