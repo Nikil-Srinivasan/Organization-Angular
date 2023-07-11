@@ -21,13 +21,17 @@ export interface UserVerifyContext{
   otp : string
 }
 
-export interface forgotPasswordContext{
+export interface ForgotPasswordContext{
   email : string
 }
 
 export interface ResetPasswordContext{
   email : string,
   newPassowrd : string
+}
+
+export interface ResendOtp{
+  email : string
 }
 
 
@@ -89,43 +93,51 @@ export class AuthenticationService {
   }
   
   verifyUser(context: UserVerifyContext): Observable<any> {
-    const params = new HttpParams()
-      .set('email', context.email)
-      .set('otp', context.otp);
-  
     const options = {
       headers: new HttpHeaders({
         'Content-Type': 'text/plain'
       }),
-      params: params
     };
-  
-    return this.http.post<{ data: string }>(`${environment.apiUrl}/api/Auth/verify`, null, options);
+    console.log("verifyContext :" , context.otp)
+
+    return this.http.post<{ data: string }>(`${environment.apiUrl}/api/Auth/Verify?email=${encodeURIComponent(context.email)}&otp=${context.otp}`, options);
   }
   
-
-  forgotPassword(context : forgotPasswordContext) : Observable<any>{
-    const params = new HttpParams()
-    .set('email', context.email)
+  forgotPassword(context: ForgotPasswordContext): Observable<any> {
     const options = {
       headers: new HttpHeaders({
         'Content-Type': 'text/plain'
       }),
-      params: params
     };
-    return this.http.post<{ data: string }>(`${environment.apiUrl}/api/Auth/forgot-password`, null, options);
-
+    return this.http.post<{ data: string }>(
+      `${environment.apiUrl}/api/Auth/ForgotPassword?email=${encodeURIComponent(context.email)}`,
+      options
+    );
   }
 
   ResetPassword(context : ResetPasswordContext) : Observable<any>{
-    return this.http.post<{ data: string }>(`${environment.apiUrl}/api/Auth/reset-password`, {
+    return this.http.post<{ data: string }>(`${environment.apiUrl}/api/Auth/ResetPassword`, {
       email: context.email,
       newPassword: context.newPassowrd
     }).pipe(
       map(response => {
-        const responseData = response.data;
-        return responseData;
+        // const responseData = response.data;
+        return response;
       })
+    );
+  }
+
+  resendOtp(context: ResendOtp): Observable<any> {
+    const options = {
+      headers: new HttpHeaders({
+        'Content-Type': 'text/plain'
+      }),
+    };
+    // http://localhost:5005/api/Auth/ResendOtp?email=m%40mail.me
+
+    return this.http.post<{ data: string }>(
+      `${environment.apiUrl}/api/Auth/ResendOtp?email=${encodeURIComponent(context.email)}`,
+      options
     );
   }
 

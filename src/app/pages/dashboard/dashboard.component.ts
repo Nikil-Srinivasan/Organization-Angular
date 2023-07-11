@@ -145,12 +145,12 @@ export class AppDashboardComponent implements OnInit{
   ];
 
   constructor(private productService : ProductServiceService) {
+    this.loadData();
    
    }
 
   ngOnInit() 
   {
-    this.loadData();
     this.setPagination(this.tableData);
     this.TotalCount(); 
   } 
@@ -196,17 +196,17 @@ export class AppDashboardComponent implements OnInit{
           series: [
             {
               name: 'Employees',
-              data: employeeCounts,
+              data: employeeCounts ? employeeCounts : [],
               color: '#5D87FF',
             },
             {
               name: 'Customers',
-              data: customerCounts,
+              data: customerCounts ? customerCounts : [],
               color: '#49BEFF',
             },
             {
               name: 'ProductRevenue',
-              data: productRevenue,
+              data: productRevenue ? productRevenue : [],
               color: '#49BEFF',
             },
           ],
@@ -237,7 +237,7 @@ export class AppDashboardComponent implements OnInit{
           legend: { show: false },
           xaxis: {
             type: 'category',
-            categories: productNames,
+            categories: productNames ? productNames : [],
             labels: {
               style: { cssClass: 'grey--text lighten-2--text fill-color' },
             },
