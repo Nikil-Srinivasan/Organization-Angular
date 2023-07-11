@@ -61,7 +61,7 @@ export class EmployeeEditComponent implements OnInit {
   }
 
   fetchDepartments() {
-    this._employeeService.FetchDepartments().subscribe(departments => {
+    this._employeeService.GetDepartmentsList().subscribe(departments => {
       this.departments = departments.data;
       this.departments.forEach(department => {
         this.departmentMap[department.departmentID] = department.departmentName;
@@ -75,7 +75,7 @@ export class EmployeeEditComponent implements OnInit {
   }
 
   fetchProducts() {
-    this._employeeService.FetchProducts().subscribe(products => {
+    this._employeeService.GetProductsList().subscribe(products => {
       this.products = products.data;
       this.products.forEach(product => {
         this.productMap[product.productID] = product.productName;

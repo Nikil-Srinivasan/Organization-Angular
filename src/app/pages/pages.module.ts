@@ -12,12 +12,19 @@ import { AppDashboardComponent } from './dashboard/dashboard.component';
 import { EmployeeComponent } from './employee/employee.component';
 import { EmployeeAddComponent } from './employee/dialog/employee-add/employee-add.component';
 import { EmployeeEditComponent } from './employee/dialog/employee-edit/employee-edit.component';
+import { ManagerComponent } from './manager/manager.component';
+import { ManagerAddComponent } from './manager/dialog/manager-add/manager-add.component';
+import { ManagerEditComponent } from './manager/dialog/manager-edit/manager-edit.component';
+
 @NgModule({
   declarations: [
     AppDashboardComponent,
     EmployeeComponent,
     EmployeeEditComponent,
-    EmployeeAddComponent
+    EmployeeAddComponent,
+    ManagerComponent,
+    ManagerAddComponent,
+    ManagerEditComponent,
   ],
   imports: [
     CommonModule,

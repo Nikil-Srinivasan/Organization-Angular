@@ -32,7 +32,7 @@ import { AppNavItemComponent } from './layouts/full/sidebar/nav-item/nav-item.co
     SidebarComponent,
     HeaderComponent,
     BrandingComponent,
-    AppNavItemComponent
+    AppNavItemComponent,
   ],
   imports: [
     BrowserModule,

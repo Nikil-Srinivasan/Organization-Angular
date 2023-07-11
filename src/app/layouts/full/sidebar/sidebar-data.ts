@@ -17,11 +17,11 @@ export const navItems: NavItem[] = [
     iconName: 'rosette',
     route: '/dashboard/employee',
   },
-  // {
-  //   displayName: 'Chips',
-  //   iconName: 'poker-chip',
-  //   route: '/ui-components/chips',
-  // },
+  {
+    displayName: 'Manager',
+    iconName: 'poker-chip',
+    route: '/dashboard/manager',
+  },
   // {
   //   displayName: 'Lists',
   //   iconName: 'list',
