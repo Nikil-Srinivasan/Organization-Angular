@@ -1,6 +1,8 @@
 import { Component, Inject } from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { EmployeeService } from 'src/app/services/EmployeeService/employee.service';
+import { DepartmentService } from 'src/app/services/DepartmentService/department.service';
+import { ProductService } from 'src/app/services/ProductService/product.service';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { HttpClient } from '@angular/common/http';
 
@@ -21,6 +23,8 @@ export class EmployeeAddComponent {
   constructor(
     private _formbuiler: FormBuilder,
     private _employeeService: EmployeeService,
+    private _departmentService: DepartmentService,
+    private _productService: ProductService,
     private _http: HttpClient,
     private _dialogRef: MatDialogRef<EmployeeAddComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
@@ -47,14 +51,14 @@ export class EmployeeAddComponent {
   }
 
   fetchDepartments() {
-    this._employeeService.GetDepartmentsList().subscribe(departments => {
+    this._departmentService.GetDepartmentsList().subscribe(departments => {
       this.departments = departments.data;
       console.log(departments.data)
     });
   }
 
   fetchProducts(){
-    this._employeeService.GetProductsList().subscribe(products => {
+    this._productService.GetProductsList().subscribe(products => {
       this.products = products.data;
       console.log(products.data);
     })

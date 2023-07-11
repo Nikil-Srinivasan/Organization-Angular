@@ -41,6 +41,12 @@ const routes: Routes = [
         loadChildren: () =>
           import('./pages/employee/employee.component').then((m) => m.EmployeeComponent),
       },
+      {
+        path: 'product',
+        loadChildren: () =>
+          import('./pages/product/product.component').then((m) => m.ProductComponent),
+      },
+      
     ],
   },
 

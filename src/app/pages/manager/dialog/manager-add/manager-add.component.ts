@@ -4,6 +4,8 @@ import { EmployeeService } from 'src/app/services/EmployeeService/employee.servi
 import { ManagerService } from 'src/app/services/ManagerService/manager.service';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { HttpClient } from '@angular/common/http';
+import { ProductService } from 'src/app/services/ProductService/product.service';
+
 @Component({
   selector: 'app-manager-add',
   templateUrl: './manager-add.component.html',
@@ -18,6 +20,7 @@ export class ManagerAddComponent {
     private _formbuiler: FormBuilder,
     private _employeeService: EmployeeService,
     private _managerService: ManagerService,
+    private _productService: ProductService,
     private _http: HttpClient,
     private _dialogRef: MatDialogRef<ManagerAddComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
@@ -43,7 +46,7 @@ export class ManagerAddComponent {
   }
 
   fetchProducts(){
-    this._employeeService.GetProductsList().subscribe(products => {
+    this._productService.GetProductsList().subscribe(products => {
       this.products = products.data;
       console.log(products.data);
     })

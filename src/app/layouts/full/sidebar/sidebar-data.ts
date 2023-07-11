@@ -19,8 +19,23 @@ export const navItems: NavItem[] = [
   },
   {
     displayName: 'Manager',
-    iconName: 'poker-chip',
+    iconName: 'rosette',
     route: '/dashboard/manager',
+  },
+  {
+    displayName: 'Product',
+    iconName: 'rosette',
+    route: '/dashboard/product',
+  },
+  {
+    displayName: 'Customer',
+    iconName: 'rosette',
+    route: '/dashboard/customer',
+  },
+  {
+    displayName: 'Department',
+    iconName: 'rosette',
+    route: '/dashboard/department',
   },
   // {
   //   displayName: 'Lists',

@@ -24,22 +24,14 @@ export class EmployeeService {
     }
 
     AddEmployee(data: any): Observable<any> {
-        return this._http.post(`${environment.baseUrl}/api/Auth/Register`, data); 
+        return this._http.post(`${environment.baseUrl}/api/Auth/Register`, data);
     }
 
     UpdateEmployee(id: number, data: any): Observable<any> {
         return this._http.put(`${environment.baseUrl}/api/Employee/UpdateEmployee?id=${id}`, data);
     }
 
-    DeleteEmployee(id: number): Observable<any> {   
+    DeleteEmployee(id: number): Observable<any> {
         return this._http.delete(`${environment.baseUrl}/api/Employee/DeleteEmployee?id=${id}`);
-    }
-
-    GetDepartmentsList(): Observable<any> {
-        return this._http.get<any>(`${environment.baseUrl}/api/Department/GetAllDepartment`);
-    }
-
-    GetProductsList(): Observable<any> {
-        return this._http.get<any>(`${environment.baseUrl}/api/Product/GetAllProducts`)
     }
 }
