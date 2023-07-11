@@ -1,5 +1,5 @@
 <div mat-dialog-title>
-    <h1>Customer Form</h1>
+    <h1>Edit Customer</h1>
 </div>
 <form [formGroup]="customerForm" (ngSubmit)="onSubmit()">
     <div mat-dialog-content class="content">
@@ -18,8 +18,6 @@
                 <mat-label>Email</mat-label>
                 <input matInput type="text" formControlName="customerEmail">
             </mat-form-field>
-        </div> <br> 
-        <div class="row">
             <mat-form-field appearance="outline">
                 <mat-label>Product</mat-label>
                 <mat-select formControlName="productID">

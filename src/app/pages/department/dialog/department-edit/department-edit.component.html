@@ -1,14 +1,12 @@
 <div mat-dialog-title>
-    <h1>Department Form</h1>
+    <h1>Edit Department</h1>
 </div>
 <form [formGroup]="departmentForm" (ngSubmit)="onSubmit()">
     <div mat-dialog-content class="content">
-        <div class="row">
-            <mat-form-field appearance="outline">
+            <mat-form-field appearance="outline" class="w-100">
                 <mat-label>Name</mat-label>
-                <input matInput type="text" formControlName="productName">
+                <input matInput type="text" formControlName="departmentName">
             </mat-form-field>        
-        </div> 
     </div>
     <div mat-dialog-actions class="action">
         <button mat-raised-button type="button" [mat-dialog-close]="false"> Cancel</button>
