@@ -62,7 +62,7 @@ export class AuthenticationService {
  
   login(context: LoginContext): Observable<any> {
     // Make the POST request to the authentication endpoint
-    return this.http.post<{ data: string }>(`${environment.apiUrl}/api/Auth/login`, {
+    return this.http.post<{ data: string }>(`${environment.baseUrl}/api/Auth/login`, {
       userName: context.username,
       password: context.password
     }).pipe(map(response => {
@@ -79,7 +79,7 @@ export class AuthenticationService {
   }
 
   AdminRegister(context: RegisterContext): Observable<any> {
-    return this.http.post<{ data: string }>(`${environment.apiUrl}/api/Auth/AdminRegister`, {
+    return this.http.post<{ data: string }>(`${environment.baseUrl}/api/Auth/AdminRegister`, {
       userName: context.username,
       email: context.email,
       password: context.password
@@ -100,7 +100,7 @@ export class AuthenticationService {
     };
     console.log("verifyContext :" , context.otp)
 
-    return this.http.post<{ data: string }>(`${environment.apiUrl}/api/Auth/Verify?email=${encodeURIComponent(context.email)}&otp=${context.otp}`, options);
+    return this.http.post<{ data: string }>(`${environment.baseUrl}/api/Auth/Verify?email=${encodeURIComponent(context.email)}&otp=${context.otp}`, options);
   }
   
   forgotPassword(context: ForgotPasswordContext): Observable<any> {
@@ -110,13 +110,13 @@ export class AuthenticationService {
       }),
     };
     return this.http.post<{ data: string }>(
-      `${environment.apiUrl}/api/Auth/ForgotPassword?email=${encodeURIComponent(context.email)}`,
+      `${environment.baseUrl}/api/Auth/ForgotPassword?email=${encodeURIComponent(context.email)}`,
       options
     );
   }
 
   ResetPassword(context : ResetPasswordContext) : Observable<any>{
-    return this.http.post<{ data: string }>(`${environment.apiUrl}/api/Auth/ResetPassword`, {
+    return this.http.post<{ data: string }>(`${environment.baseUrl}/api/Auth/ResetPassword`, {
       email: context.email,
       newPassword: context.newPassowrd
     }).pipe(
@@ -136,7 +136,7 @@ export class AuthenticationService {
     // http://localhost:5005/api/Auth/ResendOtp?email=m%40mail.me
 
     return this.http.post<{ data: string }>(
-      `${environment.apiUrl}/api/Auth/ResendOtp?email=${encodeURIComponent(context.email)}`,
+      `${environment.baseUrl}/api/Auth/ResendOtp?email=${encodeURIComponent(context.email)}`,
       options
     );
   }

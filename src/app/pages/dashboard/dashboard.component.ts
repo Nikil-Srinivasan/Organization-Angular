@@ -15,10 +15,12 @@ import {
   ApexMarkers,
   ApexResponsive,
 } from 'ng-apexcharts';
-import { ProductServiceService } from 'src/app/services/ProductService/product-service.service';
+
 import { Observable } from 'rxjs';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
+import { MatSort } from '@angular/material/sort';
+import { DashboardService } from 'src/app/services/DashboardService/Dashboard-Service';
 
 interface month {
   value: string;
@@ -32,7 +34,6 @@ export interface salesOverviewChart {
   plotOptions: ApexPlotOptions;
   yaxis: ApexYAxis;
   xaxis: ApexXAxis;
-  fill: ApexFill;
   tooltip: ApexTooltip;
   stroke: ApexStroke;
   legend: ApexLegend;
@@ -60,23 +61,13 @@ export interface productsData {
   templateUrl: './dashboard.component.html',
   encapsulation: ViewEncapsulation.None,
 })
-export class AppDashboardComponent implements OnInit{
+export class AppDashboardComponent implements OnInit {
 
   @ViewChild('chart') chart: ChartComponent = Object.create(null);
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
+  @ViewChild(MatSort) sort: MatSort;
 
-  public salesOverviewChart: any = {
-    series: [],
-    dataLabels: {},
-    chart: {},
-    legend: {},
-    xaxis: {},
-    yaxis: {},
-    grid: {},
-    stroke: {},
-    tooltip: {},
-    plotOptions: {}
-  };
+  public salesOverviewChart: salesOverviewChart ;
   
   TotalProducts : any;
   TotalEmployees : any;
@@ -144,27 +135,89 @@ export class AppDashboardComponent implements OnInit{
     },
   ];
 
-  constructor(private productService : ProductServiceService) {
-    this.loadData();
-   
+  constructor(private DasboardService : DashboardService) {
+
+    this.salesOverviewChart = {
+      series: [
+        {
+          name: 'Employees',
+          data: [],
+          color: '#5D87FF',
+        },
+        {
+          name: 'Customers',
+          data: [],
+          color: '#49BEFF',
+        },
+        {
+          name: 'ProductRevenue',
+          data: [],
+          color: '#49BEFF',
+        },
+      ],
+
+      grid: {
+        borderColor: 'rgba(0,0,0,0.1)',
+        strokeDashArray: 3,
+        xaxis: {
+          lines: {
+            show: false,
+          },
+        },
+      },
+      plotOptions: {
+        bar: { horizontal: false, columnWidth: '35%', borderRadius: 4 },
+      },
+      chart: {
+        type: 'bar',
+        height: 390,
+        offsetX: -15,
+        toolbar: { show: true },
+        foreColor: '#adb0bb',
+        fontFamily: 'inherit',
+        sparkline: { enabled: false },
+      },
+      dataLabels: { enabled: false },
+      marker: { size: 0 },
+      legend: { show: false },
+      xaxis: {
+        type: 'category',
+        categories: [],
+        labels: {
+          style: { cssClass: 'grey--text lighten-2--text fill-color' },
+        },
+      },
+      yaxis: {
+        show: true,
+        min: 0,
+        tickAmount: 4,
+        labels: {
+          style: {
+            cssClass: 'grey--text lighten-2--text fill-color',
+          },
+        },
+      },
+      stroke: {
+        show: true,
+        width: 3,
+        lineCap: 'butt',
+        colors: ['transparent'],
+      },
+      tooltip: { theme: 'light' },
+
+    };
    }
 
   ngOnInit() 
   {
-    this.setPagination(this.tableData);
     this.TotalCount(); 
+    this.loadData();
+    this.setPagination(this.tableData);
   } 
-
-  setPagination(tableData : any) 
-  {
-    this.dataSource = new MatTableDataSource<any>(tableData);
-    this.dataSource.paginator = this.paginator;
-    this.dataObs$ = this.dataSource.connect();
-  }
 
   TotalCount() 
   {
-    this.productService.getProductCount().subscribe(
+    this.DasboardService.getAllCount().subscribe(
       {
         next: (response : any) => {
           const responseData = response.data;
@@ -183,103 +236,41 @@ export class AppDashboardComponent implements OnInit{
  
   loadData()
    {
-    this.productService.getAllProductsWithCounts().subscribe(
+    this.DasboardService.getChartDetails().subscribe(
       {
       next : (response: any) => {
+        
         const data = response.data;
+        console.log(this.salesOverviewChart.xaxis.categories);
         const productNames = data.map((product: any) => product.productName);
         const employeeCounts = data.map((product: any) => product.employeeCount);
         const customerCounts = data.map((product: any) => product.customerCount);
         const productRevenue = data.map((product: any) => product.productRevenue);
 
-        this.salesOverviewChart = {
-          series: [
-            {
-              name: 'Employees',
-              data: employeeCounts ? employeeCounts : [],
-              color: '#5D87FF',
-            },
-            {
-              name: 'Customers',
-              data: customerCounts ? customerCounts : [],
-              color: '#49BEFF',
-            },
-            {
-              name: 'ProductRevenue',
-              data: productRevenue ? productRevenue : [],
-              color: '#49BEFF',
-            },
-          ],
-    
-          grid: {
-            borderColor: 'rgba(0,0,0,0.1)',
-            strokeDashArray: 3,
-            xaxis: {
-              lines: {
-                show: false,
-              },
-            },
-          },
-          plotOptions: {
-            bar: { horizontal: false, columnWidth: '35%', borderRadius: [4] },
-          },
-          chart: {
-            type: 'bar',
-            height: 390,
-            offsetX: -15,
-            toolbar: { show: true },
-            foreColor: '#adb0bb',
-            fontFamily: 'inherit',
-            sparkline: { enabled: false },
-          },
-          dataLabels: { enabled: false },
-          markers: { size: 0 },
-          legend: { show: false },
-          xaxis: {
-            type: 'category',
-            categories: productNames ? productNames : [],
-            labels: {
-              style: { cssClass: 'grey--text lighten-2--text fill-color' },
-            },
-          },
-          yaxis: {
-            show: true,
-            min: 0,
-            tickAmount: 4,
-            labels: {
-              style: {
-                cssClass: 'grey--text lighten-2--text fill-color',
-              },
-            },
-          },
-          stroke: {
-            show: true,
-            width: 3,
-            lineCap: 'butt',
-            colors: ['transparent'],
-          },
-          tooltip: { theme: 'light' },
-    
-          responsive: [
-            {
-              breakpoint: 600,
-              options: {
-                plotOptions: {
-                  bar: {
-                    borderRadius: 3,
-                  },
-                },
-              },
-            },
-          ],
-        };
+        // console.log(productNames);
+        // console.log(employeeCounts);
+        // console.log(customerCounts);
+        // console.log(productRevenue);
+        
+        this.salesOverviewChart.xaxis.categories = productNames;
+        this.salesOverviewChart.series[0].data = employeeCounts;
+        this.salesOverviewChart.series[1].data = customerCounts;
+        this.salesOverviewChart.series[2].data = productRevenue;
+        
+        console.log(this.salesOverviewChart.xaxis.categories);
+
       },
       error: (error : any) => {
         console.error(error);
       }
-    }
-  );
+    });
   }
-  
-  
+
+  setPagination(tableData : any) 
+  {
+    this.dataSource = new MatTableDataSource<any>(tableData);
+    this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
+    
+  }  
 }
