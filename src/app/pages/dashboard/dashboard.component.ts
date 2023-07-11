@@ -15,11 +15,12 @@ import {
   ApexMarkers,
   ApexResponsive,
 } from 'ng-apexcharts';
-import { ProductServiceService } from 'src/app/services/ProductService/product-service.service';
+
 import { Observable } from 'rxjs';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatSort } from '@angular/material/sort';
+import { DashboardService } from 'src/app/services/DashboardService/Dashboard-Service';
 
 interface month {
   value: string;
@@ -134,7 +135,7 @@ export class AppDashboardComponent implements OnInit {
     },
   ];
 
-  constructor(private productService : ProductServiceService) {
+  constructor(private DasboardService : DashboardService) {
 
     this.salesOverviewChart = {
       series: [
@@ -216,7 +217,7 @@ export class AppDashboardComponent implements OnInit {
 
   TotalCount() 
   {
-    this.productService.getProductCount().subscribe(
+    this.DasboardService.getAllCount().subscribe(
       {
         next: (response : any) => {
           const responseData = response.data;
@@ -235,7 +236,7 @@ export class AppDashboardComponent implements OnInit {
  
   loadData()
    {
-    this.productService.getAllProductsWithCounts().subscribe(
+    this.DasboardService.getChartDetails().subscribe(
       {
       next : (response: any) => {
         
