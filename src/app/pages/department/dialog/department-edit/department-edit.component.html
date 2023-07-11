@@ -1,17 +1,13 @@
 <div mat-dialog-title>
-    <h1>Product Form</h1>
+    <h1>Department Form</h1>
 </div>
-<form [formGroup]="productForm" (ngSubmit)="onSubmit()">
+<form [formGroup]="departmentForm" (ngSubmit)="onSubmit()">
     <div mat-dialog-content class="content">
         <div class="row">
             <mat-form-field appearance="outline">
                 <mat-label>Name</mat-label>
                 <input matInput type="text" formControlName="productName">
-            </mat-form-field>
-            <mat-form-field appearance="outline">
-                <mat-label>Revenue</mat-label>
-                <input matInput type="number" formControlName="productRevenue">
-            </mat-form-field>         
+            </mat-form-field>        
         </div> 
     </div>
     <div mat-dialog-actions class="action">

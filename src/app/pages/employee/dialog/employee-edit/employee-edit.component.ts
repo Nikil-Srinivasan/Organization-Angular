@@ -1,8 +1,9 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { EmployeeService } from 'src/app/services/EmployeeService/employee.service';
+import { DepartmentService } from 'src/app/services/DepartmentService/department.service';
+import { ProductService } from 'src/app/services/ProductService/product.service';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import { HttpClient } from '@angular/common/http';
 
 interface IDepartment {
   id: number;
@@ -20,20 +21,13 @@ export class EmployeeEditComponent implements OnInit {
 
   departments: any[] = [];
 
-  departmentMap: { [key: number]: string } = {};
-
-  selectedDepartmentId: number | undefined;
-
   products: any[] = [];
-
-  productMap: { [key: number]: string } = {};
-
-  selectedProductId: number | undefined;
 
   constructor(
     private _formbuiler: FormBuilder,
     private _employeeService: EmployeeService,
-    private _http: HttpClient,
+    private _departmentService: DepartmentService,
+    private _productService: ProductService,
     private _dialogRef: MatDialogRef<EmployeeEditComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
   ) {
@@ -44,7 +38,6 @@ export class EmployeeEditComponent implements OnInit {
       departmentID: '',
       productID: '',
     })
-    console.log(data)
   }
   ngOnInit(): void {
     this.employeeForm.patchValue({
@@ -61,30 +54,15 @@ export class EmployeeEditComponent implements OnInit {
   }
 
   fetchDepartments() {
-    this._employeeService.FetchDepartments().subscribe(departments => {
+    this._departmentService.GetDepartmentsList().subscribe(departments => {
       this.departments = departments.data;
-      this.departments.forEach(department => {
-        this.departmentMap[department.departmentID] = department.departmentName;
-      });
-
-      if (!this.selectedDepartmentId && this.departments.length > 0) {
-        this.selectedDepartmentId = this.departments[0].departmentID;
-      }
     });
 
   }
 
   fetchProducts() {
-    this._employeeService.FetchProducts().subscribe(products => {
+    this._productService.GetProductsList().subscribe(products => {
       this.products = products.data;
-      this.products.forEach(product => {
-        this.productMap[product.productID] = product.productName;
-      });
-
-      // Set selectedProductId to the first product
-    if (!this.selectedProductId && this.products.length > 0) {
-      this.selectedProductId = this.products[0].productID;
-    }
     });
   }
 
@@ -93,8 +71,6 @@ export class EmployeeEditComponent implements OnInit {
     if (this.employeeForm.valid) {
         this._employeeService.UpdateEmployee(this.data.employeeID, this.employeeForm.value).subscribe({
           next: (val: any) => {
-            console.log(this.data.employeeID);
-            console.log(this.employeeForm.value);
             // this._coreService.openSnackBar('Employee details updated!');
             this._dialogRef.close(true);
           },

@@ -1,8 +1,10 @@
 import { Routes } from '@angular/router';
 import { AppDashboardComponent } from './dashboard/dashboard.component';
 import { EmployeeComponent } from './employee/employee.component';
+import { ManagerComponent } from './manager/manager.component';
 import { ProductComponent } from './product/product.component';
 import { CustomerComponent } from './customer/customer.component';
+import { DepartmentComponent } from './department/department.component';
 
 export const PagesRoutes: Routes = [
   {
@@ -20,6 +22,13 @@ export const PagesRoutes: Routes = [
     },
   },
   {
+    path: 'manager',
+    component: ManagerComponent,
+    data: {
+      title: 'Manager Page',
+    }
+  },
+  {
     path: 'product',
     component: ProductComponent,
     data: {
@@ -31,6 +40,13 @@ export const PagesRoutes: Routes = [
     component: CustomerComponent,
     data: {
       title: 'Customer Page',
+    },
+  },
+  {
+    path: 'department',
+    component: DepartmentComponent,
+    data: {
+      title: 'Department Page',
     },
   },
 ];

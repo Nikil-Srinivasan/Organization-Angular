@@ -29,7 +29,7 @@ export class ProductComponent {
   }
 
   GetProducts() {
-    this._productService.GetProducts().subscribe(response => {
+    this._productService.GetProductsList().subscribe(response => {
       this.productlist = response.data;
       this.dataSource = new MatTableDataSource(this.productlist);
       this.dataSource.paginator = this.paginator;
