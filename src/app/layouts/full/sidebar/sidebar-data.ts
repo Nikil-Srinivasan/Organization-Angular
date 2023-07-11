@@ -17,6 +17,16 @@ export const navItems: NavItem[] = [
     iconName: 'rosette',
     route: '/dashboard/employee',
   },
+  {
+    displayName: 'Product',
+    iconName: 'rosette',
+    route: '/dashboard/product',
+  },
+  {
+    displayName: 'Customer',
+    iconName: 'rosette',
+    route: '/dashboard/customer',
+  },
   // {
   //   displayName: 'Chips',
   //   iconName: 'poker-chip',

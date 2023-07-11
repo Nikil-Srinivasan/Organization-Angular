@@ -5,18 +5,16 @@ import { Observable } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
-export class ProductServiceService {
+export class DashboardService {
 
   constructor(private http: HttpClient) { }
 
-    getProductCount(): Observable<any> {
+    getAllCount(): Observable<any> {
     const url = 'http://localhost:5005/api/Dashboard/GetTotalCount'; 
-
     return this.http.get<any>(url);
-
     }
 
-    getAllProductsWithCounts(): Observable<any> {
+    getChartDetails(): Observable<any> {
       const url = 'http://localhost:5005/api/Dashboard/GetChartDetails';
 
       return this.http.get<any>(url);
