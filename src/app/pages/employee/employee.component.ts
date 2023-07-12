@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { EmployeeAddComponent } from './dialog/employee-add/employee-add.component'; 
 import { EmployeeEditComponent } from './dialog/employee-edit/employee-edit.component';
 import { Observable } from 'rxjs';
@@ -38,7 +38,9 @@ export class EmployeeComponent implements OnInit{
   }
 
   OpenAddEmployee(){
-    const dialogRef = this._dialog.open(EmployeeAddComponent);
+    const dialogConfig = new MatDialogConfig();
+  dialogConfig.width = '60%';
+    const dialogRef = this._dialog.open(EmployeeAddComponent, dialogConfig);
     dialogRef.afterClosed().subscribe({
       next: (val) => {
         if(val){

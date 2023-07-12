@@ -25,7 +25,7 @@ export class DepartmentEditComponent {
   }
   ngOnInit(): void {
     this.departmentForm.patchValue({
-      departmnetName: this.data.departmnetName,
+      departmentName: this.data.departmentName,
     });
   }
 
