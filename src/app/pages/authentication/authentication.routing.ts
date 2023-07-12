@@ -15,15 +15,6 @@ export const AuthenticationRoutes: Routes = [
         component: AppSideLoginComponent,
       },
       {
-        path: 'admin-register',
-        component: AppSideAdminRegisterComponent,
-      },
-      {
-        path: 'verify',
-        component: VerifyComponent,
-        canActivate: [canActivateTeam],
-      },
-      {
         path: 'forgot-password',
         component: ForgotPasswordComponent,
       },
