@@ -28,6 +28,11 @@ export class ProductComponent {
     this.GetProducts();
   }
 
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+  }
+  
   GetProducts() {
     this._productService.GetProductsList().subscribe(response => {
       this.productlist = response.data;

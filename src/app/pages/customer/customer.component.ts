@@ -28,6 +28,11 @@ export class CustomerComponent {
     this.GetCustomers();
   }
 
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+  }
+
   GetCustomers() {
     this._customerService.GetCustomers().subscribe(response => {
       this.customerlist = response.data;

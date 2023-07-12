@@ -28,6 +28,11 @@ export class DepartmentComponent implements OnInit {
     this.GetDepartmentsList();
   }
 
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+  }
+  
   GetDepartmentsList() {
     this._departmentService.GetDepartmentsList().subscribe(response => {
       this.departmentlist = response.data;
