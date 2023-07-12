@@ -56,7 +56,7 @@
               </div>
               <div *ngIf="getUsername()?.errors?.['pattern']">
                 <mat-error class="custom-error">
-                  Username should have at least 5 characters with the first letter as uppercase, and no spaces or special characters allowed.
+                  Username should have at least 6 characters and no spaces allowed.
                 </mat-error>
               </div>
               <div *ngIf="!getUsername()?.hasError('userNotFound') && !getUsername()?.errors?.['required'] && !getUsername()?.errors?.['pattern'] && getUsername()?.dirty">
