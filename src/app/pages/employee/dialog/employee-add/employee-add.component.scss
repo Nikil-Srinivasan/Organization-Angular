@@ -1,10 +1,11 @@
 .content {
+    margin: 10;
     padding-top: 10px;
 }
 
 .row {
     display: flex;
-    gap: 10px;
+    gap: 20px;
 }
 
 .action {
@@ -15,6 +16,6 @@
     }
 }
 
-.half-width {
-    width: 100%;
-  }
+.form-feild-width{
+    width: 25vw;
+}
