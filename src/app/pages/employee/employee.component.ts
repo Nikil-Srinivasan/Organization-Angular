@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { EmployeeAddComponent } from './dialog/employee-add/employee-add.component'; 
 import { EmployeeEditComponent } from './dialog/employee-edit/employee-edit.component';

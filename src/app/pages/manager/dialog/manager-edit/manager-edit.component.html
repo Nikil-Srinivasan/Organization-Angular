@@ -1,5 +1,5 @@
 <div mat-dialog-title>
-    <h1>Manager Form</h1>
+    <h1>Edit Manager</h1>
 </div>
 <form [formGroup]="managerForm" (ngSubmit)="onSubmit()">
     <div mat-dialog-content class="content">
@@ -18,8 +18,6 @@
                 <mat-label>Age</mat-label>
                 <input matInput type="number" formControlName="managerAge">
             </mat-form-field>
-        </div> <br> 
-        <div class="row">
             <mat-form-field appearance="outline">
                 <mat-label>Product</mat-label>
                 <mat-select formControlName="productID">
@@ -28,7 +26,7 @@
                     </mat-option>
                   </mat-select>
             </mat-form-field>
-        </div>
+        </div> 
     </div>
     <div mat-dialog-actions class="action">
         <button mat-raised-button type="button" [mat-dialog-close]="false"> Cancel</button>
