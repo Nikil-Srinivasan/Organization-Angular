@@ -43,8 +43,8 @@ export class EmployeeComponent implements OnInit{
   }
 
   OpenAddEmployee(){
-    const dialogConfig = new MatDialogConfig();
-  dialogConfig.width = '60%';
+    const dialogConfig = new MatDialogConfig()
+    dialogConfig.width = "55%"
     const dialogRef = this._dialog.open(EmployeeAddComponent, dialogConfig);
     dialogRef.afterClosed().subscribe({
       next: (val) => {
