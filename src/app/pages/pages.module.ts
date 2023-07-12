@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule,enableProdMode  } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { PagesRoutes } from './pages.routing.module';
@@ -18,6 +18,8 @@ import { ProductEditComponent } from './product/dialog/product-edit/product-edit
 import { CustomerComponent } from './customer/customer.component';
 import { CustomerAddComponent } from './customer/dialog/customer-add/customer-add.component';
 import { CustomerEditComponent } from './customer/dialog/customer-edit/customer-edit.component';
+
+
 @NgModule({
   declarations: [
     AppDashboardComponent,

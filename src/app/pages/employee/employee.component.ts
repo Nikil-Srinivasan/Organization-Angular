@@ -29,6 +29,11 @@ export class EmployeeComponent implements OnInit{
     this.GetEmployees();
   }
 
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+  }
+  
   GetEmployees() {
     this._employeeService.GetEmployees().subscribe(response => {
       this.employeelist = response.data;
