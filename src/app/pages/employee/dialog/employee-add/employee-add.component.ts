@@ -38,6 +38,7 @@ export class EmployeeAddComponent {
     private _http: HttpClient,
     private _dialogRef: MatDialogRef<EmployeeAddComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
+
   ) {
     this.employeeForm = this._formBuilder.group({
       email: ['', [
@@ -49,10 +50,10 @@ export class EmployeeAddComponent {
       Validators.pattern(USERNAME_PATTERN) 
     ]
     ],
-      password: ['', Validators.required,[
+      password: ['', [Validators.required,
         Validators.pattern(PASSWORD_PATTERN)]
     ],
-      employeeAge: ['', Validators.required,this.ageValidator],
+      employeeAge: ['', [Validators.required,this.ageValidator]],
       employeeSalary: ['', Validators.required],
       employeeName: ['',[ Validators.required,
       Validators.pattern(USERNAME_PATTERN)]
@@ -65,6 +66,7 @@ export class EmployeeAddComponent {
       managerAge: [0, Validators.required]
     });
   }
+
 
 
   get email() {

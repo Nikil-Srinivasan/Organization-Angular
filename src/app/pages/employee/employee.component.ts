@@ -20,10 +20,14 @@ export class EmployeeComponent implements OnInit{
   dataObs$: Observable<any>;
   displayedColumns: string[] = ['name', 'age', 'salary', 'department', 'product', 'edit', 'delete'];
 
+
   constructor(
     private _dialog: MatDialog,
-    private _employeeService: EmployeeService
+    private _employeeService: EmployeeService,
   ) { }
+
+
+
   ngOnInit(): void {
     this.GetEmployees();
   }
