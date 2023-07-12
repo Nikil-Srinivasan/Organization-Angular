@@ -1,10 +1,9 @@
 import { Component, Inject } from '@angular/core';
-import { FormGroup, FormBuilder } from '@angular/forms';
-import { EmployeeService } from 'src/app/services/EmployeeService/employee.service';
+import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
 import { ManagerService } from 'src/app/services/ManagerService/manager.service';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import { HttpClient } from '@angular/common/http';
 import { ProductService } from 'src/app/services/ProductService/product.service';
+import { EMAIL_PATTERN, PASSWORD_PATTERN, USERNAME_PATTERN } from 'src/app/shared/regex-patterns';
 
 @Component({
   selector: 'app-manager-add',
@@ -16,36 +15,92 @@ export class ManagerAddComponent {
 
   products: any[] = [];
 
+  // Custom validator function
+  ageValidator = (control: FormControl) => {
+    const age = control.value;
+    if (age && age <= 20) {
+      return { invalidAge: true };
+    }
+    return null;
+  };
+
   constructor(
     private _formbuiler: FormBuilder,
-    private _employeeService: EmployeeService,
     private _managerService: ManagerService,
     private _productService: ProductService,
-    private _http: HttpClient,
     private _dialogRef: MatDialogRef<ManagerAddComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
   ) {
     this.managerForm = this._formbuiler.group({
-      email:'',
-      userName: '',
-      password:'',
+      email: ['',
+        [
+          Validators.required,
+          Validators.pattern(EMAIL_PATTERN)
+        ]
+      ],
+      userName: ['',
+        [
+          Validators.required,
+          Validators.pattern(USERNAME_PATTERN)
+        ]
+      ],
+      password: ['',
+        [
+          Validators.required,
+          Validators.pattern(PASSWORD_PATTERN)
+        ]
+      ],
       employeeAge: 0,
       employeeSalary: 0,
-      employeeName:'',
+      employeeName: '',
       departmentID: 0,
-      productID: '',
-      role:1,
-      managerName:'',
-      managerSalary:'',
-      managerAge:''
+      productID: ['', Validators.required],
+      role: 1,
+      managerName: ['',
+        [
+          Validators.required,
+          Validators.pattern(USERNAME_PATTERN)
+        ]
+      ],
+      managerSalary: ['', Validators.required],
+      managerAge: ['', [Validators.required,this.ageValidator]]
     })
   }
+
+  get email() {
+    return this.managerForm.get('email');
+  }
+
+  get userName() {
+    return this.managerForm.get('userName');
+  }
+
+  get password() {
+    return this.managerForm.get('password');
+  }
+
+  get managerAge() {
+    return this.managerForm.get('managerAge');
+  }
+
+  get managerSalary() {
+    return this.managerForm.get('managerSalary');
+  }
+
+  get managerName() {
+    return this.managerForm.get('managerName');
+  }
+
+  get productID() {
+    return this.managerForm.get('productID');
+  }
+
   ngOnInit(): void {
     this.managerForm.patchValue(this.data);
     this.fetchProducts();
   }
 
-  fetchProducts(){
+  fetchProducts() {
     this._productService.GetProductsList().subscribe(products => {
       this.products = products.data;
       console.log(products.data);
