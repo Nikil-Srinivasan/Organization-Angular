@@ -1,60 +1,48 @@
 import { Component, Inject } from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { EmployeeService } from 'src/app/services/EmployeeService/employee.service';
-import { DepartmentService } from 'src/app/services/DepartmentService/department.service';
-import { ProductService } from 'src/app/services/ProductService/product.service';
+import { ManagerService } from 'src/app/services/ManagerService/manager.service';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { HttpClient } from '@angular/common/http';
+import { ProductService } from 'src/app/services/ProductService/product.service';
 
 @Component({
-  selector: 'app-employee-add',
-  templateUrl: './employee-add.component.html',
-  styleUrls: ['./employee-add.component.scss']
+  selector: 'app-manager-add',
+  templateUrl: './manager-add.component.html',
+  styleUrls: ['./manager-add.component.scss']
 })
-export class EmployeeAddComponent {
-  employeeForm: FormGroup;
-
-  departments: any[] = [];
+export class ManagerAddComponent {
+  managerForm: FormGroup;
 
   products: any[] = [];
-
-  selectedDepartmentId: number | undefined;
 
   constructor(
     private _formbuiler: FormBuilder,
     private _employeeService: EmployeeService,
-    private _departmentService: DepartmentService,
+    private _managerService: ManagerService,
     private _productService: ProductService,
     private _http: HttpClient,
-    private _dialogRef: MatDialogRef<EmployeeAddComponent>,
+    private _dialogRef: MatDialogRef<ManagerAddComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
   ) {
-    this.employeeForm = this._formbuiler.group({
+    this.managerForm = this._formbuiler.group({
       email:'',
       userName: '',
       password:'',
-      employeeAge: '',
-      employeeSalary: '',
+      employeeAge: 0,
+      employeeSalary: 0,
       employeeName:'',
-      departmentID: '',
+      departmentID: 0,
       productID: '',
-      role:2,
+      role:1,
       managerName:'',
-      managerSalary:0,
-      managerAge:0
+      managerSalary:'',
+      managerAge:''
     })
   }
   ngOnInit(): void {
-    this.employeeForm.patchValue(this.data);
-    this.fetchDepartments();
+    this.managerForm.patchValue(this.data);
     this.fetchProducts();
-  }
-
-  fetchDepartments() {
-    this._departmentService.GetDepartmentsList().subscribe(departments => {
-      this.departments = departments.data;
-      console.log(departments.data)
-    });
   }
 
   fetchProducts(){
@@ -65,14 +53,14 @@ export class EmployeeAddComponent {
   }
   //onSubmit Method is invoked when the Submit Button is clicked
   onSubmit() {
-    this._employeeService.AddEmployee(this.employeeForm.value)
+    this._managerService.AddManager(this.managerForm.value)
       .subscribe(
         (response: any) => {
           console.log("Data sent successfully");
           this._dialogRef.close(true);
         },
         (error: any) => {
-          console.log(this.employeeForm.value);
+          console.log(this.managerForm.value);
           console.error("Error sending data:", error);
           // Handle error if needed
         }

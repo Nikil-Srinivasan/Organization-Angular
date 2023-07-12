@@ -1,17 +1,16 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { MatCardModule } from '@angular/material/card';
 import { EmployeeAddComponent } from './dialog/employee-add/employee-add.component'; 
 import { EmployeeEditComponent } from './dialog/employee-edit/employee-edit.component';
 import { Observable } from 'rxjs';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
-import { IEmployee, EmployeeService } from 'src/app/services/EmployeeService/employee.service';
+import { EmployeeService } from 'src/app/services/EmployeeService/employee.service';
 
 @Component({
   selector: 'app-employee',
   templateUrl: './employee.component.html',
-  styleUrls: ['./employee.component.css']
+  styleUrls: ['./employee.component.scss']
 })
 export class EmployeeComponent implements OnInit{
   @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -35,7 +34,7 @@ export class EmployeeComponent implements OnInit{
   }
   
   GetEmployees() {
-    this._employeeService.GetEmployees().subscribe(response => {
+    this._employeeService.GetEmployeesList().subscribe(response => {
       this.employeelist = response.data;
       this.dataSource = new MatTableDataSource(this.employeelist);
       this.dataSource.paginator = this.paginator;
@@ -43,7 +42,7 @@ export class EmployeeComponent implements OnInit{
     });
   }
 
-  OpenAddEditDialog(){
+  OpenAddEmployee(){
     const dialogRef = this._dialog.open(EmployeeAddComponent);
     dialogRef.afterClosed().subscribe({
       next: (val) => {
@@ -77,9 +76,6 @@ export class EmployeeComponent implements OnInit{
       error: console.log,
     })
   }
-
- 
-
 }
 
 

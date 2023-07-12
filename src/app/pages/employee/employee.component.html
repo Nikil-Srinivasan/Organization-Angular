@@ -3,14 +3,14 @@
         <mat-card-content class="p-24">
             <mat-card-title class="title-flex-container">
                 <div layout="row" layout-align="center center">
-                    List of Employees
+                    Employees
                 </div>
                 <mat-form-field>
                     <mat-label>Filter</mat-label>
                         <input matInput (keyup)="applyFilter($event)" placeholder="Search columns" #input>
                 </mat-form-field>
                 <div>
-                    <button mat-raised-button color="primary" (click)="OpenAddEditDialog()" >Add Employee</button>
+                    <button mat-raised-button color="primary" (click)="OpenAddEmployee()" >Add Employee</button>
                 </div>
             </mat-card-title>
             <div class="table-responsive m-t-16">

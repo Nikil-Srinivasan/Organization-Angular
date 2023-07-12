@@ -17,23 +17,23 @@ export class ProductService {
 
   constructor(private _http: HttpClient) { }
 
-  GetProducts(): Observable<any> {
-      return this._http.get<any>(`${environment.baseUrl}/api/Product/GetAllProducts`);
+  GetProductsList(): Observable<any> {
+    return this._http.get<any>(`${environment.baseUrl}/api/Product/GetAllProducts`)
   }
 
   AddProduct(data: any): Observable<any> {
-      console.log(data)
-      return this._http.post(`${environment.baseUrl}/api/Product/CreateProduct`, data);
-      
+    console.log(data)
+    return this._http.post(`${environment.baseUrl}/api/Product/CreateProduct`, data);
+
   }
 
   UpdateProduct(id: number, data: any): Observable<any> {
-      console.log(id,data)
-      return this._http.put(`${environment.baseUrl}/api/Product/UpdateProduct?id=${id}`, data);
+    console.log(id, data)
+    return this._http.put(`${environment.baseUrl}/api/Product/UpdateProduct?id=${id}`, data);
   }
 
-  DeleteProduct(id: number): Observable<any> {   
-      return this._http.delete(`${environment.baseUrl}/api/Product/DeleteProduct?id=${id}`);
+  DeleteProduct(id: number): Observable<any> {
+    return this._http.delete(`${environment.baseUrl}/api/Product/DeleteProduct?id=${id}`);
   }
 
 }

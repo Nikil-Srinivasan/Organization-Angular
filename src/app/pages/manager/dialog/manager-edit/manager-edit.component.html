@@ -1,22 +1,22 @@
 <div mat-dialog-title>
-    <h1>Edit Customer</h1>
+    <h1>Edit Manager</h1>
 </div>
-<form [formGroup]="customerForm" (ngSubmit)="onSubmit()">
+<form [formGroup]="managerForm" (ngSubmit)="onSubmit()">
     <div mat-dialog-content class="content">
         <div class="row">
             <mat-form-field appearance="outline">
                 <mat-label>Name</mat-label>
-                <input matInput type="text" formControlName="customerName">
+                <input matInput type="text" formControlName="managerName">
             </mat-form-field>
             <mat-form-field appearance="outline">
-                <mat-label>Contact Number</mat-label>
-                <input matInput type="number" formControlName="customerPhoneNumber">
+                <mat-label>Salary</mat-label>
+                <input matInput type="number" formControlName="managerSalary">
             </mat-form-field>         
         </div> <br>
         <div class="row">
             <mat-form-field appearance="outline">
-                <mat-label>Email</mat-label>
-                <input matInput type="text" formControlName="customerEmail">
+                <mat-label>Age</mat-label>
+                <input matInput type="number" formControlName="managerAge">
             </mat-form-field>
             <mat-form-field appearance="outline">
                 <mat-label>Product</mat-label>
@@ -26,7 +26,7 @@
                     </mat-option>
                   </mat-select>
             </mat-form-field>
-        </div>
+        </div> 
     </div>
     <div mat-dialog-actions class="action">
         <button mat-raised-button type="button" [mat-dialog-close]="false"> Cancel</button>

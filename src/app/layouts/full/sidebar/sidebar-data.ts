@@ -18,6 +18,11 @@ export const navItems: NavItem[] = [
     route: '/dashboard/employee',
   },
   {
+    displayName: 'Manager',
+    iconName: 'rosette',
+    route: '/dashboard/manager',
+  },
+  {
     displayName: 'Product',
     iconName: 'rosette',
     route: '/dashboard/product',
@@ -27,11 +32,11 @@ export const navItems: NavItem[] = [
     iconName: 'rosette',
     route: '/dashboard/customer',
   },
-  // {
-  //   displayName: 'Chips',
-  //   iconName: 'poker-chip',
-  //   route: '/ui-components/chips',
-  // },
+  {
+    displayName: 'Department',
+    iconName: 'rosette',
+    route: '/dashboard/department',
+  },
   // {
   //   displayName: 'Lists',
   //   iconName: 'list',
