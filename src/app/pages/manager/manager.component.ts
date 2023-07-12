@@ -28,6 +28,11 @@ export class ManagerComponent implements OnInit{
     this.GetManagersList();
   }
 
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+  }
+  
   GetManagersList() {
     this._managerService.GetManagersList().subscribe(response => {
       this.managerlist = response.data;

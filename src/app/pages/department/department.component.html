@@ -5,6 +5,10 @@
                 <div layout="row" layout-align="center center">
                     Departments
                 </div>
+                <mat-form-field>
+                    <mat-label>Filter</mat-label>
+                        <input matInput (keyup)="applyFilter($event)" placeholder="Search columns" #input>
+                </mat-form-field>
                 <div>
                     <button mat-raised-button color="primary" (click)="OpenAddDepartment()" >Add Department</button>
                 </div>
