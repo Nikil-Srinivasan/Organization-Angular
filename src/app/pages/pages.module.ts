@@ -1,10 +1,11 @@
-import { NgModule } from '@angular/core';
+import { NgModule} from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { PagesRoutes } from './pages.routing.module';
 import { MaterialModule } from '../material.module';
 import { FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { NgApexchartsModule } from 'ng-apexcharts';
+import { ChartsModule } from "@progress/kendo-angular-charts";
 // icons
 import { TablerIconsModule } from 'angular-tabler-icons';
 import * as TablerIcons from 'angular-tabler-icons/icons';
@@ -25,6 +26,7 @@ import { CustomerEditComponent } from './customer/dialog/customer-edit/customer-
 import { DepartmentComponent } from './department/department.component';
 import { DepartmentAddComponent } from './department/dialog/department-add/department-add.component';
 import { DepartmentEditComponent } from './department/dialog/department-edit/department-edit.component';
+import 'hammerjs';
 
 @NgModule({
   declarations: [
@@ -51,9 +53,11 @@ import { DepartmentEditComponent } from './department/dialog/department-edit/dep
     FormsModule,
     ReactiveFormsModule,
     NgApexchartsModule,
+    ChartsModule,
     RouterModule.forChild(PagesRoutes),
     TablerIconsModule.pick(TablerIcons),
   ],
   exports: [TablerIconsModule],
+  
 })
 export class PagesModule {}
