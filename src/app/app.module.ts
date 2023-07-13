@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -27,6 +27,11 @@ import { ChartsModule } from '@progress/kendo-angular-charts';
 import 'hammerjs';
 
 
+import { LoaderInterceptor } from './interceptor/loader.interceptor';
+import { LoaderService } from './services/loader.service';
+import { LoaderComponent } from './shared/loader-component/loader-component.component';
+import { AuthHeadersInterceptor } from './interceptor/auth-header.interceptor';
+import { PageNotFoundComponent } from './pages/page-not-found/page-not-found.component';
 
 @NgModule({
   declarations: [
@@ -49,6 +54,19 @@ import 'hammerjs';
     TablerIconsModule.pick(TablerIcons),
     ChartsModule,
   ],
+  providers : [
+    LoaderService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: LoaderInterceptor,
+      multi: true
+    },
+    {   
+      provide: HTTP_INTERCEPTORS, 
+      useClass: AuthHeadersInterceptor, 
+      multi: true 
+    }
+    ],
   exports: [TablerIconsModule],
   bootstrap: [AppComponent],
 })
