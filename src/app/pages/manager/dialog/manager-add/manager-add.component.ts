@@ -32,24 +32,9 @@ export class ManagerAddComponent {
     @Inject(MAT_DIALOG_DATA) public data: any,
   ) {
     this.managerForm = this._formbuiler.group({
-      email: ['',
-        [
-          Validators.required,
-          Validators.pattern(EMAIL_PATTERN)
-        ]
-      ],
-      userName: ['',
-        [
-          Validators.required,
-          Validators.pattern(USERNAME_PATTERN)
-        ]
-      ],
-      password: ['',
-        [
-          Validators.required,
-          Validators.pattern(PASSWORD_PATTERN)
-        ]
-      ],
+      email: ['', [Validators.required, Validators.pattern(EMAIL_PATTERN)]],
+      userName: ['', [Validators.required, Validators.pattern(USERNAME_PATTERN)]],
+      password: ['', [Validators.required, Validators.pattern(PASSWORD_PATTERN)]],
       employeeAge: 0,
       employeeSalary: 0,
       employeeName: '',
@@ -63,7 +48,7 @@ export class ManagerAddComponent {
         ]
       ],
       managerSalary: ['', Validators.required],
-      managerAge: ['', [Validators.required,this.ageValidator]]
+      managerAge: ['', [Validators.required, this.ageValidator]]
     })
   }
 
