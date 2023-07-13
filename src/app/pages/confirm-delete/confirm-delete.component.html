@@ -1,0 +1,15 @@
+<div>
+    <div class="header">
+        <h1><strong> Are you sure?</strong></h1>
+        <mat-icon color="warn" class="icon-size">warning</mat-icon>
+    </div>
+    <br>
+    <div mat-dialog-content>
+        <h3>{{ data.message }}</h3>
+    </div>
+    <br>
+    <div mat-dialog-actions class="action">
+        <button mat-raised-button type="button" [mat-dialog-close]="false">Cancel</button>
+        <button mat-raised-button color="warn" [mat-dialog-close]="true">Delete</button>
+    </div>
+</div>
