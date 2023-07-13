@@ -2,6 +2,7 @@ import { BreakpointObserver } from '@angular/cdk/layout';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { MatSidenav } from '@angular/material/sidenav';
+import { LoaderService } from 'src/app/services/loader.service';
 
 const MOBILE_VIEW = 'screen and (max-width: 768px)';
 const TABLET_VIEW = 'screen and (min-width: 769px) and (max-width: 1024px)';
@@ -30,7 +31,8 @@ export class FullComponent implements OnInit {
   // BreakpointObserver is injected as a dependency.
   //  The BreakpointObserver is a service provided by Angular CDK (Component Dev Kit) 
   // that allows you to observe changes in the viewport breakpoints.
-  constructor(private breakpointObserver: BreakpointObserver) {
+  constructor(private breakpointObserver: BreakpointObserver,private _loader: LoaderService
+    ) {
     // get the html 
     this.htmlElement = document.querySelector('html')!;
     this.layoutChangesSubscription = this.breakpointObserver
@@ -43,6 +45,8 @@ export class FullComponent implements OnInit {
         this.isContentWidthFixed = state.breakpoints[MONITOR_VIEW];
       });
   }
+
+
 
   ngOnInit(): void {}
 

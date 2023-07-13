@@ -34,6 +34,7 @@ export class EmployeeAddComponent {
     private _productService: ProductService,
     private _dialogRef: MatDialogRef<EmployeeAddComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
+
   ) {
     this.employeeForm = this._formBuilder.group({
       email: ['',
@@ -75,6 +76,7 @@ export class EmployeeAddComponent {
       managerAge: 0
     });
   }
+
 
 
   get email() {
