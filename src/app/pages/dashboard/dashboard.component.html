@@ -84,14 +84,19 @@
             
           </div>
         </div>
-  <apx-chart
-    [series]="chartOptions.series"
-    [chart]="chartOptions.chart"
-    [dataLabels]="chartOptions.dataLabels"
-    [plotOptions]="chartOptions.plotOptions"
-    [xaxis]="chartOptions.xaxis"
-    [stroke]="chartOptions.stroke"
-  ></apx-chart>
+        <kendo-chart>
+          <kendo-chart-title text="Units sold"></kendo-chart-title>
+          <kendo-chart-category-axis>
+            <kendo-chart-category-axis-item [categories]="Products">
+            </kendo-chart-category-axis-item>
+          </kendo-chart-category-axis>
+          <kendo-chart-series>
+            <kendo-chart-series-item type="bar" color="#68BBE3" [data]="Employees">
+            </kendo-chart-series-item>
+            <kendo-chart-series-item type="bar" color="#0E86D4" [data]="Customers">
+            </kendo-chart-series-item>
+          </kendo-chart-series>
+        </kendo-chart>
       </mat-card-content>
     </mat-card>
   </div>
@@ -105,14 +110,17 @@
             
           </div>
         </div>
-        <apx-chart
-        [series]="chartOption.series"
-        [chart]="chartOption.chart"
-        [labels]="chartOption.labels"
-        [title]="chartOption.title"
-        [theme]="chartOption.theme"
-        [responsive]="chartOption.responsive"
-      ></apx-chart>
+        <kendo-chart>
+          <kendo-chart-series>
+            <kendo-chart-series-item
+              type="pie"
+              [data]="PieChartData"
+              [highlight]="seriesHighlight"
+            >
+            </kendo-chart-series-item>
+          </kendo-chart-series>
+        </kendo-chart>
+
       </mat-card-content>
     </mat-card>
   </div>

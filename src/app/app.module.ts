@@ -23,6 +23,10 @@ import { SidebarComponent } from './layouts/full/sidebar/sidebar.component';
 import { HeaderComponent } from './layouts/full/header/header.component';
 import { BrandingComponent } from './layouts/full/sidebar/branding.component';
 import { AppNavItemComponent } from './layouts/full/sidebar/nav-item/nav-item.component';
+import { ChartsModule } from '@progress/kendo-angular-charts';
+import 'hammerjs';
+
+
 import { LoaderInterceptor } from './interceptor/loader.interceptor';
 import { LoaderService } from './services/loader.service';
 import { LoaderComponent } from './shared/loader-component/loader-component.component';
@@ -48,6 +52,7 @@ import { PageNotFoundComponent } from './pages/page-not-found/page-not-found.com
     ReactiveFormsModule,
     MaterialModule,
     TablerIconsModule.pick(TablerIcons),
+    ChartsModule,
   ],
   providers : [
     LoaderService,
