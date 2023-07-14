@@ -6,7 +6,8 @@ import {
   ViewEncapsulation,
 } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-
+import { Router } from '@angular/router';
+import { AuthenticationService } from 'src/app/services/auth';
 
 @Component({
   selector: 'app-header',
@@ -22,5 +23,13 @@ export class HeaderComponent {
 
   showFiller = false;
 
-  constructor(public dialog: MatDialog) {}
+  constructor(
+    public dialog: MatDialog,
+    private authenticationService : AuthenticationService,
+    private router : Router
+    ) {}
+
+  onLogoutHandle(){
+    this.authenticationService.logout();
+  }
 }

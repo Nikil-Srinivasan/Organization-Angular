@@ -6,6 +6,8 @@ import { Observable } from 'rxjs';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { EmployeeService } from 'src/app/services/EmployeeService/employee.service';
+import { User } from 'src/app/models/user';
+import { AuthenticationService, CredentialsService } from 'src/app/services/auth';
 
 @Component({
   selector: 'app-employee',
@@ -19,12 +21,20 @@ export class EmployeeComponent implements OnInit{
   dataSource: MatTableDataSource<any>;
   dataObs$: Observable<any>;
   displayedColumns: string[] = ['name', 'age', 'salary', 'department', 'product', 'edit', 'delete'];
+  user: User | null;
 
 
   constructor(
+    private credential : CredentialsService,
     private _dialog: MatDialog,
     private _employeeService: EmployeeService,
-  ) { }
+  ) { 
+
+    this.user = this.credential.userValue;
+
+    console.log(this.user)
+
+  }
 
 
 

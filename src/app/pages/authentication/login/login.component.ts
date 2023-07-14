@@ -15,6 +15,7 @@ export class AppSideLoginComponent implements OnInit{
   constructor(private authService: AuthenticationService, private router : Router,private validationService: ValidationService, private credentialsService : CredentialsService) {
   }
   ngOnInit(): void {
+    console.log(this.credentialsService.isAuthenticated())
     if(this.credentialsService.isAuthenticated()){
       this.router.navigateByUrl("/dashboard")
     }
@@ -58,7 +59,7 @@ export class AppSideLoginComponent implements OnInit{
         next: (credentials: Credentials) => {
           // Handle the successful login
           console.log('Logged in successfully:', credentials);
-          // this.router.navigate(['/dashboard']);
+          this.router.navigate(['/dashboard']);
           
         },
         error: (error: HttpErrorResponse) => {
