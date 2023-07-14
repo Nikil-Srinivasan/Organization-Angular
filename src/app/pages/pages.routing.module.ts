@@ -20,6 +20,7 @@ export const PagesRoutes: Routes = [
     data: {
       title: 'Employee Page',
     },
+  
   },
   {
     path: 'manager',
