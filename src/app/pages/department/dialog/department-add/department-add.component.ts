@@ -35,16 +35,14 @@ export class DepartmentAddComponent {
   //onSubmit Method is invoked when the Submit Button is clicked
   onSubmit() {
     this._departmentService.AddDepartment(this.departmentForm.value)
-      .subscribe(
-        (response: any) => {
-          console.log("Data sent successfully");
+      .subscribe({
+        next: (val: any) => {
           this._dialogRef.close(true);
         },
-        (error: any) => {
-          console.log(this.departmentForm.value);
-          console.error("Error sending data:", error);
-          // Handle error if needed
+        error: (error: any) => {
+          console.error('Error ADDING department details:', error);
+          // Handle the error and show an error message to the user
         }
-      );
+      });
   }
 }

@@ -94,16 +94,14 @@ export class ManagerAddComponent {
   //onSubmit Method is invoked when the Submit Button is clicked
   onSubmit() {
     this._managerService.AddManager(this.managerForm.value)
-      .subscribe(
-        (response: any) => {
-          console.log("Data sent successfully");
+      .subscribe({
+        next: (val: any) => {
           this._dialogRef.close(true);
         },
-        (error: any) => {
-          console.log(this.managerForm.value);
-          console.error("Error sending data:", error);
-          // Handle error if needed
+        error: (error: any) => {
+          console.error('Error ADDING manager details:', error);
+          // Handle the error and show an error message to the user
         }
-      );
+      });
   }
 }

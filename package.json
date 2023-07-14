@@ -1,12 +1,13 @@
 {
-  "name": "modernize",
+  "name": "stint360",
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+    "test": "ng test",
+    "sentry:sourcemaps": "sentry-cli sourcemaps inject --org kovai-eb --project stint360 ./dist/Stint360 && sentry-cli sourcemaps upload --org kovai-eb --project stint360 ./dist/Stint360"
   },
   "private": true,
   "dependencies": {
@@ -20,6 +21,8 @@
     "@angular/platform-browser": "^15.0.0",
     "@angular/platform-browser-dynamic": "^15.0.0",
     "@angular/router": "^15.0.0",
+    "@sentry/angular-ivy": "^7.58.0",
+    "@sentry/cli": "^2.19.4",
     "angular-fusioncharts": "^4.0.3",
     "angular-tabler-icons": "^2.7.0",
     "apexcharts": "^3.41.0",
@@ -32,9 +35,11 @@
     "zone.js": "~0.12.0"
   },
   "devDependencies": {
+    "@angular-builders/custom-webpack": "^16.0.0",
     "@angular-devkit/build-angular": "^15.0.5",
     "@angular/cli": "^15.2.9",
     "@angular/compiler-cli": "^15.0.0",
+    "@sentry/webpack-plugin": "^2.4.0",
     "@types/date-fns": "^2.6.0",
     "@types/jasmine": "~4.3.0",
     "jasmine-core": "~4.5.0",
@@ -43,6 +48,8 @@
     "karma-coverage": "~2.2.0",
     "karma-jasmine": "~5.1.0",
     "karma-jasmine-html-reporter": "~2.0.0",
-    "typescript": "~4.8.2"
+    "typescript": "~4.8.2",
+    "webpack": "^5.88.1",
+    "webpack-cli": "^5.1.4"
   }
 }

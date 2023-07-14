@@ -23,6 +23,7 @@ export class EmployeeComponent implements OnInit {
 
 
   constructor(
+    
     private _dialog: MatDialog,
     private _employeeService: EmployeeService,
     private _deleteDialogService: DeleteDialogService
@@ -32,6 +33,7 @@ export class EmployeeComponent implements OnInit {
 
   ngOnInit(): void {
     this.GetEmployees();
+    throw new Error("Error loading in employee") 
   }
 
   applyFilter(event: Event) {

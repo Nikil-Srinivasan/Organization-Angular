@@ -1,4 +1,5 @@
-import { NgModule } from '@angular/core';
+import { APP_INITIALIZER, ErrorHandler, NgModule } from "@angular/core";
+import * as Sentry from "@sentry/angular-ivy";
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
@@ -28,6 +29,7 @@ import { LoaderService } from './services/loader.service';
 import { LoaderComponent } from './shared/loader-component/loader-component.component';
 import { AuthHeadersInterceptor } from './interceptor/auth-header.interceptor';
 import { PageNotFoundComponent } from './pages/page-not-found/page-not-found.component';
+import { Router } from "@angular/router";
 
 @NgModule({
   declarations: [
@@ -49,19 +51,34 @@ import { PageNotFoundComponent } from './pages/page-not-found/page-not-found.com
     MaterialModule,
     TablerIconsModule.pick(TablerIcons),
   ],
-  providers : [
+  providers: [
+    {
+      provide: ErrorHandler,
+      useValue: Sentry.createErrorHandler({
+        showDialog: true,
+      }),
+    }, {
+      provide: Sentry.TraceService,
+      deps: [Router],
+    },
+    {
+      provide: APP_INITIALIZER,
+      useFactory: () => () => { },
+      deps: [Sentry.TraceService],
+      multi: true,
+    },
     LoaderService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: LoaderInterceptor,
       multi: true
     },
-    {   
-      provide: HTTP_INTERCEPTORS, 
-      useClass: AuthHeadersInterceptor, 
-      multi: true 
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthHeadersInterceptor,
+      multi: true
     }
-    ],
+  ],
   exports: [TablerIconsModule],
   bootstrap: [AppComponent],
 })

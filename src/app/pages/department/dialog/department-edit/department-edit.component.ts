@@ -35,18 +35,16 @@ export class DepartmentEditComponent {
 
   
   //onSubmit Method is invoked when the Submit Button is clicked
-  onSubmit() {
+ onSubmit() {
     this._departmentService.UpdateDepartment(this.data.departmentID,this.departmentForm.value)
-      .subscribe(
-        (response: any) => {
-          console.log("Data sent successfully");
+      .subscribe({
+        next: (val: any) => {
           this._dialogRef.close(true);
         },
-        (error: any) => {
-          console.log(this.departmentForm.value);
-          console.error("Error sending data:", error);
-          // Handle error if needed
+        error: (error: any) => {
+          console.error('Error updating department details:', error);
+          // Handle the error and show an error message to the user
         }
-      );
+      });
   }
 }
