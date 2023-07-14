@@ -12,7 +12,7 @@ export const EmployeeRoutes: Routes = [
         component: EmployeeComponent,
         data: {
           title: 'Employee Page',
-          roles : [Role.Employee],
+          roles : [Role.Employee,Role.Admin],
         },
         canActivate : [AuthGuard]
       },

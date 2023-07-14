@@ -3,7 +3,7 @@
 </div>
 <form [formGroup]="managerForm" (ngSubmit)="onSubmit()">
     <div mat-dialog-content class="content">
-        <div class="row ">
+        <div class="row">
             <div>
                 <mat-form-field appearance="outline" class="form-field-width">
                     <mat-label>Email Id</mat-label>
@@ -112,7 +112,7 @@
                     <div *ngIf="managerSalary?.touched && managerSalary?.errors?.['required']">
                         <mat-error class="custom-error">
                             Salary is <strong>required</strong>
-                        </mat-error>
+                        </mat-error>    
                     </div>
                 </div>
             </div>
