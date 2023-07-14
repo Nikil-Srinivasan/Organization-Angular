@@ -14,27 +14,27 @@ export const navItems: NavItem[] = [
   },
   {
     displayName: 'Employee',
-    iconName: 'rosette',
+    iconName: 'users',
     route: '/dashboard/employee',
   },
   {
     displayName: 'Manager',
-    iconName: 'rosette',
+    iconName: 'briefcase',
     route: '/dashboard/manager',
   },
   {
     displayName: 'Product',
-    iconName: 'rosette',
+    iconName: 'device-desktop-code',
     route: '/dashboard/product',
   },
   {
     displayName: 'Customer',
-    iconName: 'rosette',
+    iconName: 'user-plus',
     route: '/dashboard/customer',
   },
   {
     displayName: 'Department',
-    iconName: 'rosette',
+    iconName: 'users-group',
     route: '/dashboard/department',
   },
   // {

@@ -10,7 +10,7 @@
             <mat-card-title>Products</mat-card-title>
             <div class="m-l-auto">
               <button mat-fab color="accent" class="shadow-none icon-48">
-                <i-tabler name="code" class="text-white d-flex"></i-tabler>
+                <i-tabler name="device-desktop-code" class="text-white d-flex"></i-tabler>
               </button>
             </div>
           </mat-card-header>
@@ -59,7 +59,7 @@
             <mat-card-title>Departments</mat-card-title>
             <div class="m-l-auto">
               <button mat-fab color="accent" class="shadow-none icon-48">
-                <i-tabler name="briefcase" class="text-white d-flex"></i-tabler>
+                <i-tabler name="users-group" class="text-white d-flex"></i-tabler>
               </button>
             </div>
           </mat-card-header>
@@ -85,15 +85,19 @@
           </div>
         </div>
         <kendo-chart>
-          <kendo-chart-title text="Units sold"></kendo-chart-title>
-          <kendo-chart-category-axis>
-            <kendo-chart-category-axis-item [categories]="Products">
-            </kendo-chart-category-axis-item>
-          </kendo-chart-category-axis>
+          <kendo-chart-tooltip>
+            <ng-template kendoChartSeriesTooltipTemplate let-value="value">
+              Default Content {{ value }}
+            </ng-template>
+          </kendo-chart-tooltip>
           <kendo-chart-series>
-            <kendo-chart-series-item type="bar" color="#68BBE3" [data]="Employees">
-            </kendo-chart-series-item>
-            <kendo-chart-series-item type="bar" color="#0E86D4" [data]="Customers">
+            <kendo-chart-series-item [data]="[1, 2, 3]"> </kendo-chart-series-item>
+            <kendo-chart-series-item [data]="[1, 2, 3]">
+              <kendo-chart-series-item-tooltip>
+                <ng-template let-value="value">
+                  Series 1 value: {{ value }}
+                </ng-template>
+              </kendo-chart-series-item-tooltip>
             </kendo-chart-series-item>
           </kendo-chart-series>
         </kendo-chart>
