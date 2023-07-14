@@ -4,6 +4,7 @@ import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Credentials, CredentialsService } from './credentials.service';
 import { tap,map } from 'rxjs/operators';
 import { environment } from '@environments/environment';
+import { Router } from '@angular/router';
 
 export interface LoginContext {
   username: string;
@@ -43,7 +44,10 @@ export class AuthenticationService {
   private registered: boolean = false;
 
 
-  constructor(private credentialsService: CredentialsService,    private http: HttpClient) {
+  constructor(private credentialsService: CredentialsService,    
+    private http: HttpClient,
+    private router : Router    
+    ) {
     
   }
   isRegistered(): boolean {
@@ -59,7 +63,8 @@ export class AuthenticationService {
   //  transforms the response object by extracting the data property from
   //  it and logging it to the console. 
   //  Finally, the transformed responseData is returned from the map operator.
- 
+  
+
   login(context: LoginContext): Observable<any> {
     // Make the POST request to the authentication endpoint
     return this.http.post<{ data: string }>(`${environment.baseUrl}/api/Auth/login`, {
@@ -145,9 +150,11 @@ export class AuthenticationService {
    * Logs out the user and clear credentials.
    * @return True if the user was logged out successfully.
    */
+  
   logout(): Observable<boolean> {
-    // Customize credentials invalidation here
-    this.credentialsService.setCredentials();
+    // Clear the credentials (token)
+    this.credentialsService.removeCredential();
+    // Redirect to the login page
     return of(true);
   }
 
