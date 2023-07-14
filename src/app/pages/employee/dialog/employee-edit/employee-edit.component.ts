@@ -1,9 +1,10 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder } from '@angular/forms';
+import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
 import { EmployeeService } from 'src/app/services/EmployeeService/employee.service';
 import { DepartmentService } from 'src/app/services/DepartmentService/department.service';
 import { ProductService } from 'src/app/services/ProductService/product.service';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { USERNAME_PATTERN } from 'src/app/shared/regex-patterns';
 
 interface IDepartment {
   id: number;
@@ -23,6 +24,14 @@ export class EmployeeEditComponent implements OnInit {
 
   products: any[] = [];
 
+  ageValidator = (control: FormControl) => {
+    const age = control.value;
+    if (age && age <= 20) {
+      return { invalidAge: true };
+    }
+    return null;
+  };
+
   constructor(
     private _formbuiler: FormBuilder,
     private _employeeService: EmployeeService,
@@ -32,13 +41,34 @@ export class EmployeeEditComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: any,
   ) {
     this.employeeForm = this._formbuiler.group({
-      employeeName: '',
-      employeeSalary: '',
-      employeeAge: '',
-      departmentID: '',
-      productID: '',
+      employeeAge: ['', [Validators.required, this.ageValidator]],
+      employeeSalary: ['', Validators.required],
+      employeeName: ['', [Validators.required,Validators.pattern(USERNAME_PATTERN)]],
+      departmentID: ['', Validators.required],
+      productID: ['', Validators.required],
     })
   }
+
+  get employeeAge() {
+    return this.employeeForm.get('employeeAge');
+  }
+
+  get employeeSalary() {
+    return this.employeeForm.get('employeeSalary');
+  }
+
+  get employeeName() {
+    return this.employeeForm.get('employeeName');
+  }
+
+  get departmentID() {
+    return this.employeeForm.get('departmentID');
+  }
+
+  get productID() {
+    return this.employeeForm.get('productID');
+  }
+
   ngOnInit(): void {
     this.employeeForm.patchValue({
       employeeName: this.data.employeeName,

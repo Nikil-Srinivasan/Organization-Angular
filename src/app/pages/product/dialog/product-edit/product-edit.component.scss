@@ -4,7 +4,7 @@
 
 .row {
     display: flex;
-    gap: 10px;
+    gap: 20px;
 }
 
 .action {
@@ -13,4 +13,8 @@
     button {
         flex: 1;
     }
+}
+
+.form-field-width{
+    width: 25vw;
 }

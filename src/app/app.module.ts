@@ -27,6 +27,7 @@ import { LoaderInterceptor } from './interceptor/loader.interceptor';
 import { LoaderService } from './services/loader.service';
 import { LoaderComponent } from './shared/loader-component/loader-component.component';
 import { AuthHeadersInterceptor } from './interceptor/auth-header.interceptor';
+import { PageNotFoundComponent } from './pages/page-not-found/page-not-found.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,6 @@ import { AuthHeadersInterceptor } from './interceptor/auth-header.interceptor';
     HeaderComponent,
     BrandingComponent,
     AppNavItemComponent,
-    LoaderComponent
   ],
   imports: [
     BrowserModule,

@@ -9,6 +9,12 @@ import { ForgotPasswordComponent } from './forgot-password/forgot-password.compo
 export const AuthenticationRoutes: Routes = [
   {
     path: '',
+    redirectTo: '/authentication/login',
+    pathMatch: 'full',
+  },
+  
+  {
+    path: '',
     children: [
       {
         path: 'login',

@@ -1,9 +1,10 @@
 import { Component, Inject } from '@angular/core';
-import { FormGroup, FormBuilder } from '@angular/forms';
+import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import { HttpClient } from '@angular/common/http';
 import { CustomerService } from 'src/app/services/CustomerService/customer.service';
 import { ProductService } from 'src/app/services/ProductService/product.service';
+import { EMAIL_PATTERN, USERNAME_PATTERN, PHONE_PATTERN } from 'src/app/shared/regex-patterns';
+
 @Component({
   selector: 'app-customer-add',
   templateUrl: './customer-add.component.html',
@@ -19,23 +20,39 @@ export class CustomerAddComponent {
     private _formbuiler: FormBuilder,
     private _customerService: CustomerService,
     private _productService: ProductService,
-    private _http: HttpClient,
     private _dialogRef: MatDialogRef<CustomerAddComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
   ) {
     this.customerForm = this._formbuiler.group({
-      customerName:'',
-      customerPhoneNumber:'',
-      customerEmail:'',
-      productID:''
+      customerName: ['', [Validators.required, Validators.pattern(USERNAME_PATTERN)]],
+      customerPhoneNumber: ['', [Validators.required, Validators.pattern(PHONE_PATTERN)]],
+      customerEmail: ['', [Validators.required, Validators.pattern(EMAIL_PATTERN)]],
+      productID: ['', Validators.required],
     })
   }
+
+  get customerEmail() {
+    return this.customerForm.get('customerEmail');
+  }
+
+  get customerName() {
+    return this.customerForm.get('customerName');
+  }
+
+  get customerPhoneNumber() {
+    return this.customerForm.get('customerPhoneNumber');
+  }
+
+  get productID() {
+    return this.customerForm.get('productID');
+  }
+
   ngOnInit(): void {
     this.fetchProducts();
   }
 
-  
-  fetchProducts(){
+
+  fetchProducts() {
     this._productService.GetProductsList().subscribe(products => {
       this.products = products.data;
       console.log(products.data);
@@ -55,5 +72,5 @@ export class CustomerAddComponent {
           // Handle the error and show an error message to the user
         }
       });
-      }
+  }
 }

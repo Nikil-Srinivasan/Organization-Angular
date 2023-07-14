@@ -1,8 +1,8 @@
 import { Component, Inject } from '@angular/core';
-import { FormGroup, FormBuilder } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import { HttpClient } from '@angular/common/http';
 import { ProductService } from 'src/app/services/ProductService/product.service';
+import { USERNAME_PATTERN } from 'src/app/shared/regex-patterns';
 
 @Component({
   selector: 'app-product-add',
@@ -16,20 +16,28 @@ export class ProductAddComponent {
   constructor(
     private _formbuiler: FormBuilder,
     private _productService: ProductService,
-    private _http: HttpClient,
     private _dialogRef: MatDialogRef<ProductAddComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
   ) {
     this.productForm = this._formbuiler.group({
-      productName:'',
-      productRevenue:''
+      productName: ['', [Validators.required, Validators.pattern(USERNAME_PATTERN)]],
+      productRevenue: ['', Validators.required]
     })
   }
+
+  get productName() {
+    return this.productForm.get('productName');
+  }
+
+  get productRevenue() {
+    return this.productForm.get('productRevenue');
+  }
+
   ngOnInit(): void {
     this.productForm.patchValue(this.data);
   }
 
-  
+
   //onSubmit Method is invoked when the Submit Button is clicked
   onSubmit() {
     this._productService.AddProduct(this.productForm.value)

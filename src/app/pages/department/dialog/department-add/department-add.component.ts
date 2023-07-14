@@ -1,8 +1,8 @@
 import { Component, Inject } from '@angular/core';
-import { FormGroup, FormBuilder } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import { HttpClient } from '@angular/common/http';
 import { DepartmentService } from 'src/app/services/DepartmentService/department.service';
+import { USERNAME_PATTERN } from 'src/app/shared/regex-patterns';
 
 @Component({
   selector: 'app-department-add',
@@ -15,14 +15,18 @@ export class DepartmentAddComponent {
   constructor(
     private _formbuiler: FormBuilder,
     private _departmentService: DepartmentService,
-    private _http: HttpClient,
     private _dialogRef: MatDialogRef<DepartmentAddComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
   ) {
     this.departmentForm = this._formbuiler.group({
-      departmentName: '',
+      departmentName: ['', [Validators.required, Validators.pattern(USERNAME_PATTERN)]],
     })
   }
+
+  get departmentName(){
+    return this.departmentForm.get('departmentName');
+  }
+
   ngOnInit(): void {
     this.departmentForm.patchValue(this.data);
   }
