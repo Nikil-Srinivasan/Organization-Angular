@@ -84,23 +84,7 @@
             
           </div>
         </div>
-        <kendo-chart>
-          <kendo-chart-tooltip>
-            <ng-template kendoChartSeriesTooltipTemplate let-value="value">
-              Default Content {{ value }}
-            </ng-template>
-          </kendo-chart-tooltip>
-          <kendo-chart-series>
-            <kendo-chart-series-item [data]="[1, 2, 3]"> </kendo-chart-series-item>
-            <kendo-chart-series-item [data]="[1, 2, 3]">
-              <kendo-chart-series-item-tooltip>
-                <ng-template let-value="value">
-                  Series 1 value: {{ value }}
-                </ng-template>
-              </kendo-chart-series-item-tooltip>
-            </kendo-chart-series-item>
-          </kendo-chart-series>
-        </kendo-chart>
+  
       </mat-card-content>
     </mat-card>
   </div>
@@ -114,16 +98,7 @@
             
           </div>
         </div>
-        <kendo-chart>
-          <kendo-chart-series>
-            <kendo-chart-series-item
-              type="pie"
-              [data]="PieChartData"
-              [highlight]="seriesHighlight"
-            >
-            </kendo-chart-series-item>
-          </kendo-chart-series>
-        </kendo-chart>
+  
 
       </mat-card-content>
     </mat-card>
