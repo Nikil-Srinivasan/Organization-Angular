@@ -6,7 +6,6 @@ import { LoaderService } from './services/loader.service';
   templateUrl: './app.component.html',
 })
 export class AppComponent {
-  title = 'Modernize Angular Admin Tempplate';
   constructor(public loaderService: LoaderService) { }
 
 }

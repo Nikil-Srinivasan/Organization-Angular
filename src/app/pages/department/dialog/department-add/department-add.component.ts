@@ -2,7 +2,7 @@ import { Component, Inject } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { DepartmentService } from 'src/app/services/DepartmentService/department.service';
-import { USERNAME_PATTERN } from 'src/app/shared/regex-patterns';
+import { DEPARTMENT_NAME_PATTERN } from 'src/app/shared/regex-patterns';
 
 @Component({
   selector: 'app-department-add',
@@ -11,19 +11,20 @@ import { USERNAME_PATTERN } from 'src/app/shared/regex-patterns';
 })
 export class DepartmentAddComponent {
   departmentForm: FormGroup;
+  isSubmitting: boolean = false;
 
   constructor(
-    private _formbuiler: FormBuilder,
+    private _formBuilder: FormBuilder,
     private _departmentService: DepartmentService,
     private _dialogRef: MatDialogRef<DepartmentAddComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
   ) {
-    this.departmentForm = this._formbuiler.group({
-      departmentName: ['', [Validators.required, Validators.pattern(USERNAME_PATTERN)]],
-    })
+    this.departmentForm = this._formBuilder.group({
+      departmentName: ['', [Validators.required, Validators.pattern(DEPARTMENT_NAME_PATTERN)]],
+    });
   }
 
-  get departmentName(){
+  get departmentName() {
     return this.departmentForm.get('departmentName');
   }
 
@@ -31,20 +32,26 @@ export class DepartmentAddComponent {
     this.departmentForm.patchValue(this.data);
   }
 
-
-  //onSubmit Method is invoked when the Submit Button is clicked
+  // onSubmit Method is invoked when the Submit Button is clicked
   onSubmit() {
+    if (this.departmentForm.invalid) {
+      return;
+    }
+
+    this.isSubmitting = true;
+
     this._departmentService.AddDepartment(this.departmentForm.value)
-      .subscribe(
-        (response: any) => {
-          console.log("Data sent successfully");
+      .subscribe({
+        next: (val: any) => {
           this._dialogRef.close(true);
         },
-        (error: any) => {
-          console.log(this.departmentForm.value);
-          console.error("Error sending data:", error);
-          // Handle error if needed
+        error: (error: any) => {
+          console.error('Error ADDING department details:', error);
+          // Handle the error and show an error message to the user
+        },
+        complete: () => {
+          this.isSubmitting = false;
         }
-      );
+      });
   }
 }

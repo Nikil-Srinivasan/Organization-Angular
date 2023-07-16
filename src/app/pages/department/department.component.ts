@@ -18,7 +18,7 @@ export class DepartmentComponent implements OnInit {
   departmentlist: any;
   dataSource: MatTableDataSource<any>;
   dataObs$: Observable<any>;
-  displayedColumns: string[] = ['name', 'edit', 'delete'];
+  displayedColumns: string[] = ['name', 'edit'];
 
   constructor(
     private _dialog: MatDialog,
@@ -66,13 +66,13 @@ export class DepartmentComponent implements OnInit {
     })
   }
 
-  DeleteDepartment(id: number) {
-    this._departmentService.DeleteDepartment(id).subscribe({
-      next: (res) => {
-        // this._coreService.openSnackBar('Department Deleted!');
-        this.GetDepartmentsList();
-      },
-      error: console.log,
-    })
-  }
+  // DeleteDepartment(id: number) {
+  //   this._departmentService.DeleteDepartment(id).subscribe({
+  //     next: (res) => {
+  //       // this._coreService.openSnackBar('Department Deleted!');
+  //       this.GetDepartmentsList();
+  //     },
+  //     error: console.log,
+  //   })
+  // }
 }

@@ -20,7 +20,7 @@ export class ProductComponent {
   productlist: any;
   dataSource: MatTableDataSource<any>;
   dataObs$: Observable<any>;
-  displayedColumns: string[] = ['name', 'revenue', 'edit', 'delete'];
+  displayedColumns: string[] = ['name', 'revenue', 'edit'];
 
   constructor(private _dialog: MatDialog,private _productService: ProductService) { }
 
@@ -67,14 +67,14 @@ export class ProductComponent {
     })
   }
 
-  DeleteProduct(id: number) {
-    this._productService.DeleteProduct(id).subscribe({
-      next: (res) => {
-        // this._coreService.openSnackBar('Employee Deleted!');
-        this.GetProducts();
-      },
-      error: console.log,
-    })
-  }
+  // DeleteProduct(id: number) {
+  //   this._productService.DeleteProduct(id).subscribe({
+  //     next: (res) => {
+  //       // this._coreService.openSnackBar('Employee Deleted!');
+  //       this.GetProducts();
+  //     },
+  //     error: console.log,
+  //   })
+  // }
 
 }
