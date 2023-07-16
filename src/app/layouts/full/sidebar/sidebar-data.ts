@@ -18,12 +18,6 @@ export const navItems: NavItem[] = [
     roles: [Role.Employee],
   },
   {
-    displayName: 'Dashboard',
-    iconName: 'layout-dashboard',
-    route: '/dashboard',  
-    roles: [Role.Employee],
-  },
-  {
     navCap: 'Tables',
     roles: [Role.Admin],
   },
@@ -38,9 +32,9 @@ export const navItems: NavItem[] = [
     roles: [Role.Admin],
   },
   {
-    displayName: 'All Tasks',
+    displayName: 'New Tasks',
     iconName: 'rosette',
-    route: '/dashboard/tasks',
+    route: '/dashboard/tasks/new',
     roles: [Role.Employee],
   },
   {
@@ -50,9 +44,15 @@ export const navItems: NavItem[] = [
     roles: [Role.Employee],
   },
   {
-    displayName: 'Ongoing',
+    displayName: 'InProgress',
     iconName: 'rosette',
-    route: '/dashboard/tasks/ongoing',
+    route: '/dashboard/tasks/inprogress',
+    roles: [Role.Employee],
+  },
+  {
+    displayName: 'Completed',
+    iconName: 'rosette',
+    route: '/dashboard/tasks/completed',
     roles: [Role.Employee],
   },
   {
