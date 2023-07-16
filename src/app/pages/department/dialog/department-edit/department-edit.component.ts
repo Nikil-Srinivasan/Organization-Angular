@@ -2,7 +2,7 @@ import { Component, Inject } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { DepartmentService } from 'src/app/services/DepartmentService/department.service';
-import { USERNAME_PATTERN } from 'src/app/shared/regex-patterns';
+import { DEPARTMENT_NAME_PATTERN } from 'src/app/shared/regex-patterns';
 
 @Component({
   selector: 'app-department-edit',
@@ -11,6 +11,7 @@ import { USERNAME_PATTERN } from 'src/app/shared/regex-patterns';
 })
 export class DepartmentEditComponent {
   departmentForm: FormGroup;
+  isSubmitting: boolean = false;
 
   constructor(
     private _formbuiler: FormBuilder,
@@ -19,7 +20,7 @@ export class DepartmentEditComponent {
     @Inject(MAT_DIALOG_DATA) public data: any,
   ) {
     this.departmentForm = this._formbuiler.group({
-      departmentName: ['', [Validators.required, Validators.pattern(USERNAME_PATTERN)]],
+      departmentName: ['', [Validators.required, Validators.pattern(DEPARTMENT_NAME_PATTERN)]],
     })
   }
 
@@ -35,18 +36,19 @@ export class DepartmentEditComponent {
 
   
   //onSubmit Method is invoked when the Submit Button is clicked
-  onSubmit() {
+ onSubmit() {
     this._departmentService.UpdateDepartment(this.data.departmentID,this.departmentForm.value)
-      .subscribe(
-        (response: any) => {
-          console.log("Data sent successfully");
+      .subscribe({
+        next: (val: any) => {
           this._dialogRef.close(true);
         },
-        (error: any) => {
-          console.log(this.departmentForm.value);
-          console.error("Error sending data:", error);
-          // Handle error if needed
+        error: (error: any) => {
+          console.error('Error updating department details:', error);
+          // Handle the error and show an error message to the user
+        },
+        complete: () => {
+          this.isSubmitting = false;
         }
-      );
+      });
   }
 }

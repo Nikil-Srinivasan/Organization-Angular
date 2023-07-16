@@ -24,6 +24,7 @@ import { CustomerEditComponent } from './customer/dialog/customer-edit/customer-
 import { DepartmentComponent } from './department/department.component';
 import { DepartmentAddComponent } from './department/dialog/department-add/department-add.component';
 import { DepartmentEditComponent } from './department/dialog/department-edit/department-edit.component';
+import { ConfirmDeleteComponent } from './confirm-delete/confirm-delete.component';
 import { AppDashboardComponent } from './dashboard/dashboard.component';
 import { EmployeeDashboardComponent } from './dashboard/employee-dashboard/employee-dashboard.component';
 
@@ -47,6 +48,7 @@ import { EmployeeDashboardComponent } from './dashboard/employee-dashboard/emplo
     DepartmentComponent,
     DepartmentAddComponent,
     DepartmentEditComponent,
+    ConfirmDeleteComponent,
   ],
   imports: [
     CommonModule,

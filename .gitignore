@@ -43,3 +43,12 @@ testem.log
 # System files
 .DS_Store
 Thumbs.db
+
+# Sentry Auth Token
+.sentryclirc
+
+# Sentry Auth Token
+.sentryclirc
+
+# Sentry Auth Token
+.sentryclirc

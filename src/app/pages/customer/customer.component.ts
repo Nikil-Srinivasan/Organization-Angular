@@ -1,12 +1,12 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { MatCardModule } from '@angular/material/card';
-import { CustomerAddComponent } from './dialog/customer-add/customer-add.component'; 
+import { CustomerAddComponent } from './dialog/customer-add/customer-add.component';
 import { CustomerEditComponent } from './dialog/customer-edit/customer-edit.component';
 import { Observable } from 'rxjs';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { CustomerService } from 'src/app/services/CustomerService/customer.service';
+import { DeleteDialogService } from 'src/app/services/delete-dialog.service';
 
 @Component({
   selector: 'app-customer',
@@ -20,9 +20,13 @@ export class CustomerComponent {
   customerlist: any;
   dataSource: MatTableDataSource<any>;
   dataObs$: Observable<any>;
-  displayedColumns: string[] = ['customerName', 'customerPhoneNumber', 'customerEmail','product', 'edit', 'delete'];
+  displayedColumns: string[] = ['customerName', 'customerPhoneNumber', 'customerEmail', 'product', 'edit', 'delete'];
 
-  constructor(private _dialog: MatDialog,private _customerService: CustomerService) { }
+  constructor(
+    private _dialog: MatDialog,
+    private _customerService: CustomerService,
+    private _deleteDialogService: DeleteDialogService
+  ) { }
 
   ngOnInit(): void {
     this.GetCustomers();
@@ -42,11 +46,11 @@ export class CustomerComponent {
     });
   }
 
-  OpenAddCustomerDialog(){
+  OpenAddCustomerDialog() {
     const dialogRef = this._dialog.open(CustomerAddComponent);
     dialogRef.afterClosed().subscribe({
       next: (val) => {
-        if(val){
+        if (val) {
           this.GetCustomers();
         }
       }
@@ -68,13 +72,21 @@ export class CustomerComponent {
   }
 
   DeleteCustomer(id: number) {
-    this._customerService.DeleteCustomer(id).subscribe({
-      next: (res) => {
-        // this._coreService.openSnackBar('Employee Deleted!');
-        this.GetCustomers();
-      },
-      error: console.log,
-    })
-  }
+    
+    this._deleteDialogService.openConfirmDialog("Do you really want to delete this record?")
+      .afterClosed().subscribe({
+        next: (val) => {
+          if (val) {
+            this._customerService.DeleteCustomer(id).subscribe({
+              next: (res) => {
+                // this._coreService.openSnackBar('Customer Deleted!');
+                this.GetCustomers();
+              },
+              error: console.log,
+            })
+          }
+        }
+      });
 
+  }
 }

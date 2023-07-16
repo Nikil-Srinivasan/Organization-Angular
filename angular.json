@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "Modernize": {
+    "Stint360": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -15,9 +15,13 @@
       "prefix": "app",
       "architect": {
         "build": {
-          "builder": "@angular-devkit/build-angular:browser",
+          "builder": "@angular-builders/custom-webpack:browser",
           "options": {
-            "outputPath": "dist/Modernize",
+            "customWebpackConfig": {
+              "path": "./webpack.config.js"
+            },
+            "outputPath": "dist/Stint360",
+            "sourceMap": true,
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": [
@@ -37,6 +41,9 @@
           },
           "configurations": {
             "production": {
+              "sourceMap": {
+                "scripts": true
+              },
               "budgets": [
                 {
                   "type": "initial",
@@ -66,10 +73,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "Modernize:build:production"
+              "browserTarget": "Stint360:build:production"
             },
             "development": {
-              "browserTarget": "Modernize:build:development"
+              "browserTarget": "Stint360:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -77,7 +84,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "Modernize:build"
+            "browserTarget": "Stint360:build"
           }
         },
         "test": {
