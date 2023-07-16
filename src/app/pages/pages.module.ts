@@ -8,7 +8,6 @@ import { NgApexchartsModule } from 'ng-apexcharts';
 // icons
 import { TablerIconsModule } from 'angular-tabler-icons';
 import * as TablerIcons from 'angular-tabler-icons/icons';
-import { AppDashboardComponent } from './dashboard/dashboard.component';
 import { EmployeeComponent } from './employee/employee.component';
 import { EmployeeAddComponent } from './employee/dialog/employee-add/employee-add.component';
 import { EmployeeEditComponent } from './employee/dialog/employee-edit/employee-edit.component';
@@ -26,11 +25,14 @@ import { DepartmentComponent } from './department/department.component';
 import { DepartmentAddComponent } from './department/dialog/department-add/department-add.component';
 import { DepartmentEditComponent } from './department/dialog/department-edit/department-edit.component';
 import { ConfirmDeleteComponent } from './confirm-delete/confirm-delete.component';
+import { AppDashboardComponent } from './dashboard/dashboard.component';
+import { EmployeeDashboardComponent } from './dashboard/employee-dashboard/employee-dashboard.component';
 
 
 @NgModule({
   declarations: [
     AppDashboardComponent,
+    EmployeeDashboardComponent,
     EmployeeComponent,
     EmployeeEditComponent,
     EmployeeAddComponent,
