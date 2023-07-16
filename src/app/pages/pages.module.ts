@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule} from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { PagesRoutes } from './pages.routing.module';
@@ -26,6 +26,7 @@ import { DepartmentComponent } from './department/department.component';
 import { DepartmentAddComponent } from './department/dialog/department-add/department-add.component';
 import { DepartmentEditComponent } from './department/dialog/department-edit/department-edit.component';
 import { ConfirmDeleteComponent } from './confirm-delete/confirm-delete.component';
+
 
 @NgModule({
   declarations: [
@@ -57,5 +58,6 @@ import { ConfirmDeleteComponent } from './confirm-delete/confirm-delete.componen
     TablerIconsModule.pick(TablerIcons),
   ],
   exports: [TablerIconsModule],
+  
 })
 export class PagesModule {}

@@ -5,6 +5,8 @@ import { ManagerComponent } from './manager/manager.component';
 import { ProductComponent } from './product/product.component';
 import { CustomerComponent } from './customer/customer.component';
 import { DepartmentComponent } from './department/department.component';
+import { Role } from '../models/role';
+import { AuthGuard } from '../guards/auth.guard';
 
 export const PagesRoutes: Routes = [
   {
@@ -13,20 +15,21 @@ export const PagesRoutes: Routes = [
     data: {
       title: 'Starter Page',
     },
+    canActivate : [AuthGuard]
   },
   {
-    path: 'employee',
-    component: EmployeeComponent,
-    data: {
-      title: 'Employee Page',
-    },
+    path: 'employees',
+    loadChildren: () => import('./employee/employee.module').then(
+      (m) => m.EmployeeModule
+    ),
   },
   {
     path: 'manager',
     component: ManagerComponent,
     data: {
       title: 'Manager Page',
-    }
+    },
+    canActivate : [AuthGuard]
   },
   {
     path: 'product',
@@ -34,6 +37,7 @@ export const PagesRoutes: Routes = [
     data: {
       title: 'Product Page',
     },
+    canActivate : [AuthGuard]
   },
   {
     path: 'customer',
@@ -41,6 +45,7 @@ export const PagesRoutes: Routes = [
     data: {
       title: 'Customer Page',
     },
+    canActivate : [AuthGuard]
   },
   {
     path: 'department',
@@ -48,5 +53,6 @@ export const PagesRoutes: Routes = [
     data: {
       title: 'Department Page',
     },
+    canActivate : [AuthGuard]
   },
 ];

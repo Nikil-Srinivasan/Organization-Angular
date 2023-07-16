@@ -1,5 +1,5 @@
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
-
+import { enableProdMode } from "@angular/core";
 import { AppModule } from './app/app.module';
 import * as Sentry from '@sentry/angular-ivy'
 import { BrowserTracing } from '@sentry/angular-ivy';
@@ -31,6 +31,7 @@ Sentry.init({
   replaysSessionSampleRate: 0.1,
   replaysOnErrorSampleRate: 1.0,
 });
+enableProdMode();
 
 platformBrowserDynamic().bootstrapModule(AppModule)
   .catch(err => console.error(err));
