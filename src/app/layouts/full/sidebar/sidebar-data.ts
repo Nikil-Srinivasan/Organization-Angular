@@ -12,14 +12,48 @@ export const navItems: NavItem[] = [
     roles: [Role.Admin],
   },
   {
+    displayName: 'Dashboard',
+    iconName: 'layout-dashboard',
+    route: '/dashboard',
+    roles: [Role.Employee],
+  },
+  {
+    displayName: 'Dashboard',
+    iconName: 'layout-dashboard',
+    route: '/dashboard',  
+    roles: [Role.Employee],
+  },
+  {
     navCap: 'Tables',
     roles: [Role.Admin],
   },
   {
+    navCap: 'Tasks',
+    roles: [Role.Employee],
+  },
+  {
     displayName: 'Employee',
-    iconName: 'users',
-    route: '/dashboard/employee',
-    roles: [Role.Admin,Role.Employee],
+    iconName: 'rosette',
+    route: '/dashboard/employees',
+    roles: [Role.Admin],
+  },
+  {
+    displayName: 'All Tasks',
+    iconName: 'rosette',
+    route: '/dashboard/tasks',
+    roles: [Role.Employee],
+  },
+  {
+    displayName: 'Pending',
+    iconName: 'rosette',
+    route: '/dashboard/tasks/pending',
+    roles: [Role.Employee],
+  },
+  {
+    displayName: 'Ongoing',
+    iconName: 'rosette',
+    route: '/dashboard/tasks/ongoing',
+    roles: [Role.Employee],
   },
   {
     displayName: 'Manager',

@@ -1,5 +1,4 @@
 import { Routes } from '@angular/router';
-import { AppDashboardComponent } from './dashboard/dashboard.component';
 import { EmployeeComponent } from './employee/employee.component';
 import { ManagerComponent } from './manager/manager.component';
 import { ProductComponent } from './product/product.component';
@@ -7,6 +6,8 @@ import { CustomerComponent } from './customer/customer.component';
 import { DepartmentComponent } from './department/department.component';
 import { Role } from '../models/role';
 import { AuthGuard } from '../guards/auth.guard';
+import { AppDashboardComponent } from './dashboard/dashboard.component';
+import { EmployeeDashboardComponent } from './dashboard/employee-dashboard/employee-dashboard.component';
 
 export const PagesRoutes: Routes = [
   {
@@ -16,9 +17,9 @@ export const PagesRoutes: Routes = [
       title: 'Starter Page',
     },
     canActivate : [AuthGuard]
-  },
+  }, 
   {
-    path: 'employees',
+    path: '',
     loadChildren: () => import('./employee/employee.module').then(
       (m) => m.EmployeeModule
     ),
