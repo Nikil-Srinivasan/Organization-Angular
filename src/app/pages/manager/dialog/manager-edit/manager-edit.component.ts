@@ -50,9 +50,9 @@ export class ManagerEditComponent implements OnInit {
     return this.managerForm.get('managerName');
   }
 
-  get productID() {
-    return this.managerForm.get('productID');
-  }
+  // get productID() {
+  //   return this.managerForm.get('productID');
+  // }
 
   ngOnInit(): void {
     this.managerForm.patchValue({
@@ -67,7 +67,7 @@ export class ManagerEditComponent implements OnInit {
   }
 
   fetchProducts() {
-    this._productService.GetProductsList().subscribe(products => {
+    this._productService.GetAvailableProductsList().subscribe(products => {
       this.products = products.data;
     });
   }

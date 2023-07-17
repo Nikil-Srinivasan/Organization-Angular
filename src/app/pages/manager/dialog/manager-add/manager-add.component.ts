@@ -86,7 +86,7 @@ export class ManagerAddComponent {
   }
 
   fetchProducts() {
-    this._productService.GetProductsList().subscribe(products => {
+    this._productService.GetAvailableProductsList().subscribe(products => {
       this.products = products.data;
       console.log(products.data);
     })

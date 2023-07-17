@@ -34,7 +34,6 @@ export class ProductAddComponent {
   }
 
   ngOnInit(): void {
-    this.productForm.patchValue(this.data);
   }
 
 

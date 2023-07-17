@@ -17,12 +17,16 @@ export class ManagerService {
   AddManager(data: any): Observable<any> {
     return this._http.post(`${environment.baseUrl}/api/Auth/Register`, data);
   }
+  
+  AppointNewManager(id: number, data: any): Observable<any> {
+    return this._http.put(`${environment.baseUrl}api/Auth/AppointNewManager?id=${id}`, data);
+  }
 
   UpdateManager(id: number, data: any): Observable<any> {
     return this._http.put(`${environment.baseUrl}/api/Manager/UpdateManager?id=${id}`, data);
   }
 
   DeleteManager(id: number): Observable<any> {
-    return this._http.delete(`${environment.baseUrl}/api/Manager/DeleteManager?id=${id}`);
+    return this._http.delete(`${environment.baseUrl}/api/Auth/DeleteUserById?id=${id}`);
   }
 }

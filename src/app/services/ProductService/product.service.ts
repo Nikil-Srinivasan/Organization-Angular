@@ -21,6 +21,14 @@ export class ProductService {
     return this._http.get<any>(`${environment.baseUrl}/api/Product/GetAllProducts`)
   }
 
+  GetAvailableProductsList(): Observable<any> {
+    return this._http.get<any>(`${environment.baseUrl}/api/Product/GetAvailableProducts`)
+  }
+
+  GetManagerByProductId(id: number): Observable<any> {
+    return this._http.get<any>(`${environment.baseUrl}/api/Manager/GetManagerByProductId?id=${id}`)
+  }
+
   AddProduct(data: any): Observable<any> {
     console.log(data)
     return this._http.post(`${environment.baseUrl}/api/Product/CreateProduct`, data);

@@ -32,6 +32,6 @@ export class EmployeeService {
     }
 
     DeleteEmployee(id: number): Observable<any> {
-        return this._http.delete(`${environment.baseUrl}/api/Employee/DeleteEmployee?id=${id}`);
+        return this._http.delete(`${environment.baseUrl}/api/Auth/DeleteUserById?id=${id}`);
     }
 }

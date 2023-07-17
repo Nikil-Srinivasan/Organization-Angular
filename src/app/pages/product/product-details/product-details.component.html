@@ -1,16 +1,21 @@
 <div class="col-lg-12">
     <mat-card class="cardWithShadow">
+        <mat-card-title class="d-flex justify-content-between p-10">
+            <h3>{{productName}}</h3> 
+            <h3>{{productManager}}</h3>
+        </mat-card-title>
+    </mat-card>
+    <mat-card class="cardWithShadow">
         <mat-card-content class="p-24">
             <mat-card-title class="title-flex-container">
                 <div layout="row" layout-align="center center  ">
                   Employees
                 </div>
                 <div fxLayout="row" fxLayoutAlign="start center" fxLayout.lt-md="column" fxLayoutAlign.lt-md="center center">
-                  <mat-form-field appearance="outline">
+                  <!-- <mat-form-field appearance="outline">
                     <mat-label>Filter</mat-label>
                     <input matInput (keyup)="applyFilter($event)" placeholder="Search columns" #input>
-                  </mat-form-field>
-                  <button mat-raised-button class="create-btn" color="primary" (click)="OpenAddEmployee()">Create</button>
+                  </mat-form-field> -->
                 </div>
               </mat-card-title>
             <div class="table-responsive m-t-16">
@@ -36,12 +41,12 @@
                     </ng-container>
 
                     <!-- Weight Column -->
-                    <ng-container matColumnDef="manager">
+                    <ng-container matColumnDef="salary">
                         <th  mat-header-cell *matHeaderCellDef class="f-w-600 mat-subtitle-1 f-s-14" >
-                            Manager
+                            Salary
                         </th>
                         <td mat-cell *matCellDef="let element" class="mat-body-1">
-                            {{ element.managerName }}
+                            {{ element.employeeSalary }}
                         </td>
                     </ng-container>
 
@@ -61,25 +66,6 @@
                         </th>
                         <td mat-cell *matCellDef="let element" class="mat-body-1">
                             {{ element.productName }}
-                        </td>
-                    </ng-container>
-
-                    <!-- Action Column -->
-                    <ng-container matColumnDef="edit">
-                        <th mat-header-cell *matHeaderCellDef class="f-w-600 mat-subtitle-1 f-s-14">Edit</th>
-                        <td mat-cell *matCellDef="let element" class="mat-body-1">
-                            <button mat-icon-button color="primary" (click)="OpenEditEmployee(element)">
-                                <mat-icon>edit</mat-icon>
-                            </button>
-                        </td>
-                    </ng-container>
-
-                    <ng-container matColumnDef="delete">
-                        <th mat-header-cell *matHeaderCellDef class="f-w-600 mat-subtitle-1 f-s-14">Delete</th>
-                        <td mat-cell *matCellDef="let element" class="mat-body-1">
-                            <button mat-icon-button color="warn" (click)="DeleteEmployee(element.employeeID)">
-                                <mat-icon>delete</mat-icon>
-                            </button>
                         </td>
                     </ng-container>
 

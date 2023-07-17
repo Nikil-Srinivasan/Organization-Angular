@@ -33,12 +33,10 @@ export const PagesRoutes: Routes = [
     canActivate : [AuthGuard]
   },
   {
-    path: 'product',
-    component: ProductComponent,
-    data: {
-      title: 'Product Page',
-    },
-    canActivate : [AuthGuard]
+    path: '',
+    loadChildren: () => import('./product/product.module').then(
+      (m) => m.ProductModule
+    ),
   },
   {
     path: 'customer',

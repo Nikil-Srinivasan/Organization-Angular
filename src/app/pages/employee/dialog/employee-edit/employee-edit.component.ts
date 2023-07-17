@@ -2,9 +2,9 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
 import { EmployeeService } from 'src/app/services/EmployeeService/employee.service';
 import { DepartmentService } from 'src/app/services/DepartmentService/department.service';
-import { ProductService } from 'src/app/services/ProductService/product.service';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { USERNAME_PATTERN } from 'src/app/shared/regex-patterns';
+import { ManagerService } from 'src/app/services/ManagerService/manager.service';
 
 interface IDepartment {
   id: number;
@@ -22,7 +22,7 @@ export class EmployeeEditComponent implements OnInit {
 
   departments: any[] = [];
 
-  products: any[] = [];
+  managers: any[] = [];
 
   ageValidator = (control: FormControl) => {
     const age = control.value;
@@ -36,7 +36,7 @@ export class EmployeeEditComponent implements OnInit {
     private _formbuiler: FormBuilder,
     private _employeeService: EmployeeService,
     private _departmentService: DepartmentService,
-    private _productService: ProductService,
+    private _managerService: ManagerService, 
     private _dialogRef: MatDialogRef<EmployeeEditComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
   ) {
@@ -45,7 +45,7 @@ export class EmployeeEditComponent implements OnInit {
       employeeSalary: ['', Validators.required],
       employeeName: ['', [Validators.required,Validators.pattern(USERNAME_PATTERN)]],
       departmentID: ['', Validators.required],
-      productID: ['', Validators.required],
+      managerID: ['', Validators.required],
     })
   }
 
@@ -65,8 +65,8 @@ export class EmployeeEditComponent implements OnInit {
     return this.employeeForm.get('departmentID');
   }
 
-  get productID() {
-    return this.employeeForm.get('productID');
+  get managerID() {
+    return this.employeeForm.get('managerID');
   }
 
   ngOnInit(): void {
@@ -75,11 +75,11 @@ export class EmployeeEditComponent implements OnInit {
       employeeAge: this.data.employeeAge,
       employeeSalary: this.data.employeeSalary,
       departmentID: this.data.departmentID,
-      productID: this.data.productID
+      managerID: this.data.managerID
     });    
-
+    
     this.fetchDepartments();
-    this.fetchProducts();
+    this.fetchManagers();
     
   }
 
@@ -90,9 +90,9 @@ export class EmployeeEditComponent implements OnInit {
 
   }
 
-  fetchProducts() {
-    this._productService.GetProductsList().subscribe(products => {
-      this.products = products.data;
+  fetchManagers() {
+    this._managerService. GetManagersList().subscribe(managers => {
+      this.managers = managers.data;
     });
   }
 
