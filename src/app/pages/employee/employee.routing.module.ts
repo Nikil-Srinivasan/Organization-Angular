@@ -34,6 +34,8 @@ export const EmployeeRoutes: Routes = [
         data: {
           title: 'Pending Task',
         },
+        canActivate : [AuthGuard]
+
       },
       {
         path : 'tasks/inprogress',
@@ -41,6 +43,8 @@ export const EmployeeRoutes: Routes = [
         data: {
           title: 'Inprogress Task',
         },
+        canActivate : [AuthGuard]
+
       },
       {
         path : 'tasks/completed',
@@ -48,6 +52,7 @@ export const EmployeeRoutes: Routes = [
         data: {
           title: 'Completed Task',
         },
+        canActivate : [AuthGuard]
       }
     ]
     },

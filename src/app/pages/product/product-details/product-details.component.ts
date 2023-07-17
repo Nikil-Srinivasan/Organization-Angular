@@ -5,6 +5,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
 import { ProductService } from 'src/app/services/ProductService/product.service';
 import { EmployeeService } from 'src/app/services/EmployeeService/employee.service';
+import { ManagerService } from 'src/app/services/ManagerService/manager.service';
 
 
 @Component({
@@ -22,15 +23,27 @@ export class ProductDetailsComponent implements OnInit {
   dataSource: MatTableDataSource<any>;
   dataObs$: Observable<any>;
   displayedColumns: string[] = ['name', 'age', 'salary', 'department', 'product'];
+  
+  EmployeesAndManagerDetails : any
 
-  constructor(private route: ActivatedRoute, private _productService: ProductService, private _employeeService: EmployeeService) { }
+  constructor(private route: ActivatedRoute, private _managerService: ManagerService, private _employeeService: EmployeeService) { }
 
   ngOnInit() {
     this.route.params.subscribe(params => {
       this.productId = params['id'];
       // Call a method to fetch product details based on the productId
+      this._managerService.GetEmployeesAndManagerByProductId(parseInt(this.productId)).subscribe(response =>{
+        console.log(response.data)
+        this.EmployeesAndManagerDetails = response.data
+        this.employeelist = response.data.employees;
+        this.dataSource = new MatTableDataSource(this.employeelist);
+        this.dataSource.paginator = this.paginator;
+        this.dataObs$ = this.dataSource.connect();
+      })
+
+      console.log(this.productId)
       this.fetchProductDetails();
-      this.GetEmployees();
+      // this.GetEmployees();
     });
   }
 
@@ -40,10 +53,7 @@ export class ProductDetailsComponent implements OnInit {
   }
   GetEmployees() {
     this._employeeService.GetEmployeesList().subscribe(response => {
-      this.employeelist = response.data;
-      this.dataSource = new MatTableDataSource(this.employeelist);
-      this.dataSource.paginator = this.paginator;
-      this.dataObs$ = this.dataSource.connect();
+
     });
   }
   fetchProductDetails() {
@@ -51,19 +61,15 @@ export class ProductDetailsComponent implements OnInit {
     // GetManagerByProductId(){}
   }
 
-  // GetProductDetails() {
-  //   this._productService.GetProductsList().subscribe(response => {
-  //     this.productlist = response.data;
-  //     this.dataSource = new MatTableDataSource(this.productlist);
-  //     this.dataSource.paginator = this.paginator;
-  //     this.dataObs$ = this.dataSource.connect();
-  //   });
-  // }
+  GetEmployeesAndManager(){
+    
+  }
+  
 
   GetProductManager(id: number){
-    this._productService.GetManagerByProductId(id).subscribe( response => {
-      this.productManager = response.managerName;
-    })
+    // this._productService.GetManagerByProductId(id).subscribe( response => {
+    //   this.productManager = response.managerName;
+    // })
   }
 
 }

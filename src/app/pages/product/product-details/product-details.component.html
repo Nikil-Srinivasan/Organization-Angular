@@ -1,8 +1,8 @@
 <div class="col-lg-12">
     <mat-card class="cardWithShadow">
         <mat-card-title class="d-flex justify-content-between p-10">
-            <h3>{{productName}}</h3> 
-            <h3>{{productManager}}</h3>
+            {{EmployeesAndManagerDetails?.productName}}            
+            <h3>{{EmployeesAndManagerDetails?.managerName}}</h3>
         </mat-card-title>
     </mat-card>
     <mat-card class="cardWithShadow">
@@ -12,10 +12,6 @@
                   Employees
                 </div>
                 <div fxLayout="row" fxLayoutAlign="start center" fxLayout.lt-md="column" fxLayoutAlign.lt-md="center center">
-                  <!-- <mat-form-field appearance="outline">
-                    <mat-label>Filter</mat-label>
-                    <input matInput (keyup)="applyFilter($event)" placeholder="Search columns" #input>
-                  </mat-form-field> -->
                 </div>
               </mat-card-title>
             <div class="table-responsive m-t-16">
