@@ -11,28 +11,33 @@ import { DashboardService } from 'src/app/services/DashboardService/Dashboard-Se
   templateUrl: './dashboard.component.html',
 })
 
+
+
 export class AppDashboardComponent implements OnInit {
+
+  
 
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
-  public chartOptions: any;
-  public chartOption: any;
-
-  TotalProducts : any;
-  TotalEmployees : any;
-  TotalCustomers : any;
-  TotalDepartments : any;
-
+  chartOptions: any = {};
+  chartOption: any = {};
+  TotalProducts: any[] = [];
+  TotalEmployees: any[] = [];
+  TotalCustomers: any[] = [];
+  TotalDepartments: any[] = [];
   dataSource: MatTableDataSource<any>;
   dataObs$: Observable<any>;
 
-  constructor(private DasboardService : DashboardService) { }
+  constructor(private DasboardService : DashboardService) {
+
+    this.loadData();
+
+   }
 
   ngOnInit()
     {
 
-      this.loadData();
       this.TotalCount();
     }
 
@@ -64,6 +69,7 @@ export class AppDashboardComponent implements OnInit {
       next : (response: any) => {
 
         const data = response.data;
+        if (data) {
         const productNames = data.map((product: any) => product.productName);
         const employeeCounts = data.map((product: any) => product.employeeCount);
         const customerCounts = data.map((product: any) => product.customerCount);
@@ -73,12 +79,12 @@ export class AppDashboardComponent implements OnInit {
             series: [
               {
                 name: 'Employees',
-                data: employeeCounts,
+                data: employeeCounts?employeeCounts : [],
                 color: '#5D87FF',
               },
               {
                 name: 'Customers',
-                data: customerCounts,
+                data: customerCounts?employeeCounts : [],
                 color: '#49BEFF',
               },
             ],
@@ -109,7 +115,7 @@ export class AppDashboardComponent implements OnInit {
             legend: { show: false },
             xaxis: {
               type: 'category',
-              categories:productNames,
+              categories:productNames?productNames:[],
               labels: {
                 style: { cssClass: 'grey--text lighten-2--text fill-color' },
               },
@@ -145,17 +151,19 @@ export class AppDashboardComponent implements OnInit {
               },
             ],
           };
+        
+
 
     this.chartOption = {
 
-      series: productRevenue,
+      series: productRevenue?productRevenue:[],
 
       chart: {
         width: "100%",
         type: "pie"
       },
 
-      labels: productNames,
+      labels: productNames?productNames:[],
 
       theme: {
 
@@ -183,8 +191,9 @@ export class AppDashboardComponent implements OnInit {
           }
         }
       ]
-    };
-      },
+    }
+      }
+    },
       error: (error : any) => {
         console.error(error);
       }
