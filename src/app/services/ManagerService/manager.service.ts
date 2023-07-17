@@ -19,7 +19,7 @@ export class ManagerService {
   }
   
   AppointNewManager(id: number, data: any): Observable<any> {
-    return this._http.put(`${environment.baseUrl}api/Auth/AppointNewManager?id=${id}`, data);
+    return this._http.post(`${environment.baseUrl}/api/Auth/AppointNewManager?id=${id}`, data);
   }
 
   UpdateManager(id: number, data: any): Observable<any> {
