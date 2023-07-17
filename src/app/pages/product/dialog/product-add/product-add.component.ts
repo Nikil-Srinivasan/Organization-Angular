@@ -12,7 +12,7 @@ import { USERNAME_PATTERN } from 'src/app/shared/regex-patterns';
 export class ProductAddComponent {
 
   productForm: FormGroup;
-
+  isSubmitting: boolean = false;
   constructor(
     private _formbuiler: FormBuilder,
     private _productService: ProductService,
@@ -39,6 +39,12 @@ export class ProductAddComponent {
 
   //onSubmit Method is invoked when the Submit Button is clicked
   onSubmit() {
+    if (this.productForm.invalid) {
+      return;
+    }
+
+    this.isSubmitting = true;
+
     this._productService.AddProduct(this.productForm.value)
       .subscribe({
         next: (val: any) => {
@@ -47,6 +53,9 @@ export class ProductAddComponent {
         error: (error: any) => {
           console.error('Error ADDING product details:', error);
           // Handle the error and show an error message to the user
+        },
+        complete: () => {
+          this.isSubmitting = false;
         }
       });
   }

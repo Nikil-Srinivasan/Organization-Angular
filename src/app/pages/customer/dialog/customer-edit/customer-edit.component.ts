@@ -14,7 +14,7 @@ import { EMAIL_PATTERN, USERNAME_PATTERN, PHONE_PATTERN } from 'src/app/shared/r
 export class CustomerEditComponent {
 
   customerForm: FormGroup;
-
+  isSubmitting: boolean = false;
   products: any[] = [];
 
   constructor(
@@ -69,18 +69,25 @@ export class CustomerEditComponent {
 
   //onSubmit Method is invoked when the Submit Button is clicked
   onSubmit() {
-    if (this.customerForm.valid) {
-      this._customerService.UpdateCustomer(this.data.customerID, this.customerForm.value).subscribe({
+    if (this.customerForm.invalid) {
+      return;
+    }
+
+    this.isSubmitting = true;
+
+    this._customerService.UpdateCustomer(this.data.customerID, this.customerForm.value)
+      .subscribe({
         next: (val: any) => {
-          // this._coreService.openSnackBar('Customer details updated!');
           this._dialogRef.close(true);
         },
         error: (error: any) => {
           console.error('Error updating customer details:', error);
           // Handle the error and show an error message to the user
+        },
+        complete: () => {
+          this.isSubmitting = false;
         }
       });
-    }
   }
 
 }
