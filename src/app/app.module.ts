@@ -30,6 +30,8 @@ import { LoaderComponent } from './shared/loader-component/loader-component.comp
 import { AuthHeadersInterceptor } from './interceptor/auth-header.interceptor';
 import { PageNotFoundComponent } from './pages/page-not-found/page-not-found.component';
 import { Router } from "@angular/router";
+import { PagesModule } from "./pages/pages.module";
+
 
 @NgModule({
   declarations: [
@@ -40,6 +42,7 @@ import { Router } from "@angular/router";
     HeaderComponent,
     BrandingComponent,
     AppNavItemComponent,
+  
   ],
   imports: [
     BrowserModule,
@@ -49,6 +52,7 @@ import { Router } from "@angular/router";
     FormsModule,
     ReactiveFormsModule,
     MaterialModule,
+    PagesModule,
     TablerIconsModule.pick(TablerIcons),
   ],
   providers: [
