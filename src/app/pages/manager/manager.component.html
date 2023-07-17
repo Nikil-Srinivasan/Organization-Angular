@@ -21,7 +21,12 @@
                             Name
                         </th>
                         <td mat-cell *matCellDef="let element" class="mat-body-1">
+                            <ng-container *ngIf="element.isAppointed; else emptyValueBlock">
                             {{ element.managerName }}
+                            </ng-container>
+                            <ng-template #emptyValueBlock>
+                                <strong>To Be Appointed</strong>
+                            </ng-template>
                         </td>
                     </ng-container>
 
@@ -31,7 +36,9 @@
                             Age
                         </th>
                         <td mat-cell *matCellDef="let element" class="mat-body-1">
+                            <ng-container *ngIf="element.isAppointed; else emptyValue">
                             {{ element.managerAge }}
+                        </ng-container>
                         </td>
                     </ng-container>
 
@@ -41,9 +48,24 @@
                             Salary
                         </th>
                         <td mat-cell *matCellDef="let element" class="mat-body-1">
+                            <ng-container *ngIf="element.isAppointed; else emptyValue">
                             {{ element.managerSalary }}
+                        </ng-container>
                         </td>
                     </ng-container>
+
+                    <!-- Action Column -->
+                    <ng-container matColumnDef="edit" >
+                        <th mat-header-cell *matHeaderCellDef class="f-w-600 mat-subtitle-1 f-s-14">Edit</th>
+                        <td mat-cell *matCellDef="let element" class="mat-body-1">
+                            <ng-container *ngIf="element.isAppointed; else emptyValue">
+                            <button mat-icon-button color="primary" (click)="OpenEditManager(element)">
+                                <mat-icon>edit</mat-icon>
+                            </button>
+                        </ng-container>
+                        </td>
+                    </ng-container>
+                    
 
                     <ng-container matColumnDef="product">
                         <th  mat-header-cell *matHeaderCellDef class="f-w-600 mat-subtitle-1 f-s-14" mat-sort-header>
@@ -54,31 +76,30 @@
                         </td>
                     </ng-container>
 
-                    <!-- Action Column -->
-                    <ng-container matColumnDef="edit">
-                        <th mat-header-cell *matHeaderCellDef class="f-w-600 mat-subtitle-1 f-s-14">Edit</th>
-                        <td mat-cell *matCellDef="let element" class="mat-body-1">
-                            <button mat-icon-button color="primary" (click)="OpenEditManager(element)">
-                                <mat-icon>edit</mat-icon>
-                            </button>
-                        </td>
-                    </ng-container>
-
                     <ng-container matColumnDef="assign">
                         <th mat-header-cell *matHeaderCellDef class="f-w-600 mat-subtitle-1 f-s-14">Appoint </th>
                         <td mat-cell *matCellDef="let element" class="mat-body-1">
-                            <button mat-icon-button color="primary" (click)="OpenAppointManager(element)">
-                                <mat-icon>add</mat-icon>
-                            </button>
+
+                            <ng-container *ngIf="element.isAppointed; else emptyValueBlock">
+                                <strong>Appointed</strong>
+                            </ng-container>
+                            <ng-template #emptyValueBlock>
+                                <button mat-icon-button color="primary" (click)="OpenAppointManager(element)">
+                                    <mat-icon>add</mat-icon>
+                                </button>
+                            </ng-template>
+
                         </td>
                     </ng-container>
 
                     <ng-container matColumnDef="delete">
                         <th mat-header-cell *matHeaderCellDef class="f-w-600 mat-subtitle-1 f-s-14">Delete</th>
                         <td mat-cell *matCellDef="let element" class="mat-body-1">
+                            <ng-container *ngIf="element.isAppointed; else emptyValue">
                             <button mat-icon-button color="warn" (click)="DeleteManager(element.managerId)">
                                 <mat-icon>delete</mat-icon>
                             </button>
+                        </ng-container>
                         </td>
                     </ng-container>
 

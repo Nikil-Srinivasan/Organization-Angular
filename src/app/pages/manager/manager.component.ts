@@ -17,10 +17,11 @@ import { ManagerAppointComponent } from './dialog/manager-appoint/manager-appoin
 export class ManagerComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
+  emptyValue: any = "";
   managerlist: any;
   dataSource: MatTableDataSource<any>;
   dataObs$: Observable<any>;
-  displayedColumns: string[] = ['name', 'age', 'salary', 'product', 'edit', 'assign', 'delete'];
+  displayedColumns: string[] = ['name', 'age', 'salary', 'edit', 'product', 'assign', 'delete'];
 
   constructor(
     private _dialog: MatDialog,
