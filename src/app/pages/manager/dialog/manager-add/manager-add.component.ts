@@ -12,7 +12,7 @@ import { EMAIL_PATTERN, PASSWORD_PATTERN, USERNAME_PATTERN } from 'src/app/share
 })
 export class ManagerAddComponent {
   managerForm: FormGroup;
-
+  isSubmitting: boolean = false;
   products: any[] = [];
 
   // Custom validator function
@@ -93,6 +93,12 @@ export class ManagerAddComponent {
   }
   //onSubmit Method is invoked when the Submit Button is clicked
   onSubmit() {
+    if (this.managerForm.invalid) {
+      return;
+    }
+
+    this.isSubmitting = true;
+
     this._managerService.AddManager(this.managerForm.value)
       .subscribe({
         next: (val: any) => {
@@ -101,6 +107,9 @@ export class ManagerAddComponent {
         error: (error: any) => {
           console.error('Error ADDING manager details:', error);
           // Handle the error and show an error message to the user
+        },
+        complete: () => {
+          this.isSubmitting = false;
         }
       });
   }

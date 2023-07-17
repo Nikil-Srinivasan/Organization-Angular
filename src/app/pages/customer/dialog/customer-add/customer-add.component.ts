@@ -13,7 +13,7 @@ import { EMAIL_PATTERN, USERNAME_PATTERN, PHONE_PATTERN } from 'src/app/shared/r
 export class CustomerAddComponent {
 
   customerForm: FormGroup;
-
+  isSubmitting: boolean = false;
   products: any[] = [];
 
   constructor(
@@ -60,16 +60,38 @@ export class CustomerAddComponent {
   }
 
   //onSubmit Method is invoked when the Submit Button is clicked
+  // onSubmit() {
+  //   this._customerService.AddCustomer(this.customerForm.value)
+  //     .subscribe({
+  //       next: (val: any) => {
+  //         // this._coreService.openSnackBar('Employee details updated!');
+  //         this._dialogRef.close(true);
+  //       },
+  //       error: (error: any) => {
+  //         console.error('Error ADDING employee details:', error);
+  //         // Handle the error and show an error message to the user
+  //       }
+  //     });
+  // }
+
   onSubmit() {
+    if (this.customerForm.invalid) {
+      return;
+    }
+
+    this.isSubmitting = true;
+
     this._customerService.AddCustomer(this.customerForm.value)
       .subscribe({
         next: (val: any) => {
-          // this._coreService.openSnackBar('Employee details updated!');
           this._dialogRef.close(true);
         },
         error: (error: any) => {
-          console.error('Error ADDING employee details:', error);
+          console.error('Error ADDING customer details:', error);
           // Handle the error and show an error message to the user
+        },
+        complete: () => {
+          this.isSubmitting = false;
         }
       });
   }
