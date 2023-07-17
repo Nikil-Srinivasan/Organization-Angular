@@ -7,6 +7,7 @@ import { ManagerService } from 'src/app/services/ManagerService/manager.service'
 import { ManagerEditComponent } from './dialog/manager-edit/manager-edit.component';
 import { ManagerAddComponent } from './dialog/manager-add/manager-add.component';
 import { DeleteDialogService } from 'src/app/services/delete-dialog.service';
+import { ManagerAppointComponent } from './dialog/manager-appoint/manager-appoint.component';
 
 @Component({
   selector: 'app-manager',
@@ -19,7 +20,7 @@ export class ManagerComponent implements OnInit {
   managerlist: any;
   dataSource: MatTableDataSource<any>;
   dataObs$: Observable<any>;
-  displayedColumns: string[] = ['name', 'age', 'salary', 'product', 'edit', 'delete'];
+  displayedColumns: string[] = ['name', 'age', 'salary', 'product', 'edit', 'assign', 'delete'];
 
   constructor(
     private _dialog: MatDialog,
@@ -57,6 +58,19 @@ export class ManagerComponent implements OnInit {
 
   OpenEditManager(data: any) {
     const dialogRef = this._dialog.open(ManagerEditComponent, {
+      data,
+    });
+    dialogRef.afterClosed().subscribe({
+      next: (val) => {
+        if (val) {
+          this.GetManagersList();
+        }
+      }
+    })
+  }
+
+  OpenAppointManager(data: any) {
+    const dialogRef = this._dialog.open(ManagerAppointComponent, {
       data,
     });
     dialogRef.afterClosed().subscribe({

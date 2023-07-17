@@ -27,6 +27,7 @@ import { DepartmentEditComponent } from './department/dialog/department-edit/dep
 import { ConfirmDeleteComponent } from './confirm-delete/confirm-delete.component';
 import { AppDashboardComponent } from './dashboard/dashboard.component';
 import { EmployeeDashboardComponent } from './dashboard/employee-dashboard/employee-dashboard.component';
+import { ManagerAppointComponent } from './manager/dialog/manager-appoint/manager-appoint.component';
 
 
 @NgModule({
@@ -49,6 +50,7 @@ import { EmployeeDashboardComponent } from './dashboard/employee-dashboard/emplo
     DepartmentAddComponent,
     DepartmentEditComponent,
     ConfirmDeleteComponent,
+    ManagerAppointComponent,
   ],
   imports: [
     CommonModule,
