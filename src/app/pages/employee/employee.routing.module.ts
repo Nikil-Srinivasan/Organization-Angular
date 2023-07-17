@@ -20,7 +20,7 @@ export const EmployeeRoutes: Routes = [
         canActivate : [AuthGuard]
       },
       {
-        path: 'tasks',
+        path: 'tasks/new',
         component: TaskComponent,
         data: {
           title: 'Employee Task',
@@ -36,17 +36,17 @@ export const EmployeeRoutes: Routes = [
         },
       },
       {
-        path : 'tasks/ongoing',
+        path : 'tasks/inprogress',
         component : TaskOngoingComponent,
         data: {
-          title: 'Pending Task',
+          title: 'Inprogress Task',
         },
       },
       {
-        path : 'tasks/pending',
+        path : 'tasks/completed',
         component : TaskPendingComponent,
         data: {
-          title: 'Pending Task',
+          title: 'Completed Task',
         },
       }
     ]

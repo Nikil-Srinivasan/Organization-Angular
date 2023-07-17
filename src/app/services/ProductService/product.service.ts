@@ -32,7 +32,6 @@ export class ProductService {
   AddProduct(data: any): Observable<any> {
     console.log(data)
     return this._http.post(`${environment.baseUrl}/api/Product/CreateProduct`, data);
-
   }
 
   UpdateProduct(id: number, data: any): Observable<any> {
