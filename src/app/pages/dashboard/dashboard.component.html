@@ -75,13 +75,14 @@
   <!-- --------------------------------------------------------------------------- -->
   <!-- Sales Overview -->
   <!-- --------------------------------------------------------------------------- -->
-  <div class="col-lg-6">
+  <div class="col-lg-8">
     <mat-card class="cardWithShadow">
       <mat-card-content class="p-24">
-        <div class="d-flex w-100">
+        <div class="w-100">
           <mat-card-title>Overview</mat-card-title>
           <div class="m-l-auto">
-            
+            <canvas  id="MyChart" style="height: 100%;">{{ chart }}</canvas>
+
           </div>
         </div>
   
@@ -89,13 +90,13 @@
     </mat-card>
   </div>
   
-  <div class="col-lg-6">
+  <div class="col-lg-4">
     <mat-card class="cardWithShadow">
       <mat-card-content class="p-24">
         <div class="d-flex w-100">
           <mat-card-title>Revenue Stat</mat-card-title>
           <div class="m-l-auto">
-            
+
           </div>
         </div>
   
