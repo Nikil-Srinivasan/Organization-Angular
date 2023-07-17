@@ -14,12 +14,6 @@ export const navItems: NavItem[] = [
   {
     displayName: 'Dashboard',
     iconName: 'layout-dashboard',
-    route: '/dashboard',
-    roles: [Role.Employee],
-  },
-  {
-    displayName: 'Dashboard',
-    iconName: 'layout-dashboard',
     route: '/dashboard',  
     roles: [Role.Employee],
   },

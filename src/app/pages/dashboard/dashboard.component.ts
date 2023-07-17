@@ -4,15 +4,14 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatSort } from '@angular/material/sort';
 import { DashboardService } from 'src/app/services/DashboardService/Dashboard-Service';
-
-
-
+import Chart from 'chart.js/auto';
 
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
 })
 export class AppDashboardComponent implements OnInit {
+  public chart: any;
 
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
@@ -20,6 +19,36 @@ export class AppDashboardComponent implements OnInit {
   Products = [];
   Employees = [];
   Customers = [];
+
+  createChart(){
+  
+    this.chart = new Chart("MyChart", {
+      type: 'bar', //this denotes tha type of chart
+
+      data: {// values on X-Axis
+        labels: ['2022-05-10', '2022-05-11', '2022-05-12','2022-05-13',
+								 '2022-05-14', '2022-05-15', '2022-05-16','2022-05-17', ], 
+	       datasets: [
+          {
+            label: "Sales",
+            data: ['467','576', '572', '79', '92',
+								 '574', '573', '576'],
+            backgroundColor: 'blue'
+          },
+          {
+            label: "Profit",
+            data: ['542', '542', '536', '327', '17',
+									 '0.00', '538', '541'],
+            backgroundColor: 'limegreen'
+          }  
+        ]
+      },
+      options: {
+        aspectRatio:2.5
+      }
+      
+    });
+  }
 
   public PieChartData = [];
 
@@ -44,11 +73,18 @@ export class AppDashboardComponent implements OnInit {
   dataObs$: Observable<any>;
 
  
-  constructor(private DasboardService : DashboardService) {}
+  constructor(private DasboardService: DashboardService) {
+    
+  
+
+  }
+  
 
   ngOnInit() {
     this.loadData();
     this.TotalCount(); 
+    this.createChart();
+
    }
 
   TotalCount() 
@@ -68,8 +104,7 @@ export class AppDashboardComponent implements OnInit {
       }
     );
   }
-  
- 
+
   loadData()
    {
     this.DasboardService.getChartDetails().subscribe(
@@ -82,10 +117,9 @@ export class AppDashboardComponent implements OnInit {
         const customerCounts = data.map((product: any) => product.customerCount);
         const productRevenue = data.map((product: any) => product.productRevenue);
 
-        this.Products = productNames;
-        this.Employees = employeeCounts;
-        this.Customers = customerCounts;
-        this.PieChartData = productRevenue.map((revenue : any , index : any) => [revenue, productNames[index]]);
+        
+
+       
       },
       error: (error : any) => {
         console.error(error);
