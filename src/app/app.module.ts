@@ -30,7 +30,6 @@ import { LoaderComponent } from './shared/loader-component/loader-component.comp
 import { AuthHeadersInterceptor } from './interceptor/auth-header.interceptor';
 import { PageNotFoundComponent } from './pages/page-not-found/page-not-found.component';
 import { Router } from "@angular/router";
-import { NgApexchartsModule } from "ng-apexcharts";
 import { PagesModule } from "./pages/pages.module";
 
 

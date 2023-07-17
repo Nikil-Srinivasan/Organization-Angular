@@ -72,36 +72,54 @@
     </div>
   </div>
 
-  <!-- --------------------------------------------------------------------------- -->
-  <!-- Sales Overview -->
-  <!-- --------------------------------------------------------------------------- -->
-  <div class="col-lg-8">
+  <div class="col-lg-7">
     <mat-card class="cardWithShadow">
       <mat-card-content class="p-24">
-        <div class="w-100">
+        <div class="d-flex w-100">
           <mat-card-title>Overview</mat-card-title>
           <div class="m-l-auto">
-            <canvas  id="MyChart" style="height: 100%;">{{ chart }}</canvas>
-
           </div>
         </div>
-  
+
+        <ng-container *ngIf="chartOptions">
+          <apx-chart
+          [series]="chartOptions.series"
+          [dataLabels]="chartOptions.dataLabels"
+          [chart]="chartOptions.chart"
+          [legend]="chartOptions.legend"
+          [xaxis]="chartOptions.xaxis"
+          [yaxis]="chartOptions.yaxis"
+          [grid]="chartOptions.grid"
+          [stroke]="chartOptions.stroke"
+          [tooltip]="chartOptions.tooltip"
+          [plotOptions]="chartOptions.plotOptions"
+        ></apx-chart>
+        </ng-container>
       </mat-card-content>
     </mat-card>
   </div>
-  
-  <div class="col-lg-4">
+
+  <div class="col-lg-5">
     <mat-card class="cardWithShadow">
       <mat-card-content class="p-24">
         <div class="d-flex w-100">
           <mat-card-title>Revenue Stat</mat-card-title>
           <div class="m-l-auto">
-
           </div>
         </div>
-  
-
+        <ng-container *ngIf="chartOptions">
+        <apx-chart
+        [series]="chartOption.series"
+        [chart]="chartOption.chart"
+        [labels]="chartOption.labels"
+        [title]="chartOption.title"
+        [theme]="chartOption.theme"
+        [responsive]="chartOption.responsive"
+        ></apx-chart>
+        </ng-container>
       </mat-card-content>
     </mat-card>
   </div>
+
+ 
  

@@ -27,14 +27,14 @@ export const navItems: NavItem[] = [
   },
   {
     displayName: 'Employee',
-    iconName: 'rosette',
+    iconName: 'users',
     route: '/dashboard/employees',
     roles: [Role.Admin],
   },
   {
-    displayName: 'All Tasks',
+    displayName: 'New Tasks',
     iconName: 'rosette',
-    route: '/dashboard/tasks',
+    route: '/dashboard/tasks/new',
     roles: [Role.Employee],
   },
   {
@@ -44,35 +44,41 @@ export const navItems: NavItem[] = [
     roles: [Role.Employee],
   },
   {
-    displayName: 'Ongoing',
+    displayName: 'InProgress',
     iconName: 'rosette',
-    route: '/dashboard/tasks/ongoing',
+    route: '/dashboard/tasks/inprogress',
+    roles: [Role.Employee],
+  },
+  {
+    displayName: 'Completed',
+    iconName: 'rosette',
+    route: '/dashboard/tasks/completed',
     roles: [Role.Employee],
   },
   {
     displayName: 'Manager',
-    iconName: 'rosette',
+    iconName: 'briefcase',
     route: '/dashboard/manager',
     roles: [Role.Admin],
 
   },
   {
     displayName: 'Product',
-    iconName: 'rosette',
+    iconName: 'device-desktop-code',
     route: '/dashboard/product',
     roles: [Role.Admin],
 
   },
   {
     displayName: 'Customer',
-    iconName: 'rosette',
+    iconName: 'user-plus',
     route: '/dashboard/customer',
     roles: [Role.Admin],
 
   },
   {
     displayName: 'Department',
-    iconName: 'rosette',
+    iconName: 'users-group',
     route: '/dashboard/department',
     roles: [Role.Admin],
   },

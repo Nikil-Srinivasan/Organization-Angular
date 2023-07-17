@@ -54,6 +54,7 @@ export class CredentialsService {
   }
 
   public get userValue(): User | null{
+    console.log(this.userSubject.value);
     return this.userSubject.value;
   }
 

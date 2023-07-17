@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { PagesRoutes } from './pages.routing.module';
 import { MaterialModule } from '../material.module';
 import { FormsModule, ReactiveFormsModule} from '@angular/forms';
+import { NgApexchartsModule } from "ng-apexcharts";
 // icons
 import { TablerIconsModule } from 'angular-tabler-icons';
 import * as TablerIcons from 'angular-tabler-icons/icons';
@@ -54,6 +55,7 @@ import { EmployeeDashboardComponent } from './dashboard/employee-dashboard/emplo
     MaterialModule,
     FormsModule,
     ReactiveFormsModule,
+    NgApexchartsModule,
     RouterModule.forChild(PagesRoutes),
     TablerIconsModule.pick(TablerIcons),
   ],
