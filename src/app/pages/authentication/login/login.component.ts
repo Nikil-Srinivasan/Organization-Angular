@@ -2,6 +2,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { Role } from 'src/app/models/role';
 import { AuthenticationService, Credentials, CredentialsService, LoginContext, } from 'src/app/services/auth';
 import { ValidationService } from 'src/app/services/validation.service';
 import { PASSWORD_PATTERN, USERNAME_PATTERN } from 'src/app/shared/regex-patterns';
@@ -12,7 +13,9 @@ import { PASSWORD_PATTERN, USERNAME_PATTERN } from 'src/app/shared/regex-pattern
 })
 export class AppSideLoginComponent implements OnInit{
 
-  constructor(private authService: AuthenticationService, private router : Router,private validationService: ValidationService, private credentialsService : CredentialsService) {
+  constructor(private authService: AuthenticationService, 
+    private router : Router,private validationService: ValidationService, 
+    private credentialsService : CredentialsService) {
   }
   ngOnInit(): void {
     console.log(this.credentialsService.isAuthenticated())
@@ -60,7 +63,7 @@ export class AppSideLoginComponent implements OnInit{
           // Handle the successful login
           console.log('Logged in successfully:', credentials);
           this.router.navigate(['/dashboard']);
-          
+
         },
         error: (error: HttpErrorResponse) => {
           // Handle the error during login

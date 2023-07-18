@@ -21,7 +21,7 @@ export class ManagerComponent implements OnInit {
   managerlist: any;
   dataSource: MatTableDataSource<any>;
   dataObs$: Observable<any>;
-  displayedColumns: string[] = ['name', 'age', 'salary', 'edit', 'product', 'assign', 'delete'];
+  displayedColumns: string[] = ['name', 'age', 'salary', 'edit', 'department', 'assign', 'delete'];
 
   constructor(
     private _dialog: MatDialog,

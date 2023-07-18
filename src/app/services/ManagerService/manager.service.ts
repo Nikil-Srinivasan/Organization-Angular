@@ -9,7 +9,11 @@ import { environment } from '@environments/environment';
 export class ManagerService {
 
   constructor(private _http: HttpClient) { }
-
+  
+  GetAllDepartmentsAssociatedWithManager() : Observable<any>{
+    return this._http.get<any>(`${environment.baseUrl}/api/Manager/GetAllDepartmentsAssociatedWithManager`);
+  }
+  
   GetManagersList(): Observable<any> {
     return this._http.get<any>(`${environment.baseUrl}/api/Manager/GetAllManagers`);
   }
@@ -30,9 +34,9 @@ export class ManagerService {
     return this._http.delete(`${environment.baseUrl}/api/Auth/DeleteUserById?id=${id}`);
   }
 
-  GetEmployeesAndManagerByProductId(id : number) : Observable<any>{
+  GetEmployeesAndManagerByDepartmentId(id : number) : Observable<any>{
     // http://localhost:5005/api/Manager/GetEmployeesAndManagerByProductId?id=1
-    return this._http.get(`${environment.baseUrl}/api/Manager/GetEmployeesAndManagerByProductId?id=${id}`);
+    return this._http.get(`${environment.baseUrl}/api/Manager/GetEmployeesAndManagerByDepartmentId?id=${id}`);
   }
 
 

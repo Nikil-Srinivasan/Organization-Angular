@@ -58,28 +58,9 @@
             <div>
                 <mat-form-field appearance="outline" class="form-field-width">
                     <mat-label>Department</mat-label>
-                    <mat-select formControlName="departmentID">
-                        <mat-option *ngFor="let department of departments" [value]="department.departmentID">
-                            {{ department.departmentName }}
-                        </mat-option>
-                    </mat-select>
-                </mat-form-field>
-                <div class="error-container">
-                    <div *ngIf="departmentID?.touched && departmentID?.errors?.['required']">
-                        <mat-error class="custom-error">
-                            departmentID is <strong>required</strong>
-                        </mat-error>
-                    </div>
-                </div>
-            </div>
-        </div> <br>
-        <div class="row">
-            <div>
-                <mat-form-field appearance="outline" class="form-field-width">
-                    <mat-label>Manager</mat-label>
                     <mat-select formControlName="managerID">
-                        <mat-option *ngFor="let manager of managers" [value]="manager.managerId">
-                            {{ manager.managerName }}
+                        <mat-option *ngFor="let department of departments" [value]="department.managerId">
+                            {{ department.departmentName }}
                         </mat-option>
                     </mat-select>
                 </mat-form-field>
@@ -90,8 +71,9 @@
                         </mat-error>
                     </div>
                 </div>
-            </div>
-        </div>
+            </div>            
+        </div> <br>
+
     </div>
     <div mat-dialog-actions class="action">
         <button mat-raised-button type="button" [mat-dialog-close]="false"> Cancel</button>

@@ -21,9 +21,9 @@ export class EmployeeComponent implements OnInit {
   employeelist: any;
   dataSource: MatTableDataSource<any>;
   dataObs$: Observable<any>;
-  displayedColumns: string[] = ['name', 'age', 'manager', 'department', 'product', 'edit', 'delete'];
+  displayedColumns: string[] = ['name', 'age', 'manager', 'department', 'edit', 'delete'];
   user: User | null;
-
+  
   constructor(
     private credential: CredentialsService,
     private _dialog: MatDialog,
