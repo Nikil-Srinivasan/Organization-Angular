@@ -22,8 +22,6 @@ export class EmployeeEditComponent implements OnInit {
 
   departments: any[] = [];
 
-  managers: any[] = [];
-
   ageValidator = (control: FormControl) => {
     const age = control.value;
     if (age && age <= 20) {
@@ -44,7 +42,6 @@ export class EmployeeEditComponent implements OnInit {
       employeeAge: ['', [Validators.required, this.ageValidator]],
       employeeSalary: ['', Validators.required],
       employeeName: ['', [Validators.required,Validators.pattern(USERNAME_PATTERN)]],
-      departmentID: ['', Validators.required],
       managerID: ['', Validators.required],
     })
   }
@@ -61,10 +58,6 @@ export class EmployeeEditComponent implements OnInit {
     return this.employeeForm.get('employeeName');
   }
 
-  get departmentID() {
-    return this.employeeForm.get('departmentID');
-  }
-
   get managerID() {
     return this.employeeForm.get('managerID');
   }
@@ -74,28 +67,18 @@ export class EmployeeEditComponent implements OnInit {
       employeeName: this.data.employeeName,
       employeeAge: this.data.employeeAge,
       employeeSalary: this.data.employeeSalary,
-      departmentID: this.data.departmentID,
       managerID: this.data.managerID
     });    
     
-    this.fetchDepartments();
-    this.fetchManagers();
-    
+    this.fetchDepartmentsAssociatedWithManager();    
   }
 
-  fetchDepartments() {
-    this._departmentService.GetDepartmentsList().subscribe(departments => {
+  fetchDepartmentsAssociatedWithManager() {
+    this._managerService.GetAllDepartmentsAssociatedWithManager().subscribe(departments => {
       this.departments = departments.data;
     });
-
   }
-
-  fetchManagers() {
-    this._managerService. GetManagersList().subscribe(managers => {
-      this.managers = managers.data;
-    });
-  }
-
+  
   //onSubmit Method is invoked when the Submit Button is clicked
   onSubmit() {
     if (this.employeeForm.valid) {

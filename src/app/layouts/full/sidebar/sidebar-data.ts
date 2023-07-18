@@ -63,23 +63,9 @@ export const navItems: NavItem[] = [
 
   },
   {
-    displayName: 'Product',
-    iconName: 'device-desktop-code',
-    route: '/dashboard/product',
-    roles: [Role.Admin],
-
-  },
-  {
-    displayName: 'Customer',
-    iconName: 'user-plus',
-    route: '/dashboard/customer',
-    roles: [Role.Admin],
-
-  },
-  {
     displayName: 'Department',
     iconName: 'users-group',
-    route: '/dashboard/department',
+    route: '/dashboard/departments',
     roles: [Role.Admin],
   },
 ];
