@@ -52,4 +52,8 @@ export class EmployeetaskService {
         return Status.New; // Default value if the numeric value doesn't match any enum value
     }
   }
+
+  DeleteEmployeeTask(id: number): Observable<any> {
+    return this._http.delete(`${environment.baseUrl}/api/EmployeeTask/DeleteEmployeeTask?id=${id}`);
+  }
 }

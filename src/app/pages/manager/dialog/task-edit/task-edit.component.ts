@@ -3,8 +3,8 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { NAME_PATTERN } from 'src/app/shared/regex-patterns';
 import { EmployeetaskService } from 'src/app/services/EmployeeTaskService/employeetask.service';
-import * as moment from 'moment';
-import 'moment-timezone';
+// import * as moment from 'moment';
+// import 'moment-timezone';
 
 @Component({
   selector: 'app-task-edit',
@@ -58,6 +58,8 @@ export class TaskEditComponent {
     this.isSubmitting = true;
 
     this.selectedDate = new Date(this.editTaskForm.get('taskDueDate')?.value);
+    this.selectedDate.setHours(5);
+    this.selectedDate.setMinutes(30);
     console.log("Selected Date : "+ this.selectedDate)
     const utcDate = this.selectedDate.toISOString();
 
@@ -67,10 +69,10 @@ export class TaskEditComponent {
       taskDueDate: utcDate,
       employeeId: this.data.employeeId
     };
-    console.log("Form :" + formValueWithEmployeeId);
     this._employeeTaskService.UpdateEmployeeTask(this.data.editTaskFormData.taskID,formValueWithEmployeeId)
       .subscribe({
         next: (val: any) => {
+          console.log(formValueWithEmployeeId);
           this._dialogRef.close(true);
         },
         error: (error: any) => {

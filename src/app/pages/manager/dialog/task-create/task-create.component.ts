@@ -10,6 +10,7 @@ import { EmployeetaskService } from 'src/app/services/EmployeeTaskService/employ
   styleUrls: ['./task-create.component.scss']
 })
 export class TaskCreateComponent {
+  selectedDate : Date;
   createTaskForm: FormGroup;
   isSubmitting: boolean = false;
   minDate: Date;
@@ -47,9 +48,16 @@ export class TaskCreateComponent {
     }
   
     this.isSubmitting = true;
+
+    this.selectedDate = new Date(this.createTaskForm.get('taskDueDate')?.value);
+    this.selectedDate.setHours(5);
+    this.selectedDate.setMinutes(30);
+    const utcDate = this.selectedDate.toISOString();
+
     // Add the employeeId to the form value
     const formValueWithEmployeeId = {
       ...this.createTaskForm.value,
+      taskDueDate: utcDate,
       employeeId: this.data.employeeId
     };
 
