@@ -2,9 +2,11 @@ import { Routes } from '@angular/router';
 import { EmployeeComponent } from './employee.component';
 import { AuthGuard } from 'src/app/guards/auth.guard';
 import { Role } from 'src/app/models/role';
-import { TaskComponent } from './task/task.component';
+import { TaskComponent } from './task-new/task-new.component';
 import { TaskPendingComponent } from './task-pending/task-pending.component';
 import { TaskOngoingComponent } from './task-ongoing/task-ongoing.component';
+import { TaskCompletedComponent } from './task-completed/task-completed/task-completed.component';
+import { EmployeeDashboardComponent } from '../dashboard/employee-dashboard/employee-dashboard.component';
 
 export const EmployeeRoutes: Routes = [
   {
@@ -44,7 +46,7 @@ export const EmployeeRoutes: Routes = [
       },
       {
         path : 'tasks/completed',
-        component : TaskPendingComponent,
+        component : TaskCompletedComponent,
         data: {
           title: 'Completed Task',
         },

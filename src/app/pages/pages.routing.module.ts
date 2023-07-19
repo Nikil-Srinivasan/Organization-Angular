@@ -12,7 +12,7 @@ import { EmployeeDashboardComponent } from './dashboard/employee-dashboard/emplo
 export const PagesRoutes: Routes = [
   {
     path: '',
-    component: AppDashboardComponent,
+    component: EmployeeDashboardComponent,
     data: {
       title: 'Starter Page',
     },

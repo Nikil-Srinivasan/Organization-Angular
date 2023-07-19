@@ -7,7 +7,7 @@
         <div class="col-lg-3 col-sm-4">
           <mat-card class="cardWithShadow">
             <mat-card-header class="d-flex align-items-center p-x-24">
-              <mat-card-title>Products</mat-card-title>
+              <mat-card-title>New </mat-card-title>
               <div class="m-l-auto">
                 <button mat-fab color="accent" class="shadow-none icon-48">
                   <i-tabler name="code" class="text-white d-flex"></i-tabler>
@@ -15,7 +15,7 @@
               </div>
             </mat-card-header>
             <mat-card-content class="m-b-32 p-x-24">
-              <h4 class="mat-headline-5">{{ TotalProducts }}</h4>
+              <h4 class="mat-headline-5">{{ newTaskCount }}</h4>
             </mat-card-content>
            
           </mat-card>
@@ -24,7 +24,7 @@
         <div class="col-lg-3 col-sm-4">
           <mat-card class="cardWithShadow">
             <mat-card-header class="d-flex align-items-center p-x-24">
-              <mat-card-title>Employees</mat-card-title>
+              <mat-card-title>InProgress</mat-card-title>
               <div class="m-l-auto">
                 <button mat-fab color="accent" class="shadow-none icon-48">
                   <i-tabler name="users" class="text-white d-flex"></i-tabler>
@@ -32,7 +32,7 @@
               </div>
             </mat-card-header>
             <mat-card-content class="m-b-32 p-x-24">
-              <h4 class="mat-headline-5">{{ TotalEmployees }}</h4>
+              <h4 class="mat-headline-5">{{ inProgressCount }}</h4>
             </mat-card-content>
           </mat-card>
         </div>
@@ -40,7 +40,7 @@
         <div class="col-lg-3 col-sm-4">
           <mat-card class="cardWithShadow">
             <mat-card-header class="d-flex align-items-center p-x-24">
-              <mat-card-title>Customers</mat-card-title>
+              <mat-card-title>Pending</mat-card-title>
               <div class="m-l-auto">
                 <button mat-fab color="accent" class="shadow-none icon-48">
                   <i-tabler name="user-plus" class="text-white d-flex"></i-tabler>
@@ -48,7 +48,7 @@
               </div>
             </mat-card-header>
             <mat-card-content class="m-b-32 p-x-24">
-              <h4 class="mat-headline-5">{{TotalCustomers}}</h4>
+              <h4 class="mat-headline-5">{{pendingTaskCount}}</h4>
             </mat-card-content>
           </mat-card>
         </div>
@@ -56,15 +56,15 @@
         <div class="col-lg-3 col-sm-4">
           <mat-card class="cardWithShadow">
             <mat-card-header class="d-flex align-items-center p-x-24">
-              <mat-card-title>Departments</mat-card-title>
+              <mat-card-title>Completed</mat-card-title>
               <div class="m-l-auto">
                 <button mat-fab color="accent" class="shadow-none icon-48">
-                  <i-tabler name="briefcase" class="text-white d-flex"></i-tabler>
+                  <i-tabler name="domain_verification" class="text-white d-flex"></i-tabler>
                 </button>
               </div>
             </mat-card-header>
             <mat-card-content class="m-b-32 p-x-24">
-              <h4 class="mat-headline-5">{{ TotalDepartments }}</h4>
+              <h4 class="mat-headline-5">{{ completedTaskCount }}</h4>
             </mat-card-content>
   
           </mat-card>
@@ -75,7 +75,7 @@
     <!-- --------------------------------------------------------------------------- -->
     <!-- Sales Overview -->
     <!-- --------------------------------------------------------------------------- -->
-    <div class="col-lg-6">
+    <div class="col-lg-7">
       <mat-card class="cardWithShadow">
         <mat-card-content class="p-24">
           <div class="d-flex w-100">
@@ -84,12 +84,12 @@
               
             </div>
           </div>
-    
+          
         </mat-card-content>
       </mat-card>
     </div>
     
-    <div class="col-lg-6">
+    <div class="col-lg-5">
       <mat-card class="cardWithShadow">
         <mat-card-content class="p-24">
           <div class="d-flex w-100">
@@ -98,7 +98,14 @@
               
             </div>
           </div>
-    
+          <ng-container *ngIf="chartOptions">
+            <apx-chart
+              [series]="chartOptions.series"
+              [chart]="chartOptions.chart"
+              [labels]="chartOptions.labels"
+              [responsive]="chartOptions.responsive"
+            ></apx-chart>
+          </ng-container>
   
         </mat-card-content>
       </mat-card>

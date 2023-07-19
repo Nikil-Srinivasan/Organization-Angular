@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { environment } from '@environments/environment';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -9,14 +10,17 @@ export class DashboardService {
 
   constructor(private http: HttpClient) { }
 
-    getAllCount(): Observable<any> {
-    const url = 'http://localhost:5005/api/Dashboard/GetTotalCount'; 
-    return this.http.get<any>(url);
+    getAllCount(): Observable<any> { 
+
+    return this.http.get<any>(`${environment.baseUrl}/api/Dashboard/GetTotalCount`);
     }
 
     getChartDetails(): Observable<any> {
-      const url = 'http://localhost:5005/api/Dashboard/GetChartDetails';
+      
+      return this.http.get<any>(`${environment.baseUrl}/api/Dashboard/GetChartDetails`);
+    }
 
-      return this.http.get<any>(url);
+    getEmployeeTaskCount(id : number | undefined) : Observable<any> {
+      return this.http.get<any>(`${environment.baseUrl}/api/Dashboard/GetEmployeeTasksCount?id=${id}`);
     }
 }

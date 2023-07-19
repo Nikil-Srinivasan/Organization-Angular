@@ -38,20 +38,20 @@ export const navItems: NavItem[] = [
     roles: [Role.Employee],
   },
   {
-    displayName: 'Pending',
-    iconName: 'rosette',
-    route: '/dashboard/tasks/pending',
-    roles: [Role.Employee],
-  },
-  {
     displayName: 'InProgress',
     iconName: 'rosette',
     route: '/dashboard/tasks/inprogress',
     roles: [Role.Employee],
   },
   {
-    displayName: 'Completed',
+    displayName: 'Pending',
     iconName: 'rosette',
+    route: '/dashboard/tasks/pending',
+    roles: [Role.Employee],
+  },
+  {
+    displayName: 'Completed',
+    iconName: 'domain_verification',
     route: '/dashboard/tasks/completed',
     roles: [Role.Employee],
   },

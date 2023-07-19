@@ -10,22 +10,21 @@ import { EmployeetaskService } from 'src/app/services/EmployeeTaskService/employ
 import { CredentialsService } from 'src/app/services/auth';
 import jwt_decode from 'jwt-decode';
 import { Status } from 'src/app/models/status';
-import { EmployeeTaskEditComponent } from '../dialog/employee-task-edit/employee-task-edit/employee-task-edit.component';
-
-
+import { EmployeeTaskEditComponent } from '../../dialog/employee-task-edit/employee-task-edit/employee-task-edit.component';
 @Component({
-  selector: 'app-task',
-  templateUrl: './task.component.html',
-  styleUrls: ['./task.component.scss']
+  selector: 'app-task-completed',
+  templateUrl: './task-completed.component.html',
+  styleUrls: ['./task-completed.component.scss']
 })
-export class TaskComponent {
+export class TaskCompletedComponent {
+
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
   employeeId: number | undefined = this._credentials.userValue?.nameid;
   employeeTaskList: any;
   dataSource: MatTableDataSource<any>;
   dataObs$: Observable<any>;
-  displayedColumns: string[] = ['taskName', 'taskDescription', 'taskDueDate','taskStatus', 'edit'];
+  displayedColumns: string[] = ['taskName', 'taskDescription', 'taskDueDate','taskStatus'];
 
   constructor(private _dialog: MatDialog,
     private _employeeTaskService: EmployeetaskService,
@@ -35,7 +34,7 @@ export class TaskComponent {
 
 
   ngOnInit(): void {
-    this.GetEmployeeNewTask(this.employeeId);
+    this.GetEmployeeCompletedTask(this.employeeId);
   }
 
   applyFilter(event: Event) {
@@ -44,8 +43,8 @@ export class TaskComponent {
     
   }
 
-  GetEmployeeNewTask(id: number| undefined) {
-    this._employeeTaskService.GetEmployeeNewTask(id).subscribe(response => {
+  GetEmployeeCompletedTask(id: number| undefined) {
+    this._employeeTaskService.GetEmployeeCompletedTask(id).subscribe(response => {
       this.employeeTaskList = response.data;
       console.log(typeof(this.employeeId));
       this.dataSource = new MatTableDataSource(this.employeeTaskList);
@@ -77,43 +76,9 @@ export class TaskComponent {
     dialogRef.afterClosed().subscribe({
       next: (val) => {
         if (val) {
-          this.GetEmployeeNewTask(this.employeeId);
+          this.GetEmployeeCompletedTask(this.employeeId);
         }
       }
     })
   }
-  // OpenAddCustomerDialog(){
-  //   const dialogRef = this._dialog.open(CustomerAddComponent);
-  //   dialogRef.afterClosed().subscribe({
-  //     next: (val) => {
-  //       if(val){
-  //         this.GetCustomers();
-  //       }
-  //     }
-  //   })
-  // }
-
-  // OpenEditCustomer(data: any) {
-  //   // console.log(data)
-  //   const dialogRef = this._dialog.open(CustomerEditComponent, {
-  //     data,
-  //   });
-  //   dialogRef.afterClosed().subscribe({
-  //     next: (val) => {
-  //       if (val) {
-  //         this.GetCustomers();
-  //       }
-  //     }
-  //   })
-  // }
-
-  // DeleteCustomer(id: number) {
-  //   this._customerService.DeleteCustomer(id).subscribe({
-  //     next: (res) => {
-  //       // this._coreService.openSnackBar('Employee Deleted!');
-  //       this.GetCustomers();
-  //     },
-  //     error: console.log,
-  //   })
-  // }
 }
