@@ -30,7 +30,7 @@ export class SidebarComponent implements OnInit {
     else if(user === Role.Employee){
         this.navItems = this.filterNavItemsByRole(Role.Employee);
     }
-    else if(user == Role.Manager){
+    else if(user === Role.Manager){
       this.navItems = this.filterNavItemsByRole(Role.Manager);
     }
     else{

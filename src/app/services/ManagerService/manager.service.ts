@@ -21,7 +21,7 @@ export class ManagerService {
   AddManager(data: any): Observable<any> {
     return this._http.post(`${environment.baseUrl}/api/Auth/Register`, data);
   }
-  
+
   AppointNewManager(id: number, data: any): Observable<any> {
     return this._http.post(`${environment.baseUrl}/api/Auth/AppointNewManager?id=${id}`, data);
   }
@@ -39,5 +39,7 @@ export class ManagerService {
     return this._http.get(`${environment.baseUrl}/api/Manager/GetEmployeesAndManagerByDepartmentId?id=${id}`);
   }
 
-
+  GetEmployeesByManagerId(id: number): Observable<any> {
+    return this._http.get(`${environment.baseUrl}/api/Employee/GetAllEmployeesByManagerId?id=${id}`);
+  }
 }

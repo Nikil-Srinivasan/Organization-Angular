@@ -25,12 +25,10 @@ export const PagesRoutes: Routes = [
     ),
   },
   {
-    path: 'manager',
-    component: ManagerComponent,
-    data: {
-      title: 'Manager Page',
-    },
-    canActivate : [AuthGuard]
+    path: '',
+    loadChildren: () => import('./manager/manager.module').then(
+      (m) => m.ManagerModule
+    ),
   },
   {
     path: '',
