@@ -57,7 +57,8 @@ export class TaskEditComponent {
 
     this.isSubmitting = true;
 
-    this.selectedDate = new Date(this.data.editTaskFormData.taskDueDate);
+    this.selectedDate = new Date(this.editTaskForm.get('taskDueDate')?.value);
+    console.log("Selected Date : "+ this.selectedDate)
     const utcDate = this.selectedDate.toISOString();
 
     // Add the employeeId to the form value
