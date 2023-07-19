@@ -103,7 +103,7 @@ export class AuthenticationService {
         'Content-Type': 'text/plain'
       }),
     };
-    console.log("verifyContext :" , context.otp)
+    // console.log("verifyContext :" , context.otp)
 
     return this.http.post<{ data: string }>(`${environment.baseUrl}/api/Auth/Verify?email=${encodeURIComponent(context.email)}&otp=${context.otp}`, options);
   }

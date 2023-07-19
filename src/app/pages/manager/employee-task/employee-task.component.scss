@@ -1,0 +1,20 @@
+.title-flex-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    mat-form-field {
+        height: 20%;
+        padding: 0px 10px 0 0;
+    }
+}
+
+.create-btn{
+    width: 100px;
+    height: 52px;
+}
+
+.data-item {
+    margin-bottom: 10px;
+    margin-top: 10px;
+  }

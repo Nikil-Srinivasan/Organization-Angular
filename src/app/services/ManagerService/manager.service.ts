@@ -17,7 +17,7 @@ export class ManagerService {
   AddManager(data: any): Observable<any> {
     return this._http.post(`${environment.baseUrl}/api/Auth/Register`, data);
   }
-  
+
   AppointNewManager(id: number, data: any): Observable<any> {
     return this._http.post(`${environment.baseUrl}/api/Auth/AppointNewManager?id=${id}`, data);
   }
@@ -30,10 +30,12 @@ export class ManagerService {
     return this._http.delete(`${environment.baseUrl}/api/Auth/DeleteUserById?id=${id}`);
   }
 
-  GetEmployeesAndManagerByProductId(id : number) : Observable<any>{
+  GetEmployeesAndManagerByProductId(id: number): Observable<any> {
     // http://localhost:5005/api/Manager/GetEmployeesAndManagerByProductId?id=1
     return this._http.get(`${environment.baseUrl}/api/Manager/GetEmployeesAndManagerByProductId?id=${id}`);
   }
 
-
+  GetEmployeesByManagerId(id: number): Observable<any> {
+    return this._http.get(`${environment.baseUrl}/api/Employee/GetAllEmployeesByManagerId?id=${id}`);
+  }
 }

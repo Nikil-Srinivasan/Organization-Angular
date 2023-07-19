@@ -88,7 +88,6 @@ export class ManagerAddComponent {
   fetchProducts() {
     this._productService.GetAvailableProductsList().subscribe(products => {
       this.products = products.data;
-      console.log(products.data);
     })
   }
   //onSubmit Method is invoked when the Submit Button is clicked
