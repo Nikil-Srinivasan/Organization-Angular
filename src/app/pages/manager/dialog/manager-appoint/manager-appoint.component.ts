@@ -11,7 +11,7 @@ import { EMAIL_PATTERN, PASSWORD_PATTERN, USERNAME_PATTERN } from 'src/app/share
 })
 export class ManagerAppointComponent {
   managerForm: FormGroup;
-
+  isSubmitting: boolean = false;
   // Custom validator function
   ageValidator = (control: FormControl) => {
     const age = control.value;
@@ -70,6 +70,12 @@ export class ManagerAppointComponent {
 
   //onSubmit Method is invoked when the Submit Button is clicked
   onSubmit() {
+    if (this.managerForm.invalid) {
+      return;
+    }
+
+    this.isSubmitting = true;
+
     this._managerService.AppointNewManager(this.data.managerId, this.managerForm.value)
       .subscribe({
         next: (val: any) => {
@@ -78,6 +84,9 @@ export class ManagerAppointComponent {
         error: (error: any) => {
           console.error('Error ADDING manager details:', error);
           // Handle the error and show an error message to the user
+        },
+        complete: () => {
+          this.isSubmitting = false;
         }
       });
   }

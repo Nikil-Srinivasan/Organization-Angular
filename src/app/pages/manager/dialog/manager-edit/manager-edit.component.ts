@@ -13,7 +13,6 @@ import { USERNAME_PATTERN } from 'src/app/shared/regex-patterns';
 export class ManagerEditComponent implements OnInit {
   managerForm: FormGroup;
 
-  products: any[] = [];
 
   ageValidator = (control: FormControl) => {
     const age = control.value;
@@ -34,7 +33,6 @@ export class ManagerEditComponent implements OnInit {
       managerName: ['', [Validators.required,Validators.pattern(USERNAME_PATTERN)]],
       managerSalary: ['', Validators.required],
       managerAge: ['', [Validators.required, this.ageValidator]],
-      productID: ['', Validators.required],
     })
   }
 
@@ -50,27 +48,14 @@ export class ManagerEditComponent implements OnInit {
     return this.managerForm.get('managerName');
   }
 
-  // get productID() {
-  //   return this.managerForm.get('productID');
-  // }
-
   ngOnInit(): void {
     this.managerForm.patchValue({
       managerName: this.data.managerName,
       managerAge: this.data.managerAge,
       managerSalary: this.data.managerSalary,
-      productID: this.data.productID
-    });    
-
-    this.fetchProducts();
-    
+    });       
   }
 
-  fetchProducts() {
-    this._productService.GetAvailableProductsList().subscribe(products => {
-      this.products = products.data;
-    });
-  }
 
   //onSubmit Method is invoked when the Submit Button is clicked
   onSubmit() {
@@ -79,6 +64,7 @@ export class ManagerEditComponent implements OnInit {
           next: (val: any) => {
             // this._coreService.openSnackBar('Manager details updated!');
             this._dialogRef.close(true);
+            console.log(val)
           },
           error: (error: any) => {
             console.error('Error updating manager details:', error);
