@@ -14,6 +14,10 @@ export class DepartmentService {
     return this._http.get<any>(`${environment.baseUrl}/api/Department/GetAllDepartment`);
   }
 
+  GetAvailableDepartmentsList(): Observable<any>{
+    return this._http.get<any>(`${environment.baseUrl}/api/Department/GetAvailableDepartments`);
+  }
+
   AddDepartment(data: any): Observable<any> {
     return this._http.post(`${environment.baseUrl}/api/Department/CreateDepartment`, data);
   }

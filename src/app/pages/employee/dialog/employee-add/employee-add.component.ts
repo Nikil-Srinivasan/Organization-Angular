@@ -43,8 +43,6 @@ export class EmployeeAddComponent {
       employeeAge: ['', [Validators.required, this.ageValidator]],
       employeeSalary: ['', Validators.required],
       employeeName: ['', [Validators.required, Validators.pattern(USERNAME_PATTERN)]],
-      departmentID: ['', Validators.required],
-      productID: 0,
       managerID: ['', Validators.required], 
       role: 2,
       managerName: '',
@@ -80,32 +78,21 @@ export class EmployeeAddComponent {
     return this.employeeForm.get('employeeName');
   }
 
-  get departmentID() {
-    return this.employeeForm.get('departmentID');
-  }
-
   get managerID() {
     return this.employeeForm.get('managerID');
   }
 
   ngOnInit(): void {
-    this.fetchDepartments();
-    this.fetchManagers();
+    this.fetchDepartmentsAssociatedWithManager();
   }
 
-  fetchDepartments() {
-    this._departmentService.GetDepartmentsList().subscribe(departments => {
+  fetchDepartmentsAssociatedWithManager() {
+    this._managerService.GetAllDepartmentsAssociatedWithManager().subscribe(departments => {
       this.departments = departments.data;
-      // console.log(departments.data)
     });
   }
 
-  fetchManagers() {
-    this._managerService.GetManagersList().subscribe(managers => {
-      this.managers = managers.data;
-      console.log(managers.data);
-    })
-  }
+
   //onSubmit Method is invoked when the Submit Button is clicked
   onSubmit() {
     this._employeeService.AddEmployee(this.employeeForm.value)

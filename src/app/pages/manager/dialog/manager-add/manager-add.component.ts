@@ -4,6 +4,7 @@ import { ManagerService } from 'src/app/services/ManagerService/manager.service'
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { ProductService } from 'src/app/services/ProductService/product.service';
 import { EMAIL_PATTERN, PASSWORD_PATTERN, USERNAME_PATTERN } from 'src/app/shared/regex-patterns';
+import { DepartmentService } from 'src/app/services/DepartmentService/department.service';
 
 @Component({
   selector: 'app-manager-add',
@@ -13,7 +14,7 @@ import { EMAIL_PATTERN, PASSWORD_PATTERN, USERNAME_PATTERN } from 'src/app/share
 export class ManagerAddComponent {
   managerForm: FormGroup;
   isSubmitting: boolean = false;
-  products: any[] = [];
+  departments: any[] = [];
 
   // Custom validator function
   ageValidator = (control: FormControl) => {
@@ -27,7 +28,7 @@ export class ManagerAddComponent {
   constructor(
     private _formbuiler: FormBuilder,
     private _managerService: ManagerService,
-    private _productService: ProductService,
+    private _departmentService: DepartmentService,
     private _dialogRef: MatDialogRef<ManagerAddComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
   ) {
@@ -38,8 +39,9 @@ export class ManagerAddComponent {
       employeeAge: 0,
       employeeSalary: 0,
       employeeName: '',
-      departmentID: 0,
-      productID: ['', Validators.required],
+      departmentID: [null,
+        Validators.required,
+      ],
       role: 1,
       managerName: ['',
         [
@@ -76,20 +78,23 @@ export class ManagerAddComponent {
     return this.managerForm.get('managerName');
   }
 
-  get productID() {
-    return this.managerForm.get('productID');
+  get departmentID() {
+    return this.managerForm.get('departmentID');
   }
 
   ngOnInit(): void {
     this.managerForm.patchValue(this.data);
-    this.fetchProducts();
+    this.fetchDepartments();
   }
 
-  fetchProducts() {
-    this._productService.GetAvailableProductsList().subscribe(products => {
-      this.products = products.data;
+  fetchDepartments() {
+    this._departmentService.GetAvailableDepartmentsList().subscribe(departments => {
+      this.departments = departments.data;
+      console.log(departments.data);
     })
   }
+
+  
   //onSubmit Method is invoked when the Submit Button is clicked
   onSubmit() {
     if (this.managerForm.invalid) {
@@ -105,6 +110,10 @@ export class ManagerAddComponent {
         },
         error: (error: any) => {
           console.error('Error ADDING manager details:', error);
+          if (error.error?.message === 'Incorrect Password') {
+            // Perform custom validation for user not found
+            this.managerForm.get('departmentID')?.setErrors({ departmentNotFound: true });
+          }
           // Handle the error and show an error message to the user
         },
         complete: () => {

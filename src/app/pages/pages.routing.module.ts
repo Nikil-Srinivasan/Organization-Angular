@@ -1,18 +1,18 @@
 import { Routes } from '@angular/router';
 import { EmployeeComponent } from './employee/employee.component';
 import { ManagerComponent } from './manager/manager.component';
-import { ProductComponent } from './product/product.component';
-import { CustomerComponent } from './customer/customer.component';
 import { DepartmentComponent } from './department/department.component';
 import { Role } from '../models/role';
 import { AuthGuard } from '../guards/auth.guard';
-import { AppDashboardComponent } from './dashboard/dashboard.component';
 import { EmployeeDashboardComponent } from './dashboard/employee-dashboard/employee-dashboard.component';
+import { AdminDashboardComponent } from './dashboard/admin-dashboard/admin-dashboard.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
 
 export const PagesRoutes: Routes = [
   {
     path: '',
-    component: AppDashboardComponent,
+    // component: AppDashboardComponent,
+    component: DashboardComponent,
     data: {
       title: 'Starter Page',
     },
@@ -32,24 +32,8 @@ export const PagesRoutes: Routes = [
   },
   {
     path: '',
-    loadChildren: () => import('./product/product.module').then(
-      (m) => m.ProductModule
+    loadChildren: () => import('./department/department.module').then(
+      (m) => m.DepartmentModule
     ),
-  },
-  {
-    path: 'customer',
-    component: CustomerComponent,
-    data: {
-      title: 'Customer Page',
-    },
-    canActivate : [AuthGuard]
-  },
-  {
-    path: 'department',
-    component: DepartmentComponent,
-    data: {
-      title: 'Department Page',
-    },
-    canActivate : [AuthGuard]
   },
 ];

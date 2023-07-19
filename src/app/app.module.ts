@@ -31,6 +31,7 @@ import { AuthHeadersInterceptor } from './interceptor/auth-header.interceptor';
 import { PageNotFoundComponent } from './pages/page-not-found/page-not-found.component';
 import { Router } from "@angular/router";
 import { PagesModule } from "./pages/pages.module";
+import { DepartmentModule } from "./pages/department/department.module";
 
 
 @NgModule({
@@ -54,6 +55,7 @@ import { PagesModule } from "./pages/pages.module";
     MaterialModule,
     PagesModule,
     TablerIconsModule.pick(TablerIcons),
+    DepartmentModule
   ],
   providers: [
     {
