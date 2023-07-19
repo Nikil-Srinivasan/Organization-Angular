@@ -10,7 +10,7 @@ export class DashboardService {
 
   constructor(private http: HttpClient) { }
 
-    getAllCount(): Observable<any> { 
+    getAllEmployeeCount(): Observable<any> { 
 
     return this.http.get<any>(`${environment.baseUrl}/api/Dashboard/GetTotalCount`);
     }

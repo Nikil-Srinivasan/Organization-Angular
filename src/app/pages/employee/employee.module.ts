@@ -27,6 +27,7 @@ import { TaskCompletedComponent } from './task-completed/task-completed/task-com
     ReactiveFormsModule,
     RouterModule.forChild(EmployeeRoutes),
     TablerIconsModule.pick(TablerIcons),
-  ]
+  ],
+  exports: [TablerIconsModule],
 })
 export class EmployeeModule { }
