@@ -68,7 +68,7 @@ export class EmployeeTaskEditComponent {
   //onSubmit Method is invoked when the Submit Button is clicked
   onSubmit() {
     if (this.employeetaskForm.valid) {
-        this._employeeTaskService.UpdateEmployeeTask(this.data.taskID, this.employeetaskForm.value).subscribe({
+        this._employeeTaskService.UpdateEmployeeTaskStatus(this.data.taskID, this.employeetaskForm.value).subscribe({
           next: (val: any) => {
             // this._coreService.openSnackBar('Employee details updated!');
             this._dialogRef.close(true);

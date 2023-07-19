@@ -81,6 +81,10 @@ export class EmployeetaskService {
     return this._http.put(`${environment.baseUrl}/api/EmployeeTask/UpdateEmployeeTask?id=${id}`, data);
   }
 
+  UpdateEmployeeTaskStatus(id: number, data: any): Observable<any> {
+    return this._http.put(`${environment.baseUrl}/api/EmployeeTask/UpdateEmployeeTaskStatus?id=${id}`, data);
+  }
+  
   getStatusFromNumber(statusNumber: number): Status {
     switch (statusNumber) {
       case 1:
