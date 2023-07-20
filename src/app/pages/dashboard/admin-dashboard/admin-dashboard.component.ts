@@ -28,17 +28,19 @@ export class AdminDashboardComponent implements OnInit {
   TotalDepartments: any[] = [];
   dataSource: MatTableDataSource<any>;
   dataObs$: Observable<any>;
+  http: any;
 
   constructor(private DasboardService : DashboardService) {
 
     this.loadData();
 
    }
-
   ngOnInit()
     {
+      // this.http.get('https://httpstat.us/404?sleep=2000').toPromise();
 
-      this.TotalCount();
+      // throw Error("The app component has thrown an error!");
+      // this.TotalCount();
     }
 
   TotalCount()
