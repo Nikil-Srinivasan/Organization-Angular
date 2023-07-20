@@ -6,7 +6,7 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { USERNAME_PATTERN } from 'src/app/shared/regex-patterns';
 import { EmployeetaskService } from 'src/app/services/EmployeeTaskService/employeetask.service';
 import { Status } from 'src/app/models/status';
-
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-employee-task-edit',
@@ -23,8 +23,8 @@ export class EmployeeTaskEditComponent {
   constructor(
     private _formbuiler: FormBuilder,
     private _employeeTaskService: EmployeetaskService,
-   
     private _dialogRef: MatDialogRef<EmployeeTaskEditComponent>,
+    private _snackBar: MatSnackBar,
     @Inject(MAT_DIALOG_DATA) public data: any,
   )
    {
@@ -70,7 +70,7 @@ export class EmployeeTaskEditComponent {
     if (this.employeetaskForm.valid) {
         this._employeeTaskService.UpdateEmployeeTaskStatus(this.data.taskID, this.employeetaskForm.value).subscribe({
           next: (val: any) => {
-            // this._coreService.openSnackBar('Employee details updated!');
+            this._snackBar.open("Task Edited Successfully!", "close");
             this._dialogRef.close(true);
             
           },

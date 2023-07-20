@@ -16,11 +16,14 @@
     }
 }
 
-.form-field-width{
+.form-field-width {
     width: 23vw;
 }
 
 .disabled-input {
     pointer-events: none;
-  }
-  
+}
+
+.form-field-full-width {
+    width: 47vw
+}
