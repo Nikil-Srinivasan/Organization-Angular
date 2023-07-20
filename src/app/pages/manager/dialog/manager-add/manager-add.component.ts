@@ -84,10 +84,10 @@ export class ManagerAddComponent {
 
   ngOnInit(): void {
     this.managerForm.patchValue(this.data);
-    this.fetchProducts();
+    this.fetchDepartments();
   }
 
-  fetchProducts() {
+  fetchDepartments() {
     this._departmentService.GetAvailableDepartmentsList().subscribe(departments => {
       this.departments = departments.data;
       console.log(departments.data);

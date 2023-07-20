@@ -23,6 +23,10 @@ export class EmployeeService {
         return this._http.get<any>(`${environment.baseUrl}/api/Employee/GetAllEmployees`);
     }
 
+    GetEmployeeById(id: number): Observable<any> {
+        return this._http.get<any>(`${environment.baseUrl}/api/Employee/GetEmployeeById?id=${id}`);
+    }
+
     AddEmployee(data: any): Observable<any> {
         return this._http.post(`${environment.baseUrl}/api/Auth/Register`, data);
     }

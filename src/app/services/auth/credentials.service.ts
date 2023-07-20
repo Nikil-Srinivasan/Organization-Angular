@@ -41,7 +41,7 @@ export class CredentialsService {
    * @return True if the user is authenticated.
    */
   isAuthenticated(): boolean {
-    console.log("credential :", this.userSubject.value)
+    // console.log("credential :", this.userSubject.value)
     return !!this.userSubject.value;
   }
 
@@ -54,7 +54,7 @@ export class CredentialsService {
   }
 
   public get userValue(): User | null{
-    console.log(this.userSubject.value);
+    // console.log(this.userSubject.value);
     return this.userSubject.value;
   }
 
@@ -73,7 +73,7 @@ export class CredentialsService {
       const storage = localStorage;
       storage.setItem(credentialsKey, JSON.stringify(credentials));
       const user = this.decodeToken(credentials.token);
-      console.log('User Details:', user);
+      // console.log('User Details:', user);
       this.userSubject.next(user); // Update userSubject with decoded user
     } else {
       sessionStorage.removeItem(credentialsKey);

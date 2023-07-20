@@ -2,7 +2,7 @@ import { Component, Inject } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { DepartmentService } from 'src/app/services/DepartmentService/department.service';
-import { DEPARTMENT_NAME_PATTERN } from 'src/app/shared/regex-patterns';
+import { NAME_PATTERN } from 'src/app/shared/regex-patterns';
 
 @Component({
   selector: 'app-department-edit',
@@ -20,7 +20,7 @@ export class DepartmentEditComponent {
     @Inject(MAT_DIALOG_DATA) public data: any,
   ) {
     this.departmentForm = this._formbuiler.group({
-      departmentName: ['', [Validators.required, Validators.pattern(DEPARTMENT_NAME_PATTERN)]],
+      departmentName: ['', [Validators.required, Validators.pattern(NAME_PATTERN)]],
     })
   }
 
