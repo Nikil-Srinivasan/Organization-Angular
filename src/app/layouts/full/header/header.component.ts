@@ -7,7 +7,10 @@ import {
 } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
-import { AuthenticationService } from 'src/app/services/auth';
+import { Observable } from 'rxjs';
+import { Role } from 'src/app/models/role';
+import { EmployeetaskService } from 'src/app/services/EmployeeTaskService/employeetask.service';
+import { AuthenticationService, CredentialsService } from 'src/app/services/auth';
 
 @Component({
   selector: 'app-header',
@@ -22,14 +25,41 @@ export class HeaderComponent {
   @Output() toggleCollapsed = new EventEmitter<void>();
 
   showFiller = false;
+  showBellIcon = false;
+  newTaskCount : number;
+
 
   constructor(
     public dialog: MatDialog,
     private authenticationService : AuthenticationService,
+    private credentialsService: CredentialsService,
+    private employeetaskService: EmployeetaskService,
     private router : Router
     ) {}
 
-  onLogoutHandle(){
+  onLogoutHandle()
+  {
     this.authenticationService.logout();
   }
+
+  ngOnInit()
+  {
+    this.checkUserRoleForNotification();
+    this.employeetaskService.getTaskCount().subscribe(value => {
+      this.newTaskCount = value;
+    })
+  }
+
+  checkUserRoleForNotification(){
+    const user = this.credentialsService.userValue?.role;
+
+    if(user == Role.Employee ){
+      this.showBellIcon = true;
+      const employeeId = this.credentialsService.userValue?.nameid;
+     
+    }
+  }
+
+  
+
 }
