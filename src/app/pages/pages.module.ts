@@ -31,17 +31,7 @@ import { ManagerDashboardComponent } from './dashboard/manager-dashboard/manager
     AdminDashboardComponent,
     EmployeeDashboardComponent,
     ManagerDashboardComponent,
-    EmployeeComponent,
-    EmployeeEditComponent,
-    EmployeeAddComponent,
-    ManagerComponent,
-    ManagerAddComponent,
-    ManagerEditComponent,
-    DepartmentAddComponent,
-    DepartmentEditComponent,
     ConfirmDeleteComponent,
-    ManagerAppointComponent,
-    DepartmentComponent
   ],
   imports: [
     CommonModule,
@@ -51,7 +41,6 @@ import { ManagerDashboardComponent } from './dashboard/manager-dashboard/manager
     NgApexchartsModule,
     RouterModule.forChild(PagesRoutes),
     TablerIconsModule.pick(TablerIcons),
-    
   ],
   exports: [TablerIconsModule],
   

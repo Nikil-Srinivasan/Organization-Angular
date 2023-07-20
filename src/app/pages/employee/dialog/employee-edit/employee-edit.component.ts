@@ -5,6 +5,7 @@ import { DepartmentService } from 'src/app/services/DepartmentService/department
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { USERNAME_PATTERN } from 'src/app/shared/regex-patterns';
 import { ManagerService } from 'src/app/services/ManagerService/manager.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 interface IDepartment {
   id: number;
@@ -19,6 +20,8 @@ interface IDepartment {
 export class EmployeeEditComponent implements OnInit {
 
   employeeForm: FormGroup;
+
+  selectedDepartment : any
 
   departments: any[] = [];
 
@@ -37,15 +40,31 @@ export class EmployeeEditComponent implements OnInit {
     private _managerService: ManagerService, 
     private _dialogRef: MatDialogRef<EmployeeEditComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
+    private _snackBar: MatSnackBar
   ) {
     this.employeeForm = this._formbuiler.group({
       employeeAge: ['', [Validators.required, this.ageValidator]],
       employeeSalary: ['', Validators.required],
       employeeName: ['', [Validators.required,Validators.pattern(USERNAME_PATTERN)]],
       managerID: ['', Validators.required],
+      designation : ['',Validators.required],
+      address : ['',Validators.required],
+      phone : ['',Validators.required],
     })
   }
+   
+  get phone() {
+    return this.employeeForm.get('designation');
+  }
 
+  get address() {
+    return this.employeeForm.get('designation');
+  }
+    
+  get designation() {
+    return this.employeeForm.get('designation');
+  }
+  
   get employeeAge() {
     return this.employeeForm.get('employeeAge');
   }
@@ -67,7 +86,10 @@ export class EmployeeEditComponent implements OnInit {
       employeeName: this.data.employeeName,
       employeeAge: this.data.employeeAge,
       employeeSalary: this.data.employeeSalary,
-      managerID: this.data.managerID
+      managerID: this.data.managerID,
+      designation : this.data.designation,
+      phone : this.data.phone,
+      address : this.data.phone
     });    
     
     this.fetchDepartmentsAssociatedWithManager();    
@@ -84,12 +106,13 @@ export class EmployeeEditComponent implements OnInit {
     if (this.employeeForm.valid) {
         this._employeeService.UpdateEmployee(this.data.employeeID, this.employeeForm.value).subscribe({
           next: (val: any) => {
-            // this._coreService.openSnackBar('Employee details updated!');
+            this._snackBar.open("Employee added successfully",'Close',{
+              duration : 3000
+            })
             this._dialogRef.close(true);
           },
           error: (error: any) => {
             console.error('Error updating employee details:', error);
-            // Handle the error and show an error message to the user
           }
         });
     }
