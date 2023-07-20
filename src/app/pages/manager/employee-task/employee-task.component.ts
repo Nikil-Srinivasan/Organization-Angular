@@ -9,6 +9,8 @@ import { ActivatedRoute } from '@angular/router';
 import { TaskDescriptionComponent } from '../dialog/task-description/task-description.component';
 import { TaskCreateComponent } from '../dialog/task-create/task-create.component';
 import { TaskEditComponent } from '../dialog/task-edit/task-edit.component';
+import { DeleteDialogService } from 'src/app/services/delete-dialog.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-employee-task',
@@ -20,7 +22,7 @@ export class EmployeeTaskComponent implements OnInit{
   employeeTaskList: any;
   dataSource: MatTableDataSource<any>;
   dataObs$: Observable<any>;
-  displayedColumns: string[] = ['title', 'status', 'startDate', 'dueDate', 'info', 'edit'];
+  displayedColumns: string[] = ['title', 'status', 'startDate', 'dueDate', 'info', 'edit', 'delete'];
   employeeId: number;
   employeeDetails: any;
 
@@ -28,7 +30,9 @@ export class EmployeeTaskComponent implements OnInit{
     private _dialog: MatDialog,
     private _employeeTaskService: EmployeetaskService,
     private _route: ActivatedRoute,
-    private _employeeService: EmployeeService
+    private _employeeService: EmployeeService,
+    private _deleteDialogService: DeleteDialogService,
+    private _snackBar: MatSnackBar
   ) { }
   ngOnInit(): void {
     this._route.params.subscribe(params => {
@@ -109,5 +113,23 @@ export class EmployeeTaskComponent implements OnInit{
         // Handle the error and show an error message to the user
       },
     })
+  }
+
+  
+  DeleteTask(id: number) {
+    this._deleteDialogService.openConfirmDialog("Do you really want to delete this record?")
+      .afterClosed().subscribe({
+        next: (val) => {
+          if (val) {
+            this._employeeTaskService.DeleteEmployeeTask(id).subscribe({
+              next: (res) => {
+                this._snackBar.open("Task Deleted Successfully!", "close");
+                this.GetAllEmployeeTask(this.employeeId);
+              },
+              error: console.log,
+            })
+          }
+        }
+      });
   }
 }

@@ -13,7 +13,7 @@ export const PagesRoutes: Routes = [
     path: '',
     component: DashboardComponent,
     data: {
-      title: 'Starter Page',
+      title: 'Starter Page', 
     },
     canActivate : [AuthGuard]
   }, 

@@ -16,7 +16,7 @@ export class EmployeeListComponent implements OnInit {
   managerlist: any;
   dataSource: MatTableDataSource<any>;
   dataObs$: Observable<any>;
-  displayedColumns: string[] = ['name', 'action'];
+  displayedColumns: string[] = ['name', 'designation', 'action'];
 
   constructor(
     private _managerService: ManagerService,
