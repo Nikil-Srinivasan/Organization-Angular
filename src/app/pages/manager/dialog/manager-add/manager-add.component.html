@@ -21,6 +21,11 @@
                             Email should have a valid format
                         </mat-error>
                     </div>
+                    <div *ngIf="email?.hasError('emailAlreadyExist')">
+                        <mat-error class="custom-error" >
+                          Email already exist
+                        </mat-error>
+                    </div>
                 </div>
             </div>
 
@@ -120,7 +125,7 @@
         <div class="row">
             <div>
                 <mat-form-field appearance="outline" class="form-field-width">
-                    <mat-label>Product</mat-label>
+                    <mat-label>Department</mat-label>
                     <mat-select formControlName="departmentID">
                         <mat-option *ngFor="let department of departments" [value]="department.departmentID">
                             {{department.departmentName}}
@@ -130,7 +135,7 @@
                 <div class="error-container">
                     <div *ngIf="departmentID?.touched && departmentID?.errors?.['required']">
                         <mat-error class="custom-error">
-                            Product is <strong>required</strong>
+                            Department is <strong>required</strong>
                         </mat-error>
                     </div>
                     <div *ngIf="departmentID?.hasError('departmentNotFound')">
@@ -141,7 +146,36 @@
                 </div>
                 <!-- Invalid department ID. Department Not Found -->
             </div>
+            <div>
+                <mat-form-field appearance="outline" class="form-field-width">
+                    <mat-label>Phone</mat-label>
+                    <input matInput type="text" formControlName="phone">
+                </mat-form-field>
+                <div class="error-container">
+                    <div *ngIf="phone?.touched && phone?.errors?.['required']">
+                        <mat-error class="custom-error">
+                            Phone is <strong>required</strong>
+                        </mat-error>
+                    </div>
+                </div>
+            </div>
+            
+        </div> <br>
+
+    
+        <mat-form-field class="w-100" appearance="outline">
+            <mat-label >Address</mat-label>
+            <textarea formControlName="address" matInput placeholder="address goes here..."></textarea>
+        </mat-form-field>
+        <div class="error-container">
+            <div *ngIf="address?.touched && address?.errors?.['required']">
+                <mat-error class="custom-error">
+                    Address is <strong>required</strong>
+                </mat-error>
         </div>
+            
+        </div>
+
     </div>
     <div mat-dialog-actions class="action">
         <button mat-raised-button type="button" [mat-dialog-close]="false"> Cancel</button>

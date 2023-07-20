@@ -50,8 +50,18 @@ export class ManagerAddComponent {
         ]
       ],
       managerSalary: ['', Validators.required],
-      managerAge: ['', [Validators.required, this.ageValidator]]
+      managerAge: ['', [Validators.required, this.ageValidator]],
+      address : ['',Validators.required],
+      phone : ['',Validators.required]
     })
+  }
+
+  get phone() {
+    return this.managerForm.get('address');
+  }
+
+  get address() {
+    return this.managerForm.get('address');
   }
 
   get email() {
@@ -114,6 +124,12 @@ export class ManagerAddComponent {
             // Perform custom validation for user not found
             this.managerForm.get('departmentID')?.setErrors({ departmentNotFound: true });
           }
+
+          if (error.error?.message === "Email already exists") {
+            // Perform custom validation for user not found
+            this.managerForm.get('email')?.setErrors({ emailAlreadyExist: true });
+          }
+          
           // Handle the error and show an error message to the user
         },
         complete: () => {

@@ -11,6 +11,10 @@ import { EmployeeTaskComponent } from './employee-task/employee-task.component';
 import { TaskDescriptionComponent } from './dialog/task-description/task-description.component';
 import { TaskCreateComponent } from './dialog/task-create/task-create.component';
 import { TaskEditComponent } from './dialog/task-edit/task-edit.component';
+import { ManagerComponent } from './manager.component';
+import { ManagerAddComponent } from './dialog/manager-add/manager-add.component';
+import { ManagerEditComponent } from './dialog/manager-edit/manager-edit.component';
+import { ManagerAppointComponent } from './dialog/manager-appoint/manager-appoint.component';
 
 
 
@@ -20,7 +24,12 @@ import { TaskEditComponent } from './dialog/task-edit/task-edit.component';
     EmployeeTaskComponent,
     TaskDescriptionComponent,
     TaskCreateComponent,
-    TaskEditComponent
+    TaskEditComponent,
+    ManagerComponent,
+    ManagerAddComponent,
+    ManagerEditComponent,
+    ManagerAppointComponent,
+
   ],
   imports: [
     CommonModule,

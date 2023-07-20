@@ -38,8 +38,18 @@ export class ManagerAppointComponent {
         ]
       ],
       managerSalary: ['', Validators.required],
-      managerAge: ['', [Validators.required, this.ageValidator]]
+      managerAge: ['', [Validators.required, this.ageValidator]],
+      phone : ['',[Validators.required]],
+      address : ['',[Validators.required]]
     })
+  }
+
+  get phone() {
+    return this.managerForm.get('phone');
+  }
+
+  get address() {
+    return this.managerForm.get('address');
   }
 
   get email() {
@@ -83,8 +93,11 @@ export class ManagerAppointComponent {
         },
         error: (error: any) => {
           console.error('Error ADDING manager details:', error);
-          // Handle the error and show an error message to the user
-        },
+          if (error.error?.message === "Email already exists") {
+            // Perform custom validation for user not found
+            this.managerForm.get('email')?.setErrors({ emailAlreadyExist: true });
+          }
+                  },
         complete: () => {
           this.isSubmitting = false;
         }

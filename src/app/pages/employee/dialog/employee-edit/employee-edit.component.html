@@ -58,11 +58,11 @@
             <div>
                 <mat-form-field appearance="outline" class="form-field-width">
                     <mat-label>Department</mat-label>
-                    <mat-select formControlName="managerID">
-                        <mat-option *ngFor="let department of departments" [value]="department.managerId">
-                            {{ department.departmentName }}
-                        </mat-option>
-                    </mat-select>
+                        <mat-select formControlName="managerID">
+                            <mat-option *ngFor="let department of departments" [value]="department.managerId">
+                                {{ department.departmentName }}
+                            </mat-option>
+                        </mat-select>
                 </mat-form-field>
                 <div class="error-container">
                     <div *ngIf="managerID?.touched && managerID?.errors?.['required']">
@@ -73,7 +73,63 @@
                 </div>
             </div>            
         </div> <br>
+        <div class="row">
+            <div>
+                <mat-form-field appearance="outline" class="form-field-width">
+                    <mat-label>Phone</mat-label>
+                    <input matInput type="number" formControlName="phone">
+                </mat-form-field>
+                <div class="error-container">
+                    <div *ngIf="phone?.touched && phone?.errors?.['required']">
+                        <mat-error class="custom-error">
+                            phone is <strong>required</strong>
+                        </mat-error>
+                    </div>
+                </div>
+            </div>
+            <!-- <div>
+                <mat-form-field appearance="outline" class="form-field-width">
+                    <mat-label>Department</mat-label>
+                        <mat-select formControlName="managerID">
+                            <mat-option *ngFor="let department of departments" [value]="department.managerId">
+                                {{ department.departmentName }}
+                            </mat-option>
+                        </mat-select>
+                </mat-form-field>
+                <div class="error-container">
+                    <div *ngIf="managerID?.touched && managerID?.errors?.['required']">
+                        <mat-error class="custom-error">
+                            managerID is <strong>required</strong>
+                        </mat-error>
+                    </div>
+                </div>
+            </div>             -->
 
+            <div>
+                <mat-form-field appearance="outline" class="form-field-width">
+                    <mat-label>Designation</mat-label>
+                    <input matInput type="text" formControlName="designation">
+                </mat-form-field>
+                <div class="error-container">
+                    <div *ngIf="designation?.touched && designation?.errors?.['required']">
+                        <mat-error class="custom-error">
+                            Designation is <strong>required</strong>
+                        </mat-error>
+                    </div>
+                </div>
+            </div>
+        </div> <br>
+        <mat-form-field appearance="outline" class="w-100">
+        <mat-label>Address</mat-label>
+        <textarea formControlName="address" matInput placeholder="Address goes here..."></textarea>
+        </mat-form-field>
+        <div class="error-container">
+        <div *ngIf="address?.touched && address?.errors?.['required']">
+            <mat-error class="custom-error">
+            Address is <strong>required</strong>
+            </mat-error>
+        </div>
+        </div>
     </div>
     <div mat-dialog-actions class="action">
         <button mat-raised-button type="button" [mat-dialog-close]="false"> Cancel</button>

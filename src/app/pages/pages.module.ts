@@ -31,11 +31,7 @@ import { ManagerDashboardComponent } from './dashboard/manager-dashboard/manager
     AdminDashboardComponent,
     EmployeeDashboardComponent,
     ManagerDashboardComponent,
-    ManagerComponent,
-    ManagerAddComponent,
-    ManagerEditComponent,
     ConfirmDeleteComponent,
-    ManagerAppointComponent,
   ],
   imports: [
     CommonModule,
