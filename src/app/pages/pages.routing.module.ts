@@ -14,7 +14,7 @@ export const PagesRoutes: Routes = [
     // component: AppDashboardComponent,
     component: DashboardComponent,
     data: {
-      title: 'Starter Page',
+      title: 'Starter Page', 
     },
     canActivate : [AuthGuard]
   }, 

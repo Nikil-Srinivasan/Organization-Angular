@@ -10,6 +10,7 @@ import { TaskDescriptionComponent } from '../dialog/task-description/task-descri
 import { TaskCreateComponent } from '../dialog/task-create/task-create.component';
 import { TaskEditComponent } from '../dialog/task-edit/task-edit.component';
 import { DeleteDialogService } from 'src/app/services/delete-dialog.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-employee-task',
@@ -30,7 +31,8 @@ export class EmployeeTaskComponent implements OnInit{
     private _employeeTaskService: EmployeetaskService,
     private _route: ActivatedRoute,
     private _employeeService: EmployeeService,
-    private _deleteDialogService: DeleteDialogService
+    private _deleteDialogService: DeleteDialogService,
+    private _snackBar: MatSnackBar
   ) { }
   ngOnInit(): void {
     this._route.params.subscribe(params => {
@@ -121,7 +123,7 @@ export class EmployeeTaskComponent implements OnInit{
           if (val) {
             this._employeeTaskService.DeleteEmployeeTask(id).subscribe({
               next: (res) => {
-                // this._coreService.openSnackBar('Task Deleted!');
+                this._snackBar.open("Task Deleted Successfully!", "close");
                 this.GetAllEmployeeTask(this.employeeId);
               },
               error: console.log,

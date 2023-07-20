@@ -33,6 +33,7 @@ export const EmployeeRoutes: Routes = [
         component : TaskPendingComponent,
         data: {
           title: 'Pending Task',
+          roles : [Role.Employee],
         },
         canActivate : [AuthGuard]
 
@@ -42,6 +43,7 @@ export const EmployeeRoutes: Routes = [
         component : TaskOngoingComponent,
         data: {
           title: 'Inprogress Task',
+          roles : [Role.Employee],
         },
         canActivate : [AuthGuard]
 
@@ -51,6 +53,7 @@ export const EmployeeRoutes: Routes = [
         component : TaskPendingComponent,
         data: {
           title: 'Completed Task',
+          roles : [Role.Employee],
         },
         canActivate : [AuthGuard]
       }

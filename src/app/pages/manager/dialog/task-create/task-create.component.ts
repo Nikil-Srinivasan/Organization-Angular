@@ -3,6 +3,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { NAME_PATTERN } from 'src/app/shared/regex-patterns';
 import { EmployeetaskService } from 'src/app/services/EmployeeTaskService/employeetask.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-task-create',
@@ -20,6 +21,7 @@ export class TaskCreateComponent {
     private _formBuilder: FormBuilder,
     private _dialogRef: MatDialogRef<TaskCreateComponent>,
     private _employeeTaskService: EmployeetaskService,
+    private _snackBar: MatSnackBar
   ) {
     this.minDate = new Date();  // Set the minDate to the current date
 
@@ -65,12 +67,11 @@ export class TaskCreateComponent {
     this._employeeTaskService.CreateEmployeeTask(formValueWithEmployeeId)
       .subscribe({
         next: (val: any) => {
-          console.log(formValueWithEmployeeId);
+          this._snackBar.open("Task Created Successfully!", "close");
           this._dialogRef.close(true);
         },
         error: (error: any) => {
           console.error('Error ADDING Task details:', error);
-          console.log(formValueWithEmployeeId);
           // Handle the error and show an error message to the user
         },
         complete: () => {

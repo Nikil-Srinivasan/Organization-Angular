@@ -3,8 +3,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { NAME_PATTERN } from 'src/app/shared/regex-patterns';
 import { EmployeetaskService } from 'src/app/services/EmployeeTaskService/employeetask.service';
-// import * as moment from 'moment';
-// import 'moment-timezone';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-task-edit',
@@ -22,6 +21,7 @@ export class TaskEditComponent {
     private _formBuilder: FormBuilder,
     private _dialogRef: MatDialogRef<TaskEditComponent>,
     private _employeeTaskService: EmployeetaskService,
+    private _snackBar: MatSnackBar
   ) {
     this.minDate = new Date();  // Set the minDate to the current date
 
@@ -72,7 +72,7 @@ export class TaskEditComponent {
     this._employeeTaskService.UpdateEmployeeTask(this.data.editTaskFormData.taskID,formValueWithEmployeeId)
       .subscribe({
         next: (val: any) => {
-          console.log(formValueWithEmployeeId);
+          this._snackBar.open("Task Edited Successfully!", "close");
           this._dialogRef.close(true);
         },
         error: (error: any) => {
