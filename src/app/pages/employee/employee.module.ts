@@ -6,7 +6,7 @@ import { TablerIconsModule } from 'angular-tabler-icons';
 import * as TablerIcons from 'angular-tabler-icons/icons';
 import { FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { MaterialModule } from 'src/app/material.module';
-import { TaskComponent } from './task/task.component';
+import { TaskComponent } from './task-new/task-new.component';
 import { TaskPendingComponent } from './task-pending/task-pending.component';
 import { TaskOngoingComponent } from './task-ongoing/task-ongoing.component';
 import { EmployeeTaskEditComponent } from './dialog/employee-task-edit/employee-task-edit/employee-task-edit.component';
@@ -14,6 +14,7 @@ import { EmployeeAddComponent } from './dialog/employee-add/employee-add.compone
 import { EmployeeEditComponent } from './dialog/employee-edit/employee-edit.component';
 import { EmployeeComponent } from './employee.component';
 import { EmployeeDashboardComponent } from '../dashboard/employee-dashboard/employee-dashboard.component';
+import { TaskCompletedComponent } from './task-completed/task-completed/task-completed.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,7 @@ import { EmployeeDashboardComponent } from '../dashboard/employee-dashboard/empl
     EmployeeComponent,
     EmployeeEditComponent,
     EmployeeAddComponent,
-    EmployeeTaskEditComponent
+    TaskCompletedComponent,
   ],
   imports: [
     CommonModule,
@@ -33,6 +34,7 @@ import { EmployeeDashboardComponent } from '../dashboard/employee-dashboard/empl
     ReactiveFormsModule,
     RouterModule.forChild(EmployeeRoutes),
     TablerIconsModule.pick(TablerIcons),
-  ]
+  ],
+  exports: [TablerIconsModule],
 })
 export class EmployeeModule { }

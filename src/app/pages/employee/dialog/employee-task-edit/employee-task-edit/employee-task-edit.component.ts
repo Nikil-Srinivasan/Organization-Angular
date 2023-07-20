@@ -5,6 +5,7 @@ import { ProductService } from 'src/app/services/ProductService/product.service'
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { USERNAME_PATTERN } from 'src/app/shared/regex-patterns';
 import { EmployeetaskService } from 'src/app/services/EmployeeTaskService/employeetask.service';
+import { Status } from 'src/app/models/status';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
@@ -17,6 +18,7 @@ export class EmployeeTaskEditComponent {
   employeetaskForm: FormGroup;
 
   task : any ;
+  taskStatus : any;
 
   constructor(
     private _formbuiler: FormBuilder,
@@ -35,6 +37,25 @@ export class EmployeeTaskEditComponent {
 
   ngOnInit(): void {
     this.task = this.data;
+    const taskValue = this.data.taskStatus;
+
+    switch(taskValue) {
+      case 1 :
+        this.taskStatus = Status.New;
+        break;
+      case 2 :
+        this.taskStatus = Status.InProgress;
+        break;
+      case 3 :
+        this.taskStatus = Status.Completed;
+        break;
+      case 4 :
+        this.taskStatus = Status.Pending;
+        break;
+      default :
+          return;
+      }
+      
     this.employeetaskForm.patchValue({
       employeeID: this.data.employeeId,
       taskStatus: this.data.taskStatus
@@ -47,7 +68,7 @@ export class EmployeeTaskEditComponent {
   //onSubmit Method is invoked when the Submit Button is clicked
   onSubmit() {
     if (this.employeetaskForm.valid) {
-        this._employeeTaskService.UpdateEmployeeTask(this.data.taskID, this.employeetaskForm.value).subscribe({
+        this._employeeTaskService.UpdateEmployeeTaskStatus(this.data.taskID, this.employeetaskForm.value).subscribe({
           next: (val: any) => {
             this._snackBar.open("Task Edited Successfully!", "close");
             this._dialogRef.close(true);

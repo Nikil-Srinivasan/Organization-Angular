@@ -6,9 +6,9 @@
         <div class="row">
             <div>
                 <mat-form-field appearance="outline" class="form-field-width">
-                    <mat-label>Task Status</mat-label>
+                    <mat-label>{{ taskStatus }}</mat-label>
                     <mat-select formControlName="taskStatus">
-                      <ng-container *ngIf="task.taskStatus == 1" value = "New" >
+                      <ng-container *ngIf="task.taskStatus == 1" >
                         <mat-option [value] = 2  >Progress</mat-option>
                       </ng-container>
                       <ng-container *ngIf="task.taskStatus == 2">

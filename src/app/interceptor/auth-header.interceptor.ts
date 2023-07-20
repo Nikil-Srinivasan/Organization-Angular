@@ -3,13 +3,15 @@ import { HttpInterceptor, HttpRequest, HttpHandler, HttpEvent } from '@angular/c
 import { Observable } from 'rxjs';
 import { CredentialsService } from '../services/auth';
 import { environment } from '@environments/environment';
+import { Role } from '../models/role';
+import { EmployeetaskService } from '../services/EmployeeTaskService/employeetask.service';
 
 @Injectable()
 export class AuthHeadersInterceptor implements HttpInterceptor {
 
 
-  constructor(private credentials : CredentialsService){
-
+  constructor(private credentials : CredentialsService,
+              private employeeTaskService : EmployeetaskService ){
   }
 
   intercept(request: HttpRequest<any>, next: HttpHandler) : Observable<HttpEvent<any>> {
@@ -23,7 +25,7 @@ export class AuthHeadersInterceptor implements HttpInterceptor {
               Authorization: `Bearer ${user.token}`
           }
       });
-  }
+    }
     console.log('Auth interceptor');
     console.log(request.url);
     

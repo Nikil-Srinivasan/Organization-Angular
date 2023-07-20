@@ -22,10 +22,10 @@ export class AdminDashboardComponent implements OnInit {
 
   chartOptions: any = {};
   chartOption: any = {};
-  TotalProducts: any[] = [];
-  TotalEmployees: any[] = [];
-  TotalCustomers: any[] = [];
-  TotalDepartments: any[] = [];
+  
+  TotalEmployees: number;
+  TotalDepartments: number;
+
   dataSource: MatTableDataSource<any>;
   dataObs$: Observable<any>;
   http: any;
@@ -37,57 +37,34 @@ export class AdminDashboardComponent implements OnInit {
    }
   ngOnInit()
     {
-      // this.http.get('https://httpstat.us/404?sleep=2000').toPromise();
-
-      // throw Error("The app component has thrown an error!");
-      // this.TotalCount();
+      this.loadData();
     }
 
-  TotalCount()
-  {
-    this.DasboardService.getAllCount().subscribe(
-      {
-        next: (response : any) => {
-          const responseData = response.data;
-          this.TotalProducts = responseData.Products;
-          this.TotalEmployees = responseData.Employees;
-          this.TotalCustomers = responseData.Customers;
-          this.TotalDepartments = responseData.Departments;
-        },
-
-        error: (error : any) => {
-
-          console.error(error);
-        }
-      }
-    );
-  }
  
  
   loadData()  {
 
-    this.DasboardService.getChartDetails().subscribe(
+    this.DasboardService.getAllEmployeeCount().subscribe(
     {
       next : (response: any) => {
 
         const data = response.data;
-        if (data) {
-        const productNames = data.map((product: any) => product.productName);
-        const employeeCounts = data.map((product: any) => product.employeeCount);
-        const customerCounts = data.map((product: any) => product.customerCount);
-        const productRevenue = data.map((product: any) => product.productRevenue);
+        
+        const departmentNames = Object.keys(data);
+        const employeeCounts : number[] = Object.values(data);
+        
+        this.TotalDepartments = departmentNames.length;
+        
+        this.TotalEmployees = employeeCounts.reduce((a: number, b: number) => {
+          return a + b;
+        }, 0);
 
         this.chartOptions = {
             series: [
               {
                 name: 'Employees',
-                data: employeeCounts?employeeCounts : [],
+                data:  employeeCounts,
                 color: '#5D87FF',
-              },
-              {
-                name: 'Customers',
-                data: customerCounts?employeeCounts : [],
-                color: '#49BEFF',
               },
             ],
       
@@ -117,7 +94,7 @@ export class AdminDashboardComponent implements OnInit {
             legend: { show: false },
             xaxis: {
               type: 'category',
-              categories:productNames?productNames:[],
+              categories:departmentNames,
               labels: {
                 style: { cssClass: 'grey--text lighten-2--text fill-color' },
               },
@@ -146,7 +123,7 @@ export class AdminDashboardComponent implements OnInit {
                 options: {
                   plotOptions: {
                     bar: {
-                      borderRadius: 3,
+                      borderRadius: 10,
                     },
                   },
                 },
@@ -154,47 +131,6 @@ export class AdminDashboardComponent implements OnInit {
             ],
           };
         
-
-
-    this.chartOption = {
-
-      series: productRevenue?productRevenue:[],
-
-      chart: {
-        width: "100%",
-        type: "pie"
-      },
-
-      labels: productNames?productNames:[],
-
-      theme: {
-
-        monochrome: {
-
-          enabled: true
-        }
-      },
-      title: {
-        text: ""
-      },
-
-      responsive: [
-        {
-          breakpoint: 480,
-          options: {
-
-            chart: {
-              width: 200
-            },
-
-            legend: {
-              position: "bottom"
-            }
-          }
-        }
-      ]
-    }
-      }
     },
       error: (error : any) => {
         console.error(error);

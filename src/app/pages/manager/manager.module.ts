@@ -29,7 +29,6 @@ import { ManagerAppointComponent } from './dialog/manager-appoint/manager-appoin
     ManagerAddComponent,
     ManagerEditComponent,
     ManagerAppointComponent,
-
   ],
   imports: [
     CommonModule,
