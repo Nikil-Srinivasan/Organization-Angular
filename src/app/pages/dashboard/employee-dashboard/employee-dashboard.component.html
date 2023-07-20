@@ -77,13 +77,28 @@
     <!-- --------------------------------------------------------------------------- -->
     <div class="col-lg-7">
       <mat-card class="cardWithShadow">
+        <mat-card-header>
+        <mat-card-title>Employee Details</mat-card-title>
+        </mat-card-header>
         <mat-card-content class="p-24">
           <div class="d-flex w-100">
-            <mat-card-title>Overview</mat-card-title>
             <div class="m-l-auto">
               
             </div>
           </div>
+            <div *ngIf="employeeDetails">
+         
+          <mat-card>
+            <mat-card-content>
+              <p><strong>Name</strong> : {{ employeeDetails.employeeName }} </p>
+              <p><strong>Email</strong> : {{ employeeDetails.email }} </p>
+              <p><strong>Phone</strong> : {{ employeeDetails.phone }} </p>
+              <p><strong>Address</strong>  : {{ employeeDetails.address }} </p>
+            </mat-card-content>
+          </mat-card>
+
+            </div>
+        <!-- <div *ngIf="!employeeDetails">Loading employee task...</div> -->
           
         </mat-card-content>
       </mat-card>

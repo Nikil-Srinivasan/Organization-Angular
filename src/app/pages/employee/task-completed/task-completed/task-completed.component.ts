@@ -11,6 +11,7 @@ import { CredentialsService } from 'src/app/services/auth';
 import jwt_decode from 'jwt-decode';
 import { Status } from 'src/app/models/status';
 import { EmployeeTaskEditComponent } from '../../dialog/employee-task-edit/employee-task-edit/employee-task-edit.component';
+import { EmployeeTaskDescriptionComponent } from '../../dialog/employee-task-description/employee-task-description.component';
 @Component({
   selector: 'app-task-completed',
   templateUrl: './task-completed.component.html',
@@ -24,7 +25,7 @@ export class TaskCompletedComponent {
   employeeTaskList: any;
   dataSource: MatTableDataSource<any>;
   dataObs$: Observable<any>;
-  displayedColumns: string[] = ['taskName', 'taskDescription', 'taskDueDate','taskStatus'];
+  displayedColumns: string[] = ['taskName','taskCreatedDate','taskDueDate','taskStatus','info'];
 
   constructor(private _dialog: MatDialog,
     private _employeeTaskService: EmployeetaskService,
@@ -53,6 +54,14 @@ export class TaskCompletedComponent {
     });
   }
   
+  OpenTaskDescription(taskDescription: string) {
+    this._dialog.open(EmployeeTaskDescriptionComponent , {
+      data: {
+        taskDescription
+      }
+    });
+  }
+
   getStatusFromNumber(statusNumber: number): Status {
     switch (statusNumber) {
       case 1:

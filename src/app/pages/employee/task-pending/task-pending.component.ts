@@ -10,6 +10,7 @@ import { EmployeetaskService } from 'src/app/services/EmployeeTaskService/employ
 import { CredentialsService } from 'src/app/services/auth';
 import { Status } from 'src/app/models/status';
 import { EmployeeTaskEditComponent } from '../dialog/employee-task-edit/employee-task-edit/employee-task-edit.component';
+import { EmployeeTaskDescriptionComponent } from '../dialog/employee-task-description/employee-task-description.component';
 
 @Component({
   selector: 'app-task-pending',
@@ -27,7 +28,7 @@ export class TaskPendingComponent {
   employeeTaskList: any;
   dataSource: MatTableDataSource<any>;
   dataObs$: Observable<any>;
-  displayedColumns: string[] = ['taskName', 'taskDescription', 'taskDueDate','taskStatus', 'edit'];
+  displayedColumns: string[] = ['taskName','taskCreatedDate','taskDueDate','taskStatus','info', 'edit'];
 
   constructor(private _dialog: MatDialog,
     private _employeeTaskService: EmployeetaskService,
@@ -53,6 +54,14 @@ export class TaskPendingComponent {
       this.dataSource = new MatTableDataSource(this.employeeTaskList);
       this.dataSource.paginator = this.paginator;
       this.dataObs$ = this.dataSource.connect();
+    });
+  }
+
+  OpenTaskDescription(taskDescription: string) {
+    this._dialog.open(EmployeeTaskDescriptionComponent , {
+      data: {
+        taskDescription
+      }
     });
   }
 

@@ -23,4 +23,16 @@ export class DashboardService {
     getEmployeeTaskCount(id : number | undefined) : Observable<any> {
       return this.http.get<any>(`${environment.baseUrl}/api/Dashboard/GetEmployeeTasksCount?id=${id}`);
     }
+
+    getEmployeeTaskCountByManager(id : number | undefined) : Observable<any> {
+      return this.http.get<any>(`${environment.baseUrl}/api/Dashboard/GetEmployeeTasksByManager?id=${id}`);
+    }
+
+    getManagerDetails(id : number | undefined) : Observable<any> {
+      return this.http.get<any>(`${environment.baseUrl}/api/Manager/GetManagerById?id=${id}`);
+    }
+
+    getEmployeeDetails(id : number | undefined) : Observable<any> {
+      return this.http.get<any>(`${environment.baseUrl}/api/Employee/GetEmployeeById?id=${id}`);
+    }
 }

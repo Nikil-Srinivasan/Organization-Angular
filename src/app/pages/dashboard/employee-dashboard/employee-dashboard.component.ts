@@ -13,25 +13,7 @@ import { CredentialsService } from 'src/app/services/auth';
   styleUrls: ['./employee-dashboard.component.scss']
 })
 export class EmployeeDashboardComponent implements OnInit {
-  @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
-  @ViewChild(MatSort) sort: MatSort;
-
-  Products = [];
-  Employees = [];
-  Customers = [];
-
-  public PieChartData = [];
-
-  public seriesHighlight: any = {
-    // Pie series draw an overlay with the same shape as the pie segment.
-    color: "#000",
-    opacity: 0.75,
-    border: {
-      width: 1,
-      color: "#000",
-      opacity: 0.5,
-    },
-  };
+ 
  
   newTaskCount : any;
   inProgressCount : any;
@@ -39,10 +21,8 @@ export class EmployeeDashboardComponent implements OnInit {
   completedTaskCount : any;
 
   employeeId: number | undefined = this._credentials.userValue?.nameid;
+  employeeDetails : any;
 
-  displayedColumns: string[] = ['assigned', 'name', 'priority', 'budget'];
-  dataSource: MatTableDataSource<any>;
-  dataObs$: Observable<any>;
   chartOptions : any;
  
   constructor(private DasboardService : DashboardService , private _credentials : CredentialsService) {
@@ -51,8 +31,9 @@ export class EmployeeDashboardComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.loadData();
+ 
     this.TotalCount(); 
+    this.getProfileDetails(this.employeeId);
    }
 
    TotalCount() {
@@ -89,31 +70,18 @@ export class EmployeeDashboardComponent implements OnInit {
       }
     });
   }
-  
-  
- 
-  loadData()
-   {
-    this.DasboardService.getChartDetails().subscribe(
-      {
-      next : (response: any) => {
-        
-        const data = response.data;
-        const productNames = data.map((product: any) => product.productName);
-        const employeeCounts = data.map((product: any) => product.employeeCount);
-        const customerCounts = data.map((product: any) => product.customerCount);
-        const productRevenue = data.map((product: any) => product.productRevenue);
 
-        this.Products = productNames;
-        this.Employees = employeeCounts;
-        this.Customers = customerCounts;
-        this.PieChartData = productRevenue.map((revenue : any , index : any) => [revenue, productNames[index]]);
-      },
-      error: (error : any) => {
-        console.error(error);
-      }
-    });
+  getProfileDetails(id : number | undefined){
+    this.DasboardService.getEmployeeDetails(id).subscribe({
+      next : (response : any) => {
+      this.employeeDetails = response.data;
+      console.log(this.employeeDetails);
+    }
+  })
   }
+  
+  
+
 }
 
 
