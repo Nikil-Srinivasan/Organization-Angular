@@ -63,6 +63,8 @@ export class ManagerEditComponent implements OnInit {
       managerName: this.data.managerName,
       managerAge: this.data.managerAge,
       managerSalary: this.data.managerSalary,
+      phone : this.data.phone,
+      address : this.data.address
     });       
   }
 

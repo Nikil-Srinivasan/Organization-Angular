@@ -3,7 +3,7 @@ import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms'
 import { ManagerService } from 'src/app/services/ManagerService/manager.service';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { ProductService } from 'src/app/services/ProductService/product.service';
-import { EMAIL_PATTERN, PASSWORD_PATTERN, USERNAME_PATTERN } from 'src/app/shared/regex-patterns';
+import { EMAIL_PATTERN, NAME_PATTERN, PASSWORD_PATTERN, PHONE_PATTERN, USERNAME_PATTERN } from 'src/app/shared/regex-patterns';
 import { DepartmentService } from 'src/app/services/DepartmentService/department.service';
 
 @Component({
@@ -46,18 +46,21 @@ export class ManagerAddComponent {
       managerName: ['',
         [
           Validators.required,
-          Validators.pattern(USERNAME_PATTERN)
+          Validators.pattern(NAME_PATTERN)
         ]
       ],
       managerSalary: ['', Validators.required],
       managerAge: ['', [Validators.required, this.ageValidator]],
       address : ['',Validators.required],
-      phone : ['',Validators.required]
+      phone : ['',[
+        Validators.required,
+       Validators.pattern(PHONE_PATTERN)
+      ]],
     })
   }
 
   get phone() {
-    return this.managerForm.get('address');
+    return this.managerForm.get('phone');
   }
 
   get address() {

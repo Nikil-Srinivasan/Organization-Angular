@@ -83,7 +83,7 @@
                     </div>
                     <div *ngIf="managerName?.errors?.['pattern']">
                         <mat-error class="custom-error">
-                            Username should have at least 6 characters and no spaces allowed.
+                            Username should have at least 4 characters.
                         </mat-error>
                     </div>
                 </div>
@@ -144,7 +144,6 @@
                         </mat-error>
                     </div>
                 </div>
-                <!-- Invalid department ID. Department Not Found -->
             </div>
             <div>
                 <mat-form-field appearance="outline" class="form-field-width">
@@ -155,6 +154,11 @@
                     <div *ngIf="phone?.touched && phone?.errors?.['required']">
                         <mat-error class="custom-error">
                             Phone is <strong>required</strong>
+                        </mat-error>
+                    </div>
+                    <div *ngIf="phone?.touched && phone?.errors?.['pattern']">
+                        <mat-error class="custom-error">
+                         Invalid phone number
                         </mat-error>
                     </div>
                 </div>

@@ -3,7 +3,7 @@ import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms'
 import { EmployeeService } from 'src/app/services/EmployeeService/employee.service';
 import { DepartmentService } from 'src/app/services/DepartmentService/department.service';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import { USERNAME_PATTERN } from 'src/app/shared/regex-patterns';
+import { PHONE_PATTERN, USERNAME_PATTERN } from 'src/app/shared/regex-patterns';
 import { ManagerService } from 'src/app/services/ManagerService/manager.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
@@ -49,16 +49,16 @@ export class EmployeeEditComponent implements OnInit {
       managerID: ['', Validators.required],
       designation : ['',Validators.required],
       address : ['',Validators.required],
-      phone : ['',Validators.required],
+      phone : ['',[Validators.required,Validators.pattern(PHONE_PATTERN)]],
     })
   }
    
   get phone() {
-    return this.employeeForm.get('designation');
+    return this.employeeForm.get('phone');
   }
 
   get address() {
-    return this.employeeForm.get('designation');
+    return this.employeeForm.get('address');
   }
     
   get designation() {
@@ -89,7 +89,7 @@ export class EmployeeEditComponent implements OnInit {
       managerID: this.data.managerID,
       designation : this.data.designation,
       phone : this.data.phone,
-      address : this.data.phone
+      address : this.data.address
     });    
     
     this.fetchDepartmentsAssociatedWithManager();    
@@ -104,6 +104,7 @@ export class EmployeeEditComponent implements OnInit {
   //onSubmit Method is invoked when the Submit Button is clicked
   onSubmit() {
     if (this.employeeForm.valid) {
+      console.log(this.employeeForm.value)
         this._employeeService.UpdateEmployee(this.data.employeeID, this.employeeForm.value).subscribe({
           next: (val: any) => {
             this._snackBar.open("Employee added successfully",'Close',{

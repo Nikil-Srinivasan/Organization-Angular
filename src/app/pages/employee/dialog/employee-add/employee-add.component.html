@@ -85,7 +85,7 @@
                         </div>
                         <div *ngIf="employeeName?.errors?.['pattern']">
                             <mat-error class="custom-error">
-                                Name should have at least 6 characters and no spaces allowed.
+                                Username should have at least 4 characters.
                             </mat-error>
                         </div>
                     </div>
@@ -140,6 +140,11 @@
                                 Phone is <strong>required</strong>
                             </mat-error>
                         </div>
+                        <div *ngIf="phone?.errors?.['pattern']">
+                            <mat-error class="custom-error">
+                             Invalid phone number
+                            </mat-error>
+                          </div>
                     </div>
                 </div>
 
