@@ -27,9 +27,23 @@ export const navItems: NavItem[] = [
     navCap: 'Tables',
     roles: [Role.Admin],
   },
+
   {
     navCap: 'Table',
     roles: [Role.Manager],
+  },
+  {
+    displayName: 'Department',
+    iconName: 'users-group',
+    route: '/dashboard/departments',
+    roles: [Role.Admin],
+  },
+  {
+    displayName: 'Managers',
+    iconName: 'briefcase',
+    route: '/dashboard/managers',
+    roles: [Role.Admin],
+
   },
   {
     displayName: 'Employee List',
@@ -71,17 +85,6 @@ export const navItems: NavItem[] = [
     route: '/dashboard/tasks/completed',
     roles: [Role.Employee],
   },
-  {
-    displayName: 'Managers',
-    iconName: 'briefcase',
-    route: '/dashboard/managers',
-    roles: [Role.Admin],
-
-  },
-  {
-    displayName: 'Department',
-    iconName: 'users-group',
-    route: '/dashboard/departments',
-    roles: [Role.Admin],
-  },
+  
+  
 ];

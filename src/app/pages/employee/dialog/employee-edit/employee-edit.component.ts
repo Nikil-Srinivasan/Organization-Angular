@@ -3,7 +3,7 @@ import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms'
 import { EmployeeService } from 'src/app/services/EmployeeService/employee.service';
 import { DepartmentService } from 'src/app/services/DepartmentService/department.service';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import { PHONE_PATTERN, USERNAME_PATTERN } from 'src/app/shared/regex-patterns';
+import { NAME_PATTERN, PHONE_PATTERN, USERNAME_PATTERN } from 'src/app/shared/regex-patterns';
 import { ManagerService } from 'src/app/services/ManagerService/manager.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
@@ -45,7 +45,7 @@ export class EmployeeEditComponent implements OnInit {
     this.employeeForm = this._formbuiler.group({
       employeeAge: ['', [Validators.required, this.ageValidator]],
       employeeSalary: ['', Validators.required],
-      employeeName: ['', [Validators.required,Validators.pattern(USERNAME_PATTERN)]],
+      employeeName: ['', [Validators.required,Validators.pattern(NAME_PATTERN)]],
       managerID: ['', Validators.required],
       designation : ['',Validators.required],
       address : ['',Validators.required],
