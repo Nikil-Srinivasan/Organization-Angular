@@ -32,6 +32,7 @@ import { PageNotFoundComponent } from './pages/page-not-found/page-not-found.com
 import { Router } from "@angular/router";
 import { PagesModule } from "./pages/pages.module";
 import { DepartmentModule } from "./pages/department/department.module";
+import { ConfirmLogoutComponent } from './shared/confirm-logout/confirm-logout.component';
 
 
 @NgModule({
@@ -43,6 +44,7 @@ import { DepartmentModule } from "./pages/department/department.module";
     HeaderComponent,
     BrandingComponent,
     AppNavItemComponent,
+    ConfirmLogoutComponent,
   
   ],
   imports: [
