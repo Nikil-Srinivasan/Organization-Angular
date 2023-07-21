@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Observable } from 'rxjs';
-import { MatPaginator } from '@angular/material/paginator';
+import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { ManagerService } from 'src/app/services/ManagerService/manager.service';
 import { ManagerEditComponent } from './dialog/manager-edit/manager-edit.component';
@@ -22,6 +22,10 @@ export class ManagerComponent implements OnInit {
   dataSource: MatTableDataSource<any>;
   dataObs$: Observable<any>;
   displayedColumns: string[] = ['name', 'age', 'salary', 'edit', 'department', 'assign', 'delete'];
+  pageNumber = 1;
+  pageSize = 2
+  totalItems = 0;
+  totalPages = 0
 
   constructor(
     private _dialog: MatDialog,
@@ -38,10 +42,15 @@ export class ManagerComponent implements OnInit {
   }
 
   GetManagersList() {
-    this._managerService.GetManagersList().subscribe(response => {
-      this.managerlist = response.data;
+    const pageObject = {
+      pageNumber: this.pageNumber,
+      pageSize: this.pageSize
+    };
+    this._managerService.GetManagersList(pageObject).subscribe(response => {
+      this.managerlist = response.data.items;
+      this.totalItems = response.data.totalNoOfRecords;
+      this.totalPages = response.data.totalPages;
       this.dataSource = new MatTableDataSource(this.managerlist);
-      this.dataSource.paginator = this.paginator;
       this.dataObs$ = this.dataSource.connect();
     });
   }
@@ -55,6 +64,19 @@ export class ManagerComponent implements OnInit {
         }
       }
     })
+  }
+
+  onPageChange(event: PageEvent): void {
+    const previousPageIndex = event.previousPageIndex !== undefined ? event.previousPageIndex : 0;
+    if (event.pageIndex < previousPageIndex) {
+      // Clicked on the previous arrow
+      this.pageNumber--;
+    } else {
+      // Clicked on the next arrow
+      this.pageNumber++;
+    }
+    console.log(this.pageNumber,this.pageSize)
+    this.GetManagersList();
   }
 
   OpenEditManager(data: any) {
