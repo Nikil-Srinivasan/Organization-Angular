@@ -2,7 +2,7 @@ import { Component, Inject } from '@angular/core';
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
 import { ManagerService } from 'src/app/services/ManagerService/manager.service';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import { EMAIL_PATTERN, PASSWORD_PATTERN, USERNAME_PATTERN } from 'src/app/shared/regex-patterns';
+import { EMAIL_PATTERN, NAME_PATTERN, PASSWORD_PATTERN, PHONE_PATTERN, USERNAME_PATTERN } from 'src/app/shared/regex-patterns';
 
 @Component({
   selector: 'app-manager-appoint',
@@ -34,12 +34,15 @@ export class ManagerAppointComponent {
       managerName: ['',
         [
           Validators.required,
-          Validators.pattern(USERNAME_PATTERN)
+          Validators.pattern(NAME_PATTERN)
         ]
       ],
       managerSalary: ['', Validators.required],
       managerAge: ['', [Validators.required, this.ageValidator]],
-      phone : ['',[Validators.required]],
+      phone : ['',[
+        Validators.required,
+       Validators.pattern(PHONE_PATTERN)
+      ]],
       address : ['',[Validators.required]]
     })
   }

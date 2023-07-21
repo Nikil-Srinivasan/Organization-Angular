@@ -51,6 +51,7 @@ export class ManagerComponent implements OnInit {
       this.totalItems = response.data.totalNoOfRecords;
       this.totalPages = response.data.totalPages;
       this.dataSource = new MatTableDataSource(this.managerlist);
+      console.log(this.managerlist)
       this.dataObs$ = this.dataSource.connect();
     });
   }
