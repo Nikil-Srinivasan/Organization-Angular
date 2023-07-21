@@ -52,7 +52,7 @@ export class EmployeetaskService {
   }
 
   GetEmployeeInProgressTask(id: number | undefined){
-    return this._http.get<any>(`${environment.baseUrl}/api/EmployeeTask/GetOngoingEmployeeTasksByEmployeeId?id=${id}`);
+    return this._http.get<any>(`${environment.baseUrl}/api/EmployeeTask/GetInProgressEmployeeTasksByEmployeeId?id=${id}`);
   }
 
   GetEmployeePendingTask(id: number | undefined){
@@ -60,13 +60,13 @@ export class EmployeetaskService {
   }
 
   GetAllEmployeeTask(id:number){
-    return this._http.get<any>(`${environment.baseUrl}/api/EmployeeTask/GetAllEmployeeTasksByEmployeeId?id=${id}`);
+    return this._http.get<any>(`${environment.baseUrl}/api/EmployeeTask/GetEmployeeTasksByEmployeeId?id=${id}`);
   }
   
   CreateEmployeeTask(data: any): Observable<any> {
     return this._http.post<any>(`${environment.baseUrl}/api/EmployeeTask/CreateEmployeeTasks`, data);
   }
-// http://localhost:5005/api/EmployeeTask/UpdateEmployeeTask?id=1
+
 
   GetEmployeeCompletedTask(id: number | undefined){
     return this._http.get<any>(`${environment.baseUrl}/api/EmployeeTask/GetCompletedEmployeeTasksByEmployeeId?id=${id}`);
