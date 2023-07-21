@@ -3,7 +3,7 @@ import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { EmployeeAddComponent } from './dialog/employee-add/employee-add.component';
 import { EmployeeEditComponent } from './dialog/employee-edit/employee-edit.component';
 import { Observable } from 'rxjs';
-import { MatPaginator } from '@angular/material/paginator';
+import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { EmployeeService } from 'src/app/services/EmployeeService/employee.service';
 import { DeleteDialogService } from 'src/app/services/delete-dialog.service';
@@ -23,6 +23,10 @@ export class EmployeeComponent implements OnInit {
   dataObs$: Observable<any>;
   displayedColumns: string[] = ['name', 'age', 'manager', 'department', 'edit', 'delete'];
   user: User | null;
+  pageNumber = 1;
+  pageSize = 2
+  totalItems = 0;
+  totalPages = 0
   
   constructor(
     private credential: CredentialsService,
@@ -47,13 +51,33 @@ export class EmployeeComponent implements OnInit {
   }
 
   GetEmployees() {
-    this._employeeService.GetEmployeesList().subscribe(response => {
+    const pageObject = {
+      pageNumber: this.pageNumber,
+      pageSize: this.pageSize
+    };
+
+    this._employeeService.GetEmployeesList(pageObject).subscribe(response => {
       this.employeelist = response.data;
-      console.log(this.employeelist)
-      this.dataSource = new MatTableDataSource(this.employeelist);
-      this.dataSource.paginator = this.paginator;
+      this.totalItems = response.data.totalNoOfRecords;
+      this.totalPages = response.data.totalPages;
+      console.log(this.employeelist);
+      this.dataSource = new MatTableDataSource(this.employeelist.items);
       this.dataObs$ = this.dataSource.connect();
     });
+  }
+
+
+  onPageChange(event: PageEvent): void {
+    const previousPageIndex = event.previousPageIndex !== undefined ? event.previousPageIndex : 0;
+    if (event.pageIndex < previousPageIndex) {
+      // Clicked on the previous arrow
+      this.pageNumber--;
+    } else {
+      // Clicked on the next arrow
+      this.pageNumber++;
+    }
+    console.log(this.pageNumber,this.pageSize)
+    this.GetEmployees();
   }
 
   OpenAddEmployee() {

@@ -108,6 +108,13 @@
                 </table>
             </div>
         </mat-card-content>
-        <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" [pageSize]="5" > </mat-paginator>
+        <mat-paginator
+        [length]="totalItems"
+        [pageSize]="pageSize"
+        [pageSizeOptions]="[pageSize]"
+        [pageIndex]="pageNumber - 1"
+        (page)="onPageChange($event)"
+      >
+      </mat-paginator>
     </mat-card>
 </div>

@@ -19,8 +19,8 @@ import { environment } from '@environments/environment';
 export class EmployeeService {
     constructor(private _http: HttpClient) { }
 
-    GetEmployeesList(): Observable<any> {
-        return this._http.get<any>(`${environment.baseUrl}/api/Employee/GetAllEmployees`);
+    GetEmployeesList(data : any): Observable<any> {     
+        return this._http.post<any>(`${environment.baseUrl}/api/Employee/GetAllEmployees`,data);
     }
 
     GetEmployeeById(id: number): Observable<any> {
