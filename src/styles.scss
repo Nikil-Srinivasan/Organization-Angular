@@ -18,11 +18,6 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
     z-index: 9999; /* Ensure the loader is displayed on top of other content */
   }
 
-  *{
-    box-sizing:border-box;
-    margin:0;
-    padding:0;
-  }
 
   .spinner {
    width: 50px;
