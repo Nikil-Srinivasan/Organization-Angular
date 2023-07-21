@@ -44,10 +44,10 @@ export class EmployeeAddComponent {
       employeeAge: ['', [Validators.required, this.ageValidator]],
       employeeSalary: ['', Validators.required],
       employeeName: ['', [Validators.required, Validators.pattern(NAME_PATTERN)]],
-      managerID: ['', Validators.required], 
-      designation : ['',Validators.required],
-      address : ['',Validators.required],
-      phone : ['',[
+      managerID: ['', Validators.required],
+      designation: ['', Validators.required],
+      address: ['', Validators.required],
+      phone: ['', [
         Validators.required,
         Validators.pattern(PHONE_PATTERN)
       ]],
@@ -56,14 +56,14 @@ export class EmployeeAddComponent {
       managerSalary: 0,
       managerAge: 0
     });
-    
+
   }
 
 
   get designation() {
     return this.employeeForm.get('designation');
   }
-  
+
   get address() {
     return this.employeeForm.get('address');
   }
@@ -117,8 +117,8 @@ export class EmployeeAddComponent {
       .subscribe({
         next: (val: any) => {
           this._dialogRef.close(true);
-          this._snackBar.open("Employee added successfully",'Close',{
-            duration : 3000
+          this._snackBar.open("Employee added successfully", 'Close', {
+            duration: 3000
           })
         },
         error: (error: any) => {

@@ -11,42 +11,42 @@
                     <div class="data-item">
                         <strong>Name:</strong>
                     </div>
-                    <div class="data-item">{{ employeeDetails.employeeName }}</div>
+                    <div class="data-item">{{ employeeDetails?.employeeName }}</div>
                     <mat-divider></mat-divider>
                 </div>
                 <div>
                     <div class="data-item">
                         <strong>Designation:</strong>
                     </div>
-                    <div class="data-item">{{ employeeDetails.designation }}</div>
+                    <div class="data-item">{{ employeeDetails?.designation }}</div>
                     <mat-divider></mat-divider>
                 </div>
                 <div>
                     <div class="data-item">
                         <strong>Phone:</strong>
                     </div>
-                    <div class="data-item">{{ employeeDetails.phone }}</div>
+                    <div class="data-item">{{ employeeDetails?.phone }}</div>
                     <mat-divider></mat-divider>
                 </div>
                 <div>
                     <div class="data-item">
                         <strong>Email:</strong>
                     </div>
-                    <div class="data-item">{{ employeeDetails.email }}</div>
+                    <div class="data-item">{{ employeeDetails?.email }}</div>
                     <mat-divider></mat-divider>
                 </div>
                 <div>
                     <div class="data-item">
                         <strong>Address:</strong>
                     </div>
-                    <div class="data-item">{{ employeeDetails.address }}</div>
+                    <div class="data-item">{{ employeeDetails?.address }}</div>
                     <mat-divider></mat-divider>
                 </div>
                 <div>
                     <div class="data-item">
                         <strong>Age:</strong>
                     </div>
-                    <div class="data-item">{{ employeeDetails.employeeAge }}</div>
+                    <div class="data-item">{{ employeeDetails?.employeeAge }}</div>
                     <mat-divider></mat-divider>
                 </div>
             </mat-card-content>
@@ -90,7 +90,32 @@
                             </th>
                             <td mat-cell *matCellDef="let element" class="mat-body-1">
                                 <ng-container>
-                                    {{ GetStatusFromNumber(element.taskStatus) }}
+                                    <div [ngSwitch]="element.taskStatus">
+                                        <div *ngSwitchCase="1">
+                                            <span class="bg-light-accent text-accent rounded f-w-600 p-6 p-y-4 f-s-12">
+                                                {{ GetStatusFromNumber(element.taskStatus) }}
+                                            </span>
+                                        </div>
+                                        <div *ngSwitchCase="2">
+                                            <span class="bg-light-warning text-warning rounded f-w-600 p-6 p-y-4 f-s-12">
+                                                {{ GetStatusFromNumber(element.taskStatus) }}
+                                            </span>
+                                        </div>
+                                        <div *ngSwitchCase="3">
+                                            <span class="bg-light-success text-success rounded f-w-600 p-6 p-y-4 f-s-12">
+                                                {{ GetStatusFromNumber(element.taskStatus) }}
+                                            </span>
+                                        </div>
+                                        <div *ngSwitchCase="4">
+                                            <span class="bg-light-error text-error rounded f-w-600 p-6 p-y-4 f-s-12">
+                                                {{ GetStatusFromNumber(element.taskStatus) }}
+                                            </span>
+                                        </div>
+                                        <div *ngSwitchDefault>
+                                            <p>{{GetStatusFromNumber(element.taskStatus)}}</p>
+                                        </div>
+                                    </div>
+
                                 </ng-container>
                             </td>
                         </ng-container>
