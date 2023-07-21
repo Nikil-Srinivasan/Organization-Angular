@@ -1,0 +1,20 @@
+.header{
+    text-align: center;
+    .warning-icon {
+        font-size: 100px;
+        height: 92px;
+        width: 250px;
+      }      
+}
+
+.content{
+    text-align: center;
+}
+
+.action {
+    padding: 0px 25px 20px;
+
+    button {
+        flex: 1;
+    }
+}

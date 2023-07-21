@@ -35,6 +35,10 @@ const routes: Routes = [
     ],
   },
   {
+    path: '404-page-not-found',
+    component: PageNotFoundComponent
+  },
+  {
     path: '**',
     pathMatch: 'full',
     component: PageNotFoundComponent

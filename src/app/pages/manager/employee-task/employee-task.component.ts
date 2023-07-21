@@ -11,13 +11,15 @@ import { TaskCreateComponent } from '../dialog/task-create/task-create.component
 import { TaskEditComponent } from '../dialog/task-edit/task-edit.component';
 import { DeleteDialogService } from 'src/app/services/delete-dialog.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { HttpErrorResponse } from '@angular/common/http';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-employee-task',
   templateUrl: './employee-task.component.html',
   styleUrls: ['./employee-task.component.scss']
 })
-export class EmployeeTaskComponent implements OnInit{
+export class EmployeeTaskComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   employeeTaskList: any;
   dataSource: MatTableDataSource<any>;
@@ -29,16 +31,17 @@ export class EmployeeTaskComponent implements OnInit{
   constructor(
     private _dialog: MatDialog,
     private _employeeTaskService: EmployeetaskService,
-    private _route: ActivatedRoute,
+    private _activatedRoute: ActivatedRoute,
     private _employeeService: EmployeeService,
     private _deleteDialogService: DeleteDialogService,
-    private _snackBar: MatSnackBar
+    private _snackBar: MatSnackBar,
+    private _router: Router
   ) { }
   ngOnInit(): void {
-    this._route.params.subscribe(params => {
+    this._activatedRoute.params.subscribe(params => {
       this.employeeId = +params['id'];
-      this.GetAllEmployeeTask(this.employeeId);
       this.GetEmployeeDetails(this.employeeId);
+      this.GetAllEmployeeTask(this.employeeId);
     });
   }
 
@@ -48,21 +51,30 @@ export class EmployeeTaskComponent implements OnInit{
   }
 
   GetAllEmployeeTask(id: number) {
-    this._employeeTaskService.GetAllEmployeeTask(id).subscribe(response => {
-      this.employeeTaskList = response.data;
-      this.dataSource = new MatTableDataSource(this.employeeTaskList);
-      this.dataSource.paginator = this.paginator;
-      this.dataObs$ = this.dataSource.connect();
+    this._employeeTaskService.GetAllEmployeeTask(id).subscribe({
+      next: (response) => {
+        this.employeeTaskList = response.data;
+        this.dataSource = new MatTableDataSource(this.employeeTaskList);
+        this.dataSource.paginator = this.paginator;
+        this.dataObs$ = this.dataSource.connect();
+      }
     });
   }
+
 
   GetStatusFromNumber(status: number) {
     return this._employeeTaskService.getStatusFromNumber(status)
   }
 
   GetEmployeeDetails(id: number) {
-    this._employeeService.GetEmployeeById(id).subscribe(response => {
-      this.employeeDetails = response.data;
+    this._employeeService.GetEmployeeById(id).subscribe({
+      next: (response) => {
+        this.employeeDetails = response.data;
+      },
+      error: (error: any) => {
+        console.log("Error fetching employee details: "+ error)
+        this._router.navigate(['404-page-not-found']);
+      }
     });
   }
 
@@ -95,9 +107,9 @@ export class EmployeeTaskComponent implements OnInit{
 
   OpenEditTask(editTaskFormData: any) {
     // console.log("Form Datafor checking:" + formData )
-  
+
     const dialogRef = this._dialog.open(TaskEditComponent, {
-      data:{
+      data: {
         editTaskFormData,
         employeeId: this.employeeId,
       }
@@ -115,7 +127,7 @@ export class EmployeeTaskComponent implements OnInit{
     })
   }
 
-  
+
   DeleteTask(id: number) {
     this._deleteDialogService.openConfirmDialog("Do you really want to delete this record?")
       .afterClosed().subscribe({
