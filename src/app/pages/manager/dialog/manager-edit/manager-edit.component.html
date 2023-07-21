@@ -1,65 +1,104 @@
 <div mat-dialog-title>
-    <h1>Edit Manager</h1>
+  <h1>Edit Manager</h1>
 </div>
 <form [formGroup]="managerForm" (ngSubmit)="onSubmit()">
-    <div mat-dialog-content class="content">
-        <div class="row">
-            <div>
-                <mat-form-field appearance="outline" class="form-field-width">
-                    <mat-label>Name</mat-label>
-                    <input matInput type="text" formControlName="managerName">
-                </mat-form-field>
-                <div class="error-container">
-                    <div *ngIf="managerName?.touched && managerName?.errors?.['required']">
-                        <mat-error class="custom-error">
-                            Name is <strong>required</strong>
-                        </mat-error>
-                    </div>
-                    <div *ngIf="managerName?.errors?.['pattern']">
-                        <mat-error class="custom-error">
-                            Name should have at least 6 characters and no spaces allowed.
-                        </mat-error>
-                    </div>
-                </div>
-            </div>
-            <div>
-                <mat-form-field appearance="outline" class="form-field-width">
-                    <mat-label>Salary</mat-label>
-                    <input matInput type="number" formControlName="managerSalary">
-                </mat-form-field>
-                <div class="error-container">
-                    <div *ngIf="managerSalary?.touched && managerSalary?.errors?.['required']">
-                        <mat-error class="custom-error">
-                            Salary is <strong>required</strong>
-                        </mat-error>
-                    </div>
-                </div>
-            </div>        
-        </div> <br>
-        <div class="row">
-            <div>
-                <mat-form-field appearance="outline" class="form-field-width">
-                    <mat-label>Age</mat-label>
-                    <input matInput type="number" formControlName="managerAge">
-                </mat-form-field>
-                <div class="error-container">             
-                    <div *ngIf="managerAge?.touched && managerAge?.errors?.['required']">
-                        <mat-error class="custom-error">
-                            Age is <strong>required</strong>
-                        </mat-error>
-                    </div>
-                    <div *ngIf="managerAge?.errors?.['invalidAge']">
-                        <mat-error class="custom-error">
-                          Age should be greater than 20
-                        </mat-error>
-                      </div>
-                </div>
-            </div>
-            
-        </div> 
+  <div mat-dialog-content class="content">
+    <div class="row">
+      <div>
+        <mat-form-field appearance="outline" class="form-field-width">
+          <mat-label>Name</mat-label>
+          <input matInput type="text" formControlName="managerName" />
+        </mat-form-field>
+        <div class="error-container">
+          <div
+            *ngIf="managerName?.touched && managerName?.errors?.['required']"
+          >
+            <mat-error class="custom-error">
+              Name is <strong>required</strong>
+            </mat-error>
+          </div>
+          <div *ngIf="managerName?.errors?.['pattern']">
+            <mat-error class="custom-error">
+              Name should have at least 6 characters and no spaces allowed.
+            </mat-error>
+          </div>
+        </div>
+      </div>
+      <div>
+        <mat-form-field appearance="outline" class="form-field-width">
+          <mat-label>Salary</mat-label>
+          <input matInput type="number" formControlName="managerSalary" />
+        </mat-form-field>
+        <div class="error-container">
+          <div
+            *ngIf="managerSalary?.touched && managerSalary?.errors?.['required']"
+          >
+            <mat-error class="custom-error">
+              Salary is <strong>required</strong>
+            </mat-error>
+          </div>
+        </div>
+      </div>
     </div>
-    <div mat-dialog-actions class="action">
-        <button mat-raised-button type="button" [mat-dialog-close]="false"> Cancel</button>
-        <button mat-raised-button color="primary" type="submit"> Update </button>
+    <br />
+    <div class="row">
+      <div>
+        <mat-form-field appearance="outline" class="form-field-width">
+          <mat-label>Age</mat-label>
+          <input matInput type="number" formControlName="managerAge" />
+        </mat-form-field>
+        <div class="error-container">
+          <div *ngIf="managerAge?.touched && managerAge?.errors?.['required']">
+            <mat-error class="custom-error">
+              Age is <strong>required</strong>
+            </mat-error>
+          </div>
+          <div *ngIf="managerAge?.errors?.['invalidAge']">
+            <mat-error class="custom-error">
+              Age should be greater than 20
+            </mat-error>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <mat-form-field appearance="outline" class="form-field-width">
+          <mat-label>Phone</mat-label>
+          <input matInput type="text" formControlName="phone" />
+        </mat-form-field>
+        <div class="error-container">
+          <div *ngIf="phone?.touched && phone?.errors?.['required']">
+            <mat-error class="custom-error">
+              Phone is <strong>required</strong>
+            </mat-error>
+          </div>
+        </div>
+      </div>
+
+
     </div>
+
+    
+    <mat-form-field class="w-100" appearance="outline">
+        <mat-label>Address</mat-label>
+        <textarea
+          formControlName="address"
+          matInput
+          placeholder="address goes here..."
+        ></textarea>
+      </mat-form-field>
+      <div class="error-container">
+        <div *ngIf="address?.touched && address?.errors?.['required']">
+          <mat-error class="custom-error">
+            Address is <strong>required</strong>
+          </mat-error>
+        </div>
+      </div>
+  </div>
+  <div mat-dialog-actions class="action">
+    <button mat-raised-button type="button" [mat-dialog-close]="false">
+      Cancel
+    </button>
+    <button mat-raised-button color="primary" type="submit">Update</button>
+  </div>
 </form>

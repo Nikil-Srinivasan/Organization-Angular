@@ -28,17 +28,15 @@ export class AdminDashboardComponent implements OnInit {
 
   dataSource: MatTableDataSource<any>;
   dataObs$: Observable<any>;
+  http: any;
 
   constructor(private DasboardService : DashboardService) {
 
     this.loadData();
 
    }
-
   ngOnInit()
     {
-
-      //this.TotalCount();
       this.loadData();
     }
 

@@ -5,6 +5,7 @@ import { DepartmentService } from 'src/app/services/DepartmentService/department
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { EMAIL_PATTERN, PASSWORD_PATTERN, USERNAME_PATTERN } from 'src/app/shared/regex-patterns';
 import { ManagerService } from 'src/app/services/ManagerService/manager.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-employee-add',
@@ -34,7 +35,7 @@ export class EmployeeAddComponent {
     private _managerService: ManagerService,
     private _dialogRef: MatDialogRef<EmployeeAddComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
-
+    private _snackBar: MatSnackBar
   ) {
     this.employeeForm = this._formBuilder.group({
       email: ['', [Validators.required, Validators.pattern(EMAIL_PATTERN)]],
@@ -44,6 +45,9 @@ export class EmployeeAddComponent {
       employeeSalary: ['', Validators.required],
       employeeName: ['', [Validators.required, Validators.pattern(USERNAME_PATTERN)]],
       managerID: ['', Validators.required], 
+      designation : ['',Validators.required],
+      address : ['',Validators.required],
+      phone : ['',Validators.required],
       role: 2,
       managerName: '',
       managerSalary: 0,
@@ -53,6 +57,17 @@ export class EmployeeAddComponent {
   }
 
 
+  get designation() {
+    return this.employeeForm.get('designation');
+  }
+  
+  get address() {
+    return this.employeeForm.get('address');
+  }
+
+  get phone() {
+    return this.employeeForm.get('phone');
+  }
 
   get email() {
     return this.employeeForm.get('email');
@@ -98,12 +113,18 @@ export class EmployeeAddComponent {
     this._employeeService.AddEmployee(this.employeeForm.value)
       .subscribe({
         next: (val: any) => {
-          // this._coreService.openSnackBar('Employee details updated!');
           this._dialogRef.close(true);
+          this._snackBar.open("Employee added successfully",'Close',{
+            duration : 3000
+          })
         },
         error: (error: any) => {
           console.error('Error updating employee details:', error);
-          // Handle the error and show an error message to the user
+          // Handle the error and show an error message to the user "Email already exists"
+          if (error.error?.message === "Email already exists") {
+            // Perform custom validation for user not found
+            this.employeeForm.get('email')?.setErrors({ emailAlreadyExist: true });
+          }
         }
       }
       );

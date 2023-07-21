@@ -33,7 +33,17 @@ export class ManagerEditComponent implements OnInit {
       managerName: ['', [Validators.required,Validators.pattern(USERNAME_PATTERN)]],
       managerSalary: ['', Validators.required],
       managerAge: ['', [Validators.required, this.ageValidator]],
+      phone : ['',Validators.required],
+      address : ['',Validators.required]
     })
+  }
+
+  get phone() {
+    return this.managerForm.get('phone');
+  }
+  
+  get address() {
+    return this.managerForm.get('address');
   }
 
   get managerAge() {
@@ -60,17 +70,18 @@ export class ManagerEditComponent implements OnInit {
   //onSubmit Method is invoked when the Submit Button is clicked
   onSubmit() {
     if (this.managerForm.valid) {
-        this._managerService.UpdateManager(this.data.managerId, this.managerForm.value).subscribe({
-          next: (val: any) => {
-            // this._coreService.openSnackBar('Manager details updated!');
-            this._dialogRef.close(true);
-            console.log(val)
-          },
-          error: (error: any) => {
-            console.error('Error updating manager details:', error);
-            // Handle the error and show an error message to the user
-          }
-        });
+      console.log(this.data.managerId, this.managerForm.value)
+        // this._managerService.UpdateManager(this.data.managerId, this.managerForm.value).subscribe({
+        //   next: (val: any) => {
+        //     // this._coreService.openSnackBar('Manager details updated!');
+        //     this._dialogRef.close(true);
+        //     console.log(val)
+        //   },
+        //   error: (error: any) => {
+        //     console.error('Error updating manager details:', error);
+        //     // Handle the error and show an error message to the user
+        //   }
+        // });
     }
   }
 }

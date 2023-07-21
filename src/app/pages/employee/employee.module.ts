@@ -10,6 +10,10 @@ import { TaskComponent } from './task-new/task-new.component';
 import { TaskPendingComponent } from './task-pending/task-pending.component';
 import { TaskOngoingComponent } from './task-ongoing/task-ongoing.component';
 import { EmployeeTaskEditComponent } from './dialog/employee-task-edit/employee-task-edit/employee-task-edit.component';
+import { EmployeeAddComponent } from './dialog/employee-add/employee-add.component';
+import { EmployeeEditComponent } from './dialog/employee-edit/employee-edit.component';
+import { EmployeeComponent } from './employee.component';
+import { EmployeeDashboardComponent } from '../dashboard/employee-dashboard/employee-dashboard.component';
 import { TaskCompletedComponent } from './task-completed/task-completed/task-completed.component';
 
 @NgModule({
@@ -17,8 +21,11 @@ import { TaskCompletedComponent } from './task-completed/task-completed/task-com
     TaskComponent,
     TaskOngoingComponent,
     TaskPendingComponent,
+    EmployeeTaskEditComponent,
+    EmployeeComponent,
+    EmployeeEditComponent,
+    EmployeeAddComponent,
     TaskCompletedComponent,
-    EmployeeTaskEditComponent
   ],
   imports: [
     CommonModule,
