@@ -12,7 +12,7 @@ export class DashboardService {
 
     getAllEmployeeCount(): Observable<any> { 
 
-    return this.http.get<any>(`${environment.baseUrl}/api/Dashboard/GetTotalCount`);
+    return this.http.get<any>(`${environment.baseUrl}/api/Dashboard/GetTotalEmployeeCount`);
     }
 
     getChartDetails(): Observable<any> {
