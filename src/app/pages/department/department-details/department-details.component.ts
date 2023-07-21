@@ -18,7 +18,7 @@ export class DepartmentDetailsComponent implements OnInit {
   employeelist: any;
   dataSource: MatTableDataSource<any>;
   dataObs$: Observable<any>;
-  displayedColumns: string[] = ['name', 'age', 'salary', 'department'];
+  displayedColumns: string[] = ['name', 'designation', 'email', 'phone'];
   EmployeesAndManagerDetails : any
   IsMangerFound = false;
 

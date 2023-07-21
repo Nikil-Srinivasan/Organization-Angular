@@ -71,17 +71,17 @@ export class ManagerEditComponent implements OnInit {
   onSubmit() {
     if (this.managerForm.valid) {
       console.log(this.data.managerId, this.managerForm.value)
-        // this._managerService.UpdateManager(this.data.managerId, this.managerForm.value).subscribe({
-        //   next: (val: any) => {
-        //     // this._coreService.openSnackBar('Manager details updated!');
-        //     this._dialogRef.close(true);
-        //     console.log(val)
-        //   },
-        //   error: (error: any) => {
-        //     console.error('Error updating manager details:', error);
-        //     // Handle the error and show an error message to the user
-        //   }
-        // });
+        this._managerService.UpdateManager(this.data.managerId, this.managerForm.value).subscribe({
+          next: (val: any) => {
+            // this._coreService.openSnackBar('Manager details updated!');
+            this._dialogRef.close(true);
+            console.log(val)
+          },
+          error: (error: any) => {
+            console.error('Error updating manager details:', error);
+            // Handle the error and show an error message to the user
+          }
+        });
     }
   }
 }
