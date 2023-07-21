@@ -14,8 +14,8 @@ export class ManagerService {
     return this._http.get<any>(`${environment.baseUrl}/api/Manager/GetAllDepartmentsAssociatedWithManager`);
   }
   
-  GetManagersList(): Observable<any> {
-    return this._http.get<any>(`${environment.baseUrl}/api/Manager/GetAllManagers`);
+  GetManagersList(data : any): Observable<any> {
+    return this._http.post<any>(`${environment.baseUrl}/api/Manager/GetAllManagers`,data);
   }
 
   AddManager(data: any): Observable<any> {
