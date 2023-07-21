@@ -28,7 +28,8 @@ export class TaskCreateComponent {
     this.createTaskForm = this._formBuilder.group({
       taskName: ['', [Validators.required, Validators.pattern(NAME_PATTERN)]],
       taskDescription: ['', [Validators.required, Validators.pattern(NAME_PATTERN)]],
-      taskDueDate: ['', Validators.required]
+      taskDueDate: ['', Validators.required],
+      taskStatus: 1
     });
   }
 
