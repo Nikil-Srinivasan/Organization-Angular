@@ -29,7 +29,7 @@
         </div>
       </mat-card-title>
       <div class="table-responsive m-t-16">
-        <table mat-table [dataSource]="dataSource" class="w-100" matSort>
+        <table mat-table [dataSource]="dataSource" class="w-100">
           <!-- Position Column -->
           <ng-container matColumnDef="name">
             <th
@@ -135,12 +135,12 @@
       </div>
     </mat-card-content>
     <mat-paginator
-    [length]="totalItems"
-    [pageSize]="pageSize"
-    [pageSizeOptions]="[pageSize]"
-    [pageIndex]="pageNumber - 1"
-    (page)="onPageChange($event)"
-  >
-  </mat-paginator>
+      [length]="totalItems"
+      [pageSize]="pageSize"
+      [pageSizeOptions]="[pageSize]"
+      [pageIndex]="pageNumber - 1"
+      (page)="onPageChange($event)"
+    >
+    </mat-paginator>
   </mat-card>
 </div>
