@@ -2,7 +2,6 @@ import { Component, Inject } from '@angular/core';
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
 import { ManagerService } from 'src/app/services/ManagerService/manager.service';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import { ProductService } from 'src/app/services/ProductService/product.service';
 import { EMAIL_PATTERN, NAME_PATTERN, PASSWORD_PATTERN, PHONE_PATTERN, USERNAME_PATTERN } from 'src/app/shared/regex-patterns';
 import { DepartmentService } from 'src/app/services/DepartmentService/department.service';
 
@@ -12,11 +11,12 @@ import { DepartmentService } from 'src/app/services/DepartmentService/department
   styleUrls: ['./manager-add.component.scss']
 })
 export class ManagerAddComponent {
+  // Form group for manager details
   managerForm: FormGroup;
   isSubmitting: boolean = false;
   departments: any[] = [];
 
-  // Custom validator function
+  // Custom validator function to check age
   ageValidator = (control: FormControl) => {
     const age = control.value;
     if (age && age <= 20) {
@@ -32,6 +32,7 @@ export class ManagerAddComponent {
     private _dialogRef: MatDialogRef<ManagerAddComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
   ) {
+    // Initialize the managerForm with form controls and validators
     this.managerForm = this._formbuiler.group({
       email: ['', [Validators.required, Validators.pattern(EMAIL_PATTERN)]],
       userName: ['', [Validators.required, Validators.pattern(USERNAME_PATTERN)]],
@@ -39,26 +40,17 @@ export class ManagerAddComponent {
       employeeAge: 0,
       employeeSalary: 0,
       employeeName: '',
-      departmentID: [null,
-        Validators.required,
-      ],
+      departmentID: [null, Validators.required],
       role: 1,
-      managerName: ['',
-        [
-          Validators.required,
-          Validators.pattern(NAME_PATTERN)
-        ]
-      ],
+      managerName: ['', [Validators.required, Validators.pattern(NAME_PATTERN)]],
       managerSalary: ['', Validators.required],
       managerAge: ['', [Validators.required, this.ageValidator]],
-      address : ['',Validators.required],
-      phone : ['',[
-        Validators.required,
-       Validators.pattern(PHONE_PATTERN)
-      ]],
+      address: ['', Validators.required],
+      phone: ['', [Validators.required, Validators.pattern(PHONE_PATTERN)]],
     })
   }
 
+  // Helper methods to access form controls and their validation status
   get phone() {
     return this.managerForm.get('phone');
   }
@@ -96,10 +88,13 @@ export class ManagerAddComponent {
   }
 
   ngOnInit(): void {
+    // Populate form with data passed through MAT_DIALOG_DATA
     this.managerForm.patchValue(this.data);
+    // Fetch the list of available departments
     this.fetchDepartments();
   }
 
+  // Fetch the list of available departments from the service
   fetchDepartments() {
     this._departmentService.GetAvailableDepartmentsList().subscribe(departments => {
       this.departments = departments.data;
@@ -107,8 +102,7 @@ export class ManagerAddComponent {
     })
   }
 
-  
-  //onSubmit Method is invoked when the Submit Button is clicked
+  // Submit the form data to add a new manager
   onSubmit() {
     if (this.managerForm.invalid) {
       return;
@@ -116,20 +110,22 @@ export class ManagerAddComponent {
 
     this.isSubmitting = true;
 
+    // Call the service to add the manager
     this._managerService.AddManager(this.managerForm.value)
       .subscribe({
         next: (val: any) => {
+          // Close the dialog and indicate successful addition
           this._dialogRef.close(true);
         },
         error: (error: any) => {
           console.error('Error ADDING manager details:', error);
           if (error.error?.message === 'Incorrect Password') {
-            // Perform custom validation for user not found
+            // Perform custom validation for department not found
             this.managerForm.get('departmentID')?.setErrors({ departmentNotFound: true });
           }
 
           if (error.error?.message === "Email already exists") {
-            // Perform custom validation for user not found
+            // Perform custom validation for email already existing
             this.managerForm.get('email')?.setErrors({ emailAlreadyExist: true });
           }
           

@@ -17,31 +17,41 @@ import { ManagerAppointComponent } from './dialog/manager-appoint/manager-appoin
 export class ManagerComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
+  // Empty value variable to display an empty value when necessary
   emptyValue: any = "";
+
   managerlist: any;
   dataSource: MatTableDataSource<any>;
   dataObs$: Observable<any>;
+
+  // Columns to be displayed in the table
   displayedColumns: string[] = ['name', 'age', 'salary', 'edit', 'department', 'assign', 'delete'];
+
+  // Pagination variables
   pageNumber = 1;
-  pageSize = 2
+  pageSize = 2;
   totalItems = 0;
-  totalPages = 0
+  totalPages = 0;
 
   constructor(
     private _dialog: MatDialog,
     private _managerService: ManagerService,
     private _deleteDialogService: DeleteDialogService
   ) { }
+
   ngOnInit(): void {
-    this.GetManagersList();
+    // Retrieve the list of managers on component initialization
+    this.getManagersList();
   }
 
+  // Function to filter the data in the table
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 
-  GetManagersList() {
+  // Function to get the list of managers with pagination
+  getManagersList() {
     const pageObject = {
       pageNumber: this.pageNumber,
       pageSize: this.pageSize
@@ -56,17 +66,19 @@ export class ManagerComponent implements OnInit {
     });
   }
 
-  OpenAddManager() {
+  // Function to open the dialog for adding a new manager
+  openAddManager() {
     const dialogRef = this._dialog.open(ManagerAddComponent);
     dialogRef.afterClosed().subscribe({
       next: (val) => {
         if (val) {
-          this.GetManagersList();
+          this.getManagersList();
         }
       }
     })
   }
 
+  // Function to handle pagination and get the next/previous page of managers
   onPageChange(event: PageEvent): void {
     const previousPageIndex = event.previousPageIndex !== undefined ? event.previousPageIndex : 0;
     if (event.pageIndex < previousPageIndex) {
@@ -77,36 +89,39 @@ export class ManagerComponent implements OnInit {
       this.pageNumber++;
     }
     console.log(this.pageNumber,this.pageSize)
-    this.GetManagersList();
+    this.getManagersList();
   }
 
-  OpenEditManager(data: any) {
+  // Function to open the dialog for editing a manager's details
+  openEditManager(data: any) {
     const dialogRef = this._dialog.open(ManagerEditComponent, {
       data,
     });
     dialogRef.afterClosed().subscribe({
       next: (val) => {
         if (val) {
-          this.GetManagersList();
+          this.getManagersList();
         }
       }
     })
   }
 
-  OpenAppointManager(data: any) {
+  // Function to open the dialog for appointing a manager
+  openAppointManager(data: any) {
     const dialogRef = this._dialog.open(ManagerAppointComponent, {
       data,
     });
     dialogRef.afterClosed().subscribe({
       next: (val) => {
         if (val) {
-          this.GetManagersList();
+          this.getManagersList();
         }
       }
     })
   }
 
-  DeleteManager(id: number) {
+  // Function to delete a manager with confirmation dialog
+  deleteManager(id: number) {
     this._deleteDialogService.openConfirmDialog("Do you really want to delete this record?")
       .afterClosed().subscribe({
         next: (val) => {
@@ -114,7 +129,7 @@ export class ManagerComponent implements OnInit {
             this._managerService.DeleteManager(id).subscribe({
               next: (res) => {
                 // this._coreService.openSnackBar('Manager Deleted!');
-                this.GetManagersList();
+                this.getManagersList();
               },
               error: console.log,
             })

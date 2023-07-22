@@ -1,20 +1,27 @@
+<!-- This is a dialog box for editing a task. -->
+
 <div mat-dialog-title>
     <h1>Edit Task</h1>
 </div>
+
+<!-- The form for editing the task details. It is bound to the "editTaskForm" FormGroup. -->
 <form [formGroup]="editTaskForm" (ngSubmit)="onSubmit()">
     <div mat-dialog-content class="content">
         <div class="row">
             <div>
+                <!-- Input field for task name. It is bound to the "taskName" form control. -->
                 <mat-form-field appearance="outline" class="form-field-width">
                     <mat-label>Name</mat-label>
                     <input matInput type="text" formControlName="taskName">
                 </mat-form-field>
                 <div class="error-container">
+                    <!-- Display error message if task name is required and not filled. -->
                     <ng-container *ngIf="taskName?.touched && taskName?.errors?.['required']">
                         <mat-error class="custom-error">
                             Name is <strong>required</strong>
                         </mat-error>
                     </ng-container>
+                    <!-- Display error message if task name does not match the specified pattern. -->
                     <ng-container *ngIf="taskName?.errors?.['pattern']">
                         <mat-error class="custom-error">
                             Name cannot be empty
@@ -23,6 +30,7 @@
                 </div>
             </div>
             <div>
+                <!-- Input field for task due date. It is bound to the "taskDueDate" form control. -->
                 <mat-form-field appearance="outline" class="form-field-width">
                     <mat-label>Due date</mat-label>
                     <input matInput [min]="minDate" [matDatepicker]="picker" formControlName="taskDueDate"
@@ -31,6 +39,7 @@
                     <mat-datepicker #picker></mat-datepicker>
                 </mat-form-field>
                 <div class="error-container">
+                    <!-- Display error message if task due date is required and not filled. -->
                     <ng-container *ngIf="taskDueDate?.touched && taskDueDate?.errors?.['required']">
                         <mat-error class="custom-error">
                             Date is <strong>required</strong>
@@ -41,17 +50,19 @@
         </div> <br>
         <div class="row">
             <div>
+                <!-- Textarea field for task description. It is bound to the "taskDescription" form control. -->
                 <mat-form-field appearance="outline" class="form-field-full-width">
                     <mat-label>Description</mat-label>
-                    <textarea matInput type="text" formControlName="taskDescription">
-                    </textarea>
+                    <textarea matInput type="text" formControlName="taskDescription"></textarea>
                 </mat-form-field>
                 <div class="error-container">
+                    <!-- Display error message if task description is required and not filled. -->
                     <ng-container *ngIf="taskDescription?.touched && taskDescription?.errors?.['required']">
                         <mat-error class="custom-error">
                             Description is <strong>required</strong>
                         </mat-error>
                     </ng-container>
+                    <!-- Display error message if task description does not match the specified pattern. -->
                     <ng-container *ngIf="taskDescription?.errors?.['pattern']">
                         <mat-error class="custom-error">
                             Description cannot be empty
@@ -63,7 +74,9 @@
         </div>
     </div>
     <div mat-dialog-actions class="action">
+        <!-- Button to close the dialog without making any changes. -->
         <button mat-raised-button type="button" [mat-dialog-close]="false"> Cancel</button>
+        <!-- Button to submit the edited task. It is disabled if the form is invalid. -->
         <button mat-raised-button color="primary" type="submit" [disabled]="editTaskForm.invalid"> Edit </button>
     </div>
 </form>

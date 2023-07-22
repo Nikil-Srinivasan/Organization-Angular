@@ -10,29 +10,33 @@ import { CredentialsService } from 'src/app/services/auth';
 })
 export class ManagerDashboardComponent {
 
+   // Variables to store task counts
   newTaskCount : any;
   inProgressCount : any;
   pendingTaskCount : any;
   completedTaskCount : any;
 
+  // Store the manager ID retrieved from the user credentials
   managerId: number | undefined = this._credentials.userValue?.nameid;
 
+  // Configuration for the donut chart
   chartOptions : any;
 
+  // Store manager details retrieved from the API
   managerDetails : any;
  
-  constructor(private DasboardService : DashboardService , private _credentials : CredentialsService) {
-
-    
-  }
+  constructor(private DasboardService : DashboardService , private _credentials : CredentialsService) { }
 
   ngOnInit() {
- 
-    this.TotalCount(); 
+    
+     // Load data when the component is initialized
+    this.totalCount(); 
     this.getProfileDetails(this.managerId);
    }
 
-   TotalCount() {
+
+   // Configure the chart options for the donut chart
+   totalCount() {
     this.DasboardService.getEmployeeTaskCountByManager(this.managerId).subscribe({
       next: (response: any) => {
         const responseData = response.data;
@@ -67,6 +71,7 @@ export class ManagerDashboardComponent {
     });
   }
 
+  // Function to fetch manager details based on the ID
   getProfileDetails(id : number | undefined){
     this.DasboardService.getManagerDetails(id).subscribe({
       next : (response : any) => {
