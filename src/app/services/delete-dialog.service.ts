@@ -9,11 +9,12 @@ export class DeleteDialogService {
 
   constructor(private _dialog: MatDialog) { }
 
-  openConfirmDialog(confirmMessage: string){
-    return this._dialog.open(ConfirmDeleteComponent,{
-      data:{
+  // Open a confirm dialog with the provided message
+  openConfirmDialog(confirmMessage: string) {
+    return this._dialog.open(ConfirmDeleteComponent, {
+      data: {
         message: confirmMessage
       }
-    })
+    });
   }
 }

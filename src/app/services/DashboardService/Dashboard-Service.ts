@@ -10,29 +10,33 @@ export class DashboardService {
 
   constructor(private http: HttpClient) { }
 
-    getAllEmployeeCount(): Observable<any> { 
-
+  // Get total count of all employees
+  getAllEmployeeCount(): Observable<any> { 
     return this.http.get<any>(`${environment.baseUrl}/api/Dashboard/GetTotalEmployeeCount`);
-    }
+  }
 
-    getChartDetails(): Observable<any> {
-      
-      return this.http.get<any>(`${environment.baseUrl}/api/Dashboard/GetChartDetails`);
-    }
+  // Get chart details
+  getChartDetails(): Observable<any> {
+    return this.http.get<any>(`${environment.baseUrl}/api/Dashboard/GetChartDetails`);
+  }
 
-    getEmployeeTaskCount(id : number | undefined) : Observable<any> {
-      return this.http.get<any>(`${environment.baseUrl}/api/Dashboard/GetEmployeeTasksCount?id=${id}`);
-    }
+  // Get employee's task count by ID
+  getEmployeeTaskCount(id: number | undefined): Observable<any> {
+    return this.http.get<any>(`${environment.baseUrl}/api/Dashboard/GetEmployeeTasksCount?id=${id}`);
+  }
 
-    getEmployeeTaskCountByManager(id : number | undefined) : Observable<any> {
-      return this.http.get<any>(`${environment.baseUrl}/api/Dashboard/GetEmployeeTasksByManager?id=${id}`);
-    }
+  // Get employee's manager task count by manager's ID
+  getEmployeeTaskCountByManager(id: number | undefined): Observable<any> {
+    return this.http.get<any>(`${environment.baseUrl}/api/Dashboard/GetEmployeeTasksByManager?id=${id}`);
+  }
 
-    getManagerDetails(id : number | undefined) : Observable<any> {
-      return this.http.get<any>(`${environment.baseUrl}/api/Manager/GetManagerById?id=${id}`);
-    }
+  // Get manager details by ID
+  getManagerDetails(id: number | undefined): Observable<any> {
+    return this.http.get<any>(`${environment.baseUrl}/api/Manager/GetManagerById?id=${id}`);
+  }
 
-    getEmployeeDetails(id : number | undefined) : Observable<any> {
-      return this.http.get<any>(`${environment.baseUrl}/api/Employee/GetEmployeeById?id=${id}`);
-    }
+  // Get employee details by ID
+  getEmployeeDetails(id: number | undefined): Observable<any> {
+    return this.http.get<any>(`${environment.baseUrl}/api/Employee/GetEmployeeById?id=${id}`);
+  }
 }

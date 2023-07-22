@@ -3,7 +3,6 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { User } from 'src/app/models/user';
 import jwt_decode from 'jwt-decode'; // Import the JWT decode library
 
-
 export interface Credentials {
   // Customize received credentials here
   username: string;
@@ -11,7 +10,6 @@ export interface Credentials {
 }
 
 const credentialsKey = 'credentials';
-
 
 @Injectable({
   providedIn: 'root'
@@ -22,26 +20,25 @@ export class CredentialsService {
   private userSubject: BehaviorSubject<User | null> = new BehaviorSubject<User | null>(null); // Update userSubject type
   public user: any;
 
-
   constructor() {
+    // Retrieve saved credentials from session or local storage
     const savedCredentials = sessionStorage.getItem(credentialsKey) || localStorage.getItem(credentialsKey);
     if (savedCredentials) {
       this._credentials = JSON.parse(savedCredentials);
       if (this._credentials) {
+        // Decode the token and update the userSubject with the decoded user
         const user = this.decodeToken(this._credentials.token);
-        this.userSubject.next(user); // Update userSubject with decoded user
+        this.userSubject.next(user);
         this.user = this.userSubject.asObservable();
       }
     }
   }
 
-
   /**
-   * Checks is the user is authenticated.
+   * Checks if the user is authenticated.
    * @return True if the user is authenticated.
    */
   isAuthenticated(): boolean {
-    // console.log("credential :", this.userSubject.value)
     return !!this.userSubject.value;
   }
 
@@ -53,8 +50,11 @@ export class CredentialsService {
     return this._credentials;
   }
 
-  public get userValue(): User | null{
-    // console.log(this.userSubject.value);
+  /**
+   * Gets the user value from userSubject.
+   * @return The user details as a User object or null if the user is not authenticated.
+   */
+  public get userValue(): User | null {
     return this.userSubject.value;
   }
 
@@ -67,35 +67,42 @@ export class CredentialsService {
    */
   setCredentials(credentials?: Credentials) {
     this._credentials = credentials || null;
-    
 
     if (credentials) {
+      // If credentials are provided, store them in local storage and update the userSubject with the decoded user
       const storage = localStorage;
       storage.setItem(credentialsKey, JSON.stringify(credentials));
       const user = this.decodeToken(credentials.token);
-      // console.log('User Details:', user);
-      this.userSubject.next(user); // Update userSubject with decoded user
+      this.userSubject.next(user);
     } else {
+      // If credentials are not provided, remove them from session and local storage and update the userSubject with null
       sessionStorage.removeItem(credentialsKey);
       localStorage.removeItem(credentialsKey);
+      this.userSubject.next(null);
     }
   }
 
-  removeCredential(){
+  /**
+   * Removes the user credentials.
+   */
+  removeCredential() {
     localStorage.removeItem(credentialsKey);
-    this.userSubject.next(null); // Update userSubject with null
+    this.userSubject.next(null);
   }
 
-
-  private decodeToken(token: string): any {
+  /**
+   * Decodes the token and creates a User object from the decoded token.
+   * @param token The JWT token to be decoded.
+   * @return The user details as a User object.
+   */
+  private decodeToken(token: string): User {
     const decodedToken: any = jwt_decode(token);
     const user: User = {
       nameid: decodedToken.nameid,
       unique_name: decodedToken.unique_name,
       role: decodedToken.role,
-      token : token
+      token: token
     };
     return user;
   }
-
 }
