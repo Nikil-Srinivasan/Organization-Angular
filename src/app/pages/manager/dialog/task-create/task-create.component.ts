@@ -25,6 +25,7 @@ export class TaskCreateComponent {
   ) {
     this.minDate = new Date();  // Set the minDate to the current date
 
+    // Initialize the form with its controls and validators
     this.createTaskForm = this._formBuilder.group({
       taskName: ['', [Validators.required, Validators.pattern(NAME_PATTERN)]],
       taskDescription: ['', [Validators.required, Validators.pattern(NAME_PATTERN)]],
@@ -33,6 +34,7 @@ export class TaskCreateComponent {
     });
   }
 
+  // Convenience getter methods to access form controls easily
   get taskName() {
     return this.createTaskForm.get('taskName');
   }
@@ -42,6 +44,7 @@ export class TaskCreateComponent {
   get taskDueDate() {
     return this.createTaskForm.get('taskDueDate');
   }
+
   ngOnInit(): void { }
 
   // onSubmit Method is invoked when the Submit Button is clicked
@@ -52,6 +55,7 @@ export class TaskCreateComponent {
   
     this.isSubmitting = true;
 
+    // Extract the selected date from the form and convert it to UTC format
     this.selectedDate = new Date(this.createTaskForm.get('taskDueDate')?.value);
     this.selectedDate.setHours(5);
     this.selectedDate.setMinutes(30);
@@ -64,11 +68,13 @@ export class TaskCreateComponent {
       employeeId: this.data.employeeId
     };
 
-  
+    // Send the task creation request to the server through the EmployeeTaskService
     this._employeeTaskService.CreateEmployeeTask(formValueWithEmployeeId)
       .subscribe({
         next: (val: any) => {
+          // Show a success message using a snackbar
           this._snackBar.open("Task Created Successfully!", "close");
+          // Close the dialog after successful task creation
           this._dialogRef.close(true);
         },
         error: (error: any) => {

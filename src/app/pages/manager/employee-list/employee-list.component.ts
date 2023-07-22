@@ -29,7 +29,7 @@ export class EmployeeListComponent implements OnInit {
 
   // Array of column names to be displayed in the table
   displayedColumns: string[] = ['name', 'designation', 'action'];
-
+  managerName : string
   constructor(
     private _managerService: ManagerService,
     private _credentials: CredentialsService,
@@ -53,8 +53,8 @@ export class EmployeeListComponent implements OnInit {
     this._managerService.GetEmployeesByManagerId(this.managerId).subscribe(response => {
       // Store the list of employees in the managerlist variable
       this.managerlist = response.data;
-
-      // Create a MatTableDataSource with the managerlist as the data source
+      console.log(this.managerlist)
+      this.managerName = this.managerlist[0].managerName
       this.dataSource = new MatTableDataSource(this.managerlist);
 
       // Connect the MatTableDataSource to the MatPaginator for pagination
@@ -70,3 +70,4 @@ export class EmployeeListComponent implements OnInit {
     this._router.navigate(['/dashboard/employee-list', employeeId]);
   }
 }
+

@@ -10,6 +10,7 @@
                 </div>
                 <!-- Search filter input field -->
                 <div>
+                    
                     <mat-form-field appearance="outline">
                         <mat-label>Filter</mat-label>
                         <input matInput (keyup)="applyFilter($event)" placeholder="Search columns" #input>
@@ -18,11 +19,8 @@
             </mat-card-title>
             <!-- Table container with responsive design -->
             <div class="table-responsive m-t-16">
-                <!-- Material table with data source binding -->
-                <table mat-table [dataSource]="dataSource" class="w-100">
-                    <!-- Column definitions -->
-
-                    <!-- Name Column -->
+                <table mat-table [dataSource]="dataSource" class="w-100" >
+                    <!-- Position Column -->
                     <ng-container matColumnDef="name">
                         <!-- Header cell for 'Name' column -->
                         <th mat-header-cell *matHeaderCellDef class="f-w-600 mat-subtitle-1 f-s-14">
