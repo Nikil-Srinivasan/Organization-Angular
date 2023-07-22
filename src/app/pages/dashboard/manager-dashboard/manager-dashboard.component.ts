@@ -71,7 +71,6 @@ export class ManagerDashboardComponent {
     this.DasboardService.getManagerDetails(id).subscribe({
       next : (response : any) => {
       this.managerDetails = response.data;
-      console.log(this.managerDetails);
     }
   })
   }

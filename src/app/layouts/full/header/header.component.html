@@ -1,13 +1,7 @@
 <mat-toolbar class="topbar">
-  <!-- Mobile Menu -->
   <button mat-icon-button (click)="toggleMobileNav.emit()" *ngIf="!showToggle">
     <i-tabler name="menu-2" class="icon-20 d-flex"></i-tabler>
   </button>
-  <!-- --------------------------------------------------------------- -->
-
-  <!-- --------------------------------------------------------------- -->
-  <!-- Notification Dropdown -->
-  <!-- --------------------------------------------------------------- -->
 
   <button mat-icon-button aria-label="Notifications" *ngIf="showBellIcon">
     <i-tabler class="d-flex" name="bell" [matBadge]="newTaskCount" matBadgeColor="primary"></i-tabler>
@@ -15,24 +9,14 @@
 
   <span class="flex-1-auto"></span>
 
-  <!-- --------------------------------------------------------------- -->
-  <!-- profile Dropdown -->
-  <!-- --------------------------------------------------------------- -->
-  <!-- <a
-    mat-flat-button
-    color="primary"
-    href="https://adminmart.com/"
-    target="_blank"
-    class="d-flex justify-content-center"
-  >
-    Download Free
-  </a> -->
   <button mat-icon-button [matMenuTriggerFor]="profilemenu" aria-label="Notifications">
     <img src="/assets/images/profile/user-1.jpg" class="rounded-circle object-cover" width="35" />
   </button>
+
   <mat-menu #profilemenu="matMenu" class="topbar-dd cardWithShadow">
     <div class="p-x-12 m-t-12">
-      <button mat-stroked-button style="background-color: red; color: white;" class="w-100" (click)="onLogoutHandle()">Logout</button>
+      <button mat-stroked-button style="background-color: red; color: white;" class="w-100"
+        (click)="onLogoutHandle()">Logout</button>
     </div>
   </mat-menu>
 </mat-toolbar>

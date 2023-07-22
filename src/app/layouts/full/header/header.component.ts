@@ -7,7 +7,6 @@ import {
 } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { Router } from '@angular/router';
-import { Observable } from 'rxjs';
 import { Role } from 'src/app/models/role';
 import { EmployeetaskService } from 'src/app/services/EmployeeTaskService/employeetask.service';
 import { AuthenticationService, CredentialsService } from 'src/app/services/auth';
@@ -28,7 +27,6 @@ export class HeaderComponent {
   showFiller = false;
   showBellIcon = false;
   newTaskCount: number;
-
 
   constructor(
     public dialog: MatDialog,
@@ -63,11 +61,8 @@ export class HeaderComponent {
 
   checkUserRoleForNotification() {
     const user = this.credentialsService.userValue?.role;
-
     if (user == Role.Employee) {
       this.showBellIcon = true;
-      const employeeId = this.credentialsService.userValue?.nameid;
-
     }
   }
 

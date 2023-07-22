@@ -12,7 +12,8 @@
           <form class="m-t-30" [formGroup]="loginForm" (ngSubmit)="login()">
             <mat-label class="mat-subtitle-2 f-s-14 f-w-600 m-b-12 d-block">Username</mat-label>
             <mat-form-field appearance="outline" class="w-100" color="primary">
-              <input type="email" matInput formControlName="userName" [errorStateMatcher]="getErrorStateMatcher()" placeholder="Username"/>
+              <input type="email" matInput formControlName="userName" [errorStateMatcher]="getErrorStateMatcher()"
+                placeholder="Username" />
             </mat-form-field>
             <div class="error-container">
               <div *ngIf="getUsername()?.touched && getUsername()?.errors?.['required']">
@@ -22,25 +23,25 @@
               </div>
               <div *ngIf="getUsername()?.errors?.['pattern']">
                 <mat-error class="custom-error">
-                 Invalid username
+                  Invalid username
                 </mat-error>
               </div>
-              <div *ngIf="!getUsername()?.hasError('userNotFound') && !getUsername()?.errors?.['required'] && !getUsername()?.errors?.['pattern'] && getUsername()?.dirty">
+              <div
+                *ngIf="!getUsername()?.hasError('userNotFound') && !getUsername()?.errors?.['required'] && !getUsername()?.errors?.['pattern'] && getUsername()?.dirty">
                 <mat-error class="custom-success">
                   Username is valid!
                 </mat-error>
               </div>
               <div *ngIf="getUsername()?.hasError('userNotFound')">
-                <mat-error >
+                <mat-error>
                   User not found. Please check your username.
                 </mat-error>
               </div>
             </div>
-            
 
             <mat-label class="mat-subtitle-2 f-s-14 f-w-600 m-b-12 d-block ">Password</mat-label>
             <mat-form-field appearance="outline" class="w-100" color="primary">
-              <input matInput formControlName="password" type="password" placeholder="Password"/>
+              <input matInput formControlName="password" type="password" placeholder="Password" />
             </mat-form-field>
             <div class="error-container">
               <div *ngIf="getPassword()?.touched && getPassword()?.errors?.['required']">
@@ -53,23 +54,25 @@
                   Password should have at least 8 characters, one special character, and one number
                 </mat-error>
               </div>
-              <div *ngIf="!getPassword()?.hasError('incorrectPassword') && !getPassword()?.errors?.['required'] && !getPassword()?.errors?.['pattern'] && getPassword()?.dirty">
+              <div
+                *ngIf="!getPassword()?.hasError('incorrectPassword') && !getPassword()?.errors?.['required'] && !getPassword()?.errors?.['pattern'] && getPassword()?.dirty">
                 <mat-error class="custom-success">
                   Password is valid!
                 </mat-error>
               </div>
               <div *ngIf="getPassword()?.hasError('incorrectPassword')">
-                <mat-error >
+                <mat-error>
                   Incorrect Password. Please try again.
                 </mat-error>
               </div>
             </div>
 
-
-            <button mat-flat-button color="primary" class="w-100" type="submit" [disabled]="!loginForm.valid">Sign In</button>
+            <button mat-flat-button color="primary" class="w-100" type="submit" [disabled]="!loginForm.valid">Sign
+              In</button>
           </form>
           <span class="d-block f-w-500 text-right m-t-10">
-            <a [routerLink]="['/authentication/forgot-password']" class="text-decoration-none text-primary f-w-500 f-s-14 m-t-30">
+            <a [routerLink]="['/authentication/forgot-password']"
+              class="text-decoration-none text-primary f-w-500 f-s-14 m-t-30">
               Forgot Password?</a>
           </span>
         </mat-card-content>

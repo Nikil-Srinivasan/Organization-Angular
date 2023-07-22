@@ -1,13 +1,12 @@
 import { Injectable, inject } from '@angular/core';
 import { ActivatedRouteSnapshot, CanActivateFn, Router, RouterStateSnapshot, UrlTree } from '@angular/router';
-import { Observable } from 'rxjs';
 import { AuthenticationService } from 'src/app/services/auth';
 
 @Injectable({
   providedIn: 'root'
 })
 export class VerifyGuard {
-  constructor(private authService: AuthenticationService, private router: Router) {}
+  constructor(private authService: AuthenticationService, private router: Router) { }
 
   canActivate(): boolean | UrlTree {
     if (this.authService.isRegistered()) {
@@ -19,6 +18,6 @@ export class VerifyGuard {
 }
 
 export const canActivateTeam: CanActivateFn =
-(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) => {
-  return inject(VerifyGuard).canActivate();
-};
+  (route: ActivatedRouteSnapshot, state: RouterStateSnapshot) => {
+    return inject(VerifyGuard).canActivate();
+  };

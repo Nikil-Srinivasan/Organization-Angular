@@ -1,8 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { MatPaginator } from '@angular/material/paginator';
-import { MatSort } from '@angular/material/sort';
-import { MatTableDataSource } from '@angular/material/table';
-import { Observable } from 'rxjs';
+import { Component, OnInit} from '@angular/core';
 import { Status } from 'src/app/models/status';
 import { DashboardService } from 'src/app/services/DashboardService/Dashboard-Service';
 import { CredentialsService } from 'src/app/services/auth';
@@ -75,7 +71,6 @@ export class EmployeeDashboardComponent implements OnInit {
     this.DasboardService.getEmployeeDetails(id).subscribe({
       next : (response : any) => {
       this.employeeDetails = response.data;
-      console.log(this.employeeDetails);
     }
   })
   }

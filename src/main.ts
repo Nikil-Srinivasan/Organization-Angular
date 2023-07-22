@@ -2,7 +2,6 @@ import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 import { enableProdMode } from "@angular/core";
 import { AppModule } from './app/app.module';
 import * as Sentry from '@sentry/angular-ivy'
-import { BrowserTracing } from '@sentry/angular-ivy';
 
 Sentry.init({
   dsn: "https://2e3dc6d8db9e420d89493fc7548681d2@o4505521383407616.ingest.sentry.io/4505521385111552",

@@ -1,50 +1,20 @@
-<mat-sidenav-container
-  class="mainWrapper blue_theme  light-theme"
-  autosize
-  autoFocus
-  dir="ltr"
->
-  <!-- ============================================================== -->
-  <!-- Vertical Sidebar -->
-  <!-- ============================================================== -->
+<mat-sidenav-container class="mainWrapper blue_theme  light-theme" autosize autoFocus dir="ltr">
 
-  <mat-sidenav
-    #leftsidenav
-    [mode]="isOver ? 'over' : 'side'" 
-    [opened]="!isOver"
-    (openedChange)="onSidenavOpenedChange($event)"
-    (closedStart)="onSidenavClosedStart()"
-    class="sidebarNav"
-  >
+  <!-- Vertical Sidebar -->
+  <mat-sidenav #leftsidenav [mode]="isOver ? 'over' : 'side'" [opened]="!isOver" class="sidebarNav">
     <app-sidebar></app-sidebar>
   </mat-sidenav>
-  <!-- ============================================================== -->
-  <!-- Main Content -->
-  <!-- ============================================================== -->
-  <!-- 
-    The mat-sidenav-content component represents the main content area. 
-    It contains the following elements:
-   -->
-  <mat-sidenav-content class="contentWrapper">
-    <!-- ============================================================== -->
-    <!-- VerticalHeader -->
-    <!-- ============================================================== -->
 
-    <app-header
-      [showToggle]="!isOver"
-      (toggleCollapsed)="toggleCollapsed()"
-      (toggleMobileNav)="sidenav.toggle()"
-    ></app-header>
+  <!-- Main Content -->
+  <!-- The mat-sidenav-content component represents the main content area -->
+  <mat-sidenav-content class="contentWrapper">
+
+    <!-- VerticalHeader -->
+    <app-header [showToggle]="!isOver" (toggleMobileNav)="sidenav.toggle()"></app-header>
 
     <main class="pageWrapper">
-      <!-- ============================================================== -->
       <!-- Outlet -->
-      <!-- ============================================================== -->
       <router-outlet></router-outlet>
     </main>
   </mat-sidenav-content>
-
-      
-
-
 </mat-sidenav-container>

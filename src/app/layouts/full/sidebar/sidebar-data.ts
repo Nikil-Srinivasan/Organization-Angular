@@ -20,7 +20,7 @@ export const navItems: NavItem[] = [
   {
     displayName: 'Dashboard',
     iconName: 'layout-dashboard',
-    route: '/dashboard',  
+    route: '/dashboard',
     roles: [Role.Employee],
   },
   {
@@ -76,6 +76,6 @@ export const navItems: NavItem[] = [
     route: '/dashboard/tasks/completed',
     roles: [Role.Employee],
   },
-  
-  
+
+
 ];

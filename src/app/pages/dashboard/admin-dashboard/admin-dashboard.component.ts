@@ -21,7 +21,7 @@ export class AdminDashboardComponent implements OnInit {
   @ViewChild(MatSort) sort: MatSort;
 
   chartOptions: any = {};
-  chartOption: any = {};
+  
   
   TotalEmployees: number;
   TotalDepartments: number;
