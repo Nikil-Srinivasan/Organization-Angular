@@ -37,6 +37,7 @@ export class EmployeeAddComponent {
     @Inject(MAT_DIALOG_DATA) public data: any,
     private _snackBar: MatSnackBar
   ) {
+    // Initialize the employee form with form controls and validators
     this.employeeForm = this._formBuilder.group({
       email: ['', [Validators.required, Validators.pattern(EMAIL_PATTERN)]],
       userName: ['', [Validators.required, Validators.pattern(USERNAME_PATTERN)]],
@@ -47,18 +48,15 @@ export class EmployeeAddComponent {
       managerID: ['', Validators.required],
       designation: ['', Validators.required],
       address: ['', Validators.required],
-      phone: ['', [
-        Validators.required,
-        Validators.pattern(PHONE_PATTERN)
-      ]],
+      phone: ['', [Validators.required, Validators.pattern(PHONE_PATTERN)]],
       role: 2,
       managerName: '',
       managerSalary: 0,
       managerAge: 0
     });
-
   }
 
+  // Helper getter methods for accessing individual form controls
 
   get designation() {
     return this.employeeForm.get('designation');
@@ -101,35 +99,35 @@ export class EmployeeAddComponent {
   }
 
   ngOnInit(): void {
+    // Fetch departments associated with managers when the component is initialized
     this.fetchDepartmentsAssociatedWithManager();
   }
 
   fetchDepartmentsAssociatedWithManager() {
+    // Fetch departments associated with managers using the ManagerService
     this._managerService.GetAllDepartmentsAssociatedWithManager().subscribe(departments => {
       this.departments = departments.data;
     });
   }
 
-
   //onSubmit Method is invoked when the Submit Button is clicked
   onSubmit() {
-    this._employeeService.AddEmployee(this.employeeForm.value)
-      .subscribe({
-        next: (val: any) => {
-          this._dialogRef.close(true);
-          this._snackBar.open("Employee added successfully", 'Close', {
-            duration: 3000
-          })
-        },
-        error: (error: any) => {
-          console.error('Error updating employee details:', error);
-          // Handle the error and show an error message to the user "Email already exists"
-          if (error.error?.message === "Email already exists") {
-            // Perform custom validation for user not found
-            this.employeeForm.get('email')?.setErrors({ emailAlreadyExist: true });
-          }
+    // Call the EmployeeService to add a new employee
+    this._employeeService.AddEmployee(this.employeeForm.value).subscribe({
+      next: (val: any) => {
+        this._dialogRef.close(true); // Close the dialog on successful employee addition
+        this._snackBar.open("Employee added successfully", 'Close', {
+          duration: 3000
+        });
+      },
+      error: (error: any) => {
+        console.error('Error updating employee details:', error);
+        // Handle the error and show an error message to the user "Email already exists"
+        if (error.error?.message === "Email already exists") {
+          // Perform custom validation for email already exists
+          this.employeeForm.get('email')?.setErrors({ emailAlreadyExist: true });
         }
       }
-      );
+    });
   }
 }

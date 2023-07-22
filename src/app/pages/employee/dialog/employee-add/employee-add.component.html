@@ -1,45 +1,42 @@
+<!-- Define the dialog content -->
 <div class="w-100">
     <div mat-dialog-title>
         <h1>Create Employee</h1>
     </div>
+    <!-- Form for creating an employee -->
     <form [formGroup]="employeeForm" (ngSubmit)="onSubmit()">
-        <div mat-dialog-content class="content ">
-            <div class="row ">
+        <div mat-dialog-content class="content">
+            <!-- Employee details form fields -->
+            <div class="row">
+                <!-- Email Id input field -->
                 <div>
                     <mat-form-field appearance="outline" class="form-field-width">
                         <mat-label>Email Id</mat-label>
                         <input matInput type="text" formControlName="email">
-
                     </mat-form-field>
+                    <!-- Display error messages for email validation -->
                     <div class="error-container">
                         <div *ngIf="email?.touched && email?.hasError('required')">
-                            <mat-error class="custom-error">
-                                Email is <strong>required</strong>
-                            </mat-error>
+                            <mat-error class="custom-error">Email is <strong>required</strong></mat-error>
                         </div>
                         <div *ngIf="email?.hasError('pattern')">
-                            <mat-error class="custom-error">
-                                Email should have a valid format
-                            </mat-error>
+                            <mat-error class="custom-error">Email should have a valid format</mat-error>
                         </div>
                         <div *ngIf="email?.hasError('emailAlreadyExist')">
-                            <mat-error class="custom-error" >
-                              Email already exist
-                            </mat-error>
+                            <mat-error class="custom-error">Email already exists</mat-error>
                         </div>
                     </div>
                 </div>
-
+                <!-- User Name input field -->
                 <div>
                     <mat-form-field appearance="outline" class="form-field-width">
                         <mat-label>User Name</mat-label>
                         <input matInput type="text" formControlName="userName">
                     </mat-form-field>
+                    <!-- Display error messages for username validation -->
                     <div class="error-container">
                         <div *ngIf="userName?.touched && userName?.errors?.['required']">
-                            <mat-error class="custom-error">
-                                Username is <strong>required</strong>
-                            </mat-error>
+                            <mat-error class="custom-error">Username is <strong>required</strong></mat-error>
                         </div>
                         <div *ngIf="userName?.errors?.['pattern']">
                             <mat-error class="custom-error">
@@ -48,21 +45,19 @@
                         </div>
                     </div>
                 </div>
-
             </div>
             <br>
             <div class="row">
-
+                <!-- Password input field -->
                 <div>
                     <mat-form-field appearance="outline" class="form-field-width">
                         <mat-label>Password</mat-label>
                         <input matInput type="text" formControlName="password">
                     </mat-form-field>
+                    <!-- Display error messages for password validation -->
                     <div class="error-container">
                         <div *ngIf="password?.touched && password?.errors?.['required']">
-                            <mat-error class="custom-error">
-                                Password is <strong>required</strong>
-                            </mat-error>
+                            <mat-error class="custom-error">Password is <strong>required</strong></mat-error>
                         </div>
                         <div *ngIf="password?.errors?.['pattern']">
                             <mat-error class="custom-error">
@@ -71,137 +66,126 @@
                         </div>
                     </div>
                 </div>
-
+                <!-- Name input field -->
                 <div>
                     <mat-form-field appearance="outline" class="form-field-width">
                         <mat-label>Name</mat-label>
                         <input matInput type="text" formControlName="employeeName">
                     </mat-form-field>
+                    <!-- Display error messages for employee name validation -->
                     <div class="error-container">
                         <div *ngIf="employeeName?.touched && employeeName?.errors?.['required']">
-                            <mat-error class="custom-error">
-                                Name is <strong>required</strong>
-                            </mat-error>
+                            <mat-error class="custom-error">Name is <strong>required</strong></mat-error>
                         </div>
                         <div *ngIf="employeeName?.errors?.['pattern']">
-                            <mat-error class="custom-error">
-                                Username should have at least 4 characters.
-                            </mat-error>
+                            <mat-error class="custom-error">Username should have at least 4 characters.</mat-error>
                         </div>
                     </div>
                 </div>
-
-            </div> <br>
+            </div>
+            <br>
             <div class="row">
+                <!-- Age input field -->
                 <div>
                     <mat-form-field appearance="outline" class="form-field-width">
                         <mat-label>Age</mat-label>
                         <input matInput type="number" formControlName="employeeAge">
                     </mat-form-field>
+                    <!-- Display error messages for age validation -->
                     <div class="error-container">
                         <div *ngIf="employeeAge?.touched && employeeAge?.errors?.['required']">
-                            <mat-error class="custom-error">
-                                Age is <strong>required</strong>
-                            </mat-error>
+                            <mat-error class="custom-error">Age is <strong>required</strong></mat-error>
                         </div>
                         <div *ngIf="employeeAge?.errors?.['invalidAge']">
-                            <mat-error class="custom-error">
-                                Age should be greater than 20
-                            </mat-error>
+                            <mat-error class="custom-error">Age should be greater than 20</mat-error>
                         </div>
                     </div>
                 </div>
-
+                <!-- Salary input field -->
                 <div>
                     <mat-form-field appearance="outline" class="form-field-width">
                         <mat-label>Salary</mat-label>
                         <input matInput type="number" formControlName="employeeSalary">
                     </mat-form-field>
+                    <!-- Display error messages for salary validation -->
                     <div class="error-container">
                         <div *ngIf="employeeSalary?.touched && employeeSalary?.errors?.['required']">
-                            <mat-error class="custom-error">
-                                Salary is <strong>required</strong>
-                            </mat-error>
+                            <mat-error class="custom-error">Salary is <strong>required</strong></mat-error>
                         </div>
                     </div>
                 </div>
-
-            </div> <br>
-
+            </div>
+            <br>
             <div class="row">
+                <!-- Phone input field -->
                 <div>
                     <mat-form-field appearance="outline" class="form-field-width">
                         <mat-label>Phone</mat-label>
                         <input matInput type="text" formControlName="phone">
                     </mat-form-field>
+                    <!-- Display error messages for phone number validation -->
                     <div class="error-container">
                         <div *ngIf="phone?.touched && phone?.errors?.['required']">
-                            <mat-error class="custom-error">
-                                Phone is <strong>required</strong>
-                            </mat-error>
+                            <mat-error class="custom-error">Phone is <strong>required</strong></mat-error>
                         </div>
                         <div *ngIf="phone?.errors?.['pattern']">
-                            <mat-error class="custom-error">
-                             Invalid phone number
-                            </mat-error>
-                          </div>
+                            <mat-error class="custom-error">Invalid phone number</mat-error>
+                        </div>
                     </div>
                 </div>
-
+                <!-- Designation input field -->
                 <div>
                     <mat-form-field appearance="outline" class="form-field-width">
                         <mat-label>Designation</mat-label>
                         <input matInput type="text" formControlName="designation">
                     </mat-form-field>
+                    <!-- Display error messages for designation validation -->
                     <div class="error-container">
                         <div *ngIf="designation?.touched && designation?.errors?.['required']">
-                            <mat-error class="custom-error">
-                                Designation is <strong>required</strong>
-                            </mat-error>
+                            <mat-error class="custom-error">Designation is <strong>required</strong></mat-error>
                         </div>
                     </div>
                 </div>
-
-            </div> <br>
+            </div>
+            <br>
             <div class="row">
+                <!-- Department selection dropdown -->
                 <div>
                     <mat-form-field appearance="outline" class="form-field-width">
                         <mat-label>Department</mat-label>
                         <mat-select formControlName="managerID">
                             <mat-option *ngFor="let department of departments" [value]="department.managerId">
-                                {{department.departmentName}} </mat-option>
+                                {{department.departmentName}}
+                            </mat-option>
                         </mat-select>
                     </mat-form-field>
-
+                    <!-- Display error messages for department selection validation -->
                     <div class="error-container">
                         <div *ngIf="managerID?.touched && managerID?.errors?.['required']">
-                            <mat-error class="custom-error">
-                                Department is <strong>required</strong>
-                            </mat-error>
+                            <mat-error class="custom-error">Department is <strong>required</strong></mat-error>
                         </div>
                     </div>
                 </div>
-
-                <div>       
+                <!-- Address textarea field -->
+                <div>
                     <mat-form-field appearance="outline" class="form-field-width">
-                        <mat-label >Address</mat-label>
+                        <mat-label>Address</mat-label>
                         <textarea formControlName="address" matInput placeholder="address goes here..."></textarea>
                     </mat-form-field>
+                    <!-- Display error messages for address validation -->
                     <div class="error-container">
                         <div *ngIf="address?.touched && address?.errors?.['required']">
-                            <mat-error class="custom-error">
-                                Address is <strong>required</strong>
-                            </mat-error>
+                            <mat-error class="custom-error">Address is <strong>required</strong></mat-error>
                         </div>
-                       
                     </div>
-               
                 </div>
             </div>
         </div>
+        <!-- Dialog actions (buttons) -->
         <div mat-dialog-actions class="action">
             <button mat-raised-button type="button" [mat-dialog-close]="false">Cancel</button>
-            <button mat-raised-button color="primary" type="submit" [disabled]="!employeeForm.valid" >Create</button>
+            <!-- The "Create" button is enabled when the form is valid -->
+            <button mat-raised-button color="primary" type="submit" [disabled]="!employeeForm.valid">Create</button>
         </div>
     </form>
 </div>

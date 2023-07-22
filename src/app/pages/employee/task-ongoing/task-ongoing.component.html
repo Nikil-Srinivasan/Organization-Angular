@@ -1,18 +1,24 @@
 <div class="col-lg-12">
+    <!-- Mat-card is a Material Design card container -->
     <mat-card class="cardWithShadow">
         <mat-card-content class="p-24">
+            <!-- Mat-card-title with filter input -->
             <mat-card-title class="title-flex-container">
                 <div layout="row" layout-align="center center">
                    Ongoing Tasks
                 </div>
+                <!-- Filter input field to search columns -->
                 <mat-form-field appearance="outline">
                     <mat-label>Filter</mat-label>
-                        <input matInput (keyup)="applyFilter($event)" placeholder="Search columns" #input>
+                    <input matInput (keyup)="applyFilter($event)" placeholder="Search columns" #input>
                 </mat-form-field>
             </mat-card-title>
+            
+            <!-- Table for displaying ongoing tasks -->
             <div class="table-responsive m-t-16">
                 <table  mat-table [dataSource]="dataSource" class="w-100" matSort>
-                    <!-- Position Column -->
+                    
+                    <!-- Column for task name -->
                     <ng-container matColumnDef="taskName">
                         <th  mat-header-cell *matHeaderCellDef class="f-w-600 mat-subtitle-1 f-s-14" mat-sort-header >
                             Name
@@ -22,7 +28,7 @@
                         </td>
                     </ng-container>
 
-                    <!-- Name Column -->
+                    <!-- Column for task created date -->
                     <ng-container matColumnDef="taskCreatedDate">
                         <th  mat-header-cell *matHeaderCellDef class="f-w-600 mat-subtitle-1 f-s-14" mat-sort-header >
                             Created Date
@@ -32,6 +38,7 @@
                         </td>
                     </ng-container>
                    
+                    <!-- Column for task due date -->
                     <ng-container matColumnDef="taskDueDate">
                         <th  mat-header-cell *matHeaderCellDef class="f-w-600 mat-subtitle-1 f-s-14" mat-sort-header >
                             Due Date
@@ -41,21 +48,25 @@
                         </td>
                     </ng-container>
 
+                    <!-- Column for task status -->
                     <ng-container matColumnDef="taskStatus">
                         <th  mat-header-cell *matHeaderCellDef class="f-w-600 mat-subtitle-1 f-s-14" mat-sort-header>
                             Task Status
                         </th>
                         <td mat-cell *matCellDef="let task" class="mat-body-1">
+                            <!-- Display task status with a colored background based on its status -->
                             <span class="bg-light-warning text-warning rounded f-w-600 p-6 p-y-4 f-s-12">
-                            {{ getStatusFromNumber(task.taskStatus) }}
+                                {{ getStatusFromNumber(task.taskStatus) }}
                             </span>
                         </td>
                     </ng-container>
 
+                    <!-- Column for task info (description) -->
                     <ng-container matColumnDef="info">
                         <th mat-header-cell *matHeaderCellDef class="f-w-600 mat-subtitle-1 f-s-14">Info</th>
                         <td mat-cell *matCellDef="let element" class="mat-body-1">
                             <ng-container>
+                                <!-- Button to open a dialog or popup with task description -->
                                 <button mat-icon-button color="primary" (click)="OpenTaskDescription(element.taskDescription)">
                                     <mat-icon>info</mat-icon>
                                 </button>
@@ -63,23 +74,25 @@
                         </td>
                     </ng-container>
 
-                    <!-- Action Column -->
+                    <!-- Column for editing a task -->
                     <ng-container matColumnDef="edit">
                         <th mat-header-cell *matHeaderCellDef class="f-w-600 mat-subtitle-1 f-s-14">Update Task</th>
                         <td mat-cell *matCellDef="let task" class="mat-body-1">
+                            <!-- Button to open a dialog or popup for updating the task -->
                             <button mat-icon-button color="primary" (click)="OpenEditEmployeeTask(task)">
                                 <mat-icon>edit</mat-icon>
                             </button>
                         </td>
                     </ng-container>
 
-
+                    <!-- Define the table rows -->
                     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
                     <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
                 </table>
             </div>
         </mat-card-content>
-        <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" [pageSize]="5" > </mat-paginator>
+        
+        <!-- Paginator for the table -->
+        <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" [pageSize]="5"></mat-paginator>
     </mat-card>
 </div>
-

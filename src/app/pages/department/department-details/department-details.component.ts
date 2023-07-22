@@ -25,22 +25,30 @@ export class DepartmentDetailsComponent implements OnInit {
   constructor(private route: ActivatedRoute, private _managerService: ManagerService, private _employeeService: EmployeeService) { }
 
   ngOnInit() {
+    // Subscribe to route parameters to get the departmentId from the URL
     this.route.params.subscribe(params => {
       this.departmentId = params['id'];
-      // Call a method to fetch product details based on the productId
-      
-      this._managerService.GetEmployeesAndManagerByDepartmentId(parseInt(this.departmentId)).subscribe(response =>{
+
+      // Call a method to fetch product details based on the departmentId
+      this._managerService.GetEmployeesAndManagerByDepartmentId(parseInt(this.departmentId)).subscribe(response => {
         console.log(response)
-        if(response.success){
-          this.IsMangerFound = true
-          this.EmployeesAndManagerDetails = response.data
+        if (response.success) {
+          this.IsMangerFound = true;
+          this.EmployeesAndManagerDetails = response.data;
           this.employeelist = response.data.employees;
+          
+          // Create a MatTableDataSource with the employee list
           this.dataSource = new MatTableDataSource(this.employeelist);
+          
+          // Set the MatPaginator for the table
           this.dataSource.paginator = this.paginator;
+          
+          // Connect the data source to an observable for tracking changes
           this.dataObs$ = this.dataSource.connect();
         }
-      })
-      console.log(this.departmentId)
+      });
+
+      console.log(this.departmentId);
     });
   }
 }

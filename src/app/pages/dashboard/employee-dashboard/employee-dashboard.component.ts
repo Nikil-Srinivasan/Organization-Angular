@@ -14,29 +14,32 @@ import { CredentialsService } from 'src/app/services/auth';
 })
 export class EmployeeDashboardComponent implements OnInit {
  
- 
+  // Variables to store task counts
   newTaskCount : any;
   inProgressCount : any;
   pendingTaskCount : any;
   completedTaskCount : any;
 
+  // Store the employee ID retrieved from the user credentials
   employeeId: number | undefined = this._credentials.userValue?.nameid;
+
+  // Store employee details retrieved from the API
   employeeDetails : any;
 
+  // Configuration for the donut chart
   chartOptions : any;
  
-  constructor(private DasboardService : DashboardService , private _credentials : CredentialsService) {
-
-    
-  }
+  constructor(private DasboardService : DashboardService , private _credentials : CredentialsService) { }
 
   ngOnInit() {
- 
-    this.TotalCount(); 
+    
+    // Load data when the component is initialized
+    this.totalCount(); 
     this.getProfileDetails(this.employeeId);
    }
 
-   TotalCount() {
+   // Function to fetch the total task counts for the employee
+   totalCount() {
     this.DasboardService.getEmployeeTaskCount(this.employeeId).subscribe({
       next: (response: any) => {
         const responseData = response.data;
@@ -71,6 +74,7 @@ export class EmployeeDashboardComponent implements OnInit {
     });
   }
 
+  // Function to fetch employee details based on the employeeID
   getProfileDetails(id : number | undefined){
     this.DasboardService.getEmployeeDetails(id).subscribe({
       next : (response : any) => {

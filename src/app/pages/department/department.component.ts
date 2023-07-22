@@ -1,3 +1,4 @@
+
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Observable } from 'rxjs';
@@ -13,26 +14,34 @@ import { DepartmentEditComponent } from './dialog/department-edit/department-edi
   styleUrls: ['./department.component.scss']
 })
 export class DepartmentComponent implements OnInit {
+  // Reference to the MatPaginator element in the template
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
+  // Variables to hold the list of departments and the data source for the table
   departmentlist: any;
   dataSource: MatTableDataSource<any>;
   dataObs$: Observable<any>;
+
+  // Displayed columns for the table
   displayedColumns: string[] = ['name', 'edit'];
 
   constructor(
     private _dialog: MatDialog,
     private _departmentService: DepartmentService
   ) { }
+
   ngOnInit(): void {
+    // Initialize the component by fetching the departments list
     this.GetDepartmentsList();
   }
 
+  // Function to apply filtering to the table based on user input
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
-  
+
+  // Function to get the list of departments from the DepartmentService
   GetDepartmentsList() {
     this._departmentService.GetDepartmentsList().subscribe(response => {
       this.departmentlist = response.data;
@@ -42,23 +51,12 @@ export class DepartmentComponent implements OnInit {
     });
   }
 
-  OpenAddDepartment(){
+  // Function to open the Add Department dialog
+  OpenAddDepartment() {
     const dialogRef = this._dialog.open(DepartmentAddComponent);
     dialogRef.afterClosed().subscribe({
       next: (val) => {
-        if(val){
-          this.GetDepartmentsList();
-        }
-      }
-    })
-  }
-
-  OpenEditDepartment(data: any) {
-    const dialogRef = this._dialog.open(DepartmentEditComponent, {
-      data,
-    });
-    dialogRef.afterClosed().subscribe({
-      next: (val) => {
+        // If the dialog returns a value, refresh the departments list
         if (val) {
           this.GetDepartmentsList();
         }
@@ -66,13 +64,18 @@ export class DepartmentComponent implements OnInit {
     })
   }
 
-  // DeleteDepartment(id: number) {
-  //   this._departmentService.DeleteDepartment(id).subscribe({
-  //     next: (res) => {
-  //       // this._coreService.openSnackBar('Department Deleted!');
-  //       this.GetDepartmentsList();
-  //     },
-  //     error: console.log,
-  //   })
-  // }
+  // Function to open the Edit Department dialog
+  OpenEditDepartment(data: any) {
+    const dialogRef = this._dialog.open(DepartmentEditComponent, {
+      data,
+    });
+    dialogRef.afterClosed().subscribe({
+      next: (val) => {
+        // If the dialog returns a value, refresh the departments list
+        if (val) {
+          this.GetDepartmentsList();
+        }
+      }
+    })
+  }
 }

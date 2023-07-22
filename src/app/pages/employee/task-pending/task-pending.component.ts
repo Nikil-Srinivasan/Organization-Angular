@@ -1,8 +1,6 @@
 import { Component, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatCardModule } from '@angular/material/card';
-// import { CustomerAddComponent } from './dialog/customer-add/customer-add.component'; 
-// import { CustomerEditComponent } from './dialog/customer-edit/customer-edit.component';
 import { Observable } from 'rxjs';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
@@ -21,50 +19,65 @@ export class TaskPendingComponent {
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
-  //  decodedToken: any = jwt_decode(token);
-  //  employeeId: number = decodedToken.employeeId;
+  // Employee ID of the currently logged-in user
+  employeeId: any = this._credentials.userValue?.nameid;
 
-  employeeId : any = this._credentials.userValue?.nameid;
+  // Array to store the list of pending tasks for the employee
   employeeTaskList: any;
+
+  // DataSource for the MatTable to display the pending tasks in a table
   dataSource: MatTableDataSource<any>;
+
+  // Observable to hold the data source for the table
   dataObs$: Observable<any>;
-  displayedColumns: string[] = ['taskName','taskCreatedDate','taskDueDate','taskStatus','info', 'edit'];
+
+  // Array of displayed column names for the table
+  displayedColumns: string[] = ['taskName', 'taskCreatedDate', 'taskDueDate', 'taskStatus', 'info', 'edit'];
 
   constructor(private _dialog: MatDialog,
     private _employeeTaskService: EmployeetaskService,
     private _credentials: CredentialsService) {
       
-     }
-
+  }
 
   ngOnInit(): void {
+    // Fetch and display pending tasks for the employee when the component is initialized
     this.GetEmployeePendingTask(this.employeeId);
   }
 
+  // Function to apply filtering to the table based on the search input
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
-    
   }
 
+  // Function to get pending tasks for the employee based on their ID
   GetEmployeePendingTask(id: any) {
     this._employeeTaskService.GetEmployeePendingTask(id).subscribe(response => {
+      // Store the retrieved pending tasks in the employeeTaskList array
       this.employeeTaskList = response.data;
-      console.log(response.data.employeeId); // Assuming the employee ID is a property in the response data
+
+      // Create a new MatTableDataSource with the pending tasks list and set it as the data source for the table
       this.dataSource = new MatTableDataSource(this.employeeTaskList);
+
+      // Set the paginator for the table
       this.dataSource.paginator = this.paginator;
+
+      // Connect the data source to the observable
       this.dataObs$ = this.dataSource.connect();
     });
   }
 
+  // Function to open a dialog to display task description when the "Info" button is clicked
   OpenTaskDescription(taskDescription: string) {
-    this._dialog.open(EmployeeTaskDescriptionComponent , {
+    this._dialog.open(EmployeeTaskDescriptionComponent, {
       data: {
         taskDescription
       }
     });
   }
 
+  // Function to map the numeric task status to its corresponding Status enum value
   getStatusFromNumber(statusNumber: number): Status {
     switch (statusNumber) {
       case 1:
@@ -80,11 +93,13 @@ export class TaskPendingComponent {
     }
   }
 
+  // Function to open the edit task dialog when the "Edit" button is clicked
   OpenEditEmployeeTask(data: any) {
-    // console.log(data)
     const dialogRef = this._dialog.open(EmployeeTaskEditComponent, {
       data,
     });
+
+    // Subscribe to the dialog close event and refresh the pending tasks list when the dialog is closed with a valid result
     dialogRef.afterClosed().subscribe({
       next: (val) => {
         if (val) {

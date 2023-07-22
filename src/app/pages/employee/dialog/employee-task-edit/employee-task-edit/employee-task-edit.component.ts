@@ -17,8 +17,8 @@ export class EmployeeTaskEditComponent {
 
   employeetaskForm: FormGroup;
 
-  task : any ;
-  taskStatus : any;
+  task: any;
+  taskStatus: any;
 
   constructor(
     private _formbuiler: FormBuilder,
@@ -26,59 +26,61 @@ export class EmployeeTaskEditComponent {
     private _dialogRef: MatDialogRef<EmployeeTaskEditComponent>,
     private _snackBar: MatSnackBar,
     @Inject(MAT_DIALOG_DATA) public data: any,
-  )
-   {
+  ) {
     this.employeetaskForm = this._formbuiler.group({
-      employeeID: '' ,
-      taskStatus : ''
+      employeeID: '',
+      taskStatus: ''
     })
   }
 
-
   ngOnInit(): void {
+    // Get the task data from the dialog input
     this.task = this.data;
-    const taskValue = this.data.taskStatus;
 
-    switch(taskValue) {
-      case 1 :
+    // Map the task status value to a human-readable status string
+    switch (this.data.taskStatus) {
+      case 1:
         this.taskStatus = Status.New;
         break;
-      case 2 :
+      case 2:
         this.taskStatus = Status.InProgress;
         break;
-      case 3 :
+      case 3:
         this.taskStatus = Status.Completed;
         break;
-      case 4 :
+      case 4:
         this.taskStatus = Status.Pending;
         break;
-      default :
-          return;
-      }
-      
+      default:
+        this.taskStatus = 'Unknown Status';
+    }
+
+    // Set the initial values of the form fields based on the task data
     this.employeetaskForm.patchValue({
       employeeID: this.data.employeeId,
       taskStatus: this.data.taskStatus
-    });    
+    });
+
     console.log(this.task);
     console.log(this.data.taskStatus);
   }
 
- 
-  //onSubmit Method is invoked when the Submit Button is clicked
+  // onSubmit Method is invoked when the Submit Button is clicked
   onSubmit() {
     if (this.employeetaskForm.valid) {
-        this._employeeTaskService.UpdateEmployeeTaskStatus(this.data.taskID, this.employeetaskForm.value).subscribe({
-          next: (val: any) => {
-            this._snackBar.open("Task Edited Successfully!", "close");
-            this._dialogRef.close(true);
-            
-          },
-          error: (error: any) => {
-            console.error('Error updating employee details:', error);
-            // Handle the error and show an error message to the user
-          }
-        });
+      // Call the service to update the employee task status
+      this._employeeTaskService.UpdateEmployeeTaskStatus(this.data.taskID, this.employeetaskForm.value).subscribe({
+        next: (val: any) => {
+          // Show a success message to the user
+          this._snackBar.open("Task Edited Successfully!", "close");
+          // Close the dialog after successful update
+          this._dialogRef.close(true);
+        },
+        error: (error: any) => {
+          console.error('Error updating employee details:', error);
+          // Handle the error and show an error message to the user if needed
+        }
+      });
     }
   }
 }
