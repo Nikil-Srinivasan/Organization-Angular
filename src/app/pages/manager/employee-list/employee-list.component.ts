@@ -17,7 +17,7 @@ export class EmployeeListComponent implements OnInit {
   dataSource: MatTableDataSource<any>;
   dataObs$: Observable<any>;
   displayedColumns: string[] = ['name', 'designation', 'action'];
-
+  managerName : string
   constructor(
     private _managerService: ManagerService,
     private _credentials: CredentialsService,
@@ -35,6 +35,8 @@ export class EmployeeListComponent implements OnInit {
   GetEmployeesList(id: number) {
     this._managerService.GetEmployeesByManagerId(this.managerId).subscribe(response => {
       this.managerlist = response.data;
+      console.log(this.managerlist)
+      this.managerName = this.managerlist[0].managerName
       this.dataSource = new MatTableDataSource(this.managerlist);
       this.dataSource.paginator = this.paginator;
       this.dataObs$ = this.dataSource.connect();

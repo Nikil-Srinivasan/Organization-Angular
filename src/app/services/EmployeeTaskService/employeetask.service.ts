@@ -59,8 +59,8 @@ export class EmployeetaskService {
     return this._http.get<any>(`${environment.baseUrl}/api/EmployeeTask/GetPendingEmployeeTasksByManagerId?id=${id}`);
   }
 
-  GetAllEmployeeTask(id:number){
-    return this._http.get<any>(`${environment.baseUrl}/api/EmployeeTask/GetEmployeeTasksByEmployeeId?id=${id}`);
+  GetAllEmployeeTask(id:number,pageObject : any){
+    return this._http.post<any>(`${environment.baseUrl}/api/EmployeeTask/GetEmployeeTasksByEmployeeId?employeeid=${id}`,pageObject)
   }
   
   CreateEmployeeTask(data: any): Observable<any> {
