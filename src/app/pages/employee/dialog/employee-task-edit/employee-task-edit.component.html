@@ -1,0 +1,39 @@
+<!-- employee-task-edit.component.html -->
+
+<!-- The dialog title -->
+<div mat-dialog-title>
+    <h1>Edit EmployeeTask</h1>
+</div>
+
+<!-- The form with formGroup "employeetaskForm" -->
+<form [formGroup]="employeetaskForm" (ngSubmit)="onSubmit()">
+    <div mat-dialog-content class="content">
+        <div class="row">
+            <div>
+                <!-- Mat-form-field for the task status -->
+                <mat-form-field appearance="outline" class="form-field-width">
+                    <mat-label>{{ taskStatus }}</mat-label>
+                    <!-- Mat-select to choose the task status, using formControlName "taskStatus" -->
+                    <mat-select formControlName="taskStatus">
+                        <!-- ng-container with ngIf to display different options based on the current task status -->
+                        <ng-container *ngIf="task.taskStatus == 1">
+                            <mat-option [value]="2">Progress</mat-option>
+                        </ng-container>
+                        <ng-container *ngIf="task.taskStatus == 2">
+                            <mat-option [value]="3">Completed</mat-option>
+                        </ng-container>
+                        <ng-container *ngIf="task.taskStatus == 4">
+                            <mat-option [value]="3">Completed</mat-option>
+                        </ng-container>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+        </div>
+    </div>
+    <div mat-dialog-actions class="action">
+        <!-- Cancel button, closes the dialog without performing any action -->
+        <button mat-raised-button type="button" [mat-dialog-close]="false"> Cancel</button>
+        <!-- Update button, triggers the onSubmit() method when clicked -->
+        <button mat-raised-button color="primary" type="submit"> Update </button>
+    </div>
+</form>

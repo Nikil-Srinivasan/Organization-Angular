@@ -1,15 +1,21 @@
 <div>
+    <!-- Header section with a warning icon -->
     <div class="header">
-        <h1><strong> Are you sure?</strong></h1>
+        <h1><strong>Are you sure?</strong></h1>
         <mat-icon color="warn" class="warning-icon">warning</mat-icon>
     </div>
     <br>
+    <!-- Dialog content section -->
     <div mat-dialog-content>
+        <!-- Display the confirmation message from the data object -->
         <h3>{{ data.message }}</h3>
     </div>
     <br>
+    <!-- Dialog actions section -->
     <div mat-dialog-actions class="action">
+        <!-- Cancel button to close the dialog without performing the delete operation -->
         <button mat-raised-button type="button" [mat-dialog-close]="false">Cancel</button>
+        <!-- Delete button to confirm and close the dialog with a true value -->
         <button mat-raised-button color="warn" [mat-dialog-close]="true">Delete</button>
     </div>
 </div>

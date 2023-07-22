@@ -5,34 +5,35 @@ import { CredentialsService } from 'src/app/services/auth';
 
 @Component({
   selector: 'app-manager-dashboard',
-  templateUrl: './manager-dashboard.component.html',
-  styleUrls: ['./manager-dashboard.component.scss']
+  templateUrl: './manager-dashboard.component.html'
 })
 export class ManagerDashboardComponent {
 
-  newTaskCount : any;
-  inProgressCount : any;
-  pendingTaskCount : any;
-  completedTaskCount : any;
+  // Variables to store task counts
+  newTaskCount: any;
+  inProgressCount: any;
+  pendingTaskCount: any;
+  completedTaskCount: any;
 
+  // Store the manager ID retrieved from the user credentials
   managerId: number | undefined = this._credentials.userValue?.nameid;
 
-  chartOptions : any;
+  // Configuration for the donut chart
+  chartOptions: any;
 
-  managerDetails : any;
- 
-  constructor(private DasboardService : DashboardService , private _credentials : CredentialsService) {
+  // Store manager details retrieved from the API
+  managerDetails: any;
 
-    
-  }
+  constructor(private DasboardService: DashboardService, private _credentials: CredentialsService) { }
 
   ngOnInit() {
- 
-    this.TotalCount(); 
+    // Load data when the component is initialized
+    this.totalCount();
     this.getProfileDetails(this.managerId);
-   }
+  }
 
-   TotalCount() {
+  // Configure the chart options for the donut chart
+  totalCount() {
     this.DasboardService.getEmployeeTaskCountByManager(this.managerId).subscribe({
       next: (response: any) => {
         const responseData = response.data;
@@ -41,7 +42,7 @@ export class ManagerDashboardComponent {
         this.pendingTaskCount = responseData[Status.Pending];
         this.completedTaskCount = responseData[Status.Completed];
         this.chartOptions = {
-          series: [this.newTaskCount,this.inProgressCount,this.completedTaskCount,this.pendingTaskCount],
+          series: [this.newTaskCount, this.inProgressCount, this.completedTaskCount, this.pendingTaskCount],
           chart: {
             type: "donut"
           },
@@ -67,12 +68,16 @@ export class ManagerDashboardComponent {
     });
   }
 
-  getProfileDetails(id : number | undefined){
+  // Function to fetch manager details based on the ID
+  getProfileDetails(id: number | undefined) {
     this.DasboardService.getManagerDetails(id).subscribe({
-      next : (response : any) => {
-      this.managerDetails = response.data;
-    }
-  })
+      next: (response: any) => {
+        this.managerDetails = response.data;
+      },
+      error: (error: any) => {
+        console.error(error);
+      }
+    })
   }
-  
+
 }

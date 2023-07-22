@@ -1,9 +1,14 @@
+<!-- Dialog Title -->
 <div mat-dialog-title>
     <h1>Appoint New Manager</h1>
 </div>
+
+<!-- Form with manager details -->
 <form [formGroup]="managerForm" (ngSubmit)="onSubmit()">
+    <!-- Dialog Content -->
     <div mat-dialog-content class="content">
         <div class="row">
+            <!-- Email field -->
             <div>
                 <mat-form-field appearance="outline" class="form-field-width">
                     <mat-label>Email Id</mat-label>
@@ -22,13 +27,14 @@
                         </mat-error>
                     </div>
                     <div *ngIf="email?.hasError('emailAlreadyExist')">
-                        <mat-error class="custom-error" >
-                          Email already exist
+                        <mat-error class="custom-error">
+                          Email already exists
                         </mat-error>
                     </div>
                 </div>
             </div>
 
+            <!-- User Name field -->
             <div>
                 <mat-form-field appearance="outline" class="form-field-width">
                     <mat-label>User Name</mat-label>
@@ -47,11 +53,11 @@
                     </div>
                 </div>
             </div>
-
         </div>
         <br>
-        <div class="row">
 
+        <div class="row">
+            <!-- Password field -->
             <div>
                 <mat-form-field appearance="outline" class="form-field-width">
                     <mat-label>Password</mat-label>
@@ -70,6 +76,8 @@
                     </div>
                 </div>
             </div>
+
+            <!-- Manager Name field -->
             <div>
                 <mat-form-field appearance="outline" class="form-field-width">
                     <mat-label>Name</mat-label>
@@ -89,7 +97,9 @@
                 </div>
             </div>
         </div> <br>
+
         <div class="row">
+            <!-- Manager Age field -->
             <div>
                 <mat-form-field appearance="outline" class="form-field-width">
                     <mat-label>Age</mat-label>
@@ -108,6 +118,8 @@
                     </div>
                 </div>
             </div>
+
+            <!-- Manager Salary field -->
             <div>
                 <mat-form-field appearance="outline" class="form-field-width">
                     <mat-label>Salary</mat-label>
@@ -117,12 +129,14 @@
                     <div *ngIf="managerSalary?.touched && managerSalary?.errors?.['required']">
                         <mat-error class="custom-error">
                             Salary is <strong>required</strong>
-                        </mat-error>    
+                        </mat-error>
                     </div>
                 </div>
             </div>
         </div>
+
         <div class="row">
+            <!-- Phone field -->
             <div>
                 <mat-form-field appearance="outline" class="form-field-width">
                     <mat-label>Phone</mat-label>
@@ -142,6 +156,7 @@
                 </div>
             </div>
 
+            <!-- Address field -->
             <div>    
                 <mat-form-field class="form-field-width" appearance="outline">
                     <mat-label >Address</mat-label>
@@ -157,6 +172,8 @@
             </div>
         </div>
     </div>
+
+    <!-- Dialog Actions -->
     <div mat-dialog-actions class="action">
         <button mat-raised-button type="button" [mat-dialog-close]="false"> Cancel</button>
         <button mat-raised-button color="primary" type="submit" [disabled]="managerForm.invalid"> Appoint </button>

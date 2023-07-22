@@ -1,23 +1,32 @@
 <div class="col-lg-12">
+    <!-- Angular Material Card -->
     <mat-card class="cardWithShadow">
         <mat-card-content class="p-24">
+            <!-- Card title section -->
             <mat-card-title class="title-flex-container">
+                <!-- Department title -->
                 <div layout="row" layout-align="center center">
                     Departments
                 </div>
                 <div>
+                    <!-- Filter input field -->
                     <mat-form-field appearance="outline">
                         <mat-label>Filter</mat-label>
                         <input matInput (keyup)="applyFilter($event)" placeholder="Search columns" #input>
                     </mat-form-field>
 
+                    <!-- Create button to open the "Add Department" dialog -->
                     <button mat-raised-button class="create-btn" color="primary"
                         (click)="OpenAddDepartment()">Create</button>
                 </div>
             </mat-card-title>
+
+            <!-- Table container -->
             <div class="table-responsive m-t-16">
+                <!-- Table component using MatTableDataSource and matSort for sorting -->
                 <table mat-table [dataSource]="dataSource" class="w-100" matSort>
-                    <!-- Position Column -->
+
+                    <!-- Department Name column -->
                     <ng-container matColumnDef="name">
                         <th mat-header-cell *matHeaderCellDef class="f-w-600 mat-subtitle-1 f-s-14" mat-sort-header>
                             Name
@@ -27,26 +36,28 @@
                         </td>
                     </ng-container>
 
-                    <!-- Action Column -->
+                    <!-- Edit column -->
                     <ng-container matColumnDef="edit">
                         <th mat-header-cell *matHeaderCellDef class="f-w-600 mat-subtitle-1 f-s-14">Edit</th>
                         <td mat-cell *matCellDef="let element" class="mat-body-1">
-                            <button mat-icon-button color="primary" (click)="OpenEditDepartment(element)" (click)="$event.stopPropagation()">
+                            <!-- Edit button to open the "Edit Department" dialog -->
+                            <button mat-icon-button color="primary" (click)="OpenEditDepartment(element)"
+                                (click)="$event.stopPropagation()">
                                 <mat-icon>edit</mat-icon>
                             </button>
                         </td>
                     </ng-container>
 
+                    <!-- Header row -->
                     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-                    <tr style="cursor: pointer;"
-                     mat-row *matRowDef="let row; 
-                     columns: displayedColumns"
-                     [routerLink]="['/dashboard/departments/', row.departmentID]"
 
-                     ></tr>
+                    <!-- Data rows with routerLink to navigate to individual department details -->
+                    <tr style="cursor: pointer;" mat-row *matRowDef="let row; columns: displayedColumns"
+                        [routerLink]="['/dashboard/departments/', row.departmentID]"></tr>
                 </table>
             </div>
         </mat-card-content>
+        <!-- Paginator for controlling page size -->
         <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" [pageSize]="5"> </mat-paginator>
     </mat-card>
 </div>

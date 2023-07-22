@@ -1,139 +1,126 @@
 <div class="row">
-    <div class="col-lg-12">
-      
-      <h3>Welcome {{managerDetails?.departmentName | uppercase}}  Manager! </h3>
-      <div class="row">
-        <!-- --------------------------------------------------------------------------- -->
-        <!-- Widgets -->
-        <!-- --------------------------------------------------------------------------- -->
-        <div class="col-lg-3 col-sm-4">
-          <mat-card class="cardWithShadow">
-            <mat-card-header class="d-flex align-items-center p-x-24">
-              <mat-card-title>Total New </mat-card-title>
-              <div class="m-l-auto">
-                <button mat-fab color="accent" class="shadow-none icon-48">
-                  <i-tabler name="notification" class="text-white d-flex"></i-tabler>
-                </button>
-              </div>
-            </mat-card-header>
-            <mat-card-content class="m-b-8 p-x-24">
-              <h4 class="mat-headline-5">{{ newTaskCount }}</h4>
-            </mat-card-content>
-            <mat-card-content class="m-b-10 p-x-24">
-              <mat-card-title>Tasks </mat-card-title>
-            </mat-card-content>
-          </mat-card>
-        </div>
-     
-        <div class="col-lg-3 col-sm-4">
-          <mat-card class="cardWithShadow">
-            <mat-card-header class="d-flex align-items-center p-x-24">
-              <mat-card-title>Total InProgress</mat-card-title>
-              <div class="m-l-auto">
-                <button mat-fab color="accent" class="shadow-none icon-48">
-                  <i-tabler name="calendar-stats" class="text-white d-flex"></i-tabler>
-                </button>
-              </div>
-            </mat-card-header>
-            <mat-card-content class="m-b-8 p-x-24">
-              <h4 class="mat-headline-5">{{ inProgressCount }}</h4>
-            </mat-card-content>
-            <mat-card-content class="m-b-10 p-x-24">
-              <mat-card-title>Tasks </mat-card-title>
-            </mat-card-content>
-          </mat-card>
-        </div>
-  
-        <div class="col-lg-3 col-sm-4">
-          <mat-card class="cardWithShadow">
-            <mat-card-header class="d-flex align-items-center p-x-24">
-              <mat-card-title>Total Pending</mat-card-title>
-              <div class="m-l-auto">
-                <button mat-fab color="accent" class="shadow-none icon-48">
-                  <i-tabler name="alert-circle-filled" class="text-white d-flex"></i-tabler>
-                </button>
-              </div>
-            </mat-card-header>
-            <mat-card-content class="m-b-8 p-x-24">
-              <h4 class="mat-headline-5">{{pendingTaskCount}}</h4>
-            </mat-card-content>
-            <mat-card-content class="m-b-10 p-x-24">
-              <mat-card-title>Tasks </mat-card-title>
-            </mat-card-content>
-          </mat-card>
-        </div>
-  
-        <div class="col-lg-3 col-sm-4">
-          <mat-card class="cardWithShadow">
-            <mat-card-header class="d-flex align-items-center p-x-24">
-              <mat-card-title>Total Completed</mat-card-title>
-              <div class="m-l-auto">
-                <button mat-fab color="accent" class="shadow-none icon-48">
-                  <i-tabler name="checkbox" class="text-white d-flex"></i-tabler>
-                </button>
-              </div>
-            </mat-card-header>
-            <mat-card-content class="m-b-8 p-x-24">
-              <h4 class="mat-headline-5">{{ completedTaskCount }}</h4>
-            </mat-card-content>
-            <mat-card-content class="m-b-10 p-x-24">
-              <mat-card-title>Tasks </mat-card-title>
-            </mat-card-content>
-          </mat-card>
-        </div>
+  <div class="col-lg-12">
+
+    <h1>Welcome {{managerDetails?.departmentName}} Manager! </h1>
+    <br>
+    <div class="row">
+
+      <!-- Manager TaskCount Widgets -->
+
+      <div class="col-lg-3 col-sm-4">
+        <mat-card class="cardWithShadow">
+          <mat-card-header class="d-flex align-items-center p-x-24">
+            <mat-card-title>Total New </mat-card-title>
+            <div class="m-l-auto">
+              <button mat-fab color="accent" class="shadow-none icon-48">
+                <i-tabler name="notification" class="text-white d-flex"></i-tabler>
+              </button>
+            </div>
+          </mat-card-header>
+          <mat-card-content class="m-b-8 p-x-24">
+            <h4 class="mat-headline-5">{{ newTaskCount }}</h4>
+          </mat-card-content>
+          <mat-card-content class="m-b-10 p-x-24">
+            <mat-card-title>Tasks </mat-card-title>
+          </mat-card-content>
+        </mat-card>
+      </div>
+
+      <div class="col-lg-3 col-sm-4">
+        <mat-card class="cardWithShadow">
+          <mat-card-header class="d-flex align-items-center p-x-24">
+            <mat-card-title>Total InProgress</mat-card-title>
+            <div class="m-l-auto">
+              <button mat-fab color="accent" class="shadow-none icon-48">
+                <i-tabler name="calendar-stats" class="text-white d-flex"></i-tabler>
+              </button>
+            </div>
+          </mat-card-header>
+          <mat-card-content class="m-b-8 p-x-24">
+            <h4 class="mat-headline-5">{{ inProgressCount }}</h4>
+          </mat-card-content>
+          <mat-card-content class="m-b-10 p-x-24">
+            <mat-card-title>Tasks </mat-card-title>
+          </mat-card-content>
+        </mat-card>
+      </div>
+
+      <div class="col-lg-3 col-sm-4">
+        <mat-card class="cardWithShadow">
+          <mat-card-header class="d-flex align-items-center p-x-24">
+            <mat-card-title>Total Pending</mat-card-title>
+            <div class="m-l-auto">
+              <button mat-fab color="accent" class="shadow-none icon-48">
+                <i-tabler name="alert-circle-filled" class="text-white d-flex"></i-tabler>
+              </button>
+            </div>
+          </mat-card-header>
+          <mat-card-content class="m-b-8 p-x-24">
+            <h4 class="mat-headline-5">{{pendingTaskCount}}</h4>
+          </mat-card-content>
+          <mat-card-content class="m-b-10 p-x-24">
+            <mat-card-title>Tasks </mat-card-title>
+          </mat-card-content>
+        </mat-card>
+      </div>
+
+      <div class="col-lg-3 col-sm-4">
+        <mat-card class="cardWithShadow">
+          <mat-card-header class="d-flex align-items-center p-x-24">
+            <mat-card-title>Total Completed</mat-card-title>
+            <div class="m-l-auto">
+              <button mat-fab color="accent" class="shadow-none icon-48">
+                <i-tabler name="checkbox" class="text-white d-flex"></i-tabler>
+              </button>
+            </div>
+          </mat-card-header>
+          <mat-card-content class="m-b-8 p-x-24">
+            <h4 class="mat-headline-5">{{ completedTaskCount }}</h4>
+          </mat-card-content>
+          <mat-card-content class="m-b-10 p-x-24">
+            <mat-card-title>Tasks </mat-card-title>
+          </mat-card-content>
+        </mat-card>
       </div>
     </div>
-  
-    <!-- --------------------------------------------------------------------------- -->
-    <!-- Sales Overview -->
-    <!-- --------------------------------------------------------------------------- -->
-    <div class="col-lg-7">
-      <mat-card class="cardWithShadow">
-        <mat-card-header>
-        <mat-card-title>Manager Details</mat-card-title>
-        </mat-card-header>
-        <mat-card-content class="p-24">
-          <div class="d-flex w-100">
-            <div class="m-l-auto">
-              
-            </div>
-          </div>
-            <div *ngIf="managerDetails">
-         
+  </div>
+
+  <!-- Manager Details -->
+
+  <div class="col-lg-7">
+    <mat-card class="cardWithShadow">
+      <mat-card-header>
+        <mat-card-title>Your Details</mat-card-title>
+      </mat-card-header>
+      <mat-card-content class="p-24">
+        <div *ngIf="managerDetails">
+
           <mat-card>
             <mat-card-content>
               <p><strong>Name</strong> : {{ managerDetails?.managerName }} </p>
               <p><strong>Email</strong> : {{ managerDetails?.email }} </p>
               <p><strong>Phone</strong> : {{ managerDetails?.phone }} </p>
-              <p><strong>Address</strong>  : {{ managerDetails?.address }} </p>
-              <p><strong>Department</strong>  : {{ managerDetails?.departmentName | uppercase }} </p>
+              <p><strong>Address</strong> : {{ managerDetails?.address }} </p>
+              <p><strong>Department</strong> : {{ managerDetails?.departmentName | uppercase }} </p>
             </mat-card-content>
           </mat-card>
-          </div>
-        </mat-card-content>
-      </mat-card>
-    </div>
-    
-    <div class="col-lg-5">
-      <mat-card class="cardWithShadow">
-        <mat-card-content class="p-24">
-          <div class="d-flex w-100">
-            <mat-card-title>Employees Task Summary</mat-card-title>
-            <div class="m-l-auto">
-              
-            </div>
-          </div>
-          <ng-container *ngIf="chartOptions">
-            <apx-chart
-              [series]="chartOptions.series"
-              [chart]="chartOptions.chart"
-              [labels]="chartOptions.labels"
-              [responsive]="chartOptions.responsive"
-            ></apx-chart>
-          </ng-container>
-  
-        </mat-card-content>
-      </mat-card>
-    </div>
-    
-   
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+
+  <!-- Manager Task Analytics -->
+
+  <div class="col-lg-5">
+    <mat-card class="cardWithShadow">
+      <mat-card-content class="p-24">
+        <div class="d-flex w-100">
+          <mat-card-title>Employees Task Summary</mat-card-title>
+        </div>
+        <ng-container *ngIf="chartOptions">
+          <apx-chart [series]="chartOptions.series" [chart]="chartOptions.chart" [labels]="chartOptions.labels"
+            [responsive]="chartOptions.responsive"></apx-chart>
+        </ng-container>
+      </mat-card-content>
+    </mat-card>
+  </div>

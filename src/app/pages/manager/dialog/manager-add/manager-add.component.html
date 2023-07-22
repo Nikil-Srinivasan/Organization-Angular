@@ -1,16 +1,18 @@
 <div mat-dialog-title>
     <h1>Create Manager</h1>
 </div>
+<!-- Form to create a new manager -->
 <form [formGroup]="managerForm" (ngSubmit)="onSubmit()">
     <div mat-dialog-content class="content">
         <div class="row">
+            <!-- Email input field -->
             <div>
                 <mat-form-field appearance="outline" class="form-field-width">
                     <mat-label>Email Id</mat-label>
                     <input matInput type="text" formControlName="email">
-
                 </mat-form-field>
                 <div class="error-container">
+                    <!-- Email validation error messages -->
                     <div *ngIf="email?.touched && email?.hasError('required')">
                         <mat-error class="custom-error">
                             Email is <strong>required</strong>
@@ -22,19 +24,21 @@
                         </mat-error>
                     </div>
                     <div *ngIf="email?.hasError('emailAlreadyExist')">
-                        <mat-error class="custom-error" >
-                          Email already exist
+                        <mat-error class="custom-error">
+                            Email already exists
                         </mat-error>
                     </div>
                 </div>
             </div>
 
+            <!-- Username input field -->
             <div>
                 <mat-form-field appearance="outline" class="form-field-width">
                     <mat-label>User Name</mat-label>
                     <input matInput type="text" formControlName="userName">
                 </mat-form-field>
                 <div class="error-container">
+                    <!-- Username validation error messages -->
                     <div *ngIf="userName?.touched && userName?.errors?.['required']">
                         <mat-error class="custom-error">
                             User Name is <strong>required</strong>
@@ -52,12 +56,14 @@
         <br>
         <div class="row">
 
+            <!-- Password input field -->
             <div>
                 <mat-form-field appearance="outline" class="form-field-width">
                     <mat-label>Password</mat-label>
                     <input matInput type="text" formControlName="password">
                 </mat-form-field>
                 <div class="error-container">
+                    <!-- Password validation error messages -->
                     <div *ngIf="password?.touched && password?.errors?.['required']">
                         <mat-error class="custom-error">
                             Password is <strong>required</strong>
@@ -70,12 +76,14 @@
                     </div>
                 </div>
             </div>
+            <!-- Manager name input field -->
             <div>
                 <mat-form-field appearance="outline" class="form-field-width">
                     <mat-label>Name</mat-label>
                     <input matInput type="text" formControlName="managerName">
                 </mat-form-field>
                 <div class="error-container">
+                    <!-- Manager name validation error messages -->
                     <div *ngIf="managerName?.touched && managerName?.errors?.['required']">
                         <mat-error class="custom-error">
                             Name is <strong>required</strong>
@@ -90,12 +98,14 @@
             </div>
         </div> <br>
         <div class="row">
+            <!-- Manager age input field -->
             <div>
                 <mat-form-field appearance="outline" class="form-field-width">
                     <mat-label>Age</mat-label>
                     <input matInput type="number" formControlName="managerAge">
                 </mat-form-field>
                 <div class="error-container">
+                    <!-- Manager age validation error messages -->
                     <div *ngIf="managerAge?.touched && managerAge?.errors?.['required']">
                         <mat-error class="custom-error">
                             Age is <strong>required</strong>
@@ -108,21 +118,24 @@
                     </div>
                 </div>
             </div>
+            <!-- Manager salary input field -->
             <div>
                 <mat-form-field appearance="outline" class="form-field-width">
                     <mat-label>Salary</mat-label>
                     <input matInput type="number" formControlName="managerSalary">
                 </mat-form-field>
                 <div class="error-container">
+                    <!-- Manager salary validation error messages -->
                     <div *ngIf="managerSalary?.touched && managerSalary?.errors?.['required']">
                         <mat-error class="custom-error">
                             Salary is <strong>required</strong>
-                        </mat-error>    
+                        </mat-error>
                     </div>
                 </div>
             </div>
         </div> <br>
         <div class="row">
+            <!-- Manager department selection dropdown -->
             <div>
                 <mat-form-field appearance="outline" class="form-field-width">
                     <mat-label>Department</mat-label>
@@ -133,24 +146,27 @@
                     </mat-select>
                 </mat-form-field>
                 <div class="error-container">
+                    <!-- Manager department validation error messages -->
                     <div *ngIf="departmentID?.touched && departmentID?.errors?.['required']">
                         <mat-error class="custom-error">
                             Department is <strong>required</strong>
                         </mat-error>
                     </div>
                     <div *ngIf="departmentID?.hasError('departmentNotFound')">
-                        <mat-error >
-                          Invalid Department. Please create department.
+                        <mat-error>
+                            Invalid Department. Please create department.
                         </mat-error>
                     </div>
                 </div>
             </div>
+            <!-- Manager phone input field -->
             <div>
                 <mat-form-field appearance="outline" class="form-field-width">
                     <mat-label>Phone</mat-label>
                     <input matInput type="text" formControlName="phone">
                 </mat-form-field>
                 <div class="error-container">
+                    <!-- Manager phone validation error messages -->
                     <div *ngIf="phone?.touched && phone?.errors?.['required']">
                         <mat-error class="custom-error">
                             Phone is <strong>required</strong>
@@ -158,7 +174,7 @@
                     </div>
                     <div *ngIf="phone?.touched && phone?.errors?.['pattern']">
                         <mat-error class="custom-error">
-                         Invalid phone number
+                            Invalid phone number
                         </mat-error>
                     </div>
                 </div>
@@ -172,17 +188,20 @@
             <textarea formControlName="address" matInput placeholder="address goes here..."></textarea>
         </mat-form-field>
         <div class="error-container">
+            <!-- Manager address validation error messages -->
             <div *ngIf="address?.touched && address?.errors?.['required']">
                 <mat-error class="custom-error">
                     Address is <strong>required</strong>
                 </mat-error>
-        </div>
-            
+            </div>
         </div>
 
     </div>
+    <!-- Actions for the dialog -->
     <div mat-dialog-actions class="action">
+        <!-- Cancel button to close the dialog -->
         <button mat-raised-button type="button" [mat-dialog-close]="false"> Cancel</button>
+        <!-- Create button to submit the form and create a new manager -->
         <button mat-raised-button color="primary" type="submit" [disabled]="managerForm.invalid"> Create </button>
     </div>
 </form>

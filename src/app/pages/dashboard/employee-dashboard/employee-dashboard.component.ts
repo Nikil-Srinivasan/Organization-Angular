@@ -1,4 +1,4 @@
-import { Component, OnInit} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Status } from 'src/app/models/status';
 import { DashboardService } from 'src/app/services/DashboardService/Dashboard-Service';
 import { CredentialsService } from 'src/app/services/auth';
@@ -9,30 +9,33 @@ import { CredentialsService } from 'src/app/services/auth';
   styleUrls: ['./employee-dashboard.component.scss']
 })
 export class EmployeeDashboardComponent implements OnInit {
- 
- 
-  newTaskCount : any;
-  inProgressCount : any;
-  pendingTaskCount : any;
-  completedTaskCount : any;
 
+  // Variables to store task counts
+  newTaskCount: any;
+  inProgressCount: any;
+  pendingTaskCount: any;
+  completedTaskCount: any;
+
+  // Store the employee ID retrieved from the user credentials
   employeeId: number | undefined = this._credentials.userValue?.nameid;
-  employeeDetails : any;
 
-  chartOptions : any;
- 
-  constructor(private DasboardService : DashboardService , private _credentials : CredentialsService) {
+  // Store employee details retrieved from the API
+  employeeDetails: any;
 
-    
-  }
+  // Configuration for the donut chart
+  chartOptions: any;
+
+  constructor(private DasboardService: DashboardService, private _credentials: CredentialsService) { }
 
   ngOnInit() {
- 
-    this.TotalCount(); 
-    this.getProfileDetails(this.employeeId);
-   }
 
-   TotalCount() {
+    // Load data when the component is initialized
+    this.totalCount();
+    this.getProfileDetails(this.employeeId);
+  }
+
+  // Function to fetch the total task counts for the employee
+  totalCount() {
     this.DasboardService.getEmployeeTaskCount(this.employeeId).subscribe({
       next: (response: any) => {
         const responseData = response.data;
@@ -41,7 +44,7 @@ export class EmployeeDashboardComponent implements OnInit {
         this.pendingTaskCount = responseData[Status.Pending];
         this.completedTaskCount = responseData[Status.Completed];
         this.chartOptions = {
-          series: [this.newTaskCount,this.inProgressCount,this.completedTaskCount,this.pendingTaskCount],
+          series: [this.newTaskCount, this.inProgressCount, this.completedTaskCount, this.pendingTaskCount],
           chart: {
             type: "donut"
           },
@@ -67,16 +70,14 @@ export class EmployeeDashboardComponent implements OnInit {
     });
   }
 
-  getProfileDetails(id : number | undefined){
+  // Function to fetch employee details based on the employeeID
+  getProfileDetails(id: number | undefined) {
     this.DasboardService.getEmployeeDetails(id).subscribe({
-      next : (response : any) => {
-      this.employeeDetails = response.data;
-    }
-  })
+      next: (response: any) => {
+        this.employeeDetails = response.data;
+      }
+    })
   }
-  
-  
-
 }
 
 

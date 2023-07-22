@@ -3,14 +3,9 @@ import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms'
 import { EmployeeService } from 'src/app/services/EmployeeService/employee.service';
 import { DepartmentService } from 'src/app/services/DepartmentService/department.service';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import { NAME_PATTERN, PHONE_PATTERN, USERNAME_PATTERN } from 'src/app/shared/regex-patterns';
+import { NAME_PATTERN, PHONE_PATTERN } from 'src/app/shared/regex-patterns';
 import { ManagerService } from 'src/app/services/ManagerService/manager.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
-
-interface IDepartment {
-  id: number;
-  departmentName: string;
-}
 
 @Component({
   selector: 'app-employee-edit',
@@ -20,11 +15,10 @@ interface IDepartment {
 export class EmployeeEditComponent implements OnInit {
 
   employeeForm: FormGroup;
-
-  selectedDepartment : any
-
+  selectedDepartment: any;
   departments: any[] = [];
 
+  // Custom validator function for age field
   ageValidator = (control: FormControl) => {
     const age = control.value;
     if (age && age <= 20) {
@@ -37,22 +31,24 @@ export class EmployeeEditComponent implements OnInit {
     private _formbuiler: FormBuilder,
     private _employeeService: EmployeeService,
     private _departmentService: DepartmentService,
-    private _managerService: ManagerService, 
+    private _managerService: ManagerService,
     private _dialogRef: MatDialogRef<EmployeeEditComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
     private _snackBar: MatSnackBar
   ) {
+    // Initialize the employee form with form controls
     this.employeeForm = this._formbuiler.group({
       employeeAge: ['', [Validators.required, this.ageValidator]],
       employeeSalary: ['', Validators.required],
-      employeeName: ['', [Validators.required,Validators.pattern(NAME_PATTERN)]],
+      employeeName: ['', [Validators.required, Validators.pattern(NAME_PATTERN)]],
       managerID: ['', Validators.required],
-      designation : ['',Validators.required],
-      address : ['',Validators.required],
-      phone : ['',[Validators.required,Validators.pattern(PHONE_PATTERN)]],
-    })
+      designation: ['', Validators.required],
+      address: ['', Validators.required],
+      phone: ['', [Validators.required, Validators.pattern(PHONE_PATTERN)]],
+    });
   }
-   
+
+  // Getters for form controls
   get phone() {
     return this.employeeForm.get('phone');
   }
@@ -60,11 +56,11 @@ export class EmployeeEditComponent implements OnInit {
   get address() {
     return this.employeeForm.get('address');
   }
-    
+
   get designation() {
     return this.employeeForm.get('designation');
   }
-  
+
   get employeeAge() {
     return this.employeeForm.get('employeeAge');
   }
@@ -82,41 +78,45 @@ export class EmployeeEditComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    // Patch the form with existing employee data
     this.employeeForm.patchValue({
       employeeName: this.data.employeeName,
       employeeAge: this.data.employeeAge,
       employeeSalary: this.data.employeeSalary,
       managerID: this.data.managerID,
-      designation : this.data.designation,
-      phone : this.data.phone,
-      address : this.data.address
-    });    
-    
-    this.fetchDepartmentsAssociatedWithManager();    
+      designation: this.data.designation,
+      phone: this.data.phone,
+      address: this.data.address
+    });
+
+    // Fetch the departments associated with the manager
+    this.fetchDepartmentsAssociatedWithManager();
   }
 
+  // Fetch the departments associated with the manager
   fetchDepartmentsAssociatedWithManager() {
     this._managerService.GetAllDepartmentsAssociatedWithManager().subscribe(departments => {
       this.departments = departments.data;
     });
   }
-  
-  //onSubmit Method is invoked when the Submit Button is clicked
+
+  // onSubmit method is invoked when the Submit Button is clicked
   onSubmit() {
     if (this.employeeForm.valid) {
-      console.log(this.employeeForm.value)
-        this._employeeService.UpdateEmployee(this.data.employeeID, this.employeeForm.value).subscribe({
-          next: (val: any) => {
-            this._snackBar.open("Employee added successfully",'Close',{
-              duration : 3000
-            })
-            this._dialogRef.close(true);
-          },
-          error: (error: any) => {
-            console.error('Error updating employee details:', error);
-          }
-        });
+      console.log(this.employeeForm.value);
+      // Call the API to update the employee details
+      this._employeeService.UpdateEmployee(this.data.employeeID, this.employeeForm.value).subscribe({
+        next: (val: any) => {
+          // Display success message and close the dialog
+          this._snackBar.open("Employee updated successfully", 'Close', {
+            duration: 3000
+          });
+          this._dialogRef.close(true);
+        },
+        error: (error: any) => {
+          console.error('Error updating employee details:', error);
+        }
+      });
     }
   }
-
 }

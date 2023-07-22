@@ -26,7 +26,6 @@ import { BrandingComponent } from './layouts/full/sidebar/branding.component';
 import { AppNavItemComponent } from './layouts/full/sidebar/nav-item/nav-item.component';
 import { LoaderInterceptor } from './interceptor/loader.interceptor';
 import { LoaderService } from './services/loader.service';
-import { LoaderComponent } from './shared/loader-component/loader-component.component';
 import { AuthHeadersInterceptor } from './interceptor/auth-header.interceptor';
 import { PageNotFoundComponent } from './pages/page-not-found/page-not-found.component';
 import { Router } from "@angular/router";

@@ -1,10 +1,9 @@
 <div class="row">
   <div class="col-lg-12">
-    <h3>Welcome Admin!</h3>
+    <h1>Welcome Admin!</h1>
     <div class="row">
-      <!-- --------------------------------------------------------------------------- -->
-      <!-- Widgets -->
-      <!-- --------------------------------------------------------------------------- -->
+
+      <!-- Admin Widgets -->
       <div class="col-lg-6 col-sm-4">
         <mat-card class="cardWithShadow">
           <mat-card-header class="d-flex align-items-center p-x-24">
@@ -16,7 +15,7 @@
             </div>
           </mat-card-header>
           <mat-card-content class="m-b-32 p-x-24">
-            <h4 class="mat-headline-5">{{ TotalEmployees }}</h4>
+            <h4 class="mat-headline-5">{{ totalEmployees }}</h4>
           </mat-card-content>
         </mat-card>
       </div>
@@ -32,13 +31,15 @@
             </div>
           </mat-card-header>
           <mat-card-content class="m-b-32 p-x-24">
-            <h4 class="mat-headline-5">{{ TotalDepartments }}</h4>
+            <h4 class="mat-headline-5">{{ totalDepartments }}</h4>
           </mat-card-content>
 
         </mat-card>
       </div>
     </div>
   </div>
+
+  <!-- Admin Charts -->
 
   <div class="col-lg-12">
     <mat-card class="cardWithShadow">
@@ -50,23 +51,11 @@
         </div>
 
         <ng-container *ngIf="chartOptions">
-          <apx-chart
-          [series]="chartOptions.series"
-          [dataLabels]="chartOptions.dataLabels"
-          [chart]="chartOptions.chart"
-          [legend]="chartOptions.legend"
-          [xaxis]="chartOptions.xaxis"
-          [yaxis]="chartOptions.yaxis"
-          [grid]="chartOptions.grid"
-          [stroke]="chartOptions.stroke"
-          [tooltip]="chartOptions.tooltip"
-          [plotOptions]="chartOptions.plotOptions"
-        ></apx-chart>
+          <apx-chart [series]="chartOptions.series" [dataLabels]="chartOptions.dataLabels" [chart]="chartOptions.chart"
+            [legend]="chartOptions.legend" [xaxis]="chartOptions.xaxis" [yaxis]="chartOptions.yaxis"
+            [grid]="chartOptions.grid" [stroke]="chartOptions.stroke" [tooltip]="chartOptions.tooltip"
+            [plotOptions]="chartOptions.plotOptions"></apx-chart>
         </ng-container>
       </mat-card-content>
     </mat-card>
   </div>
-
-
- 
- 

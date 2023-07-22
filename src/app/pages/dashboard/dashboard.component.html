@@ -1,19 +1,19 @@
 <div *ngIf="isAdmin; else managerContent">
-    <!-- Admin Dashboard Content -->
-    <app-admin-dashboard></app-admin-dashboard>
-    <!-- Additional admin-specific content -->
+  <!-- Admin Dashboard Content -->
+  <app-admin-dashboard></app-admin-dashboard>
+  <!-- Additional admin-specific content -->
+</div>
+
+<ng-template #managerContent>
+  <div *ngIf="isManager; else employeeContent">
+    <!-- Manager Dashboard Content -->
+    <app-manager-dashboard></app-manager-dashboard>
+    <!-- Additional manager-specific content -->
   </div>
 
-  <ng-template #managerContent>
-    <div *ngIf="isManager; else employeeContent">
-      <!-- Manager Dashboard Content -->
-      <app-manager-dashboard></app-manager-dashboard>
-      <!-- Additional manager-specific content -->
-    </div>
-
-    <ng-template #employeeContent>
-      <!-- Employee Dashboard Content -->
-      <app-employee-dashboard></app-employee-dashboard>
-      <!-- Additional employee-specific content -->
-    </ng-template>
+  <ng-template #employeeContent>
+    <!-- Employee Dashboard Content -->
+    <app-employee-dashboard></app-employee-dashboard>
+    <!-- Additional employee-specific content -->
   </ng-template>
+</ng-template>

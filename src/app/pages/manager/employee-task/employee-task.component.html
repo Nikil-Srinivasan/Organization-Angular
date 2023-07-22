@@ -97,12 +97,14 @@
                                             </span>
                                         </div>
                                         <div *ngSwitchCase="2">
-                                            <span class="bg-light-warning text-warning rounded f-w-600 p-6 p-y-4 f-s-12">
+                                            <span
+                                                class="bg-light-warning text-warning rounded f-w-600 p-6 p-y-4 f-s-12">
                                                 {{ GetStatusFromNumber(element.taskStatus) }}
                                             </span>
                                         </div>
                                         <div *ngSwitchCase="3">
-                                            <span class="bg-light-success text-success rounded f-w-600 p-6 p-y-4 f-s-12">
+                                            <span
+                                                class="bg-light-success text-success rounded f-w-600 p-6 p-y-4 f-s-12">
                                                 {{ GetStatusFromNumber(element.taskStatus) }}
                                             </span>
                                         </div>
@@ -179,13 +181,8 @@
                     </table>
                 </div>
             </mat-card-content>
-            <mat-paginator
-            [length]="totalItems"
-            [pageSize]="pageSize"
-            [pageSizeOptions]="[pageSize]"
-            [pageIndex]="pageNumber - 1"
-            (page)="onPageChange($event)"
-            >
+            <mat-paginator [length]="totalItems" [pageSize]="pageSize" [pageSizeOptions]="[pageSize]"
+                [pageIndex]="pageNumber - 1" (page)="onPageChange($event)">
             </mat-paginator>
         </mat-card>
     </div>

@@ -1,42 +1,32 @@
+<!-- The component's template starts here -->
 <div class="col-lg-12">
+  <!-- A Material Design card with a shadow effect -->
   <mat-card class="cardWithShadow">
     <mat-card-content class="p-24">
+      <!-- Flex container for the card title, centered horizontally -->
       <mat-card-title class="title-flex-container">
-        <div layout="row" layout-align="center center  ">Employees</div>
-        <div
-          fxLayout="row"
-          fxLayoutAlign="start center"
-          fxLayout.lt-md="column"
-          fxLayoutAlign.lt-md="center center"
-        >
+        <div layout="row" layout-align="center center">Employees</div>
+        <div fxLayout="row" fxLayoutAlign="start center" fxLayout.lt-md="column" fxLayoutAlign.lt-md="center center">
+          <!-- Material form field with an input for filtering the table data -->
           <mat-form-field appearance="outline">
             <mat-label>Filter</mat-label>
-            <input
-              matInput
-              (keyup)="applyFilter($event)"
-              placeholder="Search columns"
-              #input
-            />
+            <input matInput (keyup)="applyFilter($event)" placeholder="Search columns" #input />
           </mat-form-field>
-          <button
-            mat-raised-button
-            class="create-btn"
-            color="primary"
-            (click)="OpenAddEmployee()"
-          >
+          <!-- Material raised button for adding a new employee -->
+          <button mat-raised-button class="create-btn" color="primary" (click)="openAddEmployee()">
             Create
           </button>
         </div>
       </mat-card-title>
+
+      <!-- A responsive table to display employee data -->
       <div class="table-responsive m-t-16">
         <table mat-table [dataSource]="dataSource" class="w-100">
-          <!-- Position Column -->
+          <!-- Define columns for the table -->
+
+          <!-- Column for displaying employee name -->
           <ng-container matColumnDef="name">
-            <th
-              mat-header-cell
-              *matHeaderCellDef
-              class="f-w-600 mat-subtitle-1 f-s-14"
-            >
+            <th mat-header-cell *matHeaderCellDef class="f-w-600 mat-subtitle-1 f-s-14">
               Name
             </th>
             <td mat-cell *matCellDef="let element" class="mat-body-1">
@@ -44,13 +34,9 @@
             </td>
           </ng-container>
 
-          <!-- Name Column -->
+          <!-- Column for displaying employee designation -->
           <ng-container matColumnDef="age">
-            <th
-              mat-header-cell
-              *matHeaderCellDef
-              class="f-w-600 mat-subtitle-1 f-s-14"
-            >
+            <th mat-header-cell *matHeaderCellDef class="f-w-600 mat-subtitle-1 f-s-14">
               Designation
             </th>
             <td mat-cell *matCellDef="let element" class="mat-body-1">
@@ -58,31 +44,26 @@
             </td>
           </ng-container>
 
-          <!-- Weight Column -->
+          <!-- Column for displaying employee's manager -->
           <ng-container matColumnDef="manager">
-            <th
-              mat-header-cell
-              *matHeaderCellDef
-              class="f-w-600 mat-subtitle-1 f-s-14"
-            >
+            <th mat-header-cell *matHeaderCellDef class="f-w-600 mat-subtitle-1 f-s-14">
               Manager
             </th>
             <td mat-cell *matCellDef="let element" class="mat-body-1">
-              <strong>{{
+              <!-- Show the manager's name if appointed, otherwise display "Not Appointed" -->
+              <strong>
+                {{
                 element.managerIsAppointed
-                  ? element.managerName
-                  : "Not Appointed"
-              }}</strong>
+                ? element.managerName
+                : "Not Appointed"
+                }}
+              </strong>
             </td>
           </ng-container>
 
-          <!-- Symbol Column -->
+          <!-- Column for displaying employee department -->
           <ng-container matColumnDef="department">
-            <th
-              mat-header-cell
-              *matHeaderCellDef
-              class="f-w-600 mat-subtitle-1 f-s-14"
-            >
+            <th mat-header-cell *matHeaderCellDef class="f-w-600 mat-subtitle-1 f-s-14">
               Department
             </th>
             <td mat-cell *matCellDef="let element" class="mat-body-1">
@@ -90,57 +71,42 @@
             </td>
           </ng-container>
 
-          <!-- Action Column -->
+          <!-- Column for edit button -->
           <ng-container matColumnDef="edit">
-            <th
-              mat-header-cell
-              *matHeaderCellDef
-              class="f-w-600 mat-subtitle-1 f-s-14"
-            >
+            <th mat-header-cell *matHeaderCellDef class="f-w-600 mat-subtitle-1 f-s-14">
               Edit
             </th>
             <td mat-cell *matCellDef="let element" class="mat-body-1">
-              <button
-                mat-icon-button
-                color="primary"
-                (click)="OpenEditEmployee(element)"
-              >
+              <!-- Material icon button to open the edit dialog for the selected employee -->
+              <button mat-icon-button color="primary" (click)="openEditEmployee(element)">
                 <mat-icon>edit</mat-icon>
               </button>
             </td>
           </ng-container>
 
+          <!-- Column for delete button -->
           <ng-container matColumnDef="delete">
-            <th
-              mat-header-cell
-              *matHeaderCellDef
-              class="f-w-600 mat-subtitle-1 f-s-14"
-            >
+            <th mat-header-cell *matHeaderCellDef class="f-w-600 mat-subtitle-1 f-s-14">
               Delete
             </th>
             <td mat-cell *matCellDef="let element" class="mat-body-1">
-              <button
-                mat-icon-button
-                color="warn"
-                (click)="DeleteEmployee(element.employeeID)"
-              >
+              <!-- Material icon button to open the delete confirmation dialog for the selected employee -->
+              <button mat-icon-button color="warn" (click)="deleteEmployee(element.employeeID)">
                 <mat-icon>delete</mat-icon>
               </button>
             </td>
           </ng-container>
 
+          <!-- Define table header row and data rows -->
           <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
           <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
         </table>
       </div>
     </mat-card-content>
-    <mat-paginator
-      [length]="totalItems"
-      [pageSize]="pageSize"
-      [pageSizeOptions]="[pageSize]"
-      [pageIndex]="pageNumber - 1"
-      (page)="onPageChange($event)"
-    >
+
+    <!-- Material paginator to handle pagination -->
+    <mat-paginator [length]="totalItems" [pageSize]="pageSize" [pageSizeOptions]="[pageSize]"
+      [pageIndex]="pageNumber - 1" (page)="onPageChange($event)">
     </mat-paginator>
   </mat-card>
 </div>

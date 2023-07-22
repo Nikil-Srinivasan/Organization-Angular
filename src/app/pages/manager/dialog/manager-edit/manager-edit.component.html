@@ -1,18 +1,20 @@
 <div mat-dialog-title>
   <h1>Edit Manager</h1>
 </div>
+
+<!-- The form to edit manager details -->
 <form [formGroup]="managerForm" (ngSubmit)="onSubmit()">
   <div mat-dialog-content class="content">
     <div class="row">
       <div>
+        <!-- Input field for Manager Name -->
         <mat-form-field appearance="outline" class="form-field-width">
           <mat-label>Name</mat-label>
           <input matInput type="text" formControlName="managerName" />
         </mat-form-field>
         <div class="error-container">
-          <div
-            *ngIf="managerName?.touched && managerName?.errors?.['required']"
-          >
+          <!-- Display validation errors for Manager Name -->
+          <div *ngIf="managerName?.touched && managerName?.errors?.['required']">
             <mat-error class="custom-error">
               Name is <strong>required</strong>
             </mat-error>
@@ -25,14 +27,14 @@
         </div>
       </div>
       <div>
+        <!-- Input field for Manager Salary -->
         <mat-form-field appearance="outline" class="form-field-width">
           <mat-label>Salary</mat-label>
           <input matInput type="number" formControlName="managerSalary" />
         </mat-form-field>
         <div class="error-container">
-          <div
-            *ngIf="managerSalary?.touched && managerSalary?.errors?.['required']"
-          >
+          <!-- Display validation errors for Manager Salary -->
+          <div *ngIf="managerSalary?.touched && managerSalary?.errors?.['required']">
             <mat-error class="custom-error">
               Salary is <strong>required</strong>
             </mat-error>
@@ -43,11 +45,13 @@
     <br />
     <div class="row">
       <div>
+        <!-- Input field for Manager Age -->
         <mat-form-field appearance="outline" class="form-field-width">
           <mat-label>Age</mat-label>
           <input matInput type="number" formControlName="managerAge" />
         </mat-form-field>
         <div class="error-container">
+          <!-- Display validation errors for Manager Age -->
           <div *ngIf="managerAge?.touched && managerAge?.errors?.['required']">
             <mat-error class="custom-error">
               Age is <strong>required</strong>
@@ -62,11 +66,13 @@
       </div>
 
       <div>
+        <!-- Input field for Manager Phone -->
         <mat-form-field appearance="outline" class="form-field-width">
           <mat-label>Phone</mat-label>
           <input matInput type="text" formControlName="phone" />
         </mat-form-field>
         <div class="error-container">
+          <!-- Display validation errors for Manager Phone -->
           <div *ngIf="phone?.touched && phone?.errors?.['required']">
             <mat-error class="custom-error">
               Phone is <strong>required</strong>
@@ -74,31 +80,26 @@
           </div>
         </div>
       </div>
-
-
     </div>
 
-    
+    <!-- Input field for Manager Address -->
     <mat-form-field class="w-100" appearance="outline">
-        <mat-label>Address</mat-label>
-        <textarea
-          formControlName="address"
-          matInput
-          placeholder="address goes here..."
-        ></textarea>
-      </mat-form-field>
-      <div class="error-container">
-        <div *ngIf="address?.touched && address?.errors?.['required']">
-          <mat-error class="custom-error">
-            Address is <strong>required</strong>
-          </mat-error>
-        </div>
+      <mat-label>Address</mat-label>
+      <textarea formControlName="address" matInput placeholder="address goes here..."></textarea>
+    </mat-form-field>
+    <div class="error-container">
+      <!-- Display validation errors for Manager Address -->
+      <div *ngIf="address?.touched && address?.errors?.['required']">
+        <mat-error class="custom-error">
+          Address is <strong>required</strong>
+        </mat-error>
       </div>
+    </div>
   </div>
+
+  <!-- Action buttons for form submission and cancel -->
   <div mat-dialog-actions class="action">
-    <button mat-raised-button type="button" [mat-dialog-close]="false">
-      Cancel
-    </button>
+    <button mat-raised-button type="button" [mat-dialog-close]="false">Cancel</button>
     <button mat-raised-button color="primary" type="submit" [disabled]="!managerForm.valid">Update</button>
   </div>
 </form>

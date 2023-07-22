@@ -1,28 +1,41 @@
+<!-- The dialog title section -->
 <div mat-dialog-title>
     <h1>Edit Department</h1>
 </div>
 
+<!-- The form section with formGroup and ngSubmit -->
 <form [formGroup]="departmentForm" (ngSubmit)="onSubmit()">
+    <!-- The dialog content section -->
     <div mat-dialog-content class="content">
+        <!-- Input field for department name -->
         <mat-form-field appearance="outline" class="form-field-width">
             <mat-label>Name</mat-label>
+            <!-- Input element with formControlName bound to "departmentName" -->
             <input matInput type="text" formControlName="departmentName">
-        </mat-form-field>   
+        </mat-form-field>
+
+        <!-- Error messages for departmentName field -->
         <div class="error-container">
+            <!-- Error message for required validation -->
             <div *ngIf="departmentName?.touched && departmentName?.errors?.['required']">
                 <mat-error class="custom-error">
                     Name is <strong>required</strong>
                 </mat-error>
             </div>
+            <!-- Error message for pattern validation -->
             <div *ngIf="departmentName?.errors?.['pattern']">
                 <mat-error class="custom-error">
                     Name should have at least 2 characters and no spaces allowed.
                 </mat-error>
             </div>
-        </div>     
+        </div>
     </div>
+
+    <!-- The dialog actions section -->
     <div mat-dialog-actions class="action">
+        <!-- Cancel button to close the dialog without saving changes -->
         <button mat-raised-button type="button" [mat-dialog-close]="false"> Cancel</button>
+        <!-- Save button to submit the form and apply the changes to the department -->
         <button mat-raised-button color="primary" type="submit" [disabled]="departmentForm.invalid"> Create </button>
     </div>
 </form>

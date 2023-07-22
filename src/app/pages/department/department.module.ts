@@ -9,16 +9,12 @@ import { DepartmentEditComponent } from './dialog/department-edit/department-edi
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DepartmentAddComponent } from './dialog/department-add/department-add.component';
 
-
-
 @NgModule({
   declarations: [
-    
     DepartmentComponent,
     DepartmentDetailsComponent,
     DepartmentEditComponent,
     DepartmentAddComponent,
-
   ],
   imports: [
     CommonModule,

@@ -13,6 +13,7 @@ export class ConfirmDeleteComponent {
     public dialogRef: MatDialogRef<ConfirmDeleteComponent>
   ) { }
 
+  // Function to close the dialog with a false value
   closeDialog() {
     this.dialogRef.close(false);
   }
