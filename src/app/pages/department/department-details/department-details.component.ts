@@ -8,18 +8,17 @@ import { ManagerService } from 'src/app/services/ManagerService/manager.service'
 
 @Component({
   selector: 'app-department-details',
-  templateUrl: './department-details.component.html',
-  styleUrls: ['./department-details.component.scss']
+  templateUrl: './department-details.component.html'
 })
 export class DepartmentDetailsComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
-  
+
   departmentId: string;
   employeelist: any;
   dataSource: MatTableDataSource<any>;
   dataObs$: Observable<any>;
   displayedColumns: string[] = ['name', 'designation', 'email', 'phone'];
-  EmployeesAndManagerDetails : any
+  EmployeesAndManagerDetails: any
   IsMangerFound = false;
 
   constructor(private route: ActivatedRoute, private _managerService: ManagerService, private _employeeService: EmployeeService) { }
@@ -31,24 +30,21 @@ export class DepartmentDetailsComponent implements OnInit {
 
       // Call a method to fetch product details based on the departmentId
       this._managerService.GetEmployeesAndManagerByDepartmentId(parseInt(this.departmentId)).subscribe(response => {
-        console.log(response)
         if (response.success) {
           this.IsMangerFound = true;
           this.EmployeesAndManagerDetails = response.data;
           this.employeelist = response.data.employees;
-          
+
           // Create a MatTableDataSource with the employee list
           this.dataSource = new MatTableDataSource(this.employeelist);
-          
+
           // Set the MatPaginator for the table
           this.dataSource.paginator = this.paginator;
-          
+
           // Connect the data source to an observable for tracking changes
           this.dataObs$ = this.dataSource.connect();
         }
       });
-
-      console.log(this.departmentId);
     });
   }
 }

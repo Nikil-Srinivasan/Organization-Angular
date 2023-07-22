@@ -28,7 +28,7 @@
                     </div>
                     <div *ngIf="email?.hasError('emailAlreadyExist')">
                         <mat-error class="custom-error">
-                          Email already exists
+                            Email already exists
                         </mat-error>
                     </div>
                 </div>
@@ -150,16 +150,16 @@
                     </div>
                     <div *ngIf="phone?.touched && phone?.errors?.['pattern']">
                         <mat-error class="custom-error">
-                         Invalid phone number
+                            Invalid phone number
                         </mat-error>
                     </div>
                 </div>
             </div>
 
             <!-- Address field -->
-            <div>    
+            <div>
                 <mat-form-field class="form-field-width" appearance="outline">
-                    <mat-label >Address</mat-label>
+                    <mat-label>Address</mat-label>
                     <textarea formControlName="address" matInput placeholder="address goes here..."></textarea>
                 </mat-form-field>
                 <div class="error-container">

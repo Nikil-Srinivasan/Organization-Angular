@@ -11,7 +11,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
   styleUrls: ['./task-edit.component.scss']
 })
 export class TaskEditComponent {
-  selectedDate : Date;
+  selectedDate: Date;
   editTaskForm: FormGroup;
   isSubmitting: boolean = false;
   minDate: Date;
@@ -46,8 +46,8 @@ export class TaskEditComponent {
       taskName: this.data.editTaskFormData.taskName,
       taskDescription: this.data.editTaskFormData.taskDescription,
       taskDueDate: this.data.editTaskFormData.taskDueDate
-    });  
-   }
+    });
+  }
 
   // onSubmit Method is invoked when the Submit Button is clicked
   onSubmit() {
@@ -60,7 +60,6 @@ export class TaskEditComponent {
     this.selectedDate = new Date(this.editTaskForm.get('taskDueDate')?.value);
     this.selectedDate.setHours(5);
     this.selectedDate.setMinutes(30);
-    console.log("Selected Date : "+ this.selectedDate)
     const utcDate = this.selectedDate.toISOString();
 
     // Add the employeeId to the form value
@@ -69,7 +68,7 @@ export class TaskEditComponent {
       taskDueDate: utcDate,
       employeeId: this.data.employeeId
     };
-    this._employeeTaskService.UpdateEmployeeTask(this.data.editTaskFormData.taskID,formValueWithEmployeeId)
+    this._employeeTaskService.UpdateEmployeeTask(this.data.editTaskFormData.taskID, formValueWithEmployeeId)
       .subscribe({
         next: (val: any) => {
           this._snackBar.open("Task Edited Successfully!", "close");

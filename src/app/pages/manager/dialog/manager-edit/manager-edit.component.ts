@@ -78,7 +78,6 @@ export class ManagerEditComponent implements OnInit {
           // Manager details updated successfully
           // Close the dialog and display a success message
           this._dialogRef.close(true);
-          console.log(val);
         },
         error: (error: any) => {
           console.error('Error updating manager details:', error);

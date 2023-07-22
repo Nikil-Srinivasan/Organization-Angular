@@ -14,28 +14,28 @@ export const ManagerRoutes: Routes = [
         component: ManagerComponent,
         data: {
           title: 'Manager Page',
-          roles : [Role.Admin],
+          roles: [Role.Admin],
         },
-        canActivate : [AuthGuard]
+        canActivate: [AuthGuard]
       },
       {
         path: 'employee-list',
         component: EmployeeListComponent,
         data: {
           title: 'Employee List',
-          roles : [Role.Manager],
+          roles: [Role.Manager],
         },
-        canActivate : [AuthGuard],
+        canActivate: [AuthGuard],
       },
       {
         path: 'employee-list/:id',
         component: EmployeeTaskComponent,
         data: {
           title: 'Employee List',
-          roles : [Role.Manager],
+          roles: [Role.Manager],
         },
-        canActivate : [AuthGuard],
+        canActivate: [AuthGuard],
       },
     ]
-    },
+  },
 ];

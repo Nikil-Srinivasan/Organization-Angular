@@ -11,7 +11,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
   styleUrls: ['./task-create.component.scss']
 })
 export class TaskCreateComponent {
-  selectedDate : Date;
+  selectedDate: Date;
   createTaskForm: FormGroup;
   isSubmitting: boolean = false;
   minDate: Date;
@@ -52,7 +52,7 @@ export class TaskCreateComponent {
     if (this.createTaskForm.invalid) {
       return;
     }
-  
+
     this.isSubmitting = true;
 
     // Extract the selected date from the form and convert it to UTC format

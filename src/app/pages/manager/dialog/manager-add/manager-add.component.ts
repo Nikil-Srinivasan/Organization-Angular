@@ -98,7 +98,6 @@ export class ManagerAddComponent {
   fetchDepartments() {
     this._departmentService.GetAvailableDepartmentsList().subscribe(departments => {
       this.departments = departments.data;
-      console.log(departments.data);
     })
   }
 
@@ -128,7 +127,7 @@ export class ManagerAddComponent {
             // Perform custom validation for email already existing
             this.managerForm.get('email')?.setErrors({ emailAlreadyExist: true });
           }
-          
+
           // Handle the error and show an error message to the user
         },
         complete: () => {

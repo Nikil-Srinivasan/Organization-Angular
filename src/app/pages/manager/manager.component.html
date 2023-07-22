@@ -13,7 +13,8 @@
                         <input matInput (keyup)="applyFilter($event)" placeholder="Search columns" #input>
                     </mat-form-field>
                     <!-- Create button for adding a new manager -->
-                    <button mat-raised-button class="create-btn" color="primary" (click)="openAddManager()">Create</button>
+                    <button mat-raised-button class="create-btn" color="primary"
+                        (click)="openAddManager()">Create</button>
                 </div>
             </mat-card-title>
             <!-- Table section -->
@@ -121,13 +122,8 @@
             </div>
         </mat-card-content>
         <!-- Paginator section -->
-        <mat-paginator
-            [length]="totalItems"
-            [pageSize]="pageSize"
-            [pageSizeOptions]="[pageSize]"
-            [pageIndex]="pageNumber - 1"
-            (page)="onPageChange($event)"
-        >
+        <mat-paginator [length]="totalItems" [pageSize]="pageSize" [pageSizeOptions]="[pageSize]"
+            [pageIndex]="pageNumber - 1" (page)="onPageChange($event)">
         </mat-paginator>
     </mat-card>
 </div>

@@ -12,7 +12,6 @@ import { TaskCreateComponent } from '../dialog/task-create/task-create.component
 import { TaskEditComponent } from '../dialog/task-edit/task-edit.component';
 import { DeleteDialogService } from 'src/app/services/delete-dialog.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { HttpErrorResponse } from '@angular/common/http';
 import { Router } from '@angular/router';
 
 @Component({
@@ -32,7 +31,7 @@ export class EmployeeTaskComponent implements OnInit {
   employeeId: number;
   employeeDetails: any;
   pageNumber = 1;
-  pageSize = 2;
+  pageSize = 5;
   totalItems = 0;
   totalPages = 0;
 
@@ -98,7 +97,6 @@ export class EmployeeTaskComponent implements OnInit {
       // Clicked on the next arrow
       this.pageNumber++;
     }
-    console.log(this.pageNumber, this.pageSize);
     this.GetAllEmployeeTask(this.employeeId);
   }
 

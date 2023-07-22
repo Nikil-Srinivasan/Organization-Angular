@@ -29,7 +29,7 @@ export class ManagerComponent implements OnInit {
 
   // Pagination variables
   pageNumber = 1;
-  pageSize = 2;
+  pageSize = 5;
   totalItems = 0;
   totalPages = 0;
 
@@ -61,7 +61,6 @@ export class ManagerComponent implements OnInit {
       this.totalItems = response.data.totalNoOfRecords;
       this.totalPages = response.data.totalPages;
       this.dataSource = new MatTableDataSource(this.managerlist);
-      console.log(this.managerlist)
       this.dataObs$ = this.dataSource.connect();
     });
   }
@@ -88,7 +87,6 @@ export class ManagerComponent implements OnInit {
       // Clicked on the next arrow
       this.pageNumber++;
     }
-    console.log(this.pageNumber,this.pageSize)
     this.getManagersList();
   }
 
@@ -128,7 +126,6 @@ export class ManagerComponent implements OnInit {
           if (val) {
             this._managerService.DeleteManager(id).subscribe({
               next: (res) => {
-                // this._coreService.openSnackBar('Manager Deleted!');
                 this.getManagersList();
               },
               error: console.log,

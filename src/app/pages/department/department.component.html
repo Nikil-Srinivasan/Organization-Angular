@@ -24,11 +24,11 @@
             <!-- Table container -->
             <div class="table-responsive m-t-16">
                 <!-- Table component using MatTableDataSource and matSort for sorting -->
-                <table mat-table [dataSource]="dataSource" class="w-100" matSort>
+                <table mat-table [dataSource]="dataSource" class="w-100" >
 
                     <!-- Department Name column -->
                     <ng-container matColumnDef="name">
-                        <th mat-header-cell *matHeaderCellDef class="f-w-600 mat-subtitle-1 f-s-14" mat-sort-header>
+                        <th mat-header-cell *matHeaderCellDef class="f-w-600 mat-subtitle-1 f-s-14">
                             Name
                         </th>
                         <td mat-cell *matCellDef="let department" class="mat-body-1">

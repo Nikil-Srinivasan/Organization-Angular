@@ -103,7 +103,6 @@ export class EmployeeEditComponent implements OnInit {
   // onSubmit method is invoked when the Submit Button is clicked
   onSubmit() {
     if (this.employeeForm.valid) {
-      console.log(this.employeeForm.value);
       // Call the API to update the employee details
       this._employeeService.UpdateEmployee(this.data.employeeID, this.employeeForm.value).subscribe({
         next: (val: any) => {

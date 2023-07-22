@@ -27,7 +27,6 @@ import { AppNavItemComponent } from './layouts/full/sidebar/nav-item/nav-item.co
 import { LoaderInterceptor } from './interceptor/loader.interceptor';
 import { LoaderService } from './services/loader.service';
 import { AuthHeadersInterceptor } from './interceptor/auth-header.interceptor';
-import { PageNotFoundComponent } from './pages/page-not-found/page-not-found.component';
 import { Router } from "@angular/router";
 import { PagesModule } from "./pages/pages.module";
 import { DepartmentModule } from "./pages/department/department.module";
@@ -44,7 +43,7 @@ import { ConfirmLogoutComponent } from './shared/confirm-logout/confirm-logout.c
     BrandingComponent,
     AppNavItemComponent,
     ConfirmLogoutComponent,
-  
+
   ],
   imports: [
     BrowserModule,
