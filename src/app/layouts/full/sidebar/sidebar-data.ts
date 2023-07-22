@@ -24,16 +24,7 @@ export const navItems: NavItem[] = [
     roles: [Role.Employee],
   },
   {
-    navCap: 'Tables',
-    roles: [Role.Admin],
-  },
-
-  {
-    navCap: 'Table',
-    roles: [Role.Manager],
-  },
-  {
-    displayName: 'Department',
+    displayName: 'Departments',
     iconName: 'users-group',
     route: '/dashboard/departments',
     roles: [Role.Admin],
@@ -68,19 +59,19 @@ export const navItems: NavItem[] = [
     roles: [Role.Employee],
   },
   {
-    displayName: 'InProgress',
+    displayName: 'InProgress Tasks',
     iconName: 'calendar-stats',
     route: '/dashboard/tasks/inprogress',
     roles: [Role.Employee],
   },
   {
-    displayName: 'Pending',
+    displayName: 'Pending Tasks',
     iconName: 'alert-circle-filled',
     route: '/dashboard/tasks/pending',
     roles: [Role.Employee],
   },
   {
-    displayName: 'Completed',
+    displayName: 'Completed Tasks',
     iconName: 'checkbox',
     route: '/dashboard/tasks/completed',
     roles: [Role.Employee],

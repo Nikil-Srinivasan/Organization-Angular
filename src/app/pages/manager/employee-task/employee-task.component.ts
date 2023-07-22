@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Observable } from 'rxjs';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
-import { MatPaginator } from '@angular/material/paginator';
+import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { EmployeetaskService } from 'src/app/services/EmployeeTaskService/employeetask.service';
 import { EmployeeService } from 'src/app/services/EmployeeService/employee.service';
@@ -27,6 +27,10 @@ export class EmployeeTaskComponent implements OnInit {
   displayedColumns: string[] = ['title', 'status', 'startDate', 'dueDate', 'info', 'edit', 'delete'];
   employeeId: number;
   employeeDetails: any;
+  pageNumber = 1;
+  pageSize = 2
+  totalItems = 0;
+  totalPages = 0
 
   constructor(
     private _dialog: MatDialog,
@@ -51,15 +55,45 @@ export class EmployeeTaskComponent implements OnInit {
   }
 
   GetAllEmployeeTask(id: number) {
-    this._employeeTaskService.GetAllEmployeeTask(id).subscribe({
-      next: (response) => {
-        this.employeeTaskList = response.data;
+    const pageObject = {
+      pageNumber: this.pageNumber,
+      pageSize: this.pageSize
+    };
+
+    this._employeeTaskService.GetAllEmployeeTask(id,pageObject).subscribe({
+      next: (response : any) => {
+        if(response){
+        this.totalItems = response.data.totalNoOfRecords; 
+        this.totalPages = response.data.totalPages;
+        this.employeeTaskList = response.data.items;
         this.dataSource = new MatTableDataSource(this.employeeTaskList);
-        this.dataSource.paginator = this.paginator;
         this.dataObs$ = this.dataSource.connect();
+        }
+      },
+      error :(error) =>{
+        console.log(error.error.status)
+        if(error.error.status === 401){
+          this._router.navigate(['404-page-not-found']);
+        }
       }
     });
   }
+
+
+  onPageChange(event: PageEvent): void {
+    const previousPageIndex = event.previousPageIndex !== undefined ? event.previousPageIndex : 0;
+    if (event.pageIndex < previousPageIndex) {
+      // Clicked on the previous arrow
+      this.pageNumber--;
+    } else {
+      // Clicked on the next arrow
+      this.pageNumber++;
+    }
+    console.log(this.pageNumber,this.pageSize)
+    this.GetAllEmployeeTask(this.employeeId);
+  }
+
+
 
 
   GetStatusFromNumber(status: number) {

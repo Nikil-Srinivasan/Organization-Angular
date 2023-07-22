@@ -1,5 +1,6 @@
 <div class="row">
     <div class="col-lg-12">
+      <h3>Welcome {{ employeeDetails.employeeName | uppercase }}!</h3>
       <div class="row">
         <!-- --------------------------------------------------------------------------- -->
         <!-- Widgets -->
@@ -14,10 +15,12 @@
                 </button>
               </div>
             </mat-card-header>
-            <mat-card-content class="m-b-32 p-x-24">
+            <mat-card-content class="m-b-8 p-x-24">
               <h4 class="mat-headline-5">{{ newTaskCount }}</h4>
             </mat-card-content>
-           
+            <mat-card-content class="m-b-10 p-x-24">
+              <mat-card-title>Tasks </mat-card-title>
+            </mat-card-content>
           </mat-card>
         </div>
      
@@ -31,8 +34,11 @@
                 </button>
               </div>
             </mat-card-header>
-            <mat-card-content class="m-b-32 p-x-24">
+            <mat-card-content class="m-b-8 p-x-24">
               <h4 class="mat-headline-5">{{ inProgressCount }}</h4>
+            </mat-card-content>
+            <mat-card-content class="m-b-10 p-x-24">
+              <mat-card-title>Tasks </mat-card-title>
             </mat-card-content>
           </mat-card>
         </div>
@@ -47,8 +53,11 @@
                 </button>
               </div>
             </mat-card-header>
-            <mat-card-content class="m-b-32 p-x-24">
+            <mat-card-content class="m-b-8 p-x-24">
               <h4 class="mat-headline-5">{{pendingTaskCount}}</h4>
+            </mat-card-content>
+            <mat-card-content class="m-b-10 p-x-24">
+              <mat-card-title>Tasks </mat-card-title>
             </mat-card-content>
           </mat-card>
         </div>
@@ -63,12 +72,17 @@
                 </button>
               </div>
             </mat-card-header>
-            <mat-card-content class="m-b-32 p-x-24">
+            <mat-card-content class="m-b-8 p-x-24">
               <h4 class="mat-headline-5">{{ completedTaskCount }}</h4>
             </mat-card-content>
-  
+            <mat-card-content class="m-b-10 p-x-24">
+              <mat-card-title>Tasks </mat-card-title>
+            </mat-card-content>
           </mat-card>
         </div>
+
+
+        
       </div>
     </div>
   
@@ -94,6 +108,7 @@
               <p><strong>Email</strong> : {{ employeeDetails.email }} </p>
               <p><strong>Phone</strong> : {{ employeeDetails.phone }} </p>
               <p><strong>Address</strong>  : {{ employeeDetails.address }} </p>
+              <p><strong>Designation</strong>  : {{ employeeDetails.designation }} </p>
             </mat-card-content>
           </mat-card>
 
