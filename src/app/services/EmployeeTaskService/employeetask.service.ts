@@ -1,10 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { BehaviorSubject, map } from 'rxjs';
+import { BehaviorSubject } from 'rxjs';
 import { Observable } from 'rxjs';
 import { environment } from '@environments/environment';
 import { Status } from 'src/app/models/status';
-
 
 @Injectable({
   providedIn: 'root'
@@ -16,14 +15,17 @@ export class EmployeetaskService {
   
   constructor(private _http: HttpClient) { }
 
+  // Get observable for new tasks
   getNewTasks(): Observable<any[]> {
     return this.newTasks$.asObservable();
   }
 
+  // Get observable for task count
   getTaskCount(): Observable<number> {
     return this.taskCount$.asObservable();
   }
 
+  // Fetch new tasks and update observables
   fetchNewTasks(id: number | undefined): any {
     this._http.get<any>(`${environment.baseUrl}/api/EmployeeTask/GetNewEmployeeTasksByEmployeeId?id=${id}`).subscribe(
       response => {
@@ -37,7 +39,8 @@ export class EmployeetaskService {
     );
   }
 
-  GetEmployeeNewTask(id: number | undefined){
+  // Get new tasks by employee ID
+  GetEmployeeNewTask(id: number | undefined): Observable<any> {
     this._http.get<any>(`${environment.baseUrl}/api/EmployeeTask/GetNewEmployeeTasksByEmployeeId?id=${id}`).subscribe(
       response => {
         const tasks = response.data;
@@ -51,40 +54,47 @@ export class EmployeetaskService {
     return this._http.get<any>(`${environment.baseUrl}/api/EmployeeTask/GetNewEmployeeTasksByEmployeeId?id=${id}`);
   }
 
-  GetEmployeeInProgressTask(id: number | undefined){
+  // Get in-progress tasks by employee ID
+  GetEmployeeInProgressTask(id: number | undefined): Observable<any> {
     return this._http.get<any>(`${environment.baseUrl}/api/EmployeeTask/GetInProgressEmployeeTasksByEmployeeId?id=${id}`);
   }
 
-  GetEmployeePendingTask(id: number | undefined){
-    return this._http.get<any>(`${environment.baseUrl}/api/EmployeeTask/GetPendingEmployeeTasksByManagerId?id=${id}`);
+  // Get pending tasks by employee ID
+  GetEmployeePendingTask(id: number | undefined): Observable<any> {
+    return this._http.get<any>(`${environment.baseUrl}/api/EmployeeTask/GetPendingEmployeeTasksByEmployeeId?id=${id}`);
   }
 
-  GetAllEmployeeTask(id:number,pageObject : any){
-    return this._http.post<any>(`${environment.baseUrl}/api/EmployeeTask/GetEmployeeTasksByEmployeeId?employeeid=${id}`,pageObject)
+  // Get all tasks for an employee by ID and pageObject
+  GetAllEmployeeTask(id: number, pageObject: any): Observable<any> {
+    return this._http.post<any>(`${environment.baseUrl}/api/EmployeeTask/GetEmployeeTasksByEmployeeId?employeeid=${id}`, pageObject);
   }
   
+  // Create a new employee task
   CreateEmployeeTask(data: any): Observable<any> {
     return this._http.post<any>(`${environment.baseUrl}/api/EmployeeTask/CreateEmployeeTasks`, data);
   }
 
-
-  GetEmployeeCompletedTask(id: number | undefined){
+  // Get completed tasks by employee ID
+  GetEmployeeCompletedTask(id: number | undefined): Observable<any> {
     return this._http.get<any>(`${environment.baseUrl}/api/EmployeeTask/GetCompletedEmployeeTasksByEmployeeId?id=${id}`);
   }
   
-  GetNewEmployeeTaskCount(id: number | undefined){
-    const data = this._http.get<any>(`${environment.baseUrl}/api/EmployeeTask/GetNewTaskCount?id=${id}`);
-    
+  // Get the count of new employee tasks by ID
+  GetNewEmployeeTaskCount(id: number | undefined): any {
+    return this._http.get<any>(`${environment.baseUrl}/api/EmployeeTask/GetNewTaskCount?id=${id}`);
   }
 
+  // Update an existing employee task by ID
   UpdateEmployeeTask(id: number, data: any): Observable<any> {
     return this._http.put(`${environment.baseUrl}/api/EmployeeTask/UpdateEmployeeTask?id=${id}`, data);
   }
 
+  // Update the status of an existing employee task by ID
   UpdateEmployeeTaskStatus(id: number, data: any): Observable<any> {
     return this._http.put(`${environment.baseUrl}/api/EmployeeTask/UpdateEmployeeTaskStatus?id=${id}`, data);
   }
   
+  // Get the status from the numeric value
   getStatusFromNumber(statusNumber: number): Status {
     switch (statusNumber) {
       case 1:
@@ -100,6 +110,7 @@ export class EmployeetaskService {
     }
   }
 
+  // Delete an employee task by ID
   DeleteEmployeeTask(id: number): Observable<any> {
     return this._http.delete(`${environment.baseUrl}/api/EmployeeTask/DeleteEmployeeTask?id=${id}`);
   }
