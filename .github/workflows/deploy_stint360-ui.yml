@@ -25,11 +25,11 @@ jobs:
           key: ${{ runner.os }}-npm-${{ hashFiles('**/package-lock.json') }}
         if: success()
 
-      - name: npm install, build, and test
-        run: |
-          npm install
-          npm install -g @angular/cli
-          ng build
+      - name: Install NPM Modules
+        run: npm install
+
+      - name: Build Project
+        run: npm run build
           
       - name: Zip Artifacts
         run: zip release.zip ./* -r
