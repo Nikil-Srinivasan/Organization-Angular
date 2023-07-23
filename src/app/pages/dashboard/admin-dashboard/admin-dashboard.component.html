@@ -51,10 +51,12 @@
         </div>
 
         <ng-container *ngIf="chartOptions">
-          <apx-chart [series]="chartOptions.series" [dataLabels]="chartOptions.dataLabels" [chart]="chartOptions.chart"
-            [legend]="chartOptions.legend" [xaxis]="chartOptions.xaxis" [yaxis]="chartOptions.yaxis"
-            [grid]="chartOptions.grid" [stroke]="chartOptions.stroke" [tooltip]="chartOptions.tooltip"
-            [plotOptions]="chartOptions.plotOptions"></apx-chart>
+          <div id="chart">
+            <apx-chart [series]="chartOptions.series" [chart]="chartOptions.chart"
+              [dataLabels]="chartOptions.dataLabels" [plotOptions]="chartOptions.plotOptions"
+              [yaxis]="chartOptions.yaxis" [legend]="chartOptions.legend" [fill]="chartOptions.fill"
+              [stroke]="chartOptions.stroke" [tooltip]="chartOptions.tooltip" [xaxis]="chartOptions.xaxis"></apx-chart>
+          </div>
         </ng-container>
       </mat-card-content>
     </mat-card>

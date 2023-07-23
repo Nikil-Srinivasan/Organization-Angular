@@ -1,4 +1,4 @@
 export const environment = {
     production: false,
-    baseUrl: 'http://localhost:5005'
+    baseUrl: 'https://stint360.azurewebsites.net'
 };
