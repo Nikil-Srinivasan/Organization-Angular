@@ -105,7 +105,7 @@ export class EmployeeAddComponent {
 
   fetchDepartmentsAssociatedWithManager() {
     // Fetch departments associated with managers using the ManagerService
-    this._managerService.GetAllDepartmentsAssociatedWithManager().subscribe(departments => {
+    this._managerService.getAllDepartmentsAssociatedWithManager().subscribe(departments => {
       this.departments = departments.data;
     });
   }
@@ -113,7 +113,7 @@ export class EmployeeAddComponent {
   //onSubmit Method is invoked when the Submit Button is clicked
   onSubmit() {
     // Call the EmployeeService to add a new employee
-    this._employeeService.AddEmployee(this.employeeForm.value).subscribe({
+    this._employeeService.addEmployee(this.employeeForm.value).subscribe({
       next: (val: any) => {
         this._dialogRef.close(true); // Close the dialog on successful employee addition
         this._snackbar.openSnackBar("Employee added successfully", 'Close');

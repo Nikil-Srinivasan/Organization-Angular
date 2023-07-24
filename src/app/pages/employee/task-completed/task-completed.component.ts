@@ -40,7 +40,7 @@ export class TaskCompletedComponent {
 
   // Lifecycle hook that runs after the component is initialized
   ngOnInit(): void {
-    this.GetEmployeeCompletedTask(this.employeeId);
+    this.getEmployeeCompletedTask(this.employeeId);
   }
 
   // Method to apply filter to the table data based on user input
@@ -50,8 +50,8 @@ export class TaskCompletedComponent {
   }
 
   // Method to get the completed tasks of the employee from the server
-  GetEmployeeCompletedTask(id: number | undefined) {
-    this._employeeTaskService.GetEmployeeCompletedTask(id).subscribe(response => {
+  getEmployeeCompletedTask(id: number | undefined) {
+    this._employeeTaskService.getEmployeeCompletedTask(id).subscribe(response => {
       this.employeeTaskList = response.data;
       // Create a new MatTableDataSource with the retrieved data and connect it to the paginator
       this.dataSource = new MatTableDataSource(this.employeeTaskList);
@@ -62,7 +62,7 @@ export class TaskCompletedComponent {
   }
 
   // Method to open a dialog showing the description of a task
-  OpenTaskDescription(taskDescription: string) {
+  openTaskDescription(taskDescription: string) {
     this._dialog.open(TaskDescriptionComponent, {
       data: {
         taskDescription
@@ -75,7 +75,7 @@ export class TaskCompletedComponent {
     return this._employeeTaskService.getStatusFromNumber(status);
   }
   // Method to open a dialog for editing an employee task
-  OpenEditEmployeeTask(data: any) {
+  openEditEmployeeTask(data: any) {
     const dialogRef = this._dialog.open(EmployeeTaskEditComponent, {
       data,
     });
@@ -83,7 +83,7 @@ export class TaskCompletedComponent {
       next: (val) => {
         if (val) {
           // Refresh the completed task list after editing a task
-          this.GetEmployeeCompletedTask(this.employeeId);
+          this.getEmployeeCompletedTask(this.employeeId);
         }
       }
     })

@@ -4,6 +4,7 @@ import { ManagerService } from 'src/app/services/ManagerService/manager.service'
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { EMAIL_PATTERN, NAME_PATTERN, PASSWORD_PATTERN, PHONE_PATTERN, USERNAME_PATTERN } from 'src/app/shared/regex-patterns';
 import { DepartmentService } from 'src/app/services/DepartmentService/department.service';
+import { SnackbarService } from 'src/app/services/snackbar.service';
 
 @Component({
   selector: 'app-manager-add',
@@ -15,6 +16,7 @@ export class ManagerAddComponent {
   managerForm: FormGroup;
   isSubmitting: boolean = false;
   departments: any[] = [];
+  hide = true;
 
   // Custom validator function to check age
   ageValidator = (control: FormControl) => {
@@ -30,6 +32,7 @@ export class ManagerAddComponent {
     private _managerService: ManagerService,
     private _departmentService: DepartmentService,
     private _dialogRef: MatDialogRef<ManagerAddComponent>,
+    private _snackbar: SnackbarService,
     @Inject(MAT_DIALOG_DATA) public data: any,
   ) {
     // Initialize the managerForm with form controls and validators
@@ -96,7 +99,7 @@ export class ManagerAddComponent {
 
   // Fetch the list of available departments from the service
   fetchDepartments() {
-    this._departmentService.GetAvailableDepartmentsList().subscribe(departments => {
+    this._departmentService.getAvailableDepartmentsList().subscribe(departments => {
       this.departments = departments.data;
     })
   }
@@ -110,11 +113,13 @@ export class ManagerAddComponent {
     this.isSubmitting = true;
 
     // Call the service to add the manager
-    this._managerService.AddManager(this.managerForm.value)
+    this._managerService.addManager(this.managerForm.value)
       .subscribe({
         next: (val: any) => {
           // Close the dialog and indicate successful addition
           this._dialogRef.close(true);
+          this._snackbar.openSnackBar("Manager added successfully", 'Close');
+
         },
         error: (error: any) => {
           console.error('Error ADDING manager details:', error);

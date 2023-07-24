@@ -55,42 +55,42 @@ export class EmployeetaskService {
   }
 
   // Get in-progress tasks by employee ID
-  GetEmployeeInProgressTask(id: number | undefined): Observable<any> {
+  getEmployeeInProgressTask(id: number | undefined): Observable<any> {
     return this._http.get<any>(`${environment.baseUrl}/api/EmployeeTask/GetInProgressEmployeeTasksByEmployeeId?id=${id}`);
   }
 
   // Get pending tasks by employee ID
-  GetEmployeePendingTask(id: number | undefined): Observable<any> {
+  getEmployeePendingTask(id: number | undefined): Observable<any> {
     return this._http.get<any>(`${environment.baseUrl}/api/EmployeeTask/GetPendingEmployeeTasksByEmployeeId?id=${id}`);
   }
 
   // Get all tasks for an employee by ID and pageObject
-  GetAllEmployeeTask(id: number, pageObject: any): Observable<any> {
+  getAllEmployeeTask(id: number, pageObject: any): Observable<any> {
     return this._http.post<any>(`${environment.baseUrl}/api/EmployeeTask/GetEmployeeTasksByEmployeeId?employeeid=${id}`, pageObject);
   }
 
   // Create a new employee task
-  CreateEmployeeTask(data: any): Observable<any> {
+  createEmployeeTask(data: any): Observable<any> {
     return this._http.post<any>(`${environment.baseUrl}/api/EmployeeTask/CreateEmployeeTasks`, data);
   }
 
   // Get completed tasks by employee ID
-  GetEmployeeCompletedTask(id: number | undefined): Observable<any> {
+  getEmployeeCompletedTask(id: number | undefined): Observable<any> {
     return this._http.get<any>(`${environment.baseUrl}/api/EmployeeTask/GetCompletedEmployeeTasksByEmployeeId?id=${id}`);
   }
 
   // Get the count of new employee tasks by ID
-  GetNewEmployeeTaskCount(id: number | undefined): any {
+  getNewEmployeeTaskCount(id: number | undefined): any {
     return this._http.get<any>(`${environment.baseUrl}/api/EmployeeTask/GetNewTaskCount?id=${id}`);
   }
 
   // Update an existing employee task by ID
-  UpdateEmployeeTask(id: number, data: any): Observable<any> {
+  updateEmployeeTask(id: number, data: any): Observable<any> {
     return this._http.put(`${environment.baseUrl}/api/EmployeeTask/UpdateEmployeeTask?id=${id}`, data);
   }
 
   // Update the status of an existing employee task by ID
-  UpdateEmployeeTaskStatus(id: number, data: any): Observable<any> {
+  updateEmployeeTaskStatus(id: number, data: any): Observable<any> {
     return this._http.put(`${environment.baseUrl}/api/EmployeeTask/UpdateEmployeeTaskStatus?id=${id}`, data);
   }
 
@@ -111,7 +111,7 @@ export class EmployeetaskService {
   }
 
   // Delete an employee task by ID
-  DeleteEmployeeTask(id: number): Observable<any> {
+  deleteEmployeeTask(id: number): Observable<any> {
     return this._http.delete(`${environment.baseUrl}/api/EmployeeTask/DeleteEmployeeTask?id=${id}`);
   }
 }

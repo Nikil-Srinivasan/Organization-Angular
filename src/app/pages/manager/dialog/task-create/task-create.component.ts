@@ -69,7 +69,7 @@ export class TaskCreateComponent {
     };
 
     // Send the task creation request to the server through the EmployeeTaskService
-    this._employeeTaskService.CreateEmployeeTask(formValueWithEmployeeId)
+    this._employeeTaskService.createEmployeeTask(formValueWithEmployeeId)
       .subscribe({
         next: (val: any) => {
           // Show a success message using a snackbar

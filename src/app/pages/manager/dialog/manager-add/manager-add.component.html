@@ -59,9 +59,12 @@
             <!-- Password input field -->
             <div>
                 <mat-form-field appearance="outline" class="form-field-width">
-                    <mat-label>Password</mat-label>
-                    <input matInput type="text" formControlName="password">
-                </mat-form-field>
+                    <mat-label>Enter your password</mat-label>
+                    <input matInput [type]="hide ? 'password' : 'text'" formControlName="password">
+                    <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide" type="button">
+                      <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                    </button>
+                  </mat-form-field>
                 <div class="error-container">
                     <!-- Password validation error messages -->
                     <ng-container *ngIf="password?.touched && password?.errors?.['required']">

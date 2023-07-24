@@ -61,7 +61,7 @@ export class TaskComponent {
   }
 
   // Method to open a dialog showing the description of a task
-  OpenTaskDescription(taskDescription: string) {
+  openTaskDescription(taskDescription: string) {
     this._dialog.open(TaskDescriptionComponent, {
       data: {
         taskDescription
@@ -75,7 +75,7 @@ export class TaskComponent {
   }
 
   // Method to open a dialog for editing an employee task
-  OpenEditEmployeeTask(data: any) {
+  openEditEmployeeTask(data: any) {
     const dialogRef = this._dialog.open(EmployeeTaskEditComponent, {
       data,
     });

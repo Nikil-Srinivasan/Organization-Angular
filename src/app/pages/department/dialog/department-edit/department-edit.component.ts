@@ -44,7 +44,7 @@ export class DepartmentEditComponent {
   // onSubmit Method is invoked when the Submit Button is clicked
   onSubmit() {
     this.isSubmitting = true;
-    this._departmentService.UpdateDepartment(this.data.departmentID, this.departmentForm.value)
+    this._departmentService.updateDepartment(this.data.departmentID, this.departmentForm.value)
       .subscribe({
         next: (val: any) => {
           // Close the dialog with a success response

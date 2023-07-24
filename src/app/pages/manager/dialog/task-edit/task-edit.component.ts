@@ -68,7 +68,7 @@ export class TaskEditComponent {
       taskDueDate: utcDate,
       employeeId: this.data.employeeId
     };
-    this._employeeTaskService.UpdateEmployeeTask(this.data.editTaskFormData.taskID, formValueWithEmployeeId)
+    this._employeeTaskService.updateEmployeeTask(this.data.editTaskFormData.taskID, formValueWithEmployeeId)
       .subscribe({
         next: (val: any) => {
           this._snackbar.openSnackBar("Task Edited Successfully!", "close");

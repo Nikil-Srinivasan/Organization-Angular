@@ -63,7 +63,7 @@ export class EmployeeTaskEditComponent {
   onSubmit() {
     if (this.employeetaskForm.valid) {
       // Call the service to update the employee task status
-      this._employeeTaskService.UpdateEmployeeTaskStatus(this.data.taskID, this.employeetaskForm.value).subscribe({
+      this._employeeTaskService.updateEmployeeTaskStatus(this.data.taskID, this.employeetaskForm.value).subscribe({
         next: (val: any) => {
           // Show a success message to the user
           this._snackbar.openSnackBar("Task Edited Successfully!", "close");

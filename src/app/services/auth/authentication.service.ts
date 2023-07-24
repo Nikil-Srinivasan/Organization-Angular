@@ -86,7 +86,7 @@ export class AuthenticationService {
   }
 
   // Method for registering an admin user
-  AdminRegister(context: RegisterContext): Observable<any> {
+  adminRegister(context: RegisterContext): Observable<any> {
     return this.http.post<{ data: string }>(`${environment.baseUrl}/api/Auth/AdminRegister`, {
       userName: context.username,
       email: context.email,
@@ -126,7 +126,7 @@ export class AuthenticationService {
   }
 
   // Method for resetting the user's password
-  ResetPassword(context: ResetPasswordContext): Observable<any> {
+  resetPassword(context: ResetPasswordContext): Observable<any> {
     return this.http.post<{ data: string }>(`${environment.baseUrl}/api/Auth/ResetPassword`, {
       email: context.email,
       newPassword: context.newPassowrd

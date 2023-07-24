@@ -93,7 +93,7 @@ export class EmployeeEditComponent implements OnInit {
 
   // Fetch the departments associated with the manager
   fetchDepartmentsAssociatedWithManager() {
-    this._managerService.GetAllDepartmentsAssociatedWithManager().subscribe(departments => {
+    this._managerService.getAllDepartmentsAssociatedWithManager().subscribe(departments => {
       this.departments = departments.data;
     });
   }
@@ -102,7 +102,7 @@ export class EmployeeEditComponent implements OnInit {
   onSubmit() {
     if (this.employeeForm.valid) {
       // Call the API to update the employee details
-      this._employeeService.UpdateEmployee(this.data.employeeID, this.employeeForm.value).subscribe({
+      this._employeeService.updateEmployee(this.data.employeeID, this.employeeForm.value).subscribe({
         next: (val: any) => {
           // Display success message and close the dialog
           this._snackbar.openSnackBar("Employee updated successfully", 'Close');

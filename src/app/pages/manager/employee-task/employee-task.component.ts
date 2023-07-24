@@ -50,8 +50,8 @@ export class EmployeeTaskComponent implements OnInit {
     // Fetch the employee ID from the route parameters and load employee details and tasks
     this._activatedRoute.params.subscribe(params => {
       this.employeeId = +params['id'];
-      this.GetEmployeeDetails(this.employeeId);
-      this.GetAllEmployeeTask(this.employeeId);
+      this.getEmployeeDetails(this.employeeId);
+      this.getAllEmployeeTask(this.employeeId);
     });
   }
 
@@ -62,13 +62,13 @@ export class EmployeeTaskComponent implements OnInit {
   }
 
   // Get all employee tasks and handle pagination
-  GetAllEmployeeTask(id: number) {
+  getAllEmployeeTask(id: number) {
     const pageObject = {
       pageNumber: this.pageNumber,
       pageSize: this.pageSize
     };
 
-    this._employeeTaskService.GetAllEmployeeTask(id, pageObject).subscribe({
+    this._employeeTaskService.getAllEmployeeTask(id, pageObject).subscribe({
       next: (response: any) => {
         if (response) {
           this.totalItems = response.data.totalNoOfRecords;
@@ -97,17 +97,17 @@ export class EmployeeTaskComponent implements OnInit {
       // Clicked on the next arrow
       this.pageNumber++;
     }
-    this.GetAllEmployeeTask(this.employeeId);
+    this.getAllEmployeeTask(this.employeeId);
   }
 
   // Get task status based on the status number
-  GetStatusFromNumber(status: number) {
+  getStatusFromNumber(status: number) {
     return this._employeeTaskService.getStatusFromNumber(status);
   }
 
   // Get employee details by ID
-  GetEmployeeDetails(id: number) {
-    this._employeeService.GetEmployeeById(id).subscribe({
+  getEmployeeDetails(id: number) {
+    this._employeeService.getEmployeeById(id).subscribe({
       next: (response) => {
         this.employeeDetails = response.data;
       },
@@ -119,7 +119,7 @@ export class EmployeeTaskComponent implements OnInit {
   }
 
   // Open task description dialog
-  OpenTaskDescription(taskDescription: string) {
+  openTaskDescription(taskDescription: string) {
     this._dialog.open(TaskDescriptionComponent, {
       data: {
         taskDescription
@@ -128,7 +128,7 @@ export class EmployeeTaskComponent implements OnInit {
   }
 
   // Open create task dialog
-  OpenCreateTask() {
+  openCreateTask() {
     const dialogRef = this._dialog.open(TaskCreateComponent, {
       data: {
         employeeId: this.employeeId,
@@ -137,7 +137,7 @@ export class EmployeeTaskComponent implements OnInit {
     dialogRef.afterClosed().subscribe({
       next: (val) => {
         if (val) {
-          this.GetAllEmployeeTask(this.employeeId);
+          this.getAllEmployeeTask(this.employeeId);
         }
       },
       error: (error: any) => {
@@ -148,7 +148,7 @@ export class EmployeeTaskComponent implements OnInit {
   }
 
   // Open edit task dialog
-  OpenEditTask(editTaskFormData: any) {
+  openEditTask(editTaskFormData: any) {
     const dialogRef = this._dialog.open(TaskEditComponent, {
       data: {
         editTaskFormData,
@@ -158,7 +158,7 @@ export class EmployeeTaskComponent implements OnInit {
     dialogRef.afterClosed().subscribe({
       next: (val) => {
         if (val) {
-          this.GetAllEmployeeTask(this.employeeId);
+          this.getAllEmployeeTask(this.employeeId);
         }
       },
       error: (error: any) => {
@@ -169,15 +169,15 @@ export class EmployeeTaskComponent implements OnInit {
   }
 
   // Delete a task
-  DeleteTask(id: number) {
+  deleteTask(id: number) {
     this._deleteDialogService.openConfirmDialog("Do you really want to delete this record?")
       .afterClosed().subscribe({
         next: (val) => {
           if (val) {
-            this._employeeTaskService.DeleteEmployeeTask(id).subscribe({
+            this._employeeTaskService.deleteEmployeeTask(id).subscribe({
               next: (res) => {
                 this._snackbar.openSnackBar("Task Deleted Successfully!", "close");
-                this.GetAllEmployeeTask(this.employeeId);
+                this.getAllEmployeeTask(this.employeeId);
               },
               error: console.log,
             })

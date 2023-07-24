@@ -66,7 +66,7 @@
                             <input matInput (keyup)="applyFilter($event)" placeholder="Search columns" #input>
                         </mat-form-field>
                         <button mat-raised-button class="create-btn" color="primary"
-                            (click)="OpenCreateTask()">Create</button>
+                            (click)="openCreateTask()">Create</button>
                     </div>
                 </mat-card-title>
                 <div class="table-responsive m-t-16">
@@ -93,28 +93,28 @@
                                     <div [ngSwitch]="element.taskStatus">
                                         <div *ngSwitchCase="1">
                                             <span class="bg-light-accent text-accent rounded f-w-600 p-6 p-y-4 f-s-12">
-                                                {{ GetStatusFromNumber(element.taskStatus) }}
+                                                {{ getStatusFromNumber(element.taskStatus) }}
                                             </span>
                                         </div>
                                         <div *ngSwitchCase="2">
                                             <span
                                                 class="bg-light-warning text-warning rounded f-w-600 p-6 p-y-4 f-s-12">
-                                                {{ GetStatusFromNumber(element.taskStatus) }}
+                                                {{ getStatusFromNumber(element.taskStatus) }}
                                             </span>
                                         </div>
                                         <div *ngSwitchCase="3">
                                             <span
                                                 class="bg-light-success text-success rounded f-w-600 p-6 p-y-4 f-s-12">
-                                                {{ GetStatusFromNumber(element.taskStatus) }}
+                                                {{ getStatusFromNumber(element.taskStatus) }}
                                             </span>
                                         </div>
                                         <div *ngSwitchCase="4">
                                             <span class="bg-light-error text-error rounded f-w-600 p-6 p-y-4 f-s-12">
-                                                {{ GetStatusFromNumber(element.taskStatus) }}
+                                                {{ getStatusFromNumber(element.taskStatus) }}
                                             </span>
                                         </div>
                                         <div *ngSwitchDefault>
-                                            <p>{{GetStatusFromNumber(element.taskStatus)}}</p>
+                                            <p>{{getStatusFromNumber(element.taskStatus)}}</p>
                                         </div>
                                     </div>
 
@@ -151,7 +151,7 @@
                             <td mat-cell *matCellDef="let element" class="mat-body-1">
                                 <ng-container>
                                     <button mat-icon-button color="primary"
-                                        (click)="OpenTaskDescription(element.taskDescription)">
+                                        (click)="openTaskDescription(element.taskDescription)">
                                         <mat-icon>info</mat-icon>
                                     </button>
                                 </ng-container>
@@ -161,7 +161,7 @@
                         <ng-container matColumnDef="edit">
                             <th mat-header-cell *matHeaderCellDef class="f-w-600 mat-subtitle-1 f-s-14">Edit</th>
                             <td mat-cell *matCellDef="let element" class="mat-body-1">
-                                <button mat-icon-button color="primary" (click)="OpenEditTask(element)">
+                                <button mat-icon-button color="primary" (click)="openEditTask(element)">
                                     <mat-icon>edit</mat-icon>
                                 </button>
                             </td>
@@ -170,7 +170,7 @@
                         <ng-container matColumnDef="delete">
                             <th mat-header-cell *matHeaderCellDef class="f-w-600 mat-subtitle-1 f-s-14">Delete</th>
                             <td mat-cell *matCellDef="let element" class="mat-body-1">
-                                <button mat-icon-button color="warn" (click)="DeleteTask(element.taskID)">
+                                <button mat-icon-button color="warn" (click)="deleteTask(element.taskID)">
                                     <mat-icon>delete</mat-icon>
                                 </button>
                             </td>

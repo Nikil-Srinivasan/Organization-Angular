@@ -31,7 +31,7 @@ export class DepartmentComponent implements OnInit {
 
   ngOnInit(): void {
     // Initialize the component by fetching the departments list
-    this.GetDepartmentsList();
+    this.getDepartmentsList();
   }
 
   // Function to apply filtering to the table based on user input
@@ -41,8 +41,8 @@ export class DepartmentComponent implements OnInit {
   }
 
   // Function to get the list of departments from the DepartmentService
-  GetDepartmentsList() {
-    this._departmentService.GetDepartmentsList().subscribe(response => {
+  getDepartmentsList() {
+    this._departmentService.getDepartmentsList().subscribe(response => {
       this.departmentlist = response.data;
       this.dataSource = new MatTableDataSource(this.departmentlist);
       this.dataSource.paginator = this.paginator;
@@ -51,13 +51,13 @@ export class DepartmentComponent implements OnInit {
   }
 
   // Function to open the Add Department dialog
-  OpenAddDepartment() {
+  openAddDepartment() {
     const dialogRef = this._dialog.open(DepartmentAddComponent);
     dialogRef.afterClosed().subscribe({
       next: (val) => {
         // If the dialog returns a value, refresh the departments list
         if (val) {
-          this.GetDepartmentsList();
+          this.getDepartmentsList();
         }
       },
       error: (error: any) => {
@@ -67,7 +67,7 @@ export class DepartmentComponent implements OnInit {
   }
 
   // Function to open the Edit Department dialog
-  OpenEditDepartment(data: any) {
+  openEditDepartment(data: any) {
     const dialogRef = this._dialog.open(DepartmentEditComponent, {
       data,
     });
@@ -75,7 +75,7 @@ export class DepartmentComponent implements OnInit {
       next: (val) => {
         // If the dialog returns a value, refresh the departments list
         if (val) {
-          this.GetDepartmentsList();
+          this.getDepartmentsList();
         }
       },
       error: (error: any) => {

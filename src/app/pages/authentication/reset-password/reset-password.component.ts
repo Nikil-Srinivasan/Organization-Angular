@@ -75,7 +75,7 @@ export class ResetPasswordComponent implements OnInit {
         newPassowrd: newPassword || ''
       }
 
-      this.authService.ResetPassword(resetPasswordContext).subscribe({
+      this.authService.resetPassword(resetPasswordContext).subscribe({
         error: error => {
           if (error.error?.message === 'Your OTP is expired.') {
             this._snackbar.openSnackBar("Your OTP is expired.Please try again", "close");

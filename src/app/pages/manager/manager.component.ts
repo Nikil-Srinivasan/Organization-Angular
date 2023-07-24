@@ -56,7 +56,7 @@ export class ManagerComponent implements OnInit {
       pageNumber: this.pageNumber,
       pageSize: this.pageSize
     };
-    this._managerService.GetManagersList(pageObject).subscribe(response => {
+    this._managerService.getManagersList(pageObject).subscribe(response => {
       this.managerlist = response.data.items;
       this.totalItems = response.data.totalNoOfRecords;
       this.totalPages = response.data.totalPages;
@@ -124,7 +124,7 @@ export class ManagerComponent implements OnInit {
       .afterClosed().subscribe({
         next: (val) => {
           if (val) {
-            this._managerService.DeleteManager(id).subscribe({
+            this._managerService.deleteManager(id).subscribe({
               next: (res) => {
                 this.getManagersList();
               },

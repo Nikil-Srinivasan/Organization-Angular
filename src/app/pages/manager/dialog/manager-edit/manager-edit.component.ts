@@ -3,6 +3,7 @@ import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms'
 import { ManagerService } from 'src/app/services/ManagerService/manager.service';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { NAME_PATTERN } from 'src/app/shared/regex-patterns';
+import { SnackbarService } from 'src/app/services/snackbar.service';
 
 @Component({
   selector: 'app-manager-edit',
@@ -26,6 +27,8 @@ export class ManagerEditComponent implements OnInit {
     private _managerService: ManagerService,
     private _dialogRef: MatDialogRef<ManagerEditComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
+    private _snackbar: SnackbarService
+
   ) {
     // Initialize the managerForm with form controls and validators
     this.managerForm = this._formbuiler.group({
@@ -73,11 +76,13 @@ export class ManagerEditComponent implements OnInit {
   onSubmit() {
     if (this.managerForm.valid) {
       // If the form is valid, update the manager details using the ManagerService
-      this._managerService.UpdateManager(this.data.managerId, this.managerForm.value).subscribe({
+      this._managerService.updateManager(this.data.managerId, this.managerForm.value).subscribe({
         next: (val: any) => {
           // Manager details updated successfully
           // Close the dialog and display a success message
           this._dialogRef.close(true);
+          this._snackbar.openSnackBar("Manager edited successfully", 'Close');
+
         },
         error: (error: any) => {
           console.error('Error updating manager details:', error);
