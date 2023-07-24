@@ -1,5 +1,5 @@
 import { Routes } from '@angular/router';
-import { AuthGuard } from '../guards/auth.guard';
+import { teamAuthGuard } from '../guards/auth.guard';
 import { DashboardComponent } from './dashboard/dashboard.component';
 
 export const PagesRoutes: Routes = [
@@ -9,7 +9,7 @@ export const PagesRoutes: Routes = [
     data: {
       title: 'Starter Page', 
     },
-    canActivate : [AuthGuard]
+    canActivate : [teamAuthGuard]
   }, 
   {
     path: '',

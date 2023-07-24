@@ -1,5 +1,5 @@
 import { Routes } from '@angular/router';
-import { AuthGuard } from 'src/app/guards/auth.guard';
+import { teamAuthGuard } from 'src/app/guards/auth.guard';
 import { DepartmentComponent } from './department.component';
 import { DepartmentDetailsComponent } from './department-details/department-details.component';
 
@@ -10,7 +10,7 @@ export const DepartmentRoutes: Routes = [
     data: {
       title: 'Department Page',
     },
-    canActivate: [AuthGuard]
+    canActivate: [teamAuthGuard]
   },
   {
     path: 'departments/:id',
@@ -18,6 +18,6 @@ export const DepartmentRoutes: Routes = [
     data: {
       title: 'Department Details',
     },
-    canActivate: [AuthGuard],
+    canActivate: [teamAuthGuard],
   },
 ];
