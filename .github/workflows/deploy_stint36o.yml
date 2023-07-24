@@ -15,7 +15,7 @@ on:
 # 2. Change these variables for your configuration:
 env:
   AZURE_WEBAPP_NAME: stint36o    # set this to your application's name
-  AZURE_WEBAPP_PACKAGE_PATH: './dist/Stint360-UI'      # set this to the path to your web app project
+  AZURE_WEBAPP_PACKAGE_PATH: './dist/Organization-Angular'      # set this to the path to your web app project
   NODE_VERSION: '18.x'       # set this to the node version to use
 
 jobs:
