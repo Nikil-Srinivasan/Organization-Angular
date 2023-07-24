@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Status } from 'src/app/models/status';
-import { DashboardService } from 'src/app/services/DashboardService/Dashboard-Service';
+import { DashboardService } from 'src/app/services/DashboardService/Dashboard.service';
 import { CredentialsService } from 'src/app/services/auth';
 
 @Component({

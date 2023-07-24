@@ -3,7 +3,7 @@ import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms'
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { EmployeetaskService } from 'src/app/services/EmployeeTaskService/employeetask.service';
 import { Status } from 'src/app/models/status';
-import { MatSnackBar } from '@angular/material/snack-bar';
+import { SnackbarService } from 'src/app/services/snackbar.service';
 
 @Component({
   selector: 'app-employee-task-edit',
@@ -21,7 +21,7 @@ export class EmployeeTaskEditComponent {
     private _formbuiler: FormBuilder,
     private _employeeTaskService: EmployeetaskService,
     private _dialogRef: MatDialogRef<EmployeeTaskEditComponent>,
-    private _snackBar: MatSnackBar,
+    private _snackbar: SnackbarService,
     @Inject(MAT_DIALOG_DATA) public data: any,
   ) {
     this.employeetaskForm = this._formbuiler.group({
@@ -66,7 +66,7 @@ export class EmployeeTaskEditComponent {
       this._employeeTaskService.UpdateEmployeeTaskStatus(this.data.taskID, this.employeetaskForm.value).subscribe({
         next: (val: any) => {
           // Show a success message to the user
-          this._snackBar.open("Task Edited Successfully!", "close");
+          this._snackbar.openSnackBar("Task Edited Successfully!", "close");
           // Close the dialog after successful update
           this._dialogRef.close(true);
         },

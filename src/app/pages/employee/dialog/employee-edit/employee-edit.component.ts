@@ -1,11 +1,10 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
 import { EmployeeService } from 'src/app/services/EmployeeService/employee.service';
-import { DepartmentService } from 'src/app/services/DepartmentService/department.service';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { NAME_PATTERN, PHONE_PATTERN } from 'src/app/shared/regex-patterns';
 import { ManagerService } from 'src/app/services/ManagerService/manager.service';
-import { MatSnackBar } from '@angular/material/snack-bar';
+import { SnackbarService } from 'src/app/services/snackbar.service';
 
 @Component({
   selector: 'app-employee-edit',
@@ -30,11 +29,10 @@ export class EmployeeEditComponent implements OnInit {
   constructor(
     private _formbuiler: FormBuilder,
     private _employeeService: EmployeeService,
-    private _departmentService: DepartmentService,
     private _managerService: ManagerService,
     private _dialogRef: MatDialogRef<EmployeeEditComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
-    private _snackBar: MatSnackBar
+    private _snackbar: SnackbarService
   ) {
     // Initialize the employee form with form controls
     this.employeeForm = this._formbuiler.group({
@@ -107,9 +105,7 @@ export class EmployeeEditComponent implements OnInit {
       this._employeeService.UpdateEmployee(this.data.employeeID, this.employeeForm.value).subscribe({
         next: (val: any) => {
           // Display success message and close the dialog
-          this._snackBar.open("Employee updated successfully", 'Close', {
-            duration: 3000
-          });
+          this._snackbar.openSnackBar("Employee updated successfully", 'Close');
           this._dialogRef.close(true);
         },
         error: (error: any) => {

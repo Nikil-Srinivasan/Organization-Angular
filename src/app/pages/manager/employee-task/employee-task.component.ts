@@ -1,7 +1,7 @@
 // Import required modules and services
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Observable } from 'rxjs';
-import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { EmployeetaskService } from 'src/app/services/EmployeeTaskService/employeetask.service';
@@ -11,8 +11,8 @@ import { TaskDescriptionComponent } from '../dialog/task-description/task-descri
 import { TaskCreateComponent } from '../dialog/task-create/task-create.component';
 import { TaskEditComponent } from '../dialog/task-edit/task-edit.component';
 import { DeleteDialogService } from 'src/app/services/delete-dialog.service';
-import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
+import { SnackbarService } from 'src/app/services/snackbar.service';
 
 @Component({
   selector: 'app-employee-task',
@@ -42,7 +42,7 @@ export class EmployeeTaskComponent implements OnInit {
     private _activatedRoute: ActivatedRoute,
     private _employeeService: EmployeeService,
     private _deleteDialogService: DeleteDialogService,
-    private _snackBar: MatSnackBar,
+    private _snackbar: SnackbarService,
     private _router: Router
   ) { }
 
@@ -176,7 +176,7 @@ export class EmployeeTaskComponent implements OnInit {
           if (val) {
             this._employeeTaskService.DeleteEmployeeTask(id).subscribe({
               next: (res) => {
-                this._snackBar.open("Task Deleted Successfully!", "close");
+                this._snackbar.openSnackBar("Task Deleted Successfully!", "close");
                 this.GetAllEmployeeTask(this.employeeId);
               },
               error: console.log,

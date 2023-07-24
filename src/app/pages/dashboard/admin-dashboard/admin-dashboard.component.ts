@@ -3,7 +3,7 @@ import { Observable } from 'rxjs';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatSort } from '@angular/material/sort';
-import { DashboardService } from 'src/app/services/DashboardService/Dashboard-Service';
+import { DashboardService } from 'src/app/services/DashboardService/Dashboard.service';
 import { ChartComponent, } from "ng-apexcharts";
 
 

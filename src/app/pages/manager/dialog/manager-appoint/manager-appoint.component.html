@@ -16,21 +16,21 @@
 
                 </mat-form-field>
                 <div class="error-container">
-                    <div *ngIf="email?.touched && email?.hasError('required')">
+                    <ng-container *ngIf="email?.touched && email?.hasError('required')">
                         <mat-error class="custom-error">
                             Email is <strong>required</strong>
                         </mat-error>
-                    </div>
-                    <div *ngIf="email?.hasError('pattern')">
+                    </ng-container>
+                    <ng-container *ngIf="email?.hasError('pattern')">
                         <mat-error class="custom-error">
                             Email should have a valid format
                         </mat-error>
-                    </div>
-                    <div *ngIf="email?.hasError('emailAlreadyExist')">
+                    </ng-container>
+                    <ng-container *ngIf="email?.hasError('emailAlreadyExist')">
                         <mat-error class="custom-error">
                             Email already exists
                         </mat-error>
-                    </div>
+                    </ng-container>
                 </div>
             </div>
 
@@ -41,16 +41,16 @@
                     <input matInput type="text" formControlName="userName">
                 </mat-form-field>
                 <div class="error-container">
-                    <div *ngIf="userName?.touched && userName?.errors?.['required']">
+                    <ng-container *ngIf="userName?.touched && userName?.errors?.['required']">
                         <mat-error class="custom-error">
                             User Name is <strong>required</strong>
                         </mat-error>
-                    </div>
-                    <div *ngIf="userName?.errors?.['pattern']">
+                    </ng-container>
+                    <ng-container *ngIf="userName?.errors?.['pattern']">
                         <mat-error class="custom-error">
                             Username should have at least 6 characters and no spaces allowed.
                         </mat-error>
-                    </div>
+                    </ng-container>
                 </div>
             </div>
         </div>
@@ -64,16 +64,16 @@
                     <input matInput type="text" formControlName="password">
                 </mat-form-field>
                 <div class="error-container">
-                    <div *ngIf="password?.touched && password?.errors?.['required']">
+                    <ng-container *ngIf="password?.touched && password?.errors?.['required']">
                         <mat-error class="custom-error">
                             Password is <strong>required</strong>
                         </mat-error>
-                    </div>
-                    <div *ngIf="password?.errors?.['pattern']">
+                    </ng-container>
+                    <ng-container *ngIf="password?.errors?.['pattern']">
                         <mat-error class="custom-error">
                             Password should have at least 8 characters, one special character, and one number
                         </mat-error>
-                    </div>
+                    </ng-container>
                 </div>
             </div>
 
@@ -84,16 +84,16 @@
                     <input matInput type="text" formControlName="managerName">
                 </mat-form-field>
                 <div class="error-container">
-                    <div *ngIf="managerName?.touched && managerName?.errors?.['required']">
+                    <ng-container *ngIf="managerName?.touched && managerName?.errors?.['required']">
                         <mat-error class="custom-error">
                             Name is <strong>required</strong>
                         </mat-error>
-                    </div>
-                    <div *ngIf="managerName?.errors?.['pattern']">
+                    </ng-container>
+                    <ng-container *ngIf="managerName?.errors?.['pattern']">
                         <mat-error class="custom-error">
                             Username should have at least 4 characters.
                         </mat-error>
-                    </div>
+                    </ng-container>
                 </div>
             </div>
         </div> <br>
@@ -106,16 +106,16 @@
                     <input matInput type="number" formControlName="managerAge">
                 </mat-form-field>
                 <div class="error-container">
-                    <div *ngIf="managerAge?.touched && managerAge?.errors?.['required']">
+                    <ng-container *ngIf="managerAge?.touched && managerAge?.errors?.['required']">
                         <mat-error class="custom-error">
                             Age is <strong>required</strong>
                         </mat-error>
-                    </div>
-                    <div *ngIf="managerAge?.errors?.['invalidAge']">
+                    </ng-container>
+                    <ng-container *ngIf="managerAge?.errors?.['invalidAge']">
                         <mat-error class="custom-error">
                             Age should be greater than 20
                         </mat-error>
-                    </div>
+                    </ng-container>
                 </div>
             </div>
 
@@ -126,11 +126,11 @@
                     <input matInput type="number" formControlName="managerSalary">
                 </mat-form-field>
                 <div class="error-container">
-                    <div *ngIf="managerSalary?.touched && managerSalary?.errors?.['required']">
+                    <ng-container *ngIf="managerSalary?.touched && managerSalary?.errors?.['required']">
                         <mat-error class="custom-error">
                             Salary is <strong>required</strong>
                         </mat-error>
-                    </div>
+                    </ng-container>
                 </div>
             </div>
         </div>
@@ -143,16 +143,16 @@
                     <input matInput type="text" formControlName="phone">
                 </mat-form-field>
                 <div class="error-container">
-                    <div *ngIf="phone?.touched && phone?.errors?.['required']">
+                    <ng-container *ngIf="phone?.touched && phone?.errors?.['required']">
                         <mat-error class="custom-error">
                             Phone is <strong>required</strong>
                         </mat-error>
-                    </div>
-                    <div *ngIf="phone?.touched && phone?.errors?.['pattern']">
+                    </ng-container>
+                    <ng-container *ngIf="phone?.touched && phone?.errors?.['pattern']">
                         <mat-error class="custom-error">
                             Invalid phone number
                         </mat-error>
-                    </div>
+                    </ng-container>
                 </div>
             </div>
 
@@ -163,11 +163,11 @@
                     <textarea formControlName="address" matInput placeholder="address goes here..."></textarea>
                 </mat-form-field>
                 <div class="error-container">
-                    <div *ngIf="address?.touched && address?.errors?.['required']">
+                    <ng-container *ngIf="address?.touched && address?.errors?.['required']">
                         <mat-error class="custom-error">
                             Address is <strong>required</strong>
                         </mat-error>
-                    </div>
+                    </ng-container>
                 </div>
             </div>
         </div>

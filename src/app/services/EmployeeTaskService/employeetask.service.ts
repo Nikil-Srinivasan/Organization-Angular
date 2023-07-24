@@ -40,7 +40,7 @@ export class EmployeetaskService {
   }
 
   // Get new tasks by employee ID
-  GetEmployeeNewTask(id: number | undefined): Observable<any> {
+  getEmployeeNewTask(id: number | undefined): Observable<any> {
     this._http.get<any>(`${environment.baseUrl}/api/EmployeeTask/GetNewEmployeeTasksByEmployeeId?id=${id}`).subscribe(
       response => {
         const tasks = response.data;

@@ -39,7 +39,7 @@ export class TaskComponent {
 
   // Lifecycle hook that runs after the component is initialized
   ngOnInit(): void {
-    this.GetEmployeeNewTask(this.employeeId);
+    this.getEmployeeNewTask(this.employeeId);
   }
 
   // Method to apply filter to the table data based on user input
@@ -49,8 +49,8 @@ export class TaskComponent {
   }
 
   // Method to get the new tasks of the employee from the server
-  GetEmployeeNewTask(id: number | undefined) {
-    this._employeeTaskService.GetEmployeeNewTask(id).subscribe(response => {
+  getEmployeeNewTask(id: number | undefined) {
+    this._employeeTaskService.getEmployeeNewTask(id).subscribe(response => {
       this.employeeTaskList = response.data;
       // Create a new MatTableDataSource with the retrieved data and connect it to the paginator
       this.dataSource = new MatTableDataSource(this.employeeTaskList);
@@ -83,7 +83,7 @@ export class TaskComponent {
       next: (val) => {
         if (val) {
           // Refresh the new task list after editing a task
-          this.GetEmployeeNewTask(this.employeeId);
+          this.getEmployeeNewTask(this.employeeId);
         }
       }
     })

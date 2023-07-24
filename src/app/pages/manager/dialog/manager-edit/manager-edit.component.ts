@@ -2,7 +2,7 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
 import { ManagerService } from 'src/app/services/ManagerService/manager.service';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import { USERNAME_PATTERN } from 'src/app/shared/regex-patterns';
+import { NAME_PATTERN } from 'src/app/shared/regex-patterns';
 
 @Component({
   selector: 'app-manager-edit',
@@ -29,7 +29,7 @@ export class ManagerEditComponent implements OnInit {
   ) {
     // Initialize the managerForm with form controls and validators
     this.managerForm = this._formbuiler.group({
-      managerName: ['', [Validators.required, Validators.pattern(USERNAME_PATTERN)]],
+      managerName: ['', [Validators.required, Validators.pattern(NAME_PATTERN)]],
       managerSalary: ['', Validators.required],
       managerAge: ['', [Validators.required, this.ageValidator]],
       phone: ['', Validators.required],
