@@ -20,7 +20,7 @@ export class ManagerComponent implements OnInit {
   // Empty value variable to display an empty value when necessary
   emptyValue: any = "";
 
-  managerlist: any;
+  managerList: any;
   dataSource: MatTableDataSource<any>;
   dataObs$: Observable<any>;
 
@@ -57,10 +57,10 @@ export class ManagerComponent implements OnInit {
       pageSize: this.pageSize
     };
     this._managerService.getManagersList(pageObject).subscribe(response => {
-      this.managerlist = response.data.items;
+      this.managerList = response.data.items;
       this.totalItems = response.data.totalNoOfRecords;
       this.totalPages = response.data.totalPages;
-      this.dataSource = new MatTableDataSource(this.managerlist);
+      this.dataSource = new MatTableDataSource(this.managerList);
       this.dataObs$ = this.dataSource.connect();
     });
   }
