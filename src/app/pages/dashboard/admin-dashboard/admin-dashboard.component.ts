@@ -5,7 +5,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { MatSort } from '@angular/material/sort';
 import { DashboardService } from 'src/app/services/DashboardService/Dashboard.service';
 import { ChartComponent, } from "ng-apexcharts";
-
+import { CredentialsService } from 'src/app/services/auth';
 
 @Component({
   selector: 'app-admin-dashboard',
@@ -18,11 +18,12 @@ export class AdminDashboardComponent implements OnInit {
   @ViewChild("chart") chart: ChartComponent;
   public chartOptions: any;
 
+  // Store the manager ID retrieved from the user credentials
+  adminName: string | undefined = this._credentials.userValue?.unique_name;
+
   // ViewChild elements from the template to interact with them in the component
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
-
-
 
   // Variables to store total employee and department counts
   totalEmployees: number;
@@ -35,7 +36,7 @@ export class AdminDashboardComponent implements OnInit {
   dataObs$: Observable<any>;
   http: any;
 
-  constructor(private dasboardService: DashboardService) { }
+  constructor(private dasboardService: DashboardService, private _credentials: CredentialsService) { }
 
   ngOnInit() {
     // Load data when the component is initialized

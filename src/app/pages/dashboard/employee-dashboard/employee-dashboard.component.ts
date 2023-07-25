@@ -19,6 +19,9 @@ export class EmployeeDashboardComponent implements OnInit {
   // Store the employee ID retrieved from the user credentials
   employeeId: number | undefined = this._credentials.userValue?.nameid;
 
+  // Store the employee Name retrieved from the user credentials
+  employeeName: string | undefined = this._credentials.userValue?.unique_name;
+
   // Store employee details retrieved from the API
   employeeDetails: any;
 
