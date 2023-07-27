@@ -20,18 +20,18 @@
         <div class="error-container">
 
             <!-- Error message for required validation -->
-            <div *ngIf="departmentName?.touched && departmentName?.errors?.['required']">
+            <ng-container *ngIf="departmentName?.touched && departmentName?.errors?.['required']">
                 <mat-error class="custom-error">
                     Name is <strong>required</strong>
                 </mat-error>
-            </div>
+            </ng-container>
 
             <!-- Error message for pattern validation -->
-            <div *ngIf="departmentName?.errors?.['pattern']">
+            <ng-container *ngIf="departmentName?.errors?.['pattern']">
                 <mat-error class="custom-error">
                     Name should have at least 2 characters and no spaces allowed.
                 </mat-error>
-            </div>
+            </ng-container>
         </div>
     </div>
 

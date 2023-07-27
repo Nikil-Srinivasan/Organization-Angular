@@ -39,7 +39,7 @@ export class EmployeeListComponent implements OnInit {
   // Lifecycle hook, called after component initialization
   ngOnInit(): void {
     // Call the function to fetch the list of employees for the current manager
-    this.GetEmployeesList(this.managerId);
+    this.getEmployeesList(this.managerId);
   }
 
   // Function to filter the table data based on user input in the filter field
@@ -49,8 +49,8 @@ export class EmployeeListComponent implements OnInit {
   }
 
   // Function to get the list of employees for the manager with the given ID
-  GetEmployeesList(id: number) {
-    this._managerService.GetEmployeesByManagerId(this.managerId).subscribe(response => {
+  getEmployeesList(id: number) {
+    this._managerService.getEmployeesByManagerId(this.managerId).subscribe(response => {
       // Store the list of employees in the managerlist variable
       this.managerlist = response.data;
       this.managerName = this.managerlist[0].managerName

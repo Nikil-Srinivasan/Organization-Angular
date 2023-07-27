@@ -12,6 +12,7 @@ import { PASSWORD_PATTERN, USERNAME_PATTERN } from 'src/app/shared/regex-pattern
 })
 
 export class AppSideLoginComponent implements OnInit {
+  hide = true;
 
   constructor(private authService: AuthenticationService,
     private router: Router, private validationService: ValidationService,

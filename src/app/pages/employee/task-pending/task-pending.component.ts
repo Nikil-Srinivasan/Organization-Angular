@@ -40,7 +40,7 @@ export class TaskPendingComponent {
 
   ngOnInit(): void {
     // Fetch and display pending tasks for the employee when the component is initialized
-    this.GetEmployeePendingTask(this.employeeId);
+    this.getEmployeePendingTask(this.employeeId);
   }
 
   // Function to apply filtering to the table based on the search input
@@ -50,8 +50,8 @@ export class TaskPendingComponent {
   }
 
   // Function to get pending tasks for the employee based on their ID
-  GetEmployeePendingTask(id: any) {
-    this._employeeTaskService.GetEmployeePendingTask(id).subscribe(response => {
+  getEmployeePendingTask(id: any) {
+    this._employeeTaskService.getEmployeePendingTask(id).subscribe(response => {
       // Store the retrieved pending tasks in the employeeTaskList array
       this.employeeTaskList = response.data;
 
@@ -67,7 +67,7 @@ export class TaskPendingComponent {
   }
 
   // Function to open a dialog to display task description when the "Info" button is clicked
-  OpenTaskDescription(taskDescription: string) {
+  openTaskDescription(taskDescription: string) {
     this._dialog.open(TaskDescriptionComponent, {
       data: {
         taskDescription
@@ -90,7 +90,7 @@ export class TaskPendingComponent {
     dialogRef.afterClosed().subscribe({
       next: (val) => {
         if (val) {
-          this.GetEmployeePendingTask(this.employeeId);
+          this.getEmployeePendingTask(this.employeeId);
         }
       }
     })

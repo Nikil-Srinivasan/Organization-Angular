@@ -51,7 +51,7 @@ export class DepartmentAddComponent {
     this.isSubmitting = true;
 
     // Call the DepartmentService to add the new department
-    this._departmentService.AddDepartment(this.departmentForm.value)
+    this._departmentService.addDepartment(this.departmentForm.value)
       .subscribe({
         next: (val: any) => {
           // Close the dialog with a success response

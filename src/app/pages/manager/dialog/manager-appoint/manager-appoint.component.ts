@@ -4,6 +4,7 @@ import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms'
 import { ManagerService } from 'src/app/services/ManagerService/manager.service';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { EMAIL_PATTERN, NAME_PATTERN, PASSWORD_PATTERN, PHONE_PATTERN, USERNAME_PATTERN } from 'src/app/shared/regex-patterns';
+import { SnackbarService } from 'src/app/services/snackbar.service';
 
 @Component({
   selector: 'app-manager-appoint',
@@ -28,6 +29,7 @@ export class ManagerAppointComponent {
     private _managerService: ManagerService,
     private _dialogRef: MatDialogRef<ManagerAppointComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
+    private _snackbar: SnackbarService
   ) {
     // Create the managerForm using FormBuilder to define form controls and validations
     this.managerForm = this._formbuiler.group({
@@ -86,10 +88,11 @@ export class ManagerAppointComponent {
     this.isSubmitting = true; // Set the isSubmitting flag to true to indicate form submission
 
     // Call the service to appoint a new manager using the data provided in the form
-    this._managerService.AppointNewManager(this.data.managerId, this.managerForm.value)
+    this._managerService.appointNewManager(this.data.managerId, this.managerForm.value)
       .subscribe({
         next: (val: any) => {
           this._dialogRef.close(true); // Close the dialog with a success flag when the operation is successful
+          this._snackbar.openSnackBar("Manager appointed successfully", 'Close');
         },
         error: (error: any) => {
           console.error('Error ADDING manager details:', error);

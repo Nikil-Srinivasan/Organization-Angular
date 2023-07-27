@@ -1,15 +1,15 @@
-<div *ngIf="isAdmin; else managerContent">
+<ng-container *ngIf="isAdmin; else managerContent">
   <!-- Admin Dashboard Content -->
   <app-admin-dashboard></app-admin-dashboard>
   <!-- Additional admin-specific content -->
-</div>
+</ng-container>
 
 <ng-template #managerContent>
-  <div *ngIf="isManager; else employeeContent">
-    <!-- Manager Dashboard Content -->
+  <ng-container *ngIf="isManager; else employeeContent">
+    <!-- Manager Dashboard Content -->  
     <app-manager-dashboard></app-manager-dashboard>
     <!-- Additional manager-specific content -->
-  </div>
+  </ng-container>
 
   <ng-template #employeeContent>
     <!-- Employee Dashboard Content -->

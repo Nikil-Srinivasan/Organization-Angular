@@ -1,6 +1,8 @@
 <div class="blank-layout-container justify-content-center align-items-center bg-light-primary">
   <div class="position-relative row w-100 h-100 bg-gredient justify-content-center">
-    <div class="col-lg-4 d-flex align-items-center">
+    <div class="col-lg-9 d-flex align-items-center">
+      <img src="assets/images/backgrounds/login.png" alt="login" height="600px" width="500px" style="padding-bottom: 20px;">
+
       <mat-card class="cardWithShadow boxed-auth">
         <mat-card-content class="p-32">
           <div class="text-center">
@@ -13,58 +15,67 @@
             <mat-label class="mat-subtitle-2 f-s-14 f-w-600 m-b-12 d-block">Username</mat-label>
             <mat-form-field appearance="outline" class="w-100" color="primary">
               <input type="email" matInput formControlName="userName" [errorStateMatcher]="getErrorStateMatcher()"
-                placeholder="Username" />
+                placeholder="Enter your Username" />
             </mat-form-field>
             <div class="error-container">
-              <div *ngIf="getUsername()?.touched && getUsername()?.errors?.['required']">
+              <ng-container *ngIf="getUsername()?.touched && getUsername()?.errors?.['required']">
                 <mat-error class="custom-error">
                   Username is <strong>required</strong>
                 </mat-error>
-              </div>
-              <div *ngIf="getUsername()?.errors?.['pattern']">
+              </ng-container>
+              <ng-container *ngIf="getUsername()?.errors?.['pattern']">
                 <mat-error class="custom-error">
                   Invalid username
                 </mat-error>
-              </div>
-              <div
+              </ng-container>
+              <ng-container
                 *ngIf="!getUsername()?.hasError('userNotFound') && !getUsername()?.errors?.['required'] && !getUsername()?.errors?.['pattern'] && getUsername()?.dirty">
                 <mat-error class="custom-success">
                   Username is valid!
                 </mat-error>
-              </div>
-              <div *ngIf="getUsername()?.hasError('userNotFound')">
+              </ng-container>
+              <ng-container *ngIf="getUsername()?.hasError('userNotFound')">
                 <mat-error>
                   User not found. Please check your username.
                 </mat-error>
-              </div>
+              </ng-container>
             </div>
 
             <mat-label class="mat-subtitle-2 f-s-14 f-w-600 m-b-12 d-block ">Password</mat-label>
             <mat-form-field appearance="outline" class="w-100" color="primary">
-              <input matInput formControlName="password" type="password" placeholder="Password" />
+              <input matInput [type]="hide ? 'password' : 'text'" formControlName="password"
+                placeholder="Enter your Password">
+              <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+                [attr.aria-pressed]="hide" type="button">
+                <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+              </button>
             </mat-form-field>
+
+            <!-- <mat-form-field appearance="outline" class="w-100" color="primary">
+              <input matInput formControlName="password" type="password" placeholder="Password" />
+            </mat-form-field> -->
             <div class="error-container">
-              <div *ngIf="getPassword()?.touched && getPassword()?.errors?.['required']">
+              <ng-container *ngIf="getPassword()?.touched && getPassword()?.errors?.['required']">
                 <mat-error class="custom-error">
                   Password is <strong>required</strong>
                 </mat-error>
-              </div>
-              <div *ngIf="getPassword()?.errors?.['pattern']">
+              </ng-container>
+              <ng-container *ngIf="getPassword()?.errors?.['pattern']">
                 <mat-error class="custom-error">
                   Password should have at least 8 characters, one special character, and one number
                 </mat-error>
-              </div>
-              <div
+              </ng-container>
+              <ng-container
                 *ngIf="!getPassword()?.hasError('incorrectPassword') && !getPassword()?.errors?.['required'] && !getPassword()?.errors?.['pattern'] && getPassword()?.dirty">
                 <mat-error class="custom-success">
                   Password is valid!
                 </mat-error>
-              </div>
-              <div *ngIf="getPassword()?.hasError('incorrectPassword')">
+              </ng-container>
+              <ng-container *ngIf="getPassword()?.hasError('incorrectPassword')">
                 <mat-error>
                   Incorrect Password. Please try again.
                 </mat-error>
-              </div>
+              </ng-container>
             </div>
 
             <button mat-flat-button color="primary" class="w-100" type="submit" [disabled]="!loginForm.valid">Sign

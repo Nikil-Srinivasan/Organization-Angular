@@ -29,7 +29,7 @@ export class DepartmentDetailsComponent implements OnInit {
       this.departmentId = params['id'];
 
       // Call a method to fetch product details based on the departmentId
-      this._managerService.GetEmployeesAndManagerByDepartmentId(parseInt(this.departmentId)).subscribe(response => {
+      this._managerService.getEmployeesAndManagerByDepartmentId(parseInt(this.departmentId)).subscribe(response => {
         if (response.success) {
           this.IsMangerFound = true;
           this.EmployeesAndManagerDetails = response.data;

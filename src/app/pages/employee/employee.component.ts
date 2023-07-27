@@ -67,7 +67,7 @@ export class EmployeeComponent implements OnInit {
       pageSize: this.pageSize
     };
 
-    this._employeeService.GetEmployeesList(pageObject).subscribe(response => {
+    this._employeeService.getEmployeesList(pageObject).subscribe(response => {
       // Store the retrieved employees in the employeelist array
       this.employeelist = response.data;
 
@@ -143,7 +143,7 @@ export class EmployeeComponent implements OnInit {
           if (val) {
             // If the user confirmed the delete action, call the deleteEmployee function in the EmployeeService
             // and refresh the employees list on successful delete
-            this._employeeService.DeleteEmployee(id).subscribe({
+            this._employeeService.deleteEmployee(id).subscribe({
               next: (res) => {
                 this.getEmployees();
               },

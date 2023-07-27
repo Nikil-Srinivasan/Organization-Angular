@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Status } from 'src/app/models/status';
-import { DashboardService } from 'src/app/services/DashboardService/Dashboard-Service';
+import { DashboardService } from 'src/app/services/DashboardService/Dashboard.service';
 import { CredentialsService } from 'src/app/services/auth';
 
 @Component({
@@ -18,6 +18,9 @@ export class EmployeeDashboardComponent implements OnInit {
 
   // Store the employee ID retrieved from the user credentials
   employeeId: number | undefined = this._credentials.userValue?.nameid;
+
+  // Store the employee Name retrieved from the user credentials
+  employeeName: string | undefined = this._credentials.userValue?.unique_name;
 
   // Store employee details retrieved from the API
   employeeDetails: any;

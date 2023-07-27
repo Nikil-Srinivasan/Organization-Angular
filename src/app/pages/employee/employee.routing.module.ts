@@ -1,6 +1,6 @@
 import { Routes } from '@angular/router';
 import { EmployeeComponent } from './employee.component';
-import { AuthGuard } from 'src/app/guards/auth.guard';
+import { teamAuthGuard } from 'src/app/guards/auth.guard';
 import { Role } from 'src/app/models/role';
 import { TaskComponent } from './task-new/task-new.component';
 import { TaskPendingComponent } from './task-pending/task-pending.component';
@@ -18,7 +18,7 @@ export const EmployeeRoutes: Routes = [
           title: 'Employee Page',
           roles: [Role.Employee, Role.Admin],
         },
-        canActivate: [AuthGuard]
+        canActivate: [teamAuthGuard]
       },
       {
         path: 'tasks/new',
@@ -27,7 +27,7 @@ export const EmployeeRoutes: Routes = [
           title: 'Employee Task',
           roles: [Role.Employee],
         },
-        canActivate: [AuthGuard],
+        canActivate: [teamAuthGuard],
       },
       {
         path: 'tasks/pending',
@@ -36,7 +36,7 @@ export const EmployeeRoutes: Routes = [
           title: 'Pending Task',
           roles: [Role.Employee],
         },
-        canActivate: [AuthGuard]
+        canActivate: [teamAuthGuard]
 
       },
       {
@@ -46,7 +46,7 @@ export const EmployeeRoutes: Routes = [
           title: 'Inprogress Task',
           roles: [Role.Employee],
         },
-        canActivate: [AuthGuard]
+        canActivate: [teamAuthGuard]
 
       },
       {
@@ -56,7 +56,7 @@ export const EmployeeRoutes: Routes = [
           title: 'Completed Task',
           roles: [Role.Employee],
         },
-        canActivate: [AuthGuard]
+        canActivate: [teamAuthGuard]
       }
     ]
   },

@@ -4,7 +4,7 @@ import { EmployeeService } from 'src/app/services/EmployeeService/employee.servi
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { EMAIL_PATTERN, NAME_PATTERN, PASSWORD_PATTERN, PHONE_PATTERN, USERNAME_PATTERN } from 'src/app/shared/regex-patterns';
 import { ManagerService } from 'src/app/services/ManagerService/manager.service';
-import { MatSnackBar } from '@angular/material/snack-bar';
+import { SnackbarService } from 'src/app/services/snackbar.service';
 
 @Component({
   selector: 'app-employee-add',
@@ -13,6 +13,8 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 })
 export class EmployeeAddComponent {
   employeeForm: FormGroup;
+
+  hide = true;
 
   departments: any[] = [];
 
@@ -33,7 +35,7 @@ export class EmployeeAddComponent {
     private _managerService: ManagerService,
     private _dialogRef: MatDialogRef<EmployeeAddComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
-    private _snackBar: MatSnackBar
+    private _snackbar: SnackbarService
   ) {
     // Initialize the employee form with form controls and validators
     this.employeeForm = this._formBuilder.group({
@@ -103,7 +105,7 @@ export class EmployeeAddComponent {
 
   fetchDepartmentsAssociatedWithManager() {
     // Fetch departments associated with managers using the ManagerService
-    this._managerService.GetAllDepartmentsAssociatedWithManager().subscribe(departments => {
+    this._managerService.getAllDepartmentsAssociatedWithManager().subscribe(departments => {
       this.departments = departments.data;
     });
   }
@@ -111,12 +113,10 @@ export class EmployeeAddComponent {
   //onSubmit Method is invoked when the Submit Button is clicked
   onSubmit() {
     // Call the EmployeeService to add a new employee
-    this._employeeService.AddEmployee(this.employeeForm.value).subscribe({
+    this._employeeService.addEmployee(this.employeeForm.value).subscribe({
       next: (val: any) => {
         this._dialogRef.close(true); // Close the dialog on successful employee addition
-        this._snackBar.open("Employee added successfully", 'Close', {
-          duration: 3000
-        });
+        this._snackbar.openSnackBar("Employee added successfully", 'Close');
       },
       error: (error: any) => {
         console.error('Error updating employee details:', error);

@@ -3,6 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { AuthenticationService, UserVerifyContext, ForgotPasswordContext, ResendOtp } from 'src/app/services/auth';
+import { SnackbarService } from 'src/app/services/snackbar.service';
 import { EMAIL_PATTERN } from 'src/app/shared/regex-patterns';
 
 @Component({
@@ -15,7 +16,7 @@ export class ForgotPasswordComponent {
   openOtpTemplate: boolean = false
 
   isLoading: boolean = false
-  constructor(private authService: AuthenticationService, private router: Router, private _snackBar: MatSnackBar) { }
+  constructor(private authService: AuthenticationService, private router: Router, private _snackbar: SnackbarService) { }
 
   forgotPasswordForm = new FormGroup({
     email: new FormControl('', [
@@ -69,7 +70,7 @@ export class ForgotPasswordComponent {
           // Handle the next value
           this.openOtpTemplate = true
           this.startCountdown()
-          this._snackBar.open(`We have sent OTP to ${forgotPasswordContext.email}`, "close");
+          this._snackbar.openSnackBar(`We have sent OTP to ${forgotPasswordContext.email}`, "close");
         },
         error: error => {
           // Handle the error       
@@ -99,7 +100,7 @@ export class ForgotPasswordComponent {
           // Handle the error
           if (error.error?.message === 'Maximum OTP resend limit reached.') {
             // Perform custom validation for user not found
-            this._snackBar.open('Maximum OTP depth is reached. Please contact the administrator.', 'Close');
+            this._snackbar.openSnackBar('Maximum OTP depth is reached. Please contact the administrator.', 'Close');
           }
           if (error.error?.message === 'Invalid OTP , Please try again') {
             // Perform custom validation for user not found
@@ -112,7 +113,7 @@ export class ForgotPasswordComponent {
         },
         complete: () => {
           // Handle the complete event
-          this._snackBar.open("Verified Successfully", "close");
+          this._snackbar.openSnackBar("Verified Successfully", "close");
         }
       });
     }
@@ -128,14 +129,14 @@ export class ForgotPasswordComponent {
         // Handle the next value
         this.countdown = 180;
         this.formatTime(this.countdown);
-        this._snackBar.open(`We have sent OTP to ${resendOtp.email}`, "close");
+        this._snackbar.openSnackBar(`We have sent OTP to ${resendOtp.email}`, "close");
         this.formatTime(this.countdown)
       },
       error: error => {
         // Handle the error
         if (error.error?.message === 'Maximum OTP resend limit reached.') {
           // Perform custom validation for user not found
-          this._snackBar.open('Maximum OTP depth is reached. Please contact the administrator.', 'Close');
+          this._snackbar.openSnackBar('Maximum OTP depth is reached. Please contact the administrator.', 'Close');
         }
       },
     })

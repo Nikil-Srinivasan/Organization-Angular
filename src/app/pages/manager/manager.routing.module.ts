@@ -1,6 +1,6 @@
 import { Routes } from '@angular/router';
 import { ManagerComponent } from './manager.component';
-import { AuthGuard } from 'src/app/guards/auth.guard';
+import { teamAuthGuard } from 'src/app/guards/auth.guard';
 import { Role } from 'src/app/models/role';
 import { EmployeeListComponent } from './employee-list/employee-list.component';
 import { EmployeeTaskComponent } from './employee-task/employee-task.component';
@@ -16,7 +16,7 @@ export const ManagerRoutes: Routes = [
           title: 'Manager Page',
           roles: [Role.Admin],
         },
-        canActivate: [AuthGuard]
+        canActivate: [teamAuthGuard]
       },
       {
         path: 'employee-list',
@@ -25,7 +25,7 @@ export const ManagerRoutes: Routes = [
           title: 'Employee List',
           roles: [Role.Manager],
         },
-        canActivate: [AuthGuard],
+        canActivate: [teamAuthGuard],
       },
       {
         path: 'employee-list/:id',
@@ -34,7 +34,7 @@ export const ManagerRoutes: Routes = [
           title: 'Employee List',
           roles: [Role.Manager],
         },
-        canActivate: [AuthGuard],
+        canActivate: [teamAuthGuard],
       },
     ]
   },

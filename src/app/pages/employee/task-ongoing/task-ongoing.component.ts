@@ -39,7 +39,7 @@ export class TaskOngoingComponent {
 
   // Lifecycle hook that runs after the component is initialized
   ngOnInit(): void {
-    this.GetEmployeeInProgressTask(this.employeeId);
+    this.getEmployeeInProgressTask(this.employeeId);
   }
 
   // Method to apply filter to the table data based on user input
@@ -49,8 +49,8 @@ export class TaskOngoingComponent {
   }
 
   // Method to get the ongoing tasks of the employee from the server
-  GetEmployeeInProgressTask(id: any) {
-    this._employeeTaskService.GetEmployeeInProgressTask(id).subscribe(response => {
+  getEmployeeInProgressTask(id: any) {
+    this._employeeTaskService.getEmployeeInProgressTask(id).subscribe(response => {
       this.employeeTaskList = response.data;
       // Create a new MatTableDataSource with the retrieved data and connect it to the paginator
       this.dataSource = new MatTableDataSource(this.employeeTaskList);
@@ -61,7 +61,7 @@ export class TaskOngoingComponent {
   }
 
   // Method to open a dialog showing the description of a task
-  OpenTaskDescription(taskDescription: string) {
+  openTaskDescription(taskDescription: string) {
     this._dialog.open(TaskDescriptionComponent, {
       data: {
         taskDescription
@@ -75,7 +75,7 @@ export class TaskOngoingComponent {
   }
 
   // Method to open a dialog for editing an ongoing task
-  OpenEditEmployeeTask(data: any) {
+  openEditEmployeeTask(data: any) {
     const dialogRef = this._dialog.open(EmployeeTaskEditComponent, {
       data,
     });
@@ -83,7 +83,7 @@ export class TaskOngoingComponent {
       next: (val) => {
         if (val) {
           // Refresh the ongoing task list after editing a task
-          this.GetEmployeeInProgressTask(this.employeeId);
+          this.getEmployeeInProgressTask(this.employeeId);
         }
       }
     })

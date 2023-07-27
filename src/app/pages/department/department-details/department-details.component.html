@@ -78,7 +78,7 @@
           <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
         </table>
         <!-- Display a message when there's no data in the dataSource -->
-        <div *ngIf="!dataSource" class="no-data-message">No data available.</div>
+        <ng-container *ngIf="!dataSource" class="no-data-message">No data available.</ng-container>
       </div>
     </mat-card-content>
     <!-- Material paginator to handle pagination, allowing the user to change the number of items per page -->

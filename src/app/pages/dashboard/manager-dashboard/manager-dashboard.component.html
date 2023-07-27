@@ -1,7 +1,7 @@
 <div class="row">
   <div class="col-lg-12">
 
-    <h1>Welcome {{managerDetails?.departmentName}} Manager! </h1>
+    <h1>Welcome {{ managerName }} 🫡 ({{managerDetails?.designation}}Manager) </h1>
     <br>
     <div class="row">
 
@@ -93,7 +93,7 @@
         <mat-card-title>Your Details</mat-card-title>
       </mat-card-header>
       <mat-card-content class="p-24">
-        <div *ngIf="managerDetails">
+        <ng-container *ngIf="managerDetails">
 
           <mat-card>
             <mat-card-content>
@@ -101,10 +101,10 @@
               <p><strong>Email</strong> : {{ managerDetails?.email }} </p>
               <p><strong>Phone</strong> : {{ managerDetails?.phone }} </p>
               <p><strong>Address</strong> : {{ managerDetails?.address }} </p>
-              <p><strong>Department</strong> : {{ managerDetails?.departmentName | uppercase }} </p>
+              <p><strong>Department</strong> : {{ managerDetails?.departmentName}} </p>
             </mat-card-content>
           </mat-card>
-        </div>
+        </ng-container>
       </mat-card-content>
     </mat-card>
   </div>

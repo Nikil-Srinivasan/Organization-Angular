@@ -15,16 +15,16 @@
                 </mat-form-field>
                 <!-- Error messages for name field -->
                 <div class="error-container">
-                    <div *ngIf="employeeName?.touched && employeeName?.errors?.['required']">
+                    <ng-container *ngIf="employeeName?.touched && employeeName?.errors?.['required']">
                         <mat-error class="custom-error">
                             Name is <strong>required</strong>
                         </mat-error>
-                    </div>
-                    <div *ngIf="employeeName?.errors?.['pattern']">
+                    </ng-container>
+                    <ng-container *ngIf="employeeName?.errors?.['pattern']">
                         <mat-error class="custom-error">
                             Name should have at least 2 characters.
                         </mat-error>
-                    </div>
+                    </ng-container>
                 </div>
             </div>
             <div>
@@ -34,11 +34,11 @@
                 </mat-form-field>
                 <!-- Error messages for salary field -->
                 <div class="error-container">
-                    <div *ngIf="employeeSalary?.touched && employeeSalary?.errors?.['required']">
+                    <ng-container *ngIf="employeeSalary?.touched && employeeSalary?.errors?.['required']">
                         <mat-error class="custom-error">
                             Salary is <strong>required</strong>
                         </mat-error>
-                    </div>
+                    </ng-container>
                 </div>
             </div>
         </div> <br>
@@ -52,16 +52,16 @@
                 </mat-form-field>
                 <!-- Error messages for age field -->
                 <div class="error-container">
-                    <div *ngIf="employeeAge?.touched && employeeAge?.errors?.['required']">
+                    <ng-container *ngIf="employeeAge?.touched && employeeAge?.errors?.['required']">
                         <mat-error class="custom-error">
                             Age is <strong>required</strong>
                         </mat-error>
-                    </div>
-                    <div *ngIf="employeeAge?.errors?.['invalidAge']">
+                    </ng-container>
+                    <ng-container *ngIf="employeeAge?.errors?.['invalidAge']">
                         <mat-error class="custom-error">
                             Age should be greater than 20
                         </mat-error>
-                    </div>
+                    </ng-container>
                 </div>
             </div>
             <div>
@@ -76,11 +76,11 @@
                 </mat-form-field>
                 <!-- Error messages for department field -->
                 <div class="error-container">
-                    <div *ngIf="managerID?.touched && managerID?.errors?.['required']">
+                    <ng-container *ngIf="managerID?.touched && managerID?.errors?.['required']">
                         <mat-error class="custom-error">
                             Department is <strong>required</strong>
                         </mat-error>
-                    </div>
+                    </ng-container>
                 </div>
             </div>
         </div> <br>
@@ -94,16 +94,16 @@
                 </mat-form-field>
                 <!-- Error messages for phone field -->
                 <div class="error-container">
-                    <div *ngIf="phone?.touched && phone?.errors?.['required']">
+                    <ng-container *ngIf="phone?.touched && phone?.errors?.['required']">
                         <mat-error class="custom-error">
                             Phone is <strong>required</strong>
                         </mat-error>
-                    </div>
-                    <div *ngIf="phone?.errors?.['pattern']">
+                    </ng-container>
+                    <ng-container *ngIf="phone?.errors?.['pattern']">
                         <mat-error class="custom-error">
                             Invalid phone number
                         </mat-error>
-                    </div>
+                    </ng-container>
                 </div>
             </div>
 
@@ -114,11 +114,11 @@
                 </mat-form-field>
                 <!-- Error messages for designation field -->
                 <div class="error-container">
-                    <div *ngIf="designation?.touched && designation?.errors?.['required']">
+                    <ng-container *ngIf="designation?.touched && designation?.errors?.['required']">
                         <mat-error class="custom-error">
                             Designation is <strong>required</strong>
                         </mat-error>
-                    </div>
+                    </ng-container>
                 </div>
             </div>
         </div> <br>
@@ -130,11 +130,11 @@
         </mat-form-field>
         <!-- Error messages for address field -->
         <div class="error-container">
-            <div *ngIf="address?.touched && address?.errors?.['required']">
+            <ng-container *ngIf="address?.touched && address?.errors?.['required']">
                 <mat-error class="custom-error">
                     Address is <strong>required</strong>
                 </mat-error>
-            </div>
+            </ng-container>
         </div>
     </div>
 
