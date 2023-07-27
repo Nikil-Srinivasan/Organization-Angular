@@ -11,12 +11,6 @@ export interface LoginContext {
   password: string;
 }
 
-// Interface for user registration context
-export interface RegisterContext {
-  username: string;
-  password: string;
-  email: string;
-}
 
 // Interface for user verification context
 export interface UserVerifyContext {
@@ -85,21 +79,6 @@ export class AuthenticationService {
     );
   }
 
-  // Method for registering an admin user
-  adminRegister(context: RegisterContext): Observable<any> {
-    return this.http.post<{ data: string }>(`${environment.baseUrl}/api/Auth/AdminRegister`, {
-      userName: context.username,
-      email: context.email,
-      password: context.password
-    }).pipe(
-      // Transform the response and set the registered status
-      map(response => {
-        const responseData = response.data;
-        this.setRegistered(true);
-        return responseData;
-      })
-    );
-  }
 
   // Method for verifying a user
   verifyUser(context: UserVerifyContext): Observable<any> {
